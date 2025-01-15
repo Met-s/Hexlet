@@ -31,16 +31,16 @@ public class App {
 //    }
 
     //№_4
-    public static String checkSecurity(Url url) {
-        var protocol = url.getProtocol();
-        var securePart = protocol.equals("https") ? "" : "not ";
-
-        return "Connection to "
-                + url.getHost()
-                + " is "
-                + securePart
-                + "secure";
-    }
+//    public static String checkSecurity(Url url) {
+//        var protocol = url.getProtocol();
+//        var securePart = protocol.equals("https") ? "" : "not ";
+//
+//        return "Connection to "
+//                + url.getHost()
+//                + " is "
+//                + securePart
+//                + "secure";
+//    }
 
 //        if (url.getProtocol().equals("https")) {
 //            return ("Connection to " + url.getHost() + " is secure");
