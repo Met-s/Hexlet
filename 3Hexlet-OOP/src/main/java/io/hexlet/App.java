@@ -21,12 +21,31 @@ public class App {
 //    }
 
     //№_3
-    public static double getCircumference(Circle circle) {
-        /**
-         * Длинна окружности
-         * радиус приходит из класса Circle.java
-         */
-        double result = circle.radius * 2 * Math.PI;
-        return result;
+//    public static double getCircumference(Circle circle) {
+//        /**
+//         * Длинна окружности
+//         * радиус приходит из класса Circle.java
+//         */
+//        double result = circle.radius * 2 * Math.PI;
+//        return result;
+//    }
+
+    //№_4
+    public static String checkSecurity(Url url) {
+        var protocol = url.getProtocol();
+        var securePart = protocol.equals("https") ? "" : "not ";
+
+        return "Connection to "
+                + url.getHost()
+                + " is "
+                + securePart
+                + "secure";
     }
+
+//        if (url.getProtocol().equals("https")) {
+//            return ("Connection to " + url.getHost() + " is secure");
+//        } else {
+//            return ("Connection to " + url.getHost() + " is not secure");
+//        }
+
 }

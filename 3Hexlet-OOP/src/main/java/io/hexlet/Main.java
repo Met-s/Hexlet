@@ -11,9 +11,13 @@ public class Main {
 //        System.out.println(point.getX());
 //        System.out.println(point.getY());
 //№_3
-        Circle circle = new Circle(1, 2, 10);
-        var result = App.getCircumference(circle);
-        System.out.println(result);
+//        Circle circle = new Circle(1, 2, 10);
+//        var result = App.getCircumference(circle);
+//        System.out.println(result);
+
+//№_4
+        var url = new Url("https://google.com");
+        System.out.println(App.checkSecurity(url));
 
 
     }
