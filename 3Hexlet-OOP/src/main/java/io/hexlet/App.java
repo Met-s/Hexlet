@@ -15,8 +15,18 @@ public class App {
 //    }
 
     //№_2
-    public static Point getNewPoint() {
-        var point = new Point(5, 10);
-        return point;
+//    public static Point getNewPoint() {
+//        var point = new Point(5, 10);
+//        return point;
+//    }
+
+    //№_3
+    public static double getCircumference(Circle circle) {
+        /**
+         * Длинна окружности
+         * радиус приходит из класса Circle.java
+         */
+        double result = circle.radius * 2 * Math.PI;
+        return result;
     }
 }

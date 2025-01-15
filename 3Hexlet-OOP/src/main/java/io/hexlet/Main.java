@@ -7,9 +7,13 @@ public class Main {
 //№_1
 //        System.out.println(App.getSquare(10, 10, 60));
 //№_2
-        var point = App.getNewPoint();
-        System.out.println(point.getX());
-        System.out.println(point.getY());
+//        var point = App.getNewPoint();
+//        System.out.println(point.getX());
+//        System.out.println(point.getY());
+//№_3
+        Circle circle = new Circle(1, 2, 10);
+        var result = App.getCircumference(circle);
+        System.out.println(result);
 
 
     }
