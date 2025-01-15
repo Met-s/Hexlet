@@ -20,18 +20,23 @@ public class Main {
 //        System.out.println(App.checkSecurity(url));
 
 //№_5
-//        var u1 = new User("Igor", "Mon");
-//        var u2 = u1;
-//        u2.firstName = "Nina";
-//        System.out.println(u1.firstName);
-        var u = new User("Igor", "Mon");
-        UserController.replaceName(u, "Nina");
-        System.out.println(u.firstName);
+////        var u1 = new User("Igor", "Mon");
+////        var u2 = u1;
+////        u2.firstName = "Nina";
+////        System.out.println(u1.firstName);
+//        var u = new User("Igor", "Mon");
+//        UserController.replaceName(u, "Nina");
+//        System.out.println(u.firstName);
+//№_6  class User.java
+        var user1 = new User(1, "Nick12");
+        var user2 = new User(1, "Nick1");
 
+        var result = user1.isEqual(user2);
+        System.out.println(result);
 
 
     }
-//№_6
+
 //№_7
 //№_8
 //№_9
