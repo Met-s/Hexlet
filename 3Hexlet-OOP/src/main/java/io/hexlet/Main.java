@@ -16,9 +16,30 @@ public class Main {
 //        System.out.println(result);
 
 //№_4
-        var url = new Url("https://google.com");
-        System.out.println(App.checkSecurity(url));
+//        var url = new Url("https://google.com");
+//        System.out.println(App.checkSecurity(url));
 
+//№_5
+//        var u1 = new User("Igor", "Mon");
+//        var u2 = u1;
+//        u2.firstName = "Nina";
+//        System.out.println(u1.firstName);
+        var u = new User("Igor", "Mon");
+        UserController.replaceName(u, "Nina");
+        System.out.println(u.firstName);
 
     }
+//№_6
+//№_7
+//№_8
+//№_9
+//№_10
+//№_11
+
 }
+
+//№_
+//№_
+//№_
+//№_
+//№_
