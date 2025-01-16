@@ -34,11 +34,14 @@ public class Main {
 //        var result = user1.isEqual(user2);
 //        System.out.println(result);
 //№_7 Строки
-        String line[] = new String[] {"java", "javascript", "java", "aphp" };
-
-        System.out.println(App.hasDuplicates(line));
+//        String line[] = new String[] {"java", "javascript", "java", "aphp" };
+//
+//        System.out.println(App.hasDuplicates(line));
 //№_8
-
+        App.calculateAverage(new Integer[] {1, 2, 3, 4}); // 2.5
+        App.calculateAverage(new Integer[] {}); // null
+        App.calculateAverage(new Integer[] {null}); // null
+        App.calculateAverage(new Integer[] {1, null, 3}); // null
 //№_9
 
 

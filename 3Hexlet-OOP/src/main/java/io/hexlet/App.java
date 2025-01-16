@@ -52,26 +52,26 @@ public class App {
 //            return ("Connection to " + url.getHost() + " is not secure");
 //        }
 //№_7
-    public static boolean hasDuplicates(String[] strings) {
-        /**
-         * Принимает массив строк,проверяет содержатся ли в массиве дубликаты.
-         * Если содержатся, возвращает true, иначе false
-         */
-        boolean result = false;
-        for (int i = 0; i < strings.length; i++) {
-            if (result == true) {
-                break;
-            }
-            for (int j = i + 1; j < strings.length; j++) {
-                if (strings[i].equals(strings[j])) {
-                    result = true;
-                    break;
-                }
-            }
-        }
-        return result ;
-
-    }
+//    public static boolean hasDuplicates(String[] strings) {
+//        /**
+//         * Принимает массив строк,проверяет содержатся ли в массиве дубликаты.
+//         * Если содержатся, возвращает true, иначе false
+//         */
+//        boolean result = false;
+//        for (int i = 0; i < strings.length; i++) {
+//            if (result == true) {
+//                break;
+//            }
+//            for (int j = i + 1; j < strings.length; j++) {
+//                if (strings[i].equals(strings[j])) {
+//                    result = true;
+//                    break;
+//                }
+//            }
+//        }
+//        return result ;
+//
+//    }
 // ###_____ Решение Учителя ____###
 //    public static boolean hasDuplicates(String[] words) {
 //        var copy = Arrays.copyOf(words, words.length);
@@ -88,7 +88,54 @@ public class App {
 //        return false;
 //    }
 //№_8
+    public static Double calculateAverage(Integer[] numbers) {
+        /**
+         * Принимает массив целых чисел. Метод возвращает среднее арифметическое
+         * значение всех чисел в массиве, число типа Double.
+         * На вход метода может прийти пустой массив, или массив, содержащий
+         * значения null. В этом случае вычислить среднее значение невозможно
+         * метод должен вернуть null
+         */
+        Double result = null;
 
+        if (numbers.length == 0) {
+            return result;
+        }
+
+        int sum = 0;
+        for (Integer number : numbers) {
+            if (number != null) {
+                sum += number;
+            } else {
+                return result;
+            }
+        }
+        result = (double) sum / numbers.length;
+        System.out.println("result :" + result);
+        return result;
+    }
+// ###_____ Решение Учителя ____###
+//    public static Double calculateAverage(Integer[] numbers) {
+//
+//        var length = numbers.length;
+//
+//        if (length == 0) {
+//            return null;
+//        }
+//
+//        var sum = 0.0;
+//
+//        for (var num : numbers) {
+//
+//            if (num == null) {
+//                return null;
+//            }
+//
+//            sum += num;
+//        }
+//
+//        return sum / length;
+//    }
 //№_9
 
 
