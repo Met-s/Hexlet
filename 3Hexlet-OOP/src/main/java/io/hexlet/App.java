@@ -1,5 +1,9 @@
 package io.hexlet;
 
+import java.util.Arrays;
+
+
+
 public class App {
     //№_1
 //    public static double getSquare(int ab, int ac, int a) {
@@ -47,20 +51,55 @@ public class App {
 //        } else {
 //            return ("Connection to " + url.getHost() + " is not secure");
 //        }
-
-
-//№_5
-
-
-
-
-
-
-
-//№_6
 //№_7
+    public static boolean hasDuplicates(String[] strings) {
+        /**
+         * Принимает массив строк,проверяет содержатся ли в массиве дубликаты.
+         * Если содержатся, возвращает true, иначе false
+         */
+        boolean result = false;
+        for (int i = 0; i < strings.length; i++) {
+            if (result == true) {
+                break;
+            }
+            for (int j = i + 1; j < strings.length; j++) {
+                if (strings[i].equals(strings[j])) {
+                    result = true;
+                    break;
+                }
+            }
+        }
+        return result ;
+
+    }
+// ###_____ Решение Учителя ____###
+//    public static boolean hasDuplicates(String[] words) {
+//        var copy = Arrays.copyOf(words, words.length);
+//        Arrays.sort(copy);
+//
+//        for (var i = 0; i < copy.length - 1; i++) {
+//            var currentWord = copy[i];
+//            var nextWord = copy[i + 1];
+//
+//            if (currentWord.equals(nextWord)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 //№_8
+
 //№_9
+
+
+
+
+
+
+
+
+
+
 //№_10
 //№_11
 //№_12
@@ -70,3 +109,4 @@ public class App {
 //№_
 
 }
+// ###_____ Решение Учителя ____###

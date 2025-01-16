@@ -28,18 +28,25 @@ public class Main {
 //        UserController.replaceName(u, "Nina");
 //        System.out.println(u.firstName);
 //№_6  class User.java
-        var user1 = new User(1, "Nick12");
-        var user2 = new User(1, "Nick1");
+//        var user1 = new User(1, "Nick12");
+//        var user2 = new User(1, "Nick1");
+//
+//        var result = user1.isEqual(user2);
+//        System.out.println(result);
+//№_7 Строки
+        String line[] = new String[] {"java", "javascript", "java", "aphp" };
 
-        var result = user1.isEqual(user2);
-        System.out.println(result);
+        System.out.println(App.hasDuplicates(line));
+//№_8
+
+//№_9
 
 
     }
 
-//№_7
-//№_8
-//№_9
+
+
+
 //№_10
 //№_11
 
@@ -50,3 +57,4 @@ public class Main {
 //№_
 //№_
 //№_
+// ###_____ Решение Учитуля ____###
