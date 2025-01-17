@@ -88,32 +88,32 @@ public class App {
 //        return false;
 //    }
 //№_8
-    public static Double calculateAverage(Integer[] numbers) {
-        /**
-         * Принимает массив целых чисел. Метод возвращает среднее арифметическое
-         * значение всех чисел в массиве, число типа Double.
-         * На вход метода может прийти пустой массив, или массив, содержащий
-         * значения null. В этом случае вычислить среднее значение невозможно
-         * метод должен вернуть null
-         */
-        Double result = null;
-
-        if (numbers.length == 0) {
-            return result;
-        }
-
-        int sum = 0;
-        for (Integer number : numbers) {
-            if (number != null) {
-                sum += number;
-            } else {
-                return result;
-            }
-        }
-        result = (double) sum / numbers.length;
-        System.out.println("result :" + result);
-        return result;
-    }
+//    public static Double calculateAverage(Integer[] numbers) {
+//        /**
+//         * Принимает массив целых чисел. Метод возвращает среднее арифметическое
+//         * значение всех чисел в массиве, число типа Double.
+//         * На вход метода может прийти пустой массив, или массив, содержащий
+//         * значения null. В этом случае вычислить среднее значение невозможно
+//         * метод должен вернуть null
+//         */
+//        Double result = null;
+//
+//        if (numbers.length == 0) {
+//            return result;
+//        }
+//
+//        int sum = 0;
+//        for (Integer number : numbers) {
+//            if (number != null) {
+//                sum += number;
+//            } else {
+//                return result;
+//            }
+//        }
+//        result = (double) sum / numbers.length;
+//        System.out.println("result :" + result);
+//        return result;
+//    }
 // ###_____ Решение Учителя ____###
 //    public static Double calculateAverage(Integer[] numbers) {
 //
