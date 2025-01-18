@@ -43,26 +43,31 @@ public class Main {
 //        App.calculateAverage(new Integer[] {null}); // null
 //        App.calculateAverage(new Integer[] {1, null, 3}); // null
 //№_9
-        /**
-         * Интерфейс
-         * class UserController, class SuperPasswordGenerator,
-         * class SimplePasswordGenerator, interface PasswordGenerator
-         */
+//        /**
+//         * интерфейс
+//         * class UserController, class SuperPasswordGenerator,
+//         * class SimplePasswordGenerator, interface PasswordGenerator
+//         */
+//
+//        // Создадим два разных генератора паролей, реализующих PasswordGenerator
+//        PasswordGenerator simpleGenerator = new SimplePasswordGenerator();
+//        PasswordGenerator superGenerator = new SuperPasswordGenerator();
+//
+//        UserController controller = new UserController();
+//
+//        // Сюда мы можем передать любой класс,
+//        // Который реализует интерфейс PasswordGenerator
+//        var simplePass = controller.create(simpleGenerator);
+//        System.out.println("Простой пароль: " + simplePass);
+//
+//        var superPass = controller.create(superGenerator);
+//        System.out.println("Супер пароль: " + superPass);
+//№_10
+        Geometric quadrate = new Quadrate(5);
+        App.getFigureSquare(quadrate);
 
-        // Создадим два разных генератора паролей, реализующих PasswordGenerator
-        PasswordGenerator simpleGenerator = new SimplePasswordGenerator();
-        PasswordGenerator superGenerator = new SuperPasswordGenerator();
-
-        UserController controller = new UserController();
-
-        // Сюда мы можем передать любой класс,
-        // Который реализует интерфейс PasswordGenerator
-        var simplePass = controller.create(simpleGenerator);
-        System.out.println("Простой пароль: " + simplePass);
-
-        var superPass = controller.create(superGenerator);
-        System.out.println("Супер пароль: " + superPass);
-
+        Geometric circle = new Circle(10);
+        App.getFigureSquare(circle);
 
 
 
@@ -71,7 +76,7 @@ public class Main {
 
 
 
-//№_10
+
 //№_11
 
 }

@@ -136,18 +136,30 @@ public class App {
 //
 //        return sum / length;
 //    }
-//№_9
-
-
-
-
-
-
-
-
-
-
 //№_10
+    public static String getFigureSquare(Geometric figure) {
+        /**
+         * Принимает в качестве аргумента геометрическую фигуру типа
+         * Geometric.
+         * возвращать площадь фигуры в виде строки формата
+         * "Square of quadrate is 36.0"
+         */
+        var nameFigure = figure.getName();
+        var squareFigure = figure.getSquare();
+        System.out.println("Square of " + nameFigure + " is " + squareFigure);
+        return "Square of " + nameFigure + " is " + squareFigure;
+    }
+
+
+
+
+
+
+
+
+
+
+
 //№_11
 //№_12
 //№_13
