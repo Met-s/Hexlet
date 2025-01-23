@@ -137,20 +137,39 @@ public class App {
 //        return sum / length;
 //    }
 //№_10
-    public static String getFigureSquare(Geometric figure) {
-        /**
-         * Принимает в качестве аргумента геометрическую фигуру типа
-         * Geometric.
-         * возвращать площадь фигуры в виде строки формата
-         * "Square of quadrate is 36.0"
-         */
-        var nameFigure = figure.getName();
-        var squareFigure = figure.getSquare();
-        System.out.println("Square of " + nameFigure + " is " + squareFigure);
-        return "Square of " + nameFigure + " is " + squareFigure;
+//    public static String getFigureSquare(Geometric figure) {
+//        /**
+//         * Принимает в качестве аргумента геометрическую фигуру типа
+//         * Geometric.
+//         * возвращать площадь фигуры в виде строки формата
+//         * "Square of quadrate is 36.0"
+//         */
+//        var nameFigure = figure.getName();
+//        var squareFigure = figure.getSquare();
+//        System.out.println("Square of " + nameFigure + " is " + squareFigure);
+//        return "Square of " + nameFigure + " is " + squareFigure;
+//    }
+
+//№_12
+//    public static void printSquare(Rectangle rectangle) {
+//
+//        try {
+//            int result = rectangle.getSquare();
+//            System.out.println(result);
+//        } catch (Exception e) {
+//            System.out.println("Failed to calculate area App");
+//        }
+//
+//    }
+// ###_____ Решение Учитуеля ____###
+    public static void printSquare(Rectangle figure) {
+        try {                               // Обрабатываем исключение
+            var square = figure.getSquare();
+            System.out.println(square);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
-
-
 
 
 
