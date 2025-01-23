@@ -1,9 +1,13 @@
 package io.hexlet;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 //№_1
 //        System.out.println(App.getSquare(10, 10, 60));
 //№_2
@@ -63,27 +67,69 @@ public class Main {
 //        var superPass = controller.create(superGenerator);
 //        System.out.println("Супер пароль: " + superPass);
 //№_10
-        Geometric quadrate = new Quadrate(5);
-        App.getFigureSquare(quadrate);
+//        Geometric quadrate = new Quadrate(5);
+//        App.getFigureSquare(quadrate);
+//
+//        Geometric circle = new Circle(10);
+//        App.getFigureSquare(circle);
+//№_11_###_____ Код_из_модуля ____###
+//        var path = "/path/to/file.txt";
+//        try {
+//            var content = readFile(path);
+//            System.out.println("content " + content);
+//        } catch (IOException e) {
+//            System.out.println("Проверьте что файл ");
+//        }
+//        System.out.println("Код который идет тут, будет выполнен");
+//    }
+//
+//    public static String readFile(String path) throws IOException {
+//        var preparedPath = Paths.get(path);
+//        var content = new String(Files.readAllBytes(preparedPath));
+//        System.out.println("readFile: FORT");
+//        return content;
+//    }
+//№_12
+        var figure1 = new Rectangle(-4, 5);
+        App.printSquare(figure1);
 
-        Geometric circle = new Circle(10);
-        App.getFigureSquare(circle);
 
 
 
+
+//        int length = 5;
+//        int width = 4;
+//        int result ;
+//
+//        try {
+//            isCheckValue(length);
+//            isCheckValue(width);
+//            result = width * length;
+//            System.out.println(result);
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//
+//    }
+//    public static void isCheckValue(int value) throws Exception {
+//        if (value < 0) {
+//            throw new Exception("Failed to calculate area");
+//        }
     }
-
-
-
-
-
-//№_11
-
 }
 
+//        if (length > 0 && width > 0 ) {
+//            System.out.println(result);
+//        } else {
+//            System.out.println("Failed to calculate area");
+//        }
+// = length > 0 && width > 0 ? result :
+//        new Exception();
+
+
+
 //№_
 //№_
 //№_
-//№_
-//№_
+//№_ _###_____ Код_из_модуля ____###
 // ###_____ Решение Учитуля ____###
