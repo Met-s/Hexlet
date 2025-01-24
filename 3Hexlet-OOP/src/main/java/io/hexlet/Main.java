@@ -1,8 +1,19 @@
 package io.hexlet;
 
+
+import org.apache.commons.lang3.RandomUtils;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
+import io.hexlet.geometry.Quadrate. *;
+import io.hexlet.App;
+import io.hexlet.geometry.Quadrate;
+import static io.hexlet.App.enlargeQuadrate;
+
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -90,46 +101,48 @@ public class Main {
 //        return content;
 //    }
 //№_12
-        var figure1 = new Rectangle(-4, 5);
-        App.printSquare(figure1);
+//        var figure1 = new Rectangle(-4, 5);
+//        App.printSquare(figure1);
 
-
-
-
-
-//        int length = 5;
-//        int width = 4;
-//        int result ;
+//№_13
+//        LocalDate dateFrom = LocalDate.of(2017, Month.MAY, 24);
+//        LocalDate dateTo = LocalDate.of(2017, Month.JULY, 29);
+//        long noOfDaysBetween = ChronoUnit.DAYS.between(dateFrom, dateTo);
+//        System.out.println(noOfDaysBetween);
 //
-//        try {
-//            isCheckValue(length);
-//            isCheckValue(width);
-//            result = width * length;
-//            System.out.println(result);
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//
-//    }
-//    public static void isCheckValue(int value) throws Exception {
-//        if (value < 0) {
-//            throw new Exception("Failed to calculate area");
-//        }
+//        var x = RandomUtils.nextInt(1, 1000);
+//        System.out.println(x);
+//№_14
+        var quadrate = new Quadrate(3);
+        var enlargedQuadrate = App.enlargeQuadrate(quadrate);
+
+        var reset1 = enlargedQuadrate.getSide();
+        var reset = quadrate.getSide();
+
+
+        System.out.println(enlargedQuadrate);
+        System.out.println(reset);
+        System.out.println(reset1);
+
+
+
+
+
+
     }
 }
 
-//        if (length > 0 && width > 0 ) {
-//            System.out.println(result);
-//        } else {
-//            System.out.println("Failed to calculate area");
-//        }
-// = length > 0 && width > 0 ? result :
-//        new Exception();
 
 
 
-//№_
-//№_
+
+
+//№_15
+//№_16
+//№_17
+//№_18
+//№_19
+//№_20
 //№_
 //№_ _###_____ Код_из_модуля ____###
 // ###_____ Решение Учитуля ____###

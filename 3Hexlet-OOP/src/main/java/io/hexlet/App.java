@@ -1,7 +1,7 @@
 package io.hexlet;
 
 import java.util.Arrays;
-
+import io.hexlet.geometry.Quadrate;
 
 
 public class App {
@@ -162,15 +162,34 @@ public class App {
 //
 //    }
 // ###_____ Решение Учитуеля ____###
-    public static void printSquare(Rectangle figure) {
-        try {                               // Обрабатываем исключение
-            var square = figure.getSquare();
-            System.out.println(square);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+//    public static void printSquare(Rectangle figure) {
+//        try {                               // Обрабатываем исключение
+//            var square = figure.getSquare();
+//            System.out.println(square);
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
+
+//№_13 Пакеты
+    public static Quadrate enlargeQuadrate(Quadrate x) {
+        /**
+         * package io.hexlet.geometry;
+         * Метод принимает в качестве аргумента квадрат и возвращает новый
+         * квадрат, сторона которого в два раза больше, чем у переданного.
+         */
+        var result = new Quadrate(x.getSide() * 2);
+        return result ;
     }
 
+    // ###_____ Решение Учителя ____###
+//    class App {
+//        public static Quadrate enlargeQuadrate(Quadrate figure) {
+//            var side = figure.getSide();
+//            var enlargedSide = side * 2;
+//            return new Quadrate(enlargedSide);
+//        }
+//    }
 
 
 
@@ -179,9 +198,14 @@ public class App {
 
 
 
-//№_11
-//№_12
-//№_13
+
+
+
+
+
+
+
+
 //№_14
 //№_15
 //№_
