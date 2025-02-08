@@ -1,6 +1,6 @@
 package io.hexlet;
 
-// Интерфейс PasswordGenerator
+// интерфейс PasswordGenerator
 // Задает требование к классу генератору паролей,
 // какие методы требуются от класса
 
