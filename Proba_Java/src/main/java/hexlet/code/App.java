@@ -17,30 +17,32 @@ public class App {
                 + "0 - Exit\n"
                 + "Your choice: ");
 
-    Scanner choice = new Scanner(System.in);
-        try {
-        int number = choice.nextInt();
-        if (3 < number || number < 0) {
-            throw new Exception();
+        Scanner choice = new Scanner(System.in);
+            try {
+            int number = choice.nextInt();
+            if (4 < number || number < 0) {
+                throw new Exception();
+            }
+            switch (number) {
+                case 0:
+                    System.out.println("Goodbye!");
+                    break;
+                case 1:
+                    Cli.greeting();
+                    break;
+                case 2:
+                    Even.parityCheck();
+                    break;
+                case 3:
+                    Calc.calculate();
+                    break;
+                case 4:
+                    Gcd.divisor();
+                    break;
+                default:
+            }
+        } catch (Exception e) {
+            System.out.println(("Incorrect input!"));
         }
-        switch (number) {
-            case 0:
-                System.out.println("Goodbye!");
-                break;
-            case 1:
-                Cli.greeting();
-                break;
-            case 2:
-                Even.parityCheck();
-                break;
-            case 3:
-                Calc.calculate();
-            case 4:
-                Gcd.divisor();
-            default:
-        }
-    } catch (Exception e) {
-        System.out.println(("Incorrect input!"));
-    }
     }
 }
