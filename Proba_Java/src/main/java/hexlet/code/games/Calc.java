@@ -2,22 +2,25 @@ package hexlet.code.games;
 
 import hexlet.code.Cli;
 import hexlet.code.Engine;
+import static hexlet.code.games.MyValues.CORRECT_ANSWERS;
+import static hexlet.code.games.MyValues.MAX_RANDOM_NUMBER;
+import static hexlet.code.games.MyValues.MAX_RANDOM_OPERATORS;
 
 public class Calc {
-    public static void calculate() throws Exception {
+    public static void calculate() {
 
         int result = 0;
         int correctAnswers = 0;
         String[] operators = { "+", "-", "*" };
 
         Cli.greeting();
-//        String userName = Cli.nameUser;
+
         System.out.println("What is the result of the expression?");
 
-        while (correctAnswers < 3) {
-            int number1 = Engine.random(20) + 1;
-            int number2 = Engine.random(20) + 1;
-            int i = Engine.random(3);
+        while (correctAnswers < CORRECT_ANSWERS) {
+            int number1 = Engine.random(MAX_RANDOM_NUMBER) + 1;
+            int number2 = Engine.random(MAX_RANDOM_NUMBER) + 1;
+            int i = Engine.random(MAX_RANDOM_OPERATORS);
             String outputResult =
                     number1 + " " + operators[i] + " " + number2;
 
@@ -42,9 +45,7 @@ public class Calc {
                 break;
             }
         }
-
         Engine.finall(correctAnswers);
-
     }
 }
 //            Engine.game(result);`
