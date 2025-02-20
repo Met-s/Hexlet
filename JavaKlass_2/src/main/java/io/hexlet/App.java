@@ -19,9 +19,14 @@ public class App {
 //        Object obj = new User("Nina");
 //        System.out.println(obj);
 // №_2
-        var book = new Book("First Folio", "William Shakespeare", 1623);
-        System.out.println(book);
-
+//        var book = new Book("First Folio", "William Shakespeare", 1623);
+//        System.out.println(book);
+//------
+        var u1 = new User("Mike", 22);
+        var u2 = new User("Mike", 22);
+        boolean b = u1.equals(u2);
+        System.out.println(b);
+        System.out.println(u1);
 
     }
 }
