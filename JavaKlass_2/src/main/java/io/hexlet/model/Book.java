@@ -1,4 +1,6 @@
 package io.hexlet.model;
+
+
 // №_2
 public class Book {
     private String title;
