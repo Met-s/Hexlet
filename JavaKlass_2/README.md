@@ -27,6 +27,75 @@ TextUtils.getWordsCount(""); // 0
 TextUtils.getWordsCount("man in BlacK"); // 3
 TextUtils.getWordsCount("  hello, world!  "); // 2
 
+№_2
+Book.java
+App.java
+
+src/main/java/io/hexlet/model/Book.java
+
+В файле создайте класс Book, который будет представлять собой книгу в нашем 
+приложении. Класс содержит следующие поля:
+
+title — название книги, строка
+author — имя автора книги, строка
+published — год публикации, целое число
+Реализуйте в классе конструктор
+
+Так как наш класс неявно наследуется от класса Object, ему уже доступен 
+метод toString() со стандартным поведением. Переопределите метод toString() 
+так, чтобы сделать собственное текстовое представление книги:
+
+var book = new Book("First Folio", "William Shakespeare", 1623);
+System.out.println(book); //=> Book "First Folio" written by William Shakespeare published in 1623
+
+№_3
+
+Предположим, мы разрабатываем каталог автомобилей. Вам предстоит реализовать метод, который будет производить поиск автомобиля в этом каталоге
+
+src/main/java/io/hexlet/App.java
+В классе App создайте публичный статический метод contains(), который принимает два параметра:
+
+Каталог автомобилей — массив Car[]
+Автомобиль Car, который мы ищем.
+Метод должен вернуть true, если такой же автомобиль есть в каталоге и false в ином случае
+
+Car[] cars = {
+new Car("Aston Martin", "V8 Vantage", 2011),
+new Car("Ford", "VWindstar", 1998),
+new Car("Lotus", "Exige", 2006)
+};
+
+var car1 = new Car("Lotus", "Exige", 2006);
+App.contains(cars, car1); // true
+
+var car2 = new Car("Lotus", "Exige", 2009);
+App.contains(cars, car2); // false
+src/main/java/io/hexlet/model/Car.java
+В классе Car переопределите методы equals() и hashCode() так, чтобы сравнение двух объектов класса Car происходило по содержимому. Считаем, что автомобили идентичны, если у них совпадают марка, модель и год выпуска.
+
+var car1 = new Car("bmv", "x5", 1998);
+var car2 = new Car("bmv", "x5", 1998);
+car1.equals(car2); // true
+
+var car3 = new Car("bmv", "x5", 2000);
+car1.equals(car3); // false
+Методы equals() и hashCode() работают в связке, так что эти методы нужно переопределять парно
+###_____ Решение Учителя ____###
+
+package io.hexlet;
+
+import io.hexlet.model.Car;
+
+class App {
+    public static boolean contains(Car[] cars, Car car) {
+        for (var currentCar : cars) {
+            if (currentCar.equals(car)) {
+            return true;
+            }
+        }
+        return false;
+    }
+}
 
 ###_____  ____###
 №_
