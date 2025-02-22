@@ -135,7 +135,17 @@ film.getDuration(); // 250
 Параметры аннотации EqualsAndHashCode   https://javadoc.io/doc/org.projectlombok/lombok/1.16.18/lombok/EqualsAndHashCode.html#exclude--
 Статья про EqualsAndHashCode    https://www.baeldung.com/java-lombok-equalsandhashcode
 
+№_5
+###_____ Data-классы ____###
 
+src/main/java/io/hexlet/dto/CustomerDTO.java
+В файле создайте класс CustomerDTO, который будет служить в нашем приложении для получения извне данных о покупателе. Класс содержит следующие поля:
 
+firstName — имя покупателя, строка
+lastName — фамилия покупателя, строка
+email — адрес электронной почты, строка
+Сделайте поля класса неизменяемыми и реализуйте в классе конструктор и геттеры
+
+var customerDTO = new CustomerDTO("Anna", "Smith", "anna@gmail.com");
 
 №_
