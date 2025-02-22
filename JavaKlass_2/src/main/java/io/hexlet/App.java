@@ -1,4 +1,5 @@
 package io.hexlet;
+import io.hexlet.moduls.OrderDTO;
 import io.hexlet.moduls.Post;
 import io.hexlet.util.TextUtils;
 import javax.print.attribute.standard.RequestingUserName;
@@ -42,31 +43,6 @@ public class App {
 //        System.out.println(result);
 //        boolean result1 = App.contains(cars, car);
 //        System.out.println(result1);
-//------
-//        var post = new User("Frenk", 25, "debian@set.ve");
-//        System.out.println(post);
-// №_4
-        var film = new Film(
-               "Man Who Sleeps",
-               "John Doe",
-               1998,
-               "action",
-               new String[] {"Jack Jones", "Anna S"},
-               123
-        );
-        boolean result = film.getTitle().equals("Man Who Sleeps");
-        boolean result1 = film.getActors()[0].equals("Jack Jones");
-
-        System.out.println(result);
-        System.out.println(result1);
-
-
-
-
-
-
-
-    }
 //// №_3
 //    public static boolean contains(Car[] cars, Car car ) {
 //        int length = cars.length;
@@ -79,6 +55,40 @@ public class App {
 //        }
 //        return false;
 //    }
+//------
+//        var post = new User("Frenk", 25, "debian@set.ve");
+//        System.out.println(post);
+// №_4
+//        var film = new Film(
+//               "Man Who Sleeps",
+//               "John Doe",
+//               1998,
+//               "action",
+//               new String[] {"Jack Jones", "Anna S"},
+//               123
+//        );
+//        boolean result = film.getTitle().equals("Man Who Sleeps");
+//        boolean result1 = film.getActors()[0].equals("Jack Jones");
+//
+//        System.out.println(result);
+//        System.out.println(result1);
+//------
+        OrderDTO order1 = new OrderDTO(12345, "Alice Smith", 250.0);
+        OrderDTO order2 = new OrderDTO(67890, "Bob Johnson", 450.5);
+        OrderDTO order1 = new OrderDTO(12345, "Alice Smith", 250.0);
+        OrderDTO order2 = new OrderDTO(67890, "Bob Johnson", 450.5);
+
+        System.out.println("Order ID: " + order1.id());
+        System.out.println("Order ID: " + order2.id());
+// №_5
+
+
+
+
+
+
+    }
+
 
 
 }
@@ -90,7 +100,7 @@ public class App {
 
 
 
-// №_5
+
 // №_6
 // №_7
 // №_8
