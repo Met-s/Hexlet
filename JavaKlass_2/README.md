@@ -107,5 +107,35 @@ Project Lombok - это библиотека java, которая автомат
 ваш класс имеет полнофункциональный конструктор, автоматизирующий ведение 
 журнала переменных и многое другое.
 
-№_
+№_4
+src/main/java/io/hexlet/model/Film.java
+В файле создайте класс Film, который будет представлять собой фильм. Класс содержит следующие поля:
 
+title — название фильма, строка
+director — имя режиссера, строка
+produced — год выпуска, целое число
+genre — жанр фильма, строка
+actors — имена актеров, массив строк
+duration — длительность фильма в минутах, целое число
+Реализуйте в классе пустой конструктор и конструктор со всеми полями. Добавьте в класс геттеры и сеттеры для всех полей. Переопределите методы equals() и hashCode() так, чтобы сравнение фильмов происходило по содержимому всех полей объекта, кроме поля duration
+
+var film1 = new Film(
+"Man Who Sleeps",
+"John Doe",
+1998,
+"action",
+new String[] {"Jack Jones", "Anna S"},
+123
+);
+
+film.getDirector(); // John Doe
+film.setDuration(250);
+film.getDuration(); // 250
+Подсказки
+Параметры аннотации EqualsAndHashCode   https://javadoc.io/doc/org.projectlombok/lombok/1.16.18/lombok/EqualsAndHashCode.html#exclude--
+Статья про EqualsAndHashCode    https://www.baeldung.com/java-lombok-equalsandhashcode
+
+
+
+
+№_
