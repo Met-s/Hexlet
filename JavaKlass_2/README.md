@@ -1,11 +1,15 @@
 
 
 23 (WSL) Oracle OpenJDK 23.0.1
+
 ###_____ Java: Классы ____###
+
 Курсс_№_2
 
 ###_____ Задания ____###
+
 №_1
+
 App.java
 TextUtils.java
 
@@ -23,12 +27,12 @@ src/main/java/io/hexlet/util/TextUtils.java
 число — количество слов в тексте. Слова в тексте разделены одним пробелом, 
 а значит словом считается любая последовательность, не содержащая пробелов.
 
-import io.hexlet.util.TextUtils;
+```import io.hexlet.util.TextUtils;
 
 TextUtils.getWordsCount(""); // 0
 TextUtils.getWordsCount("man in BlacK"); // 3
 TextUtils.getWordsCount("  hello, world!  "); // 2
-
+```
 №_2
 Book.java
 App.java
@@ -46,10 +50,10 @@ published — год публикации, целое число
 Так как наш класс неявно наследуется от класса Object, ему уже доступен 
 метод toString() со стандартным поведением. Переопределите метод toString() 
 так, чтобы сделать собственное текстовое представление книги:
-
+```
 var book = new Book("First Folio", "William Shakespeare", 1623);
 System.out.println(book); //=> Book "First Folio" written by William Shakespeare published in 1623
-
+```
 №_3
 
 Предположим, мы разрабатываем каталог автомобилей. Вам предстоит реализовать метод, который будет производить поиск автомобиля в этом каталоге
@@ -60,7 +64,7 @@ src/main/java/io/hexlet/App.java
 Каталог автомобилей — массив Car[]
 Автомобиль Car, который мы ищем.
 Метод должен вернуть true, если такой же автомобиль есть в каталоге и false в ином случае
-
+```
 Car[] cars = {
 new Car("Aston Martin", "V8 Vantage", 2011),
 new Car("Ford", "VWindstar", 1998),
@@ -82,10 +86,11 @@ car1.equals(car2); // true
 var car3 = new Car("bmv", "x5", 2000);
 car1.equals(car3); // false
 Методы equals() и hashCode() работают в связке, так что эти методы нужно переопределять парно
+```
 ###_____ Решение Учителя ____###
 
 package io.hexlet;
-
+```
 import io.hexlet.model.Car;
 
 class App {
@@ -98,8 +103,9 @@ class App {
         return false;
     }
 }
+```
+###_____ Lombok ____###
 
-###_____  ____###
 [Project Lombok](https://projectlombok.org/#) 
 
 
@@ -120,7 +126,7 @@ genre — жанр фильма, строка
 actors — имена актеров, массив строк
 duration — длительность фильма в минутах, целое число
 Реализуйте в классе пустой конструктор и конструктор со всеми полями. Добавьте в класс геттеры и сеттеры для всех полей. Переопределите методы equals() и hashCode() так, чтобы сравнение фильмов происходило по содержимому всех полей объекта, кроме поля duration
-
+```
 var film1 = new Film(
 "Man Who Sleeps",
 "John Doe",
@@ -129,13 +135,13 @@ var film1 = new Film(
 new String[] {"Jack Jones", "Anna S"},
 123
 );
-
+```
 film.getDirector(); // John Doe
 film.setDuration(250);
 film.getDuration(); // 250
 Подсказки
-Параметры аннотации EqualsAndHashCode   https://javadoc.io/doc/org.projectlombok/lombok/1.16.18/lombok/EqualsAndHashCode.html#exclude--
-Статья про EqualsAndHashCode    https://www.baeldung.com/java-lombok-equalsandhashcode
+Параметры аннотации [EqualsAndHashCode](https://javadoc.io/doc/org.projectlombok/lombok/1.16.18/lombok/EqualsAndHashCode.html#exclude--)
+Статья про [EqualsAndHashCode](https://www.baeldung.com/java-lombok-equalsandhashcode)
 
 №_5
 ###_____ Data-классы ____###
@@ -147,7 +153,7 @@ firstName — имя покупателя, строка
 lastName — фамилия покупателя, строка
 email — адрес электронной почты, строка
 Сделайте поля класса неизменяемыми и реализуйте в классе конструктор и геттеры
-
+```
 var customerDTO = new CustomerDTO("Anna", "Smith", "anna@gmail.com");
-
+```
 №_
