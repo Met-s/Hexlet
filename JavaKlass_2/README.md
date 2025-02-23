@@ -1,3 +1,5 @@
+
+
 23 (WSL) Oracle OpenJDK 23.0.1
 ###_____ Java: Классы ____###
 Курсс_№_2
@@ -98,7 +100,7 @@ class App {
 }
 
 ###_____  ____###
-Project Lombok  https://projectlombok.org/# 
+[Project Lombok](https://projectlombok.org/#) 
 
 
 Project Lombok - это библиотека java, которая автоматически подключается 
