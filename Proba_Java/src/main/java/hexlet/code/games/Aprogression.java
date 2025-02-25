@@ -2,7 +2,6 @@ package hexlet.code.games;
 
 import hexlet.code.Cli;
 import hexlet.code.Engine;
-
 import org.apache.commons.lang3.ArrayUtils;
 
 import static hexlet.code.games.MyValues.CORRECT_ANSWERS;

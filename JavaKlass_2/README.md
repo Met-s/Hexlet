@@ -1,16 +1,12 @@
 
 
-23 (WSL) Oracle OpenJDK 23.0.1
-
-###_____ Java: Классы ____###
-
-Курсс_№_2
-
+23 (WSL) Oracle OpenJDK 23.0.1\
+###_____ Java: Классы ____###\
+Курсс_№_2\
 ###_____ Задания ____###
 
-№_1
-
-App.java
+№_1\
+App.java\
 TextUtils.java
 
 Предположим, мы разрабатываем приложение, в котором пользователи могут 
@@ -33,8 +29,8 @@ TextUtils.getWordsCount(""); // 0
 TextUtils.getWordsCount("man in BlacK"); // 3
 TextUtils.getWordsCount("  hello, world!  "); // 2
 ```
-№_2
-Book.java
+№_2\
+Book.java\
 App.java
 
 src/main/java/io/hexlet/model/Book.java
@@ -54,8 +50,7 @@ published — год публикации, целое число
 var book = new Book("First Folio", "William Shakespeare", 1623);
 System.out.println(book); //=> Book "First Folio" written by William Shakespeare published in 1623
 ```
-№_3
-
+№_3\
 Предположим, мы разрабатываем каталог автомобилей. Вам предстоит реализовать метод, который будет производить поиск автомобиля в этом каталоге
 
 src/main/java/io/hexlet/App.java
@@ -104,19 +99,16 @@ class App {
     }
 }
 ```
-###_____ Lombok ____###
-
-[Project Lombok](https://projectlombok.org/#) 
-
-
+###_____ Lombok ____###\
+[Project Lombok](https://projectlombok.org/#) \
 Project Lombok - это библиотека java, которая автоматически подключается 
 к вашему редактору и инструментам сборки, придавая пикантность вашей java.
 Никогда больше не пишите другой метод getter или equals, с одной аннотацией 
 ваш класс имеет полнофункциональный конструктор, автоматизирующий ведение 
 журнала переменных и многое другое.
 
-№_4
-src/main/java/io/hexlet/model/Film.java
+№_4\
+src/main/java/io/hexlet/model/Film.java \
 В файле создайте класс Film, который будет представлять собой фильм. Класс содержит следующие поля:
 
 title — название фильма, строка
@@ -135,15 +127,16 @@ var film1 = new Film(
 new String[] {"Jack Jones", "Anna S"},
 123
 );
-```
-film.getDirector(); // John Doe
+
+film.getDirector(); // John Doe 
 film.setDuration(250);
 film.getDuration(); // 250
-Подсказки
-Параметры аннотации [EqualsAndHashCode](https://javadoc.io/doc/org.projectlombok/lombok/1.16.18/lombok/EqualsAndHashCode.html#exclude--)
+```
+Подсказки \
+Параметры аннотации [EqualsAndHashCode](https://javadoc.io/doc/org.projectlombok/lombok/1.16.18/lombok/EqualsAndHashCode.html#exclude--) \
 Статья про [EqualsAndHashCode](https://www.baeldung.com/java-lombok-equalsandhashcode)
 
-№_5
+№_5 \
 ###_____ Data-классы ____###
 
 src/main/java/io/hexlet/dto/CustomerDTO.java

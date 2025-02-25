@@ -83,11 +83,11 @@ public class App {
 //        System.out.println("Order ID: " + order2.id());
 // №_5
 // CustomerDTO.java
-        var customerDTO = new CustomerDTO("Anna", "Smith", "anna@gmail.com");
-        System.out.printf("First name: %s\nLast name: %s",
-                customerDTO.getFirstName(), customerDTO.getLastName());
-
-
+//        var customerDTO = new CustomerDTO("Anna", "Smith", "anna@gmail.com");
+//        System.out.printf("First name: %s\nLast name: %s",
+//                customerDTO.getFirstName(), customerDTO.getLastName());
+//------
+        var md = new Markdown();
 
 
 
