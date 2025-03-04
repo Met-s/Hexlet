@@ -1,97 +1,48 @@
 package hexlet.code;
 
-import java.util.Random;
-import java.util.Scanner;
-import static hexlet.code.games.MyValues.CORRECT_ANSWERS;
-
+import static hexlet.code.MyValues.CORRECT_ANSWERS;
+/**
+ * General methods used in the application.
+ * User interaction
+ * Pseudo random number from 0 to input parameter
+ * Displays the final message about successful completion of the game
+ */
 
 public class Engine {
+    /**
+     * Logic common to all games.
+     * -
+     * String[][] is accepted as input.
+     * @param number - String[number of questions][question to the user,
+     *                correct answer]
+     * @param gameCondition - message about the rules of the game.
+     */
+    public static void generalLogic(String[][] number, String gameCondition) {
 
-    private static String answer;
-
-    public static void userInteraction(String number) {
-
-        System.out.println("Question: " + number);
-        System.out.print("Your answer: ");
-        Scanner scan = new Scanner(System.in);
-        answer = scan.next();
-    }
-
-//    public String getAnswer() {
-//        return answer;
-//    }
-//    public void setAnswer(String answer) {
-//        this.answer = answer;
-//    }
-
-
-    public static boolean generalLogic(String number, int number1){
-
-
-//        Cli nameUser = new Cli();
+        Cli.greeting();
+        System.out.println(gameCondition);
         String userName = Cli.getNameUser();
+        String answer;
 
-        userInteraction(number);
+        int i = 0;
+        while (i < CORRECT_ANSWERS) {
+            String exemp = number[i][0];
+            String num1 = number[i][1];
+            System.out.printf("Question: %s\nYour answer: ", exemp);
+            answer = App.getScanner().next();
 
-        int answers = Integer.parseInt(answer);
-
-        if (number1 == answers) {
-            System.out.println("Correct!");
-            return true;
-        } else {
-            System.out.printf("'%s' is wrong answer ;). "
-                            + "Correct answer was '%d'.\nLet`s try again, %s!",
-                    answer, number1, userName);
-            return false;
-        }
-    }
-
-    public static boolean game(String result) throws Exception {
-
-//        Cli nameUser1 = new Cli();
-        String nameUser = Cli.getNameUser();
-
-        if ((!answer.equals("no")) & (!answer.equals("yes"))) {
-            throw new Exception();
-        }
-        if (result.equals("yes")) {
-            if (answer.equals("yes")) {
+            if (answer.equals(num1)) {
                 System.out.println("Correct!");
-                return true;
+                i++;
             } else {
-                System.out.println("'no' is wrong answer ;(. Correct "
-                        + "answer was 'yes'.\nLet's try again, "
-                        + nameUser + "!");
-                return false;
+                System.out.printf("'%s' is wrong answer ;). "
+                                + "Correct answer was '%s'.\nLet's try "
+                                + "again, %s!", answer, num1, userName);
+                break;
             }
         }
-        if (result.equals("no")) {
-            if (answer.equals("no")) {
-                System.out.println("Correct!");
-                return true;
-            } else {
-                System.out.println("'yes' is wrong answer ;(. Correct"
-                        + " answer was 'no'.\nLet's try again, "
-                        + nameUser + "!");
-                return false;
-            }
-        }
-        return false;
-    }
-
-    public static int random(int maxRandom) {
-        Random random = new Random();
-        return random.nextInt(maxRandom);
-    }
-
-    public static void finall(int correctAnswers) {
-
-
-//        Cli nameUser1 = new Cli();
-        String nameUser = Cli.getNameUser();
-
-        if (correctAnswers == CORRECT_ANSWERS) {
-             System.out.println("Congratulations, " + nameUser + "!");
+        if (i == CORRECT_ANSWERS) {
+            System.out.println("Congratulations, " + userName + "!");
         }
     }
 }

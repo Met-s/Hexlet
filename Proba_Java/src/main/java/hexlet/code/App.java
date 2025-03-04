@@ -1,5 +1,5 @@
 package hexlet.code;
-import static hexlet.code.games.MyValues.QUANTITY_GAME;
+
 import java.util.Scanner;
 import hexlet.code.games.Aprogression;
 import hexlet.code.games.Even;
@@ -8,9 +8,13 @@ import hexlet.code.games.Gcd;
 import hexlet.code.games.PrimeN;
 
 
-final
-
 public class App {
+
+    private static Scanner scanner = new Scanner(System.in);
+    public static Scanner getScanner() {
+        return scanner;
+    }
+
     public static void main(String[] args) {
 
         System.out.print("Please enter the game number and press Enter.\n"
@@ -25,8 +29,7 @@ public class App {
 
         Scanner choice = new Scanner(System.in);
         String number = choice.nextLine();
-            try {
-
+        try {
             switch (number) {
                 case "0" -> System.out.println("Goodbye!");
                 case "1" -> Cli.greeting();
@@ -35,10 +38,12 @@ public class App {
                 case "4" -> Gcd.divisor();
                 case "5" -> Aprogression.progression();
                 case "6" -> PrimeN.primeNumber();
-                default -> System.out.println("Invalid number");
+                default -> throw new CustomException("Error: Invalid value "
+                        + "entered!\nValue must be between 0 and 6!");
             }
-        } catch (Exception e) {
-            System.out.println(("Incorrect input!"));
+        } catch (CustomException e) {
+            System.out.println(("Ошибка: " + e.getMessage()));
         }
+        scanner.close();
     }
 }
