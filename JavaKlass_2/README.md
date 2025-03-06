@@ -271,4 +271,40 @@ private int maxCapacity;
     }
 }
 ```
+###_____ Задание ____###
+// №_7
+В этом упражнении мы создадим собственный класс для генерации случайных чисел
+
+src/main/java/io/hexlet/MyRandom.java
+В файле создайте класс MyRandom, который будет представлять собой наш собственный генератор чисел. Генератор предназначен для получения случайных чисел в в диапазоне от 1 до 100 включительно. Конфигурацию нашего генератора — верхнюю и нижнюю границы диапазона будем хранить в статических свойствах. Создайте в классе соответствующие статические свойства.
+
+Реализуйте в классе публичный статический метод generate(), который будет возвращать случайное число типа int в диапазоне, указанном в конфиге класса
+
+MyRandom.generate(); // Целое число в диапазоне от 1 до 100
+Подсказки
+Случайное число можете получить любым удобным вам способом. Возможно, вам пригодится метод [Math.random()](https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#random--)
+
+###_____ Решение ____###
+```
+public class MyRandom {
+public static int minValue = 1;
+public static int maxValue = 100;
+
+    public static int generate() {
+        return minValue + (int)(Math.random() * (maxValue - minValue) + 1);
+    }
+}
+```
+###_____ Решение Учителя ____###
+```
+class MyRandom {
+public static final int MIN = 1;
+public static final int MAX = 100;
+
+    public static int generate() {
+        return (int) Math.floor(Math.random() * (MAX - MIN + 1)) + MIN;
+    }
+}
+```
+
 №_

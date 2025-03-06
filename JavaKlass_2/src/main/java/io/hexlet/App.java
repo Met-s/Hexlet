@@ -1,16 +1,15 @@
 package io.hexlet;
 import io.hexlet.dto.CustomerDTO;
-import io.hexlet.model.ProductsStorage;
+import io.hexlet.model.*;
 import io.hexlet.moduls.Employee;
 import io.hexlet.moduls.OrderDTO;
 import io.hexlet.moduls.Post;
 import io.hexlet.util.TextUtils;
 import javax.print.attribute.standard.RequestingUserName;
 import io.hexlet.moduls.User;
-import io.hexlet.model.Book;
-import io.hexlet.model.Car;
+
 import java.util.Arrays;
-import io.hexlet.model.Film;
+
 import io.hexlet.util.Change;
 
 public class App {
@@ -96,15 +95,18 @@ public class App {
 //        var change = changeString("Win");
 //        System.out.println(change);
 // №_6
-        var storage = new ProductsStorage(20, 50);
-
-        storage.placeProducts(20);
-        storage.takeProducts(30);
-//        storage.setGoodsQuantity(40);
-        int quantity = storage.getGoodsQuantity();
-        int maxCapacity = storage.getMaxCapacity();
-        System.out.println(quantity);
-        System.out.println(maxCapacity);
+//        var storage = new ProductsStorage(20, 50);
+//
+//        storage.placeProducts(20);
+//        storage.takeProducts(30);
+////        storage.setGoodsQuantity(40);
+//        int quantity = storage.getGoodsQuantity();
+//        int maxCapacity = storage.getMaxCapacity();
+//        System.out.println(quantity);
+//        System.out.println(maxCapacity);
+// №_7
+        int result = MyRandom.generate();
+        System.out.println(result);
 
 
 
@@ -130,7 +132,7 @@ public class App {
 
 
 
-// №_7
+
 // №_8
 // №_9
 // №_10
