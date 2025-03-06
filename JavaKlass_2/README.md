@@ -149,4 +149,126 @@ email — адрес электронной почты, строка
 ```
 var customerDTO = new CustomerDTO("Anna", "Smith", "anna@gmail.com");
 ```
+###_____ Решение ____###
+```
+CustomerDTO.java
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
+public class CustomerDTO {
+private final String firstName;
+private final String lastName;
+private final String email;
+}
+```
+№_6
+###_____ Задание ____###
+Представьте, что мы разрабатываем логистическое приложение, которое следит за транспортировкой и хранением грузов. Одно из сущностей нашего приложения — это склад товаров. У нашего склада есть максимальная вместимость. Мы не можем разместить на складе товаров больше, чем там поместится. И не можем забрать со склада товаров больше, чем там сейчас есть
+
+src/main/java/io/hexlet/ProductsStorage.java
+В файле создайте класс ProductsStorage, который представляет собой склад товаров
+
+Класс содержит следующие поля:
+
+goodsQuantity — количество товара на складе
+maxCapacity — максимальная вместимость склада
+Реализуйте в классе конструктор со всеми полями и геттеры
+
+Реализуйте в классе следующие методы, которые меняют состояние объекта склада:
+
+placeProducts() — добавляет новые товары на склад. Метод принимает в качестве параметра целое число — количество товара, которое нужно разместить на складе
+
+takeProducts() — забирает товары со склада. Метод принимает в качестве параметра целое число — количество товара, которое мы изымаем со склада
+
+Ваша задача — проследить за целостностью состояния объекта, чтобы оно не нарушалась. Правила такие: мы не можем загрузить на склад товаров больше, чем он может вместить. И не можем забрать больше, чем есть сейчас. При попытке сделать это методы должны вывести на экран сообщение о том, что действие не возможно выполнить, а состояние объекта не должно измениться. Содержание сообщения остается на ваше усмотрение
+```
+// Создаем новый объект склада с начальным количеством товара и максимальной вместимостью
+var storage = new ProductsStorage(20, 50);
+
+// Размещаем там товар
+storage.placeProducts(20);
+storage.getGoodsQuantity(); // 40
+
+// Будет превышена максимальная вместимость
+storage.placeProducts(60); // => Общее количество товара превысит максимальную вместимость
+// Состояние склада не изменилось
+storage.getGoodsQuantity(); // 40
+
+// Забираем товары со склада
+storage.takeProducts(30);
+storage.getGoodsQuantity(); // 10
+
+// Это больше, чем есть сейчас
+storage.takeProducts(60); // => Такого количество товара нет на складе
+storage.getGoodsQuantity(); // 10
+```
+###_____ Решение ____###
+```
+package io.hexlet.model;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+public class ProductsStorage {
+private int goodsQuantity;
+private int maxCapacity;
+
+public void placeProducts(int quantityProducts) {
+int balance = goodsQuantity + quantityProducts;
+
+        if (balance <= maxCapacity) {
+            goodsQuantity = balance;
+        } else {
+            System.out.println("Операция не выполнена!\n" +
+                    "Количество товара превышает допустимое значение");
+        }
+    }
+
+    public void takeProducts(int quantityProducts) {
+        if (goodsQuantity >= quantityProducts) {
+            goodsQuantity -= quantityProducts;
+        } else {
+            System.out.println("Операция не выполнена!\n" +
+                    "Такого количества товара на складе нет.");
+        }
+    }
+}
+```
+###_____ Решение Учителя ____###
+```
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
+class ProductsStorage {
+private int goodsQuantity;
+private int maxCapacity;
+
+    public void placeProducts(int quantity) {
+
+        if ((goodsQuantity + quantity) > maxCapacity) {
+            System.out.println("Общее количество товара превысит максимальную вместимость");
+            return;
+        }
+
+        goodsQuantity += quantity;
+    }
+
+    public void takeProducts(int quantity) {
+
+        if ((goodsQuantity - quantity) < 0) {
+            System.out.println("Такого количество товара нет на складе");
+            return;
+        }
+
+        goodsQuantity -= quantity;
+    }
+}
+```
 №_

@@ -1,5 +1,7 @@
 package io.hexlet;
 import io.hexlet.dto.CustomerDTO;
+import io.hexlet.model.ProductsStorage;
+import io.hexlet.moduls.Employee;
 import io.hexlet.moduls.OrderDTO;
 import io.hexlet.moduls.Post;
 import io.hexlet.util.TextUtils;
@@ -9,8 +11,7 @@ import io.hexlet.model.Book;
 import io.hexlet.model.Car;
 import java.util.Arrays;
 import io.hexlet.model.Film;
-
-
+import io.hexlet.util.Change;
 
 public class App {
     public static void main(String[] args) {
@@ -87,7 +88,30 @@ public class App {
 //        System.out.printf("First name: %s\nLast name: %s",
 //                customerDTO.getFirstName(), customerDTO.getLastName());
 //------
-        var md = new Markdown();
+//        var company = "Simens";
+//        var employee = new Employee("Mike", company);
+// Напрямую
+//        var result = company.Change("LG");
+//        employee.getCompany().contains("MAK");
+//        var change = changeString("Win");
+//        System.out.println(change);
+// №_6
+        var storage = new ProductsStorage(20, 50);
+
+        storage.placeProducts(20);
+        storage.takeProducts(30);
+//        storage.setGoodsQuantity(40);
+        int quantity = storage.getGoodsQuantity();
+        int maxCapacity = storage.getMaxCapacity();
+        System.out.println(quantity);
+        System.out.println(maxCapacity);
+
+
+
+
+
+
+
 
 
 
@@ -105,7 +129,7 @@ public class App {
 
 
 
-// №_6
+
 // №_7
 // №_8
 // №_9
