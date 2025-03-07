@@ -1,4 +1,5 @@
 package io.hexlet;
+import org.apache.commons.collections4.CollectionUtils;
 import io.hexlet.dto.CustomerDTO;
 import io.hexlet.model.*;
 import io.hexlet.moduls.Employee;
@@ -7,10 +8,12 @@ import io.hexlet.moduls.Post;
 import io.hexlet.util.TextUtils;
 import javax.print.attribute.standard.RequestingUserName;
 import io.hexlet.moduls.User;
-
+import java.util.ArrayList;
 import java.util.Arrays;
-
 import io.hexlet.util.Change;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class App {
     public static void main(String[] args) {
@@ -105,18 +108,41 @@ public class App {
 //        System.out.println(quantity);
 //        System.out.println(maxCapacity);
 // №_7
-        int result = MyRandom.generate();
+//        int result = MyRandom.generate();
+//        System.out.println(result);
+//###_____ ArrayList ____###
+//        var items = new ArrayList<String>();
+//        items.add("Sun");
+//        items.add("Mars");
+//        System.out.println(items);                  //[Sun, Mars]
+//        System.out.println(items.contains("Sun"));  //true
+//        System.out.println(items.get(1));           // Mars
+//        System.out.println(items.size());           //2
+// Предположим что у нас есть класс User
+//        var users = new ArrayList<User>();
+//        users.add(new User(/* параметры */));
+//        String e = "Stran";
+//        var items = new ArrayList<String>();
+//        items.add("Mars");
+//        CollectionUtils.addIgnoreNull(items, e);
+//        System.out.println(items);
+// №_8
+        var capitals = List.of("london", "berlin", "tokio");
+
+        String result = App.getOrDefault(capitals, 2, " ");
         System.out.println(result);
 
 
 
-
-
-
-
-
-
-
+    }
+// №_8
+    public static String getOrDefault(List<String> listStr, int index,
+                                      String def) {
+        try {
+            return listStr.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            return def;
+        }
     }
 
 
@@ -133,7 +159,8 @@ public class App {
 
 
 
-// №_8
+
 // №_9
 // №_10
+//###_____ Страница модуля ____###
 // №_
