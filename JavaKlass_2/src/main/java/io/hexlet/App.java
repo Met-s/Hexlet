@@ -127,23 +127,37 @@ public class App {
 //        CollectionUtils.addIgnoreNull(items, e);
 //        System.out.println(items);
 // №_8
-        var capitals = List.of("london", "berlin", "tokio");
-
-        String result = App.getOrDefault(capitals, 2, " ");
-        System.out.println(result);
+//        var capitals = List.of("london", "berlin", "tokio");
+//
+//        String result = App.getOrDefault(capitals, 2, " ");
+//        System.out.println(result);
+// №_9
+//        var items = List.of(1, -2, 3, -5);
+//        var result = App.replaceByZero(items);
+//        System.out.println(result);
+//        System.out.println(items);
 
 
 
     }
 // №_8
-    public static String getOrDefault(List<String> listStr, int index,
-                                      String def) {
-        try {
-            return listStr.get(index);
-        } catch (IndexOutOfBoundsException e) {
-            return def;
-        }
-    }
+//    public static String getOrDefault(List<String> listStr, int index,
+//                                      String def) {
+//        try {
+//            return listStr.get(index);
+//        } catch (IndexOutOfBoundsException e) {
+//            return def;
+//        }
+//    }
+// №_9
+//    public static List<Integer> replaceByZero(List<Integer> numbers) {
+//        var newNumbers = new ArrayList<Integer>();
+//        for (var number : numbers) {
+//            number = (number > 0) ? number : 0;
+//            newNumbers.add(number);
+//        }
+//        return newNumbers;
+//    }
 
 
 
@@ -160,7 +174,7 @@ public class App {
 
 
 
-// №_9
+
 // №_10
 //###_____ Страница модуля ____###
 // №_

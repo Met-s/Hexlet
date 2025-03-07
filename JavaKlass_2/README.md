@@ -308,7 +308,8 @@ src/main/java/io/hexlet/MyRandom.java
 Реализуйте в классе публичный статический метод generate(), который будет 
 возвращать случайное число типа int в диапазоне, указанном в конфиге класса
 
-MyRandom.generate(); // Целое число в диапазоне от 1 до 100
+MyRandom.generate(); \
+// Целое число в диапазоне от 1 до 100
 Подсказки
 Случайное число можете получить любым удобным вам способом. 
 Возможно, вам пригодится метод [Math.random()](https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#random--)
@@ -393,6 +394,55 @@ return defaultValue;
     }    
 }
 ```
+№_9 \
+###_____ Задание ____###\
+
+src/main/java/io/hexlet/App.java\
+В классе App реализуйте публичный статический метод replaceByZero(), 
+который принимает в качестве парамера список List целых чисел. 
+Метод должен вернуть новый список, в котором все отрицательные числа заменены на нули. 
+Метод не должен менять исходный список
+```
+var items = List.of(1, -2, 3, -5);
+
+var result = App.replaceByZero(items);
+System.out.println(result); // => [1, 0, 3, 0]
+
+// Исходный список не изменился
+System.out.println(items); // => [1, -2, 3, -5]
+```
+###_____ Решение ____###
+```
+public static List<Integer> replaceByZero(List<Integer> numbers) {
+var newNumbers = new ArrayList<Integer>();
+for (var number : numbers) {
+number = (number > 0) ? number : 0;
+newNumbers.add(number);
+}
+return newNumbers;
+}
+```
+###_____ Решение Учителя ____###
+```
+import java.util.List;
+import java.util.ArrayList;
+
+class App {
+// BEGIN
+public static List<Integer> replaceByZero(List<Integer> items) {
+var result = new ArrayList<Integer>();
+
+        for (var item : items) {
+            var processedItem = item > 0 ? item : 0;
+            result.add(processedItem);
+        }
+
+        return result;
+    }
+    // END
+}
+```
+
 
 №_\
 ###_____ Задание ____###\
