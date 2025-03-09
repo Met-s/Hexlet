@@ -2,9 +2,9 @@ package hexlet.code.games;
 
 import hexlet.code.Engine;
 import hexlet.code.Utils;
-import static hexlet.code.MyValues.CORRECT_ANSWERS;
-import static hexlet.code.MyValues.MAX_RANDOM_NUMBER;
-import static hexlet.code.MyValues.MAX_RANDOM_OPERATORS;
+import static hexlet.code.Constants.CORRECT_ANSWERS;
+import static hexlet.code.Constants.MAX_RANDOM_NUMBER;
+import static hexlet.code.Constants.MAX_RANDOM_OPERATORS;
 /**
  * The user is asked to solve a mathematical expression.
  * You need to give three correct answers in a row.

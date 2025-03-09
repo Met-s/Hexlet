@@ -1,16 +1,22 @@
 package io.hexlet;
-import org.apache.commons.collections4.CollectionUtils;
-import io.hexlet.dto.CustomerDTO;
-import io.hexlet.model.*;
-import io.hexlet.moduls.Employee;
-import io.hexlet.moduls.OrderDTO;
-import io.hexlet.moduls.Post;
-import io.hexlet.util.TextUtils;
-import javax.print.attribute.standard.RequestingUserName;
+
+//import org.apache.commons.collections4.CollectionUtils;
+//import io.hexlet.dto.CustomerDTO;
+//import io.hexlet.model.*;
+//import io.hexlet.moduls.Employee;
+//import io.hexlet.moduls.OrderDTO;
+//import io.hexlet.moduls.Post;
+//import io.hexlet.util.TextUtils;
+//import javax.print.attribute.standard.RequestingUserName;
+//import io.hexlet.moduls.User;
+//import java.util.ArrayList;
+//import java.util.Arrays;
+//import io.hexlet.util.Change;
+//import java.util.ArrayList;
+//import java.util.List;
 import io.hexlet.moduls.User;
-import java.util.ArrayList;
-import java.util.Arrays;
-import io.hexlet.util.Change;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -136,7 +142,20 @@ public class App {
 //        var result = App.replaceByZero(items);
 //        System.out.println(result);
 //        System.out.println(items);
+//###_____ Страница модуля ____###
+        var users = List.of(
+                new User(LocalDate.of(1999, 1, 1)),
+                new User(LocalDate.of(2010, 5, 8)),
+                new User(LocalDate.of(2008, 10, 11))
+        );
+        var ages = new ArrayList<Integer>();
+        var currentDate = LocalDate.now();
 
+        for (var user : users) {
+            var age = Period.between(user.getBirthday(), currentDate);
+            ages.add(age.getYears());
+        }
+        System.out.println(ages);
 
 
     }

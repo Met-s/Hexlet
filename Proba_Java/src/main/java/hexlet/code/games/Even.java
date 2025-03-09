@@ -3,8 +3,8 @@ package hexlet.code.games;
 
 import hexlet.code.Engine;
 import hexlet.code.Utils;
-import static hexlet.code.MyValues.CORRECT_ANSWERS;
-import static hexlet.code.MyValues.MAX_RANDOM_NUMBER;
+import static hexlet.code.Constants.CORRECT_ANSWERS;
+import static hexlet.code.Constants.MAX_RANDOM_NUMBER;
 /**
  * Game "Check for parity".
  * Game essence:

@@ -1,28 +1,40 @@
 package io.hexlet.moduls;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-
-import java.util.Objects;
+import java.time.LocalDate;
 
 
-
-@ToString
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode
 public class User {
-    private String firstName;
-    private int age;
-    private String email;
+    private LocalDate birthday;
 
+    public User(LocalDate birthday) {
+        this.birthday = birthday;
+    }
 
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+}
+
+//-------------------------------
+//import lombok.Getter;
+//import lombok.NoArgsConstructor;
+//import lombok.Setter;
+//import lombok.ToString;
+//import lombok.AllArgsConstructor;
+//import lombok.EqualsAndHashCode;
+//import java.util.Objects;
+//@ToString
+//@Getter
+//@Setter
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@EqualsAndHashCode
+//public class User {
+//    private String firstName;
+//    private int age;
+//    private String email;
+//}
+//-------------------------------
 
 
 //    public User(String firstName, int age) {
@@ -72,4 +84,4 @@ public class User {
 //    }
 
 
-}
+
