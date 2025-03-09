@@ -14,6 +14,7 @@ package io.hexlet;
 //import io.hexlet.util.Change;
 //import java.util.ArrayList;
 //import java.util.List;
+import io.hexlet.model.Product;
 import io.hexlet.moduls.User;
 import java.time.LocalDate;
 import java.time.Period;
@@ -143,19 +144,27 @@ public class App {
 //        System.out.println(result);
 //        System.out.println(items);
 //###_____ Страница модуля ____###
-        var users = List.of(
-                new User(LocalDate.of(1999, 1, 1)),
-                new User(LocalDate.of(2010, 5, 8)),
-                new User(LocalDate.of(2008, 10, 11))
+//        var users = List.of(
+//                new User(LocalDate.of(1999, 1, 1)),
+//                new User(LocalDate.of(2010, 5, 8)),
+//                new User(LocalDate.of(2008, 10, 11))
+//        );
+//        var ages = new ArrayList<Integer>();
+//        var currentDate = LocalDate.now();
+//
+//        for (var user : users) {
+//            var age = Period.between(user.getBirthday(), currentDate);
+//            ages.add(age.getYears());
+//        }
+//        System.out.println(ages);
+// №_10
+        var products = List.of(
+                new Product("bread", 5),
+                new Product("milk", 10),
+                new Product("fish", 30)
         );
-        var ages = new ArrayList<Integer>();
-        var currentDate = LocalDate.now();
-
-        for (var user : users) {
-            var age = Period.between(user.getBirthday(), currentDate);
-            ages.add(age.getYears());
-        }
-        System.out.println(ages);
+        var result = App.getProductsByPrice(products, 10, 30);
+        System.out.println(result);
 
 
     }
@@ -177,6 +186,17 @@ public class App {
 //        }
 //        return newNumbers;
 //    }
+// №_10
+    public static List<String> getProductsByPrice(List<Product> products,
+                                                  int minPrice, int maxPrice) {
+        var newProducts = new ArrayList<String>();
+        for (var product : products) {
+            if (product.getPrice() >= minPrice && product.getPrice() <= maxPrice) {
+                newProducts.add(product.getTitle());
+            }
+        }
+        return newProducts;
+    }
 
 
 
@@ -194,6 +214,6 @@ public class App {
 
 
 
-// №_10
+
 //###_____ Страница модуля ____###
 // №_

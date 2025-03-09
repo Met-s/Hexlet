@@ -442,6 +442,69 @@ var result = new ArrayList<Integer>();
     // END
 }
 ```
+№_10\
+src/main/java/io/hexlet/App.java\
+В классе App реализуйте публичный статический метод getProductsByPrice(),
+который фильтрует список товаров по цене. Метод принимает три параметра:
+
+Список List<Product> товаров\
+Минимальная цена товара, целое число\
+Максимальная цена товара, целое число
+Метод должен вернуть список названий тех товаров, цена которых 
+укладывается в переданный диапазон, включая границы диапазона
+```
+var products = List.of(
+new Product("bread", 5),
+new Product("milk", 10),
+new Product("fish", 30)
+);
+
+var result = App.getProductsByPrice(products, 10, 30);
+System.out.println(result); // => ["milk", "fish"]
+```
+###_____ Решение ____###
+```
+class App {
+// BEGIN (write your solution here)
+public static List<String> getProductsByPrice(List<Product> products,
+int minPrice, int maxPrice) {
+var newProducts = new ArrayList<String>();
+for (var product : products) {
+if (product.getPrice() >= minPrice && product.getPrice() <= maxPrice) {
+newProducts.add(product.getTitle());
+}
+}
+return newProducts;
+}
+// END
+}
+```
+###_____ Решение Учителя ____###
+```
+import java.util.List;
+import java.util.ArrayList;
+import io.hexlet.model.Product;
+
+class App {
+// BEGIN
+public static List<String> getProductsByPrice(List<Product> products, int min, int max) {
+var productTitles = new ArrayList<String>();
+
+        for (var product : products) {
+            var price = product.getPrice();
+
+            if (price >= min && price <= max) {
+                var title = product.getTitle();
+                productTitles.add(title);
+            }
+        }
+
+        return productTitles;
+    }
+    // END
+}
+```
+
 
 
 №_\
