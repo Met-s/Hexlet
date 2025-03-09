@@ -14,10 +14,10 @@ package io.hexlet;
 //import io.hexlet.util.Change;
 //import java.util.ArrayList;
 //import java.util.List;
+import io.hexlet.model.BookS;
 import io.hexlet.model.Product;
-import io.hexlet.moduls.User;
-import java.time.LocalDate;
-import java.time.Period;
+import io.hexlet.moduls.UserFriends;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -158,13 +158,32 @@ public class App {
 //        }
 //        System.out.println(ages);
 // №_10
-        var products = List.of(
-                new Product("bread", 5),
-                new Product("milk", 10),
-                new Product("fish", 30)
+//        var products = List.of(
+//                new Product("bread", 5),
+//                new Product("milk", 10),
+//                new Product("fish", 30)
+//        );
+//        var result = App.getProductsByPrice(products, 10, 30);
+//        System.out.println(result);
+//###_____ Страница модуля ____###
+//        var user = new UserFriends();
+//        var friends = new ArrayList<UserFriends>();
+//        friends.add(new UserFriends());
+//        friends.add(new UserFriends());
+//        user.setUserFriends(friends);
+//№_11
+        var books = List.of(
+                new BookS("Death on the Nile", "Agatha Christie",
+                        "Detective"),
+                new BookS("Murder on the Orient Express", "Agatha Christie"
+                        , "Detective"),
+                new BookS("The Raven", "Edgar Allan Poe", "Poem")
         );
-        var result = App.getProductsByPrice(products, 10, 30);
+        int result = App.countBooks(books, "Agatha Christie", "Detective");
         System.out.println(result);
+
+
+
 
 
     }
@@ -187,17 +206,27 @@ public class App {
 //        return newNumbers;
 //    }
 // №_10
-    public static List<String> getProductsByPrice(List<Product> products,
-                                                  int minPrice, int maxPrice) {
-        var newProducts = new ArrayList<String>();
-        for (var product : products) {
-            if (product.getPrice() >= minPrice && product.getPrice() <= maxPrice) {
-                newProducts.add(product.getTitle());
+//    public static List<String> getProductsByPrice(List<Product> products,
+//                                                  int minPrice, int maxPrice) {
+//        var newProducts = new ArrayList<String>();
+//        for (var product : products) {
+//            if (product.getPrice() >= minPrice && product.getPrice() <= maxPrice) {
+//                newProducts.add(product.getTitle());
+//            }
+//        }
+//        return newProducts;
+//    }
+//№_11
+    public static int countBooks(List<BookS> books,
+                                          String nameAuthor, String genre) {
+        int quantityBooks = 0;
+        for (BookS book : books) {
+            if (nameAuthor.equals(book.getAuthorName()) && genre.equals(book.getGenre())) {
+                quantityBooks++;
             }
         }
-        return newProducts;
+        return quantityBooks;
     }
-
 
 
 }

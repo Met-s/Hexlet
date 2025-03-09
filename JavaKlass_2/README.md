@@ -504,6 +504,70 @@ var productTitles = new ArrayList<String>();
     // END
 }
 ```
+###_____ Страница модуля ____###\
+Списки в определении типов
+[Интерфейс List](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html)
+
+###_____ Задание ____###\
+№_11\
+В этом упражнении мы лишний раз потренируемся обрабатывать списки, а заодно применим подход, рассмотренный в уроке.
+
+src/main/java/io/hexlet/App.java\
+В классе App реализуйте публичный статический метод countBooks(), который посчитает общее количество книг автора. Метод принимает три параметра
+
+Список книг\
+Имя автора, строка\
+Жанр, строка\
+Метод должен вернуть общее количество книг в библиотеке, написанных нашим автором в определенном жанре
+```
+var books = List.of(
+new Book("Death on the Nile", "Agatha Christie", "Detective"),
+new Book("Murder on the Orient Express", "Agatha Christie", "Detective"),
+new Book("The Raven", "Edgar Allan Poe", "Poem")
+);
+
+App.countBooks(books, "Agatha Christie", "Detective"); // 2
+```
+Реализуйте метод так, чтобы он мог принимать в качестве списка книг любую реализацию интерфейса List
+
+###_____ Решение ____###
+```
+public static int countBooks(List<BookS> books,
+String nameAuthor, String genre) {
+int quantityBooks = 0;
+for (BookS book : books) {
+if (nameAuthor.equals(book.getAuthorName()) && genre.equals(book.getGenre())) {
+quantityBooks++;
+}
+}
+return quantityBooks;
+}
+```
+###_____ Решение Учителя ____###
+```
+import java.util.List;
+import io.hexlet.model.Book;
+
+class App {
+// BEGIN
+public static int countBooks(List<Book> books, String authorName, String genre) {
+
+        var booksCont = 0;
+
+        for (var book : books) {
+            var bookAuthor = book.getAuthorName();
+            var bookGenre = book.getGenre();
+
+            if (bookAuthor.equals(authorName) && bookGenre.equals(genre)) {
+                booksCont++;
+            }
+        }
+
+        return booksCont;
+    }
+    // END
+}
+```
 
 
 
