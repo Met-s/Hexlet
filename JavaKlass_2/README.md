@@ -568,12 +568,79 @@ public static int countBooks(List<Book> books, String authorName, String genre) 
     // END
 }
 ```
+###_____ Задание ____###\
+//№_12
+
+Одно из типичных действий в социальных сетях - поиск общих друзей. В этом упражнении вам предстоит реализовать аналогичный функционал
+
+src/main/java/io/hexlet/App.java
+В классе App реализуйте публичный статический метод getCommonFriends(), который находит общих друзей у двух пользователей. Метод принимает два параметра - пользователей, у которых мы ищем общих друзей
+
+Метод должен вернуть список List<User> друзей, которые являются общими для двух переданных пользователей
+```
+var user1 = new User("John");
+user1.addFriend(new User("Ellery"));
+
+var user2 = new User("Anna");
+user2.addFriend(new User("Abey"));
+
+// Общий друг двух пользователей
+var friend = new User("Jacky");
+user1.addFriend(friend);
+user2.addFriend(friend);
+
+List<User> commonFriends = App.getCommonFriends(user1, user2);
+System.out.println(commonFriends); // => ["Jacky"]
+```
+Подсказки
+Изучите класс User, который представляет собой пользователя нашей социальной сети. Посмотрите, как хранятся друзья пользователя
+В упражнении доступна зависимость CollectionUtils. При желании можете импортировать и использовать ее
+
+###_____ Решение ____###
+```
+package io.hexlet;
+
+import java.util.List;
+import io.hexlet.model.User;
+import java.util.ArrayList;
+import org.apache.commons.collections4.CollectionUtils;
 
 
+class App {
+// BEGIN (write your solution here)
+public static List<User> getCommonFriends(User firstUser,
+User secondUser) {
+var firstUser1 = firstUser.getFriends() ;
+var secondUser1 = secondUser.getFriends() ;
+var commonFriends = new ArrayList<User>();
+commonFriends = (ArrayList<User>)
+CollectionUtils.intersection(firstUser1, secondUser1);
+return commonFriends;
+}
+// END
+}
+```
+###_____ Решение Учителя ____###
+```
+package io.hexlet;
+
+import java.util.List;
+import io.hexlet.model.User;
+import java.util.ArrayList;
+
+class App {
+// BEGIN
+public static List<User> getCommonFriends(User user1, User user2) {
+var commonFriends = new ArrayList<>(user1.getFriends());
+commonFriends.retainAll(user2.getFriends());
+return commonFriends;
+}
+// END
+}
+```
 
 №_\
 ###_____ Задание ____###\
 ###_____ Решение ____###\
 ###_____ Решение Учителя ____###\
 ###_____ Страница модуля ____###\
-j

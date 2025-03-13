@@ -20,6 +20,8 @@ import io.hexlet.moduls.UserFriends;
 
 import java.util.ArrayList;
 import java.util.List;
+import io.hexlet.model.User;
+import org.apache.commons.collections4.CollectionUtils;
 
 
 public class App {
@@ -172,21 +174,40 @@ public class App {
 //        friends.add(new UserFriends());
 //        user.setUserFriends(friends);
 //№_11
-        var books = List.of(
-                new BookS("Death on the Nile", "Agatha Christie",
-                        "Detective"),
-                new BookS("Murder on the Orient Express", "Agatha Christie"
-                        , "Detective"),
-                new BookS("The Raven", "Edgar Allan Poe", "Poem")
-        );
-        int result = App.countBooks(books, "Agatha Christie", "Detective");
-        System.out.println(result);
+//        var books = List.of(
+//                new BookS("Death on the Nile", "Agatha Christie",
+//                        "Detective"),
+//                new BookS("Murder on the Orient Express", "Agatha Christie"
+//                        , "Detective"),
+//                new BookS("The Raven", "Edgar Allan Poe", "Poem")
+//        );
+//        int result = App.countBooks(books, "Agatha Christie", "Detective");
+//        System.out.println(result);
+//№_12
+        var user1 = new User("John");
+        user1.addFriend(new User("Ellery"));
 
+        var user2 = new User("Anna");
+        user2.addFriend(new User("Abey"));
+
+        var friend = new User("Jacky");
+        user1.addFriend(friend);
+        user2.addFriend(friend);
+
+        List<User> commonFriends = App.getCommonFriends(user1, user2);
+        System.out.println(commonFriends);
+
+//        var getUser1 = user1.getFriends();
+//        var getUser2 = user2.getFriends();
+//
+//        var result = CollectionUtils.intersection(getUser1, getUser2);
+//        System.out.println(result);
 
 
 
 
     }
+//===========================================================================
 // №_8
 //    public static String getOrDefault(List<String> listStr, int index,
 //                                      String def) {
@@ -217,15 +238,25 @@ public class App {
 //        return newProducts;
 //    }
 //№_11
-    public static int countBooks(List<BookS> books,
-                                          String nameAuthor, String genre) {
-        int quantityBooks = 0;
-        for (BookS book : books) {
-            if (nameAuthor.equals(book.getAuthorName()) && genre.equals(book.getGenre())) {
-                quantityBooks++;
-            }
-        }
-        return quantityBooks;
+//    public static int countBooks(List<BookS> books,
+//                                          String nameAuthor, String genre) {
+//        int quantityBooks = 0;
+//        for (BookS book : books) {
+//            if (nameAuthor.equals(book.getAuthorName()) && genre.equals(book.getGenre())) {
+//                quantityBooks++;
+//            }
+//        }
+//        return quantityBooks;
+//    }
+//№_12
+    public static List<User> getCommonFriends(User firstUser,
+                                              User secondUser) {
+        var firstUser1 = firstUser.getFriends() ;
+        var secondUser1 = secondUser.getFriends() ;
+        var commonFriends = new ArrayList<User>();
+        commonFriends = (ArrayList<User>)
+                CollectionUtils.intersection(firstUser1, secondUser1);
+        return commonFriends;
     }
 
 
