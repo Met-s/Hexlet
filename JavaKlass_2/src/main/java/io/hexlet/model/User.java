@@ -2,6 +2,8 @@ package io.hexlet.model;
 import java.util.List;
 import java.util.ArrayList;
 
+
+//№_12
 public final class User {
     private String name;
     private List<User> friends;
