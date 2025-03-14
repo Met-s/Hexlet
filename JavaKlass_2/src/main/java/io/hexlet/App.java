@@ -17,9 +17,7 @@ package io.hexlet;
 import io.hexlet.model.Cars;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 public class App {
@@ -201,14 +199,34 @@ public class App {
 //        var result = CollectionUtils.intersection(getUser1, getUser2);
 //        System.out.println(result);
 //№_13
-        var cars = List.of(
-                new Cars("Jaguar", "XK120", LocalDate.of(1950, 8, 21)),
-                new Cars("Mercedes-Benz", "W114", LocalDate.of(1968, 7, 10)),
-                new Cars("Fiat", "600", LocalDate.of(1956, 1, 1))
-        );
+//        var cars = List.of(
+//                new Cars("Jaguar", "XK120", LocalDate.of(1950, 8, 21)),
+//                new Cars("Mercedes-Benz", "W114", LocalDate.of(1968, 7, 10)),
+//                new Cars("Fiat", "600", LocalDate.of(1956, 1, 1))
+//        );
+//
+//        var result = App.getCars(cars, 1960);
+//        System.out.println("Res: " + result);
+//№_14
+//        App.isBracketsBalanced("()"); // true
+//        App.isBracketsBalanced("()()"); // true
+        boolean result = App.isBracketsBalanced("(()())"); // true
 
-        var result = App.getCars(cars, 1960);
-        System.out.println("Res: " + result);
+//        App.isBracketsBalanced("("); // false
+        App.isBracketsBalanced("(()"); // false
+//        App.isBracketsBalanced(")("); // false
+        System.out.println(result);
+
+        App.isBracketsBalanced("");
+        App.isBracketsBalanced("()");
+        App.isBracketsBalanced("()()()");
+        App.isBracketsBalanced("(())");
+        App.isBracketsBalanced("(()()())");
+        App.isBracketsBalanced("(()");
+        App.isBracketsBalanced("())");
+        App.isBracketsBalanced(")(");
+        App.isBracketsBalanced("(()()");
+
 
 
 
@@ -265,18 +283,34 @@ public class App {
 //        return commonFriends;
 //    }
 //№_13
-    public static ArrayList<String> getCars(List<Cars> cars, int year) {
-        var result = new ArrayList<String>();
-        for (var car : cars) {
-            LocalDate carYear = car.getManufacturedAt();
-            if (carYear.getYear() < year) {
-                result.add(car.toString());
+//    public static ArrayList<String> getCars(List<Cars> cars, int year) {
+//        var result = new ArrayList<String>();
+//        for (var car : cars) {
+//            LocalDate carYear = car.getManufacturedAt();
+//            if (carYear.getYear() < year) {
+//                result.add(car.toString());
+//            }
+//        }
+//        Collections.sort(result, String.CASE_INSENSITIVE_ORDER);
+//        return result;
+//    }
+//№_14
+    public static boolean isBracketsBalanced(String input) {
+        var str = new LinkedList<String>();
+        char[] symbol = input.toCharArray();
+        if (symbol.length % 2 != 0) {
+            return false;
+        }
+        for (char s : symbol) {
+            if (s == '(') {
+                str.add("(");
+            } else {
+                str.pollLast();
             }
         }
-        Collections.sort(result, String.CASE_INSENSITIVE_ORDER);
-        return result;
+        System.out.println(str);
+        return str.isEmpty();
     }
-
 
 
 
