@@ -15,12 +15,14 @@ package io.hexlet;
 //import java.util.ArrayList;
 //import java.util.List;
 import io.hexlet.model.Cars;
-
 import java.time.LocalDate;
 import java.util.*;
+import io.hexlet.moduls.Data;
 
 
 public class App {
+
+
     public static void main(String[] args) {
 // №_1
 //        int result2 = TextUtils.getWordsCount("  Hello, WoRlD!   ");
@@ -208,29 +210,81 @@ public class App {
 //        var result = App.getCars(cars, 1960);
 //        System.out.println("Res: " + result);
 //№_14
+//        App.isBracketsBalanced("");
 //        App.isBracketsBalanced("()"); // true
 //        App.isBracketsBalanced("()()"); // true
-        boolean result = App.isBracketsBalanced("(()())"); // true
-
+//        boolean result = App.isBracketsBalanced("(()())"); // true
+//        App.isBracketsBalanced("())");
 //        App.isBracketsBalanced("("); // false
-        App.isBracketsBalanced("(()"); // false
+//        App.isBracketsBalanced("(()"); // false
 //        App.isBracketsBalanced(")("); // false
-        System.out.println(result);
+//        App.isBracketsBalanced("(()()");
+//        System.out.println(result);
 
-        App.isBracketsBalanced("");
-        App.isBracketsBalanced("()");
-        App.isBracketsBalanced("()()()");
-        App.isBracketsBalanced("(())");
-        App.isBracketsBalanced("(()()())");
-        App.isBracketsBalanced("(()");
-        App.isBracketsBalanced("())");
-        App.isBracketsBalanced(")(");
-        App.isBracketsBalanced("(()()");
+//###_____ Java: Maps ____###
+//        var codes = new HashMap<String, Integer>();
+//        codes.put("usa", 2);
+//        codes.put("usa", 1);
+//        codes.put("france", 33);
+//        codes.put("germany", 49);
+//
+//        System.out.println(codes);
+//        System.out.println(codes.containsKey("Usa"));
+//        System.out.println(codes.containsKey("usa"));
+//        System.out.println(codes.containsValue(1));
+//        System.out.println(codes.get("usa"));
+//        System.out.println(codes.get("spain")); // null
+//        System.out.println(codes.getOrDefault("spain", 1));
+//        System.out.println(codes.size());
+//        System.out.println(codes.isEmpty());
+
+//        var map = Map.of("usa", 1, "england", 44);
+//        var codes = new HashMap<String, Integer>(map);
+//        codes.put("france", 33);
+//        codes.put("germany", 49);
+//        System.out.println(codes);
+//
+//        var name = "hexlet";
+//        System.out.println(name.hashCode());
+//        System.out.println(codes.hashCode());
+// №_15
+//        var products = Map.of(
+//                "Coffee", 30.0,
+//                "Bread", 10.0,
+//                "Milk", 20.0
+//        );
+
+//        var discounts = Map.of(
+//                "Bread", 10.0,
+//                "Salmon", 20.0,
+//                "List", 5.0 // null
+//
+//        );
+//        System.out.println(products.get("Coffee")); // 22.0
+//        System.out.println(products.get("Papaya"));
+
+        var product = "Tomatoes";
+        var discounts = Map.of(
+                "Chicken", 20.0,
+                "Salmon", 10.0,
+                "Tomatoes", 50.0,
+                "Bread", 10.0
+
+        );
+        Double res = App.getPriceWithDiscount(discounts, product);
+        System.out.println(res);
+
+
+
+}
 
 
 
 
-    }
+
+
+
+
 //===========================================================================
 // №_8
 //    public static String getOrDefault(List<String> listStr, int index,
@@ -295,23 +349,39 @@ public class App {
 //        return result;
 //    }
 //№_14
-    public static boolean isBracketsBalanced(String input) {
-        var str = new LinkedList<String>();
-        char[] symbol = input.toCharArray();
-        if (symbol.length % 2 != 0) {
-            return false;
-        }
-        for (char s : symbol) {
-            if (s == '(') {
-                str.add("(");
-            } else {
-                str.pollLast();
-            }
-        }
-        System.out.println(str);
-        return str.isEmpty();
-    }
+//    public static boolean isBracketsBalanced(String input) {
+//        var str = new LinkedList<String>();
+//        char[] symbol = input.toCharArray();
+//        if (symbol.length % 2 != 0) {
+//            return false;
+//        }
+//        for (char s : symbol) {
+//            if (s == '(') {
+//                str.add("(");
+//            } else {
+//                str.pollLast();
+//            }
+//        }
+//        System.out.println(str);
+//        return str.isEmpty();
+//    }
+//###_____ Java: Maps ____###
+// №_15
 
+    private static Map<String, Double> products = Data.getProducts();
+
+    public static Double getPriceWithDiscount(Map<String, Double> discountProduct,
+                                              String product) {
+
+        var inProduct = products.get(product);
+        var procentDiscount = discountProduct.getOrDefault(product, 0.0);
+
+        if (inProduct == null) {
+            return inProduct;
+        }
+        var result = (inProduct - inProduct * (procentDiscount / 100));
+        return result;
+    }
 
 
 }

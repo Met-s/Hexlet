@@ -796,6 +796,82 @@ public static boolean isBracketsBalanced(String expression) {
 }
 ```
 
+//=================================================================================
+###_____ Jva: Maps ____###\
+###_____ Задание ____###\
+№_15
+
+В классе App в переменной products находится каталог товаров магазина, представленный HashMap<String, Double>. Ключом в этом каталоге является название товара, а значением - его цена. Вам предстоит реализовать метод, который будет возвращать цену нужного товара с учетом скидки на него
+
+src/main/java/io/hexlet/App.java
+Реализуйте публичный статический метод getPriceWithDiscount(), который возвращает цену товара с учетом скидки. Метод принимает два параметра:
+
+Карта сегодняшних скидок, Map<String, Double>. Ключ в этой карте - название товара, а значение - скидка на него в процентах
+Название товара, цену на который мы ищем
+Метод должен найти товар в каталоге products и вернуть число типа Double - цену на товар с учетом скидки. Если товара в каталоге нет, должно вернуться null. Если в карте сегодняшних скидок нет такого товара, должна вернуться полная цена из каталога
+```
+var products = Map.of(
+"Coffee", 30.0,
+"Bread", 10.0,
+"Milk", 20.0
+);
+
+var discounts = Map.of(
+"Bread", 10.0,
+"Salmon", 20.0
+);
+
+// Скидка на хлеб 10 процентов
+App.getPriceWithDiscount(discounts, "Bread"); // 9.0
+
+// На молоко сегодня скидок нет
+App.getPriceWithDiscount(discounts, "Milk"); // 20.0
+
+App.getPriceWithDiscount(discounts, "Olives"); // null
+```
+###_____ Решение ____###
+```
+private static Map<String, Double> products = Data.getProducts();
+
+    public static Double getPriceWithDiscount(Map<String, Double> discountProduct,
+                                              String product) {
+
+        var inProduct = products.get(product);
+        var procentDiscount = discountProduct.getOrDefault(product, 0.0);
+
+        if (inProduct == null) {
+            return inProduct;
+        }
+        var result = (inProduct - inProduct * (procentDiscount / 100));
+        return result;
+    }
+```    
+###_____ Решение Учителя ____###
+```
+package io.hexlet;
+
+import java.util.Map;
+
+class App {
+private static Map<String, Double> products = Data.getProducts();
+
+    // BEGIN
+    public static Double getPriceWithDiscount(Map<String, Double> discounts, String product) {
+
+        if (!products.containsKey(product)) {
+            return null;
+        }
+
+        var discount = discounts.getOrDefault(product, 0.0);
+
+        var price = products.get(product);
+        var priceWithDiscount = price * (100 - discount) / 100;
+
+        return priceWithDiscount;
+    }
+    // END
+}
+```
 
 
 №_\
