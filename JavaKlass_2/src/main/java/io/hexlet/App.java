@@ -263,16 +263,32 @@ public class App {
 //        System.out.println(products.get("Coffee")); // 22.0
 //        System.out.println(products.get("Papaya"));
 
-        var product = "Tomatoes";
-        var discounts = Map.of(
-                "Chicken", 20.0,
-                "Salmon", 10.0,
-                "Tomatoes", 50.0,
-                "Bread", 10.0
-
+//        var product = "Tomatoes";
+//        var discounts = Map.of(
+//                "Chicken", 20.0,
+//                "Salmon", 10.0,
+//                "Tomatoes", 50.0,
+//                "Bread", 10.0
+//
+//        );
+//        Double res = App.getPriceWithDiscount(discounts, product);
+//        System.out.println(res);
+//###_____ Страница модуля ____###
+//        var codes = new HashMap<String, Integer>();
+//        codes.put("usa", 1);
+//        codes.put("france", 33);
+//        codes.put("germany", 49);
+//        codes.forEach((key, value) -> {
+//            System.out.println("key: " + key);
+//            System.out.println("value: " + value);
+//        });
+// №_16
+        var cities = Map.of(
+                "White River", 114958,
+                "Kashmor", 210451,
+                "Oxford", 152450
         );
-        Double res = App.getPriceWithDiscount(discounts, product);
-        System.out.println(res);
+        App.getMostPopulatedCity(cities);
 
 
 
@@ -367,22 +383,33 @@ public class App {
 //    }
 //###_____ Java: Maps ____###
 // №_15
-
-    private static Map<String, Double> products = Data.getProducts();
-
-    public static Double getPriceWithDiscount(Map<String, Double> discountProduct,
-                                              String product) {
-
-        var inProduct = products.get(product);
-        var procentDiscount = discountProduct.getOrDefault(product, 0.0);
-
-        if (inProduct == null) {
-            return inProduct;
+//    private static Map<String, Double> products = Data.getProducts();
+//
+//    public static Double getPriceWithDiscount(Map<String, Double> discountProduct,
+//                                              String product) {
+//
+//        var inProduct = products.get(product);
+//        var procentDiscount = discountProduct.getOrDefault(product, 0.0);
+//
+//        if (inProduct == null) {
+//            return inProduct;
+//        }
+//        var result = (inProduct - inProduct * (procentDiscount / 100));
+//        return result;
+//    }
+// №_16
+    public static String getMostPopulatedCity(Map<String, Integer> cities) {
+        String city = null;
+        var maxValue = 0;
+        var keys = cities.keySet();
+        for (var key : keys) {
+            if (maxValue < cities.get(key)) {
+                maxValue = cities.get(key);
+                city = key;
+            }
         }
-        var result = (inProduct - inProduct * (procentDiscount / 100));
-        return result;
+        return city;
     }
-
 
 }
 

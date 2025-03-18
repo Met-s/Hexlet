@@ -872,7 +872,66 @@ private static Map<String, Double> products = Data.getProducts();
     // END
 }
 ```
+###_____ Задание ____###\
+//№_16\
+В классе App реализуйте публичный статический метод getMostPopulatedCity(), 
+который находит среди всех городов самый густонаселенный. Метод принимает в 
+качестве параметра перечень городов Map<String, Integer>, где ключ - 
+это название города, а значение - его население. Метод должен вернуть строку, 
+название города с максимальным населением
+```
+var cities = Map.of(
+"White River", 114958,
+"Kashmor", 210451,
+"Oxford", 152450
+);
 
+App.getMostPopulatedCity(cities); // Kashmor
+```
+###_____ Решение ____###
+```
+public static String getMostPopulatedCity(Map<String, Integer> cities) {
+String city = null;
+var maxValue = 0;
+var keys = cities.keySet();
+for (var key : keys) {
+if (maxValue < cities.get(key)) {
+maxValue = cities.get(key);
+city = key;
+}
+}
+return city;
+}
+```
+###_____ Решение Учителя ____###
+```
+package io.hexlet;
+
+import java.util.Map;
+
+class App {
+
+    // BEGIN
+    public static String getMostPopulatedCity(Map<String, Integer> cities) {
+
+        var maxPopulation = 0;
+        String mostPopulatedCity = null;
+
+        for (var city : cities.entrySet()) {
+            var population = city.getValue();
+
+            if (population > maxPopulation) {
+                maxPopulation = population;
+                mostPopulatedCity = city.getKey();
+            }
+
+        }
+
+        return mostPopulatedCity;
+    }
+    // END
+}
+```
 
 №_\
 ###_____ Задание ____###\
