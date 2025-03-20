@@ -18,13 +18,19 @@ import io.hexlet.model.Cars;
 import java.time.LocalDate;
 import java.util.*;
 import io.hexlet.moduls.Data;
+import io.hexlet.moduls.Gamer;
+
+import javax.annotation.concurrent.Immutable;
 
 
 public class App {
 
 
     public static void main(String[] args) {
-// №_1
+
+/**
+ * №_1
+ */
 //        int result2 = TextUtils.getWordsCount("  Hello, WoRlD!   ");
 //        System.out.println(result2);
 //------
@@ -33,7 +39,9 @@ public class App {
 //        System.out.println(user);
 //        Object obj = new User("Nina");
 //        System.out.println(obj);
-// №_2
+/**
+ * №_2
+ */
 //        var book = new Book("First Folio", "William Shakespeare", 1623);
 //        System.out.println(book);
 //------
@@ -42,7 +50,9 @@ public class App {
 //        boolean b = u1.equals(u2);
 //        System.out.println(b);
 //        System.out.println(u1);
-//// №_3
+/**
+ * №_3
+ */
 //        var car = new Car("Lotus", "Exige", 2006);
 //        var car1 = new Car("Lotus", "Exige", 2006);
 //        Car[] cars = {
@@ -54,7 +64,9 @@ public class App {
 //        System.out.println(result);
 //        boolean result1 = App.contains(cars, car);
 //        System.out.println(result1);
-//// №_3
+/**
+ * №_3.1
+ */
 //    public static boolean contains(Car[] cars, Car car ) {
 //        int length = cars.length;
 //        for (int i = 0; i < length; i++) {
@@ -69,7 +81,9 @@ public class App {
 //------
 //        var post = new User("Frenk", 25, "debian@set.ve");
 //        System.out.println(post);
-// №_4
+/**
+ * №_4
+ */
 //        var film = new Film(
 //               "Man Who Sleeps",
 //               "John Doe",
@@ -91,7 +105,9 @@ public class App {
 //
 //        System.out.println("Order ID: " + order1.id());
 //        System.out.println("Order ID: " + order2.id());
-// №_5
+/**
+ * №_5
+ */
 // CustomerDTO.java
 //        var customerDTO = new CustomerDTO("Anna", "Smith", "anna@gmail.com");
 //        System.out.printf("First name: %s\nLast name: %s",
@@ -104,7 +120,9 @@ public class App {
 //        employee.getCompany().contains("MAK");
 //        var change = changeString("Win");
 //        System.out.println(change);
-// №_6
+/**
+ * №_6
+ */
 //        var storage = new ProductsStorage(20, 50);
 //
 //        storage.placeProducts(20);
@@ -114,10 +132,15 @@ public class App {
 //        int maxCapacity = storage.getMaxCapacity();
 //        System.out.println(quantity);
 //        System.out.println(maxCapacity);
-// №_7
+/**
+ * №_7
+ */
 //        int result = MyRandom.generate();
 //        System.out.println(result);
-//###_____ ArrayList ____###
+/**
+* ###_____ ArrayList ____###
+*/
+//
 //        var items = new ArrayList<String>();
 //        items.add("Sun");
 //        items.add("Mars");
@@ -133,17 +156,24 @@ public class App {
 //        items.add("Mars");
 //        CollectionUtils.addIgnoreNull(items, e);
 //        System.out.println(items);
-// №_8
+/**
+ * №_8
+ */
 //        var capitals = List.of("london", "berlin", "tokio");
 //
 //        String result = App.getOrDefault(capitals, 2, " ");
 //        System.out.println(result);
-// №_9
+/**
+ * №_9
+ */
 //        var items = List.of(1, -2, 3, -5);
 //        var result = App.replaceByZero(items);
 //        System.out.println(result);
 //        System.out.println(items);
-//###_____ Страница модуля ____###
+/**
+ * ###_____ Страница модуля ____###
+ */
+//
 //        var users = List.of(
 //                new User(LocalDate.of(1999, 1, 1)),
 //                new User(LocalDate.of(2010, 5, 8)),
@@ -157,7 +187,9 @@ public class App {
 //            ages.add(age.getYears());
 //        }
 //        System.out.println(ages);
-// №_10
+/**
+ * №_10
+ */
 //        var products = List.of(
 //                new Product("bread", 5),
 //                new Product("milk", 10),
@@ -165,13 +197,17 @@ public class App {
 //        );
 //        var result = App.getProductsByPrice(products, 10, 30);
 //        System.out.println(result);
-//###_____ Страница модуля ____###
+/**
+ * ###_____ Страница модуля ____###
+ */
 //        var user = new UserFriends();
 //        var friends = new ArrayList<UserFriends>();
 //        friends.add(new UserFriends());
 //        friends.add(new UserFriends());
 //        user.setUserFriends(friends);
-//№_11
+/**
+ * №_11
+ */
 //        var books = List.of(
 //                new BookS("Death on the Nile", "Agatha Christie",
 //                        "Detective"),
@@ -181,7 +217,9 @@ public class App {
 //        );
 //        int result = App.countBooks(books, "Agatha Christie", "Detective");
 //        System.out.println(result);
-//№_12
+/**
+ * №_12
+ */
 //        var user1 = new User("John");
 //        user1.addFriend(new User("Ellery"));
 //
@@ -200,7 +238,9 @@ public class App {
 //
 //        var result = CollectionUtils.intersection(getUser1, getUser2);
 //        System.out.println(result);
-//№_13
+/**
+ * №_13
+ */
 //        var cars = List.of(
 //                new Cars("Jaguar", "XK120", LocalDate.of(1950, 8, 21)),
 //                new Cars("Mercedes-Benz", "W114", LocalDate.of(1968, 7, 10)),
@@ -209,7 +249,9 @@ public class App {
 //
 //        var result = App.getCars(cars, 1960);
 //        System.out.println("Res: " + result);
-//№_14
+/**
+ * №_14
+ */
 //        App.isBracketsBalanced("");
 //        App.isBracketsBalanced("()"); // true
 //        App.isBracketsBalanced("()()"); // true
@@ -220,8 +262,9 @@ public class App {
 //        App.isBracketsBalanced(")("); // false
 //        App.isBracketsBalanced("(()()");
 //        System.out.println(result);
-
-//###_____ Java: Maps ____###
+/**
+ * ###_____ Java: Maps ____###
+ */
 //        var codes = new HashMap<String, Integer>();
 //        codes.put("usa", 2);
 //        codes.put("usa", 1);
@@ -247,7 +290,9 @@ public class App {
 //        var name = "hexlet";
 //        System.out.println(name.hashCode());
 //        System.out.println(codes.hashCode());
-// №_15
+/**
+ * №_15
+ */
 //        var products = Map.of(
 //                "Coffee", 30.0,
 //                "Bread", 10.0,
@@ -273,7 +318,9 @@ public class App {
 //        );
 //        Double res = App.getPriceWithDiscount(discounts, product);
 //        System.out.println(res);
-//###_____ Страница модуля ____###
+/**
+ * ###_____ Страница модуля ____###
+ */
 //        var codes = new HashMap<String, Integer>();
 //        codes.put("usa", 1);
 //        codes.put("france", 33);
@@ -282,27 +329,101 @@ public class App {
 //            System.out.println("key: " + key);
 //            System.out.println("value: " + value);
 //        });
-// №_16
-        var cities = Map.of(
-                "White River", 114958,
-                "Kashmor", 210451,
-                "Oxford", 152450
-        );
-        App.getMostPopulatedCity(cities);
+/**
+ * №_16
+ */
+//        var cities = Map.of(
+//                "White River", 114958,
+//                "Kashmor", 210451,
+//                "Oxford", 152450
+//        );
+//        App.getMostPopulatedCity(cities);
+/**
+ * ###_____ Страница модуля ____###
+ */
+//        var text = "one two three two one one four";
+//
+//        var words = text.split(" ");
+//
+//        var wordsFrequency = new HashMap<String, Integer>();
+//        for (var word : words) {
+            //----
+//            if (wordsFrequency.containsKey(word)) {
+//                var count = wordsFrequency.get(word);
+//            } else {
+//                wordsFrequency.put(word, 1);
+//            }
+            //----
+            // тоже но без условных конструкций
+//            var count = wordsFrequency.getOrDefault(word, 0);
+//            wordsFrequency.put(word, count + 1);
+//        }
+//        System.out.println(wordsFrequency);
+/**
+ * ###_____ Страница модуля код из видеоролика ____###
+ * Создание ХешМепа
+ */
+//        Map<String, String> map1 = new HashMap<>();
+//        Map<String, String> map2 = new HashMap<>(64);// 64 длина
+//        Map<String, String> map3 = new HashMap<>(32, 0.99f);
+//        Map<String, String> map4 = new HashMap<>(map3);
+//        Map<String,String> map = new HashMap<>();
+//        map.put("4510775676", "Linus Torvalds");
+//        map.put("4510775434", "Donald Knuth");
+//        map.put("4510775222", "Larry Page");
+//        map.put("4510775222", "Janes Gosling");
+//        map.put(null, "Anders Hejlberg");
+//        map.put("4510776225", null);
+//        System.out.println(map);
+//        System.out.println(map.size());
+//        System.out.println(map.isEmpty());
+//        System.out.println(map.containsKey("4510775434"));
+//        System.out.println(map.containsKey(null));
+//        System.out.println(map.containsKey("4510776226"));
+//        map.putIfAbsent("4510776226", "Sir Tim Bernes-Lee");
+//        map.putIfAbsent("4510776226", "Brian Kernigan");
+//        map.remove("4510775222");
+//        System.out.println(map);
+
+//        for (Map.Entry<String, String> entry : map.entrySet()) {
+//            System.out.println(entry.getKey() + ":" + entry.getValue());
+//        }
+
+//        map.forEach((key, value) -> {
+//            System.out.printf("%s : %s\n", key, value);
+//
+//        });
+//        for (Map.Entry<String,String> entry : map.entrySet()) {
+//            entry.setValue(entry.getValue().concat("-1023")); // дописывает к значению
+//            System.out.println(entry.getKey() + ": " + entry.getValue());
+//        }
+//        Map<Gamer, String> hm = new HashMap<>();
+//        Gamer gamer1 = new Gamer(1L, "Dinotrex", "password");
+//        Gamer gamer2 = new Gamer(1L, "Dinotrex", "password");
+//
+//        hm.put(gamer1, "level1");
+//        hm.put(gamer2, "level2");
+//        System.out.println(gamer1.hashCode());
+//        System.out.println(gamer2.hashCode());
+//        System.out.println(gamer1.equals(gamer2));
+//        System.out.println(hm);
 
 
 
-}
+
+/**
+ * №_17
+ */
 
 
 
 
+    }
 
-
-
-
-//===========================================================================
-// №_8
+/**
+ * //========================================================================
+ * №_8
+ */
 //    public static String getOrDefault(List<String> listStr, int index,
 //                                      String def) {
 //        try {
@@ -311,7 +432,9 @@ public class App {
 //            return def;
 //        }
 //    }
-// №_9
+/**
+ * №_9
+ */
 //    public static List<Integer> replaceByZero(List<Integer> numbers) {
 //        var newNumbers = new ArrayList<Integer>();
 //        for (var number : numbers) {
@@ -320,7 +443,9 @@ public class App {
 //        }
 //        return newNumbers;
 //    }
-// №_10
+/**
+ * №_10
+ */
 //    public static List<String> getProductsByPrice(List<Product> products,
 //                                                  int minPrice, int maxPrice) {
 //        var newProducts = new ArrayList<String>();
@@ -331,7 +456,9 @@ public class App {
 //        }
 //        return newProducts;
 //    }
-//№_11
+/**
+ * №_11
+ */
 //    public static int countBooks(List<BookS> books,
 //                                          String nameAuthor, String genre) {
 //        int quantityBooks = 0;
@@ -342,7 +469,9 @@ public class App {
 //        }
 //        return quantityBooks;
 //    }
-//№_12
+/**
+ * №_12
+ */
 //    public static List<User> getCommonFriends(User firstUser,
 //                                              User secondUser) {
 //        var firstUser1 = firstUser.getFriends() ;
@@ -352,7 +481,9 @@ public class App {
 //                CollectionUtils.intersection(firstUser1, secondUser1);
 //        return commonFriends;
 //    }
-//№_13
+/**
+ * №_13
+ */
 //    public static ArrayList<String> getCars(List<Cars> cars, int year) {
 //        var result = new ArrayList<String>();
 //        for (var car : cars) {
@@ -364,7 +495,9 @@ public class App {
 //        Collections.sort(result, String.CASE_INSENSITIVE_ORDER);
 //        return result;
 //    }
-//№_14
+/**
+ * №_14
+ */
 //    public static boolean isBracketsBalanced(String input) {
 //        var str = new LinkedList<String>();
 //        char[] symbol = input.toCharArray();
@@ -381,8 +514,10 @@ public class App {
 //        System.out.println(str);
 //        return str.isEmpty();
 //    }
-//###_____ Java: Maps ____###
-// №_15
+/**
+ * ###_____ Java: Maps ____###
+ * №_15
+ */
 //    private static Map<String, Double> products = Data.getProducts();
 //
 //    public static Double getPriceWithDiscount(Map<String, Double> discountProduct,
@@ -397,34 +532,31 @@ public class App {
 //        var result = (inProduct - inProduct * (procentDiscount / 100));
 //        return result;
 //    }
-// №_16
-    public static String getMostPopulatedCity(Map<String, Integer> cities) {
-        String city = null;
-        var maxValue = 0;
-        var keys = cities.keySet();
-        for (var key : keys) {
-            if (maxValue < cities.get(key)) {
-                maxValue = cities.get(key);
-                city = key;
-            }
-        }
-        return city;
-    }
+/**
+ * №_16
+ */
+//    public static String getMostPopulatedCity(Map<String, Integer> cities) {
+//        String city = null;
+//        var maxValue = 0;
+//        var keys = cities.keySet();
+//        for (var key : keys) {
+//            if (maxValue < cities.get(key)) {
+//                maxValue = cities.get(key);
+//                city = key;
+//            }
+//        }
+//        return city;
+//    }
+
+
 
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
+/**
+ * №_
+ */
 //###_____ Страница модуля ____###
 // №_
