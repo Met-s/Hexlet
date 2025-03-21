@@ -14,18 +14,11 @@ package io.hexlet;
 //import io.hexlet.util.Change;
 //import java.util.ArrayList;
 //import java.util.List;
-import io.hexlet.model.Cars;
-import java.time.LocalDate;
-import java.util.*;
-import io.hexlet.moduls.Data;
-import io.hexlet.moduls.Gamer;
 
-import javax.annotation.concurrent.Immutable;
+import java.util.*;
 
 
 public class App {
-
-
     public static void main(String[] args) {
 
 /**
@@ -138,8 +131,8 @@ public class App {
 //        int result = MyRandom.generate();
 //        System.out.println(result);
 /**
-* ###_____ ArrayList ____###
-*/
+ * ###_____ ArrayList ____###
+ */
 //
 //        var items = new ArrayList<String>();
 //        items.add("Sun");
@@ -347,16 +340,17 @@ public class App {
 //
 //        var wordsFrequency = new HashMap<String, Integer>();
 //        for (var word : words) {
-            //----
+//            //----
 //            if (wordsFrequency.containsKey(word)) {
 //                var count = wordsFrequency.get(word);
+//                wordsFrequency.put(word, count + 1);
 //            } else {
 //                wordsFrequency.put(word, 1);
 //            }
-            //----
-            // тоже но без условных конструкций
-//            var count = wordsFrequency.getOrDefault(word, 0);
-//            wordsFrequency.put(word, count + 1);
+//            //----
+//            // тоже но без условных конструкций
+////            var count = wordsFrequency.getOrDefault(word, 0);
+////            wordsFrequency.put(word, count + 1);
 //        }
 //        System.out.println(wordsFrequency);
 /**
@@ -407,13 +401,15 @@ public class App {
 //        System.out.println(gamer2.hashCode());
 //        System.out.println(gamer1.equals(gamer2));
 //        System.out.println(hm);
-
-
-
-
 /**
  * №_17
  */
+
+        var text = "id ornare imperdiet sapien urna pretium ut volutpat sapies arcu sed augue aliquam vislo";
+        var index = App.buildIndex(text);
+        System.out.println(index);
+
+
 
 
 
@@ -547,8 +543,28 @@ public class App {
 //        }
 //        return city;
 //    }
+/**
+ * №_17
+ */
+    public static HashMap<Character, List<String>> buildIndex(String text) {
+        var wordsIndex = new HashMap<Character, List<String>>();
 
+        if (text.isEmpty()) {
+            return wordsIndex;
+        }
+        var words = text.split(" ");
+        for (var word : words) {
+            var first = word.charAt(0);
 
+            if (!wordsIndex.containsKey(first)) {
+                wordsIndex.put(first, new ArrayList<>());
+            }
+            if (!wordsIndex.get(first).contains(word)) {
+                wordsIndex.get(first).add(word);
+            }
+        }
+        return wordsIndex;
+    }
 
 }
 

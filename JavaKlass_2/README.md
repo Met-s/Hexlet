@@ -932,6 +932,70 @@ class App {
     // END
 }
 ```
+###_____ Задание ____###/ \
+//№_17
+
+Предположим, нам нужно найти в тексте все слова, начинающиеся на определенную букву. Это можно решить простым перебором слов в тексте. Но если текст очень большой, а таких запросов много, то задача начнет занимать достаточно много времени. Чтобы ускорить процесс, можно использовать своеобразный индекс - специальный объект, в котором ключи - это символы, а значения - список всех слов текста, начинающихся с этого символа. Тогда поиск слов в тексте сводится только к получению значения из Map по его ключу. Похожий по принципу механизм используется в поисковиках, в распоряжении которого огромное количество документов, а на запрос он отвечает достаточно быстро. В этом упражнении вам предстоит построить такой индекс на основе переданного текста
+
+src/main/java/io/hexlet/App.java
+В классе App реализуйте публичный статический метод buildIndex(), который принимает в качестве параметра текст и строит индекс на его основе. Метод должен вернуть готовый индекс - структуру Map<Character, List<String>>, в котором ключ - это символ, а значение - список слов из текста, начинающихся на эту букву
+```
+var text = "java and javascript are different languages";
+
+var index = App.buildIndex(text);
+System.out.println(index); // => {a=[and, are], d=[different], j=[java, javascript], l=[languages]}
+
+var index2 = App.buildIndex("");
+System.out.println(index2); // => {}
+```
+###_____ Решение ____###
+```
+public static HashMap<Character, List<String>> buildIndex(String text) {
+var wordsIndex = new HashMap<Character, List<String>>();
+
+        if (text.isEmpty()) {
+            return wordsIndex;
+        }
+        var words = text.split(" ");
+        for (var word : words) {
+            var first = word.charAt(0);
+
+            if (!wordsIndex.containsKey(first)) {
+                wordsIndex.put(first, new ArrayList<>());
+            }
+            if (!wordsIndex.get(first).contains(word)) {
+                wordsIndex.get(first).add(word);
+            }
+        }
+        return wordsIndex;
+    }
+```
+###_____ Решение Учителя ____###
+```
+public static Map<Character, List<String>> buildIndex(String text) {
+
+        var index = new HashMap<Character, List<String>>();
+
+        if (text.isEmpty()) {
+            return index;
+        }
+
+        var words = text.split(" ");
+
+        for (var word : words) {
+            var firstChar = word.charAt(0);
+            var innerWords = index.getOrDefault(firstChar, new ArrayList<String>());
+            innerWords.add(word);
+            index.put(firstChar, innerWords);
+        }
+
+        return index;
+
+    }
+```
+
+
+
 
 №_\
 ###_____ Задание ____###\
