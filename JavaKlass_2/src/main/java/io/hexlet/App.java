@@ -16,6 +16,7 @@ package io.hexlet;
 //import java.util.List;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 public class App {
@@ -361,6 +362,7 @@ public class App {
 //        Map<String, String> map2 = new HashMap<>(64);// 64 длина
 //        Map<String, String> map3 = new HashMap<>(32, 0.99f);
 //        Map<String, String> map4 = new HashMap<>(map3);
+
 //        Map<String,String> map = new HashMap<>();
 //        map.put("4510775676", "Linus Torvalds");
 //        map.put("4510775434", "Donald Knuth");
@@ -404,11 +406,28 @@ public class App {
 /**
  * №_17
  */
+//        var text = "id ornare imperdiet sapien urna pretium ut volutpat sapies arcu sed augue aliquam vislo";
+//        var index = App.buildIndex(text);
+//        System.out.println(index);
 
-        var text = "id ornare imperdiet sapien urna pretium ut volutpat sapies arcu sed augue aliquam vislo";
-        var index = App.buildIndex(text);
-        System.out.println(index);
+/**
+* ###_____ Java: Функции ____###
+ *
+ * ###_____ Страница модуля ____###
+*/
+//        int number = 5;
+//        int result = MathUtils.factorial(number);
+//        System.out.println("Factorial of " + number + " is " + result);
+/**
+ * №_18
+ */
+        var products = Map.of(
+                "Apple", 5,
+                "Lemon", 9,
+                "Pear", 15
+        );
 
+        App.printBalance(products, 10);
 
 
 
@@ -546,30 +565,45 @@ public class App {
 /**
  * №_17
  */
-    public static HashMap<Character, List<String>> buildIndex(String text) {
-        var wordsIndex = new HashMap<Character, List<String>>();
+//    public static HashMap<Character, List<String>> buildIndex(String text) {
+//        var wordsIndex = new HashMap<Character, List<String>>();
+//
+//        if (text.isEmpty()) {
+//            return wordsIndex;
+//        }
+//        var words = text.split(" ");
+//        for (var word : words) {
+//            var first = word.charAt(0);
+//
+//            if (!wordsIndex.containsKey(first)) {
+//                wordsIndex.put(first, new ArrayList<>());
+//            }
+//            if (!wordsIndex.get(first).contains(word)) {
+//                wordsIndex.get(first).add(word);
+//            }
+//        }
+//        return wordsIndex;
+//    }
+//
+/**
+* ###_____ Java: Функции ____###
+*/
+/**
+ * №_18
+ */
+    public static void printBalance(Map<String, Integer> products,
+                                      int minQuantity) {
 
-        if (text.isEmpty()) {
-            return wordsIndex;
-        }
-        var words = text.split(" ");
-        for (var word : words) {
-            var first = word.charAt(0);
+        products.forEach((key, value) -> {
 
-            if (!wordsIndex.containsKey(first)) {
-                wordsIndex.put(first, new ArrayList<>());
+            if (value < minQuantity) {
+                System.out.println(key);
             }
-            if (!wordsIndex.get(first).contains(word)) {
-                wordsIndex.get(first).add(word);
-            }
-        }
-        return wordsIndex;
+        });
     }
 
+
 }
-
-
-
 
 /**
  * №_

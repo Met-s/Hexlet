@@ -993,8 +993,47 @@ public static Map<Character, List<String>> buildIndex(String text) {
 
     }
 ```
+###_____ Задание ____###\
+№_18\
+В классе App реализуйте публичный статический метод printBalance(), который выведет на экран названия тех фруктов, которых осталось мало на складе. Метод принимает два параметра:
 
+Склад, Map<String, Integer>, которая содержит названия товаров и их количество на складе
+Минимальный остаток для количества товара, целое число
+Метод должен вывести на экран название тех товаров, которых на складе осталось меньше минимального остатка. Каждый товар с новой строки
+```
+var products = Map.of(
+"Apple", 5,
+"Lemon", 9,
+"Pear", 15
+);
 
+App.printBalance(products, 10); // =>
+// Apple
+// Lemon
+```
+###_____ Решение ____###
+```
+public static void printBalance(Map<String, Integer> products,
+int minQuantity) {
+
+        products.forEach((key, value) -> {
+
+            if (value < minQuantity) {
+                System.out.println(key);
+            }
+        });
+    }
+```    
+###_____ Решение Учителя ____###
+```
+public static void printBalance(Map<String, Integer> stock, int minBalance) {
+stock.forEach((key, value) -> {
+if (value < minBalance) {
+System.out.println(key);
+}
+});
+}
+```
 
 
 №_\
