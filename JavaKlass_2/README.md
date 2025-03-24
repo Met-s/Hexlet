@@ -1034,6 +1034,65 @@ System.out.println(key);
 });
 }
 ```
+###_____ Задание ____###\
+//№_19\
+В классе App реализуйте публичный статический метод getOldest(), который принимает в качестве параметра список пользователей List<User>. Метод должен вернуть самого старшего пользователя из списка
+```
+var users = new ArrayList<>(List.of(
+new User("Salli", LocalDate.of(1990, 12, 15)),
+new User("Gawen", LocalDate.of(2002, 10, 23)),
+new User("Emmalee", LocalDate.of(1992, 9, 16))
+));
+
+var oldestUser = App.getOldest(users);
+System.out.println(oldestUser); // => User(name=Salli, birthday=1190-12-15)
+```
+Каждый пользователь — это объект класса User. У каждого пользователя есть имя и дата рождения (объект класса LocalDate). Интерфейс у пользователя следующий:
+```
+user.getName(); // Emmalee
+user.getBirthday(); // 1992-09-16
+```
+Подсказки
+
+Изучите методы класса [LocalDate](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html)
+Один из них пригодится вам для сравнения двух дат
+
+###_____ Решение ____###
+```
+public static Object getOldest(List<User> users) {
+LocalDate date = LocalDate.now();
+if (users.isEmpty()) {
+return null;
+}
+final User[] userMin = {users.getFirst()};
+users.forEach((user) -> {
+int userMinAge = date.compareTo(userMin[0].getBirthday());
+int userAge = date.compareTo(user.getBirthday());
+if (userMinAge < userAge) {
+userMin[0] = user;
+}
+});
+return userMin[0];
+}
+```
+###_____ Решение Учителя ____###
+```
+public static User getOldest(List<User> users) {
+var usersCopy = new ArrayList<>(users);
+
+        if (usersCopy.isEmpty()) {
+            return null;
+        }
+
+        usersCopy.sort((firstUser, secondUser) -> {
+            var firstUserBirthday = firstUser.getBirthday();
+            var secondUserBirthday = secondUser.getBirthday();
+            return firstUserBirthday.compareTo(secondUserBirthday);
+        });
+
+        return usersCopy.getFirst();
+    }
+```
 
 
 №_\

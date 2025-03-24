@@ -14,9 +14,15 @@ package io.hexlet;
 //import io.hexlet.util.Change;
 //import java.util.ArrayList;
 //import java.util.List;
+import io.hexlet.model.User;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.Comparator;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static java.time.temporal.ChronoUnit.MONTHS;
 
 
 public class App {
@@ -421,13 +427,40 @@ public class App {
 /**
  * №_18
  */
-        var products = Map.of(
-                "Apple", 5,
-                "Lemon", 9,
-                "Pear", 15
-        );
+//        var products = Map.of(
+//                "Apple", 5,
+//                "Lemon", 9,
+//                "Pear", 15
+//        );
+//        App.printBalance(products, 10);
+//###_____ Страница модуля ____###
+//        var langs = new ArrayList<>(List.of("ruby", "php", "python",
+//                "javascript"));
+////        Collections.sort(langs);
+//
+////        langs.sort((v1, v2) -> Integer.compare(v1.length(), v2.length()));
+//        langs.sort(Comparator.comparingInt((v) -> v.length()));
+//        System.out.println(langs);
+/**
+ * №_19
+ */
+        var users = new ArrayList<>(List.of(
+                new User("Salli", LocalDate.of(1990, 12, 15)),
+                new User("Gawen", LocalDate.of(2002, 10, 23)),
+                new User("Emmalee", LocalDate.of(1992, 9, 16)),
+                new User("Stacee", LocalDate.of(1974, 10, 25)),
+                new User("Lydia", LocalDate.of(1987, 5, 10)),
+                new User("Annabal", LocalDate.of(1970, 3, 22)),
+                new User("Tymon", LocalDate.of(1960, 8, 12)),
+                new User("Evania", LocalDate.of(1973, 4, 3))
+        ));
+//        var oldestUser = App.getOldest(List.of());
+        var oldestUser = App.getOldest(users);
+        System.out.println(oldestUser);
+//        users.sort(Comparator.comparing(User::getBirthday));
 
-        App.printBalance(products, 10);
+
+
 
 
 
@@ -436,7 +469,7 @@ public class App {
     }
 
 /**
- * //========================================================================
+ * //=======================================================================
  * №_8
  */
 //    public static String getOrDefault(List<String> listStr, int index,
@@ -591,16 +624,37 @@ public class App {
 /**
  * №_18
  */
-    public static void printBalance(Map<String, Integer> products,
-                                      int minQuantity) {
-
-        products.forEach((key, value) -> {
-
-            if (value < minQuantity) {
-                System.out.println(key);
+//    public static void printBalance(Map<String, Integer> products,
+//                                      int minQuantity) {
+//
+//        products.forEach((key, value) -> {
+//
+//            if (value < minQuantity) {
+//                System.out.println(key);
+//            }
+//        });
+//    }
+/**
+ * №_19
+ */
+    public static Object getOldest(List<User> users) {
+        LocalDate date = LocalDate.now();
+        if (users.isEmpty()) {
+            return null;
+        }
+        final User[] userMin = {users.getFirst()};
+        users.forEach((user) -> {
+            int userMinAge = date.compareTo(userMin[0].getBirthday());
+            int userAge = date.compareTo(user.getBirthday());
+            if (userMinAge < userAge) {
+                userMin[0] = user;
             }
         });
+        return userMin[0];
     }
+//        users.sort(Comparator.comparing(User::getBirthday));
+
+
 
 
 }
