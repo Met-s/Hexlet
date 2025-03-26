@@ -1093,6 +1093,76 @@ var usersCopy = new ArrayList<>(users);
         return usersCopy.getFirst();
     }
 ```
+###_____ Задание ____###\
+//№_20
+
+В классе App реализуйте публичный статический метод countNumbers(), который принимает в качестве параметра список List целых чисел и подсчитывает количество положительных, отрицательных чисел и нулей в этом списке. Метод должен вернуть Map, где ключом будет строка - тип числа ("positive", "negative" или "zero"), а значением - количество чисел данного типа
+```
+var numbers1 = List.of(-2, -3, 4, 3, 8, 0);
+var result1 = App.countNumbers(numbers1);
+System.out.println(result1); // => {"negative"=2, "positive"=3, "zero"=1}
+
+var numbers2 = List.of(-2, -3, -2);
+var result2 = App.countNumbers(numbers2);
+System.out.println(result2); // => {"negative"=3, "positive"=0, "zero"=0}
+```
+Подсказки
+Прежде, чем начинать работу, обязательно загляните в тесты за подробностями работы метода
+При необходимости можете создавать дополнительные вспомогательные методы\
+###_____ Решение ____###
+```
+public static HashMap<String, Integer> countNumbers(List<Integer> numbers) {
+
+       var result = new HashMap<String, Integer>(Map.of(
+                "positive", 0,
+                "negative", 0,
+                "zero", 0
+        ));
+
+        numbers.forEach((number) -> {
+            if (number > 0) {
+                result.computeIfPresent("positive", (key, value) -> value + 1);
+            }
+            if (number < 0) {
+                result.computeIfPresent("negative", (key, value) -> value + 1);
+            }
+            if (number == 0) {
+                result.computeIfPresent("zero", (key, value) -> value + 1);
+            }
+                });
+        return result;
+    }
+```
+###_____ Решение Учителя ____###
+```
+public static Map<String, Integer> countNumbers(List<Integer> numbers) {
+
+        var result = new HashMap<String, Integer>();
+        result.put("positive", 0);
+        result.put("negative", 0);
+        result.put("zero", 0);
+
+        numbers.forEach(number -> {
+            var type = getNumberType(number);
+            result.compute(type, (key, count) -> count + 1);
+        });
+
+        return result;
+    }
+
+    private static String getNumberType(int number) {
+        if (number > 0) {
+            return "positive";
+        }
+
+        if (number < 0) {
+            return "negative";
+        }
+
+        return "zero";
+    }
+```
+
 
 
 №_\

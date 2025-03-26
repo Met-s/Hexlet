@@ -14,15 +14,8 @@ package io.hexlet;
 //import io.hexlet.util.Change;
 //import java.util.ArrayList;
 //import java.util.List;
-import io.hexlet.model.User;
 
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.*;
-import java.util.Comparator;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import static java.time.temporal.ChronoUnit.MONTHS;
 
 
 public class App {
@@ -444,22 +437,59 @@ public class App {
 /**
  * №_19
  */
-        var users = new ArrayList<>(List.of(
-                new User("Salli", LocalDate.of(1990, 12, 15)),
-                new User("Gawen", LocalDate.of(2002, 10, 23)),
-                new User("Emmalee", LocalDate.of(1992, 9, 16)),
-                new User("Stacee", LocalDate.of(1974, 10, 25)),
-                new User("Lydia", LocalDate.of(1987, 5, 10)),
-                new User("Annabal", LocalDate.of(1970, 3, 22)),
-                new User("Tymon", LocalDate.of(1960, 8, 12)),
-                new User("Evania", LocalDate.of(1973, 4, 3))
-        ));
-//        var oldestUser = App.getOldest(List.of());
-        var oldestUser = App.getOldest(users);
-        System.out.println(oldestUser);
-//        users.sort(Comparator.comparing(User::getBirthday));
+//        var users = new ArrayList<>(List.of(
+//                new User("Salli", LocalDate.of(1990, 12, 15)),
+//                new User("Gawen", LocalDate.of(2002, 10, 23)),
+//                new User("Emmalee", LocalDate.of(1992, 9, 16)),
+//                new User("Stacee", LocalDate.of(1974, 10, 25)),
+//                new User("Lydia", LocalDate.of(1987, 5, 10)),
+//                new User("Annabal", LocalDate.of(1970, 3, 22)),
+//                new User("Tymon", LocalDate.of(1960, 8, 12)),
+//                new User("Evania", LocalDate.of(1973, 4, 3))
+//        ));
+////        var oldestUser = App.getOldest(List.of());
+//        var oldestUser = App.getOldest(users);
+//        System.out.println(oldestUser);
+////        users.sort(Comparator.comparing(User::getBirthday));
+/**
+ * ###_____ Страница модуля ____###
+ */
+//        var words = List.of("apple", "banana", "apple",
+//                "orange", "banana", "apple");
+//        var wordCount = new HashMap<String, Integer>();
+//
+//        words.forEach((word) -> {
+//            wordCount.compute(word, (key, count) -> count == null ? 1 : count + 1);
+//        });
+//        System.out.println(wordCount);
+//---------
+// import java.io.hexlet.moduls.CacheExample.java
+//        CacheExample.computeExpensiveOperation();
+//// import java.io.hexlet.moduls.DiscountExample.java
+//        DiscountExample.main();
 
+//        public void testCommonCase2() {
+//            var coll = List.of(-23, 43, 5, 9, 0, -2, 8, 0, -12);
+//            var actual = App.countNumbers(coll);
+//            var expected = Map.of(
+//                    "positive", 4,
+//                    "negative", 3,
+//                    "zero", 2
+//            );
+/**
+ * №_20
+ */
+        var numbers1 = List.of(-2, -3, 4, 3, 8, 0, 0);
+        var result1 = App.countNumbers(numbers1);
+        System.out.println(result1);
 
+        var numbers2 = List.of(-2, -3,  -2);
+        var result2 = App.countNumbers(numbers2);
+        System.out.println(result2);
+
+        var coll = List.of(-23, 43, 5, 9, 0, 0, -2, 8, -12);
+        var result3 = App.countNumbers(coll);
+        System.out.println(result3);
 
 
 
@@ -637,23 +667,55 @@ public class App {
 /**
  * №_19
  */
-    public static Object getOldest(List<User> users) {
-        LocalDate date = LocalDate.now();
-        if (users.isEmpty()) {
-            return null;
-        }
-        final User[] userMin = {users.getFirst()};
-        users.forEach((user) -> {
-            int userMinAge = date.compareTo(userMin[0].getBirthday());
-            int userAge = date.compareTo(user.getBirthday());
-            if (userMinAge < userAge) {
-                userMin[0] = user;
-            }
-        });
-        return userMin[0];
-    }
-//        users.sort(Comparator.comparing(User::getBirthday));
+//    public static Object getOldest(List<User> users) {
+//        LocalDate date = LocalDate.now();
+//        if (users.isEmpty()) {
+//            return null;
+//        }
+//        final User[] userMin = {users.getFirst()};
+//        users.forEach((user) -> {
+//            int userMinAge = date.compareTo(userMin[0].getBirthday());
+//            int userAge = date.compareTo(user.getBirthday());
+//            if (userMinAge < userAge) {
+//                userMin[0] = user;
+//            }
+//        });
+//        return userMin[0];
+//    }
+////        users.sort(Comparator.comparing(User::getBirthday));
+/**
+ * №_20
+ */
+//var words = List.of("apple", "banana", "apple",
+//        "orange", "banana", "apple");
+//    var wordCount = new HashMap<String, Integer>();
+//
+//        words.forEach((word) -> {
+//        wordCount.compute(word, (key, count) -> count == null ? 1 : count + 1);
+//    });
+//        System.out.println(wordCount);
 
+    public static HashMap<String, Integer> countNumbers(List<Integer> numbers) {
+
+       var result = new HashMap<String, Integer>(Map.of(
+                "positive", 0,
+                "negative", 0,
+                "zero", 0
+        ));
+
+        numbers.forEach((number) -> {
+            if (number > 0) {
+                result.computeIfPresent("positive", (key, value) -> value + 1);
+            }
+            if (number < 0) {
+                result.computeIfPresent("negative", (key, value) -> value + 1);
+            }
+            if (number == 0) {
+                result.computeIfPresent("zero", (key, value) -> value + 1);
+            }
+                });
+        return result;
+    }
 
 
 
