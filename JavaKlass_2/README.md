@@ -1162,6 +1162,86 @@ public static Map<String, Integer> countNumbers(List<Integer> numbers) {
         return "zero";
     }
 ```
+###_____ Задание ____###\
+//№_21\
+src/main/java/io/hexlet/BinaryOperation.java
+Создайте функциональный интерфейс BinaryOperation, который будет представлять бинарную операцию. Так как операция бинарная, единственный метод интерфейса должен принимать два параметра - целые числа и возвращать целое число
+
+src/main/java/io/hexlet/App.java
+В классе App создайте публичный статический метод calculate(), который будет принимать три параметра:
+
+два целых числа - операнды
+лямбду, которая реализует интерфейс BinaryOperation
+Метод должен вернуть целое число - результат применения бинарной операции к переданным в метод числам
+```
+// Сложение двух чисел
+BinaryOperation add = (a, b) -> a + b
+App.calculate(6, 5, add); // 11
+
+// Вычитание
+BinaryOperation sub = (a, b) -> a - b
+App.calculate(6, 5, sub); // 1
+```
+В методе main() выведите на экран результат сложения чисел 2 и 3, используя метод calculate()
+###_____ Решение ____###
+```
+class App {
+// BEGIN (write your solution here)
+public static int calculate(int a, int b, BinaryOperation fn) {
+int result = fn.binary(a, b);
+System.out.println(result);
+return result;
+}
+// END
+
+    public static void main(String[] args) {
+        // BEGIN (write your solution here)
+        BinaryOperation add = (a, b) -> a + b;
+        App.calculate(2, 3, add);
+        // END
+    }
+}
+```
+Файл BinaryOperation, без объявления класса
+```
+package io.hexlet;
+
+// BEGIN (write your solution here)
+@FunctionalInterface
+public interface BinaryOperation {
+int binary(int a, int b);
+}
+// END
+```
+###_____ Решение Учителя ____###
+```
+class App {
+// BEGIN
+public static int calculate(int a, int b, BinaryOperation operation) {
+return operation.apply(a, b);
+}
+// END
+
+    public static void main(String[] args) {
+        // BEGIN
+        BinaryOperation add = (a, b) -> a + b;
+        var result = calculate(2, 3, add);
+        System.out.println(result);
+        // END
+    }
+}
+```
+Файл BinaryOperation, без объявления класса
+```
+package io.hexlet;
+
+// BEGIN
+@FunctionalInterface
+public interface BinaryOperation {
+int apply(int a, int b);
+}
+// END
+```
 
 
 

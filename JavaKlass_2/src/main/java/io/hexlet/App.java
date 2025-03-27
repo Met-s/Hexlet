@@ -15,7 +15,9 @@ package io.hexlet;
 //import java.util.ArrayList;
 //import java.util.List;
 
-import java.util.*;
+
+
+import io.hexlet.model.BinaryOperation;
 
 
 public class App {
@@ -479,19 +481,39 @@ public class App {
 /**
  * №_20
  */
-        var numbers1 = List.of(-2, -3, 4, 3, 8, 0, 0);
-        var result1 = App.countNumbers(numbers1);
-        System.out.println(result1);
+//        var numbers1 = List.of(-2, -3, 4, 3, 8, 0, 0);
+//        var result1 = App.countNumbers(numbers1);
+//        System.out.println(result1);
+//
+//        var numbers2 = List.of(-2, -3,  -2);
+//        var result2 = App.countNumbers(numbers2);
+//        System.out.println(result2);
+//
+//        var coll = List.of(-23, 43, 5, 9, 0, 0, -2, 8, -12);
+//        var result3 = App.countNumbers(coll);
+//        System.out.println(result3);
+//###_____ Страница модуля ____###
+//        Transformer upperCaseTransformer = (input) -> input.toUpperCase();
+//        var result = upperCaseTransformer.apply("hello");
+//        System.out.println(result);
 
-        var numbers2 = List.of(-2, -3,  -2);
-        var result2 = App.countNumbers(numbers2);
-        System.out.println(result2);
-
-        var coll = List.of(-23, 43, 5, 9, 0, 0, -2, 8, -12);
-        var result3 = App.countNumbers(coll);
-        System.out.println(result3);
+//        var result = App.transform((input) -> input.toUpperCase(), "hello");
+//        System.out.println(result);
+//
+//        var result3 = transform((input) -> input + ", World!", "Hello");
+//        System.out.println(result3); // Hello, World!
 
 
+
+
+/**
+ * №_21
+ */
+        BinaryOperation add = (a, b) -> a + b;
+        App.calculate(12, 5, add);
+
+        BinaryOperation sub = (a, b) -> a - b;
+        App.calculate(7, 5, sub);
 
 
 
@@ -695,25 +717,52 @@ public class App {
 //    });
 //        System.out.println(wordCount);
 
-    public static HashMap<String, Integer> countNumbers(List<Integer> numbers) {
+//    public static HashMap<String, Integer> countNumbers(List<Integer> numbers) {
+//
+//       var result = new HashMap<String, Integer>(Map.of(
+//                "positive", 0,
+//                "negative", 0,
+//                "zero", 0
+//        ));
+//
+//        numbers.forEach((number) -> {
+//            if (number > 0) {
+//                result.computeIfPresent("positive", (key, value) -> value + 1);
+//            }
+//            if (number < 0) {
+//                result.computeIfPresent("negative", (key, value) -> value + 1);
+//            }
+//            if (number == 0) {
+//                result.computeIfPresent("zero", (key, value) -> value + 1);
+//            }
+//                });
+//        return result;
+//    }
+//###_____ Страница модуля ____###
+//    @FunctionalInterface
+//    public interface Transformer {
+//    // Имя метода может быть любым
+//    // Количество параметров может быть любым
+//        String apply(String input);
+//    }
+//    // Метод, который принимает лямбду как параметр
+//    public static String transform(Transformer fn, String param) {
+//        return fn.apply(param);
+//    }
 
-       var result = new HashMap<String, Integer>(Map.of(
-                "positive", 0,
-                "negative", 0,
-                "zero", 0
-        ));
 
-        numbers.forEach((number) -> {
-            if (number > 0) {
-                result.computeIfPresent("positive", (key, value) -> value + 1);
-            }
-            if (number < 0) {
-                result.computeIfPresent("negative", (key, value) -> value + 1);
-            }
-            if (number == 0) {
-                result.computeIfPresent("zero", (key, value) -> value + 1);
-            }
-                });
+/**
+ * №_21
+ */
+//    @FunctionalInterface
+//    public interface BinaryOperation {
+//        int result(int a, int b);
+//
+//    }
+
+    public static int calculate(int a, int b, BinaryOperation fn) {
+        int result = fn.binary(a, b);
+        System.out.println(result);
         return result;
     }
 
