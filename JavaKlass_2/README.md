@@ -1242,6 +1242,88 @@ int apply(int a, int b);
 }
 // END
 ```
+###_____ Задание ____###\
+//№_22\
+В этом упражнении мы лишний раз потренируемся сортировать список объектов. Используйте ссылки на метод для записи лямбда-функции, чтобы сделать код более компактным
+
+src/main/java/io/hexlet/App.java
+В классе App реализуйте публичный статический метод sortBooks(), который принимает на вход список книг List<Book> и сортирует его по названию книги в обратном порядке. Метод должен вернуть новый список
+```
+var books = new ArrayList<>(
+List.of(
+new Book("Dubliners", "James Joyce"),
+new Book("Moby-Dick", "Herman Melville"),
+new Book("The Great Gatsby", "F. Scott Fitzgerald")
+)
+);
+
+var sortedBooks = App.sortBooks(books);
+System.out.println(sortedBooks);
+// => [The Great Gatsby - F. Scott Fitzgerald, Moby-Dick - Herman Melville, Dubliners - James Joyce]
+```
+Подсказки
+
+Изучите методы класса [Comparator](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html)
+Возможно, какие-то из них вам пригодятся в работе
+
+###_____ Решение ____###
+```
+public static List<Book> sortBooks(List<Book> books) {
+
+        var sortBooks = new ArrayList<>(books);
+        sortBooks.sort(Comparator.comparing(Book::getTitle,
+                Comparator.reverseOrder()));
+
+        return sortBooks;
+    }
+```
+class Book
+```
+public final class Book {
+
+    private String title;
+    private String author;
+
+    public Book(String title, String author) {
+        this.title = title;
+        this.author = author;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    @Override
+    public String toString() {
+        return title + " - " + author;
+    }
+}
+```
+###_____ Решение Учителя ____###
+```
+import java.util.List;
+import java.util.ArrayList;
+
+import io.hexlet.model.Book;
+import java.util.Comparator;
+
+class App {
+// BEGIN
+public static List<Book> sortBooks(List<Book> books) {
+var booksCopy = new ArrayList<>(books);
+
+        booksCopy.sort(Comparator.comparing(Book::getTitle).reversed());
+
+        return booksCopy;
+    }
+    // END
+}
+```
+
 
 
 

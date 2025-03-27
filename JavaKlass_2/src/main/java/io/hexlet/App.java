@@ -18,6 +18,9 @@ package io.hexlet;
 
 
 import io.hexlet.model.BinaryOperation;
+import io.hexlet.model.Book;
+
+import java.util.*;
 
 
 public class App {
@@ -428,6 +431,7 @@ public class App {
 //                "Pear", 15
 //        );
 //        App.printBalance(products, 10);
+
 //###_____ Страница модуля ____###
 //        var langs = new ArrayList<>(List.of("ruby", "php", "python",
 //                "javascript"));
@@ -502,19 +506,62 @@ public class App {
 //
 //        var result3 = transform((input) -> input + ", World!", "Hello");
 //        System.out.println(result3); // Hello, World!
-
-
-
-
+///**
+// * №_21
+// */
+//        BinaryOperation add = (a, b) -> a + b;
+//        App.calculate(12, 5, add);
+//
+//        BinaryOperation sub = (a, b) -> a - b;
+//        App.calculate(7, 5, sub);
 /**
- * №_21
+ * №_22
  */
-        BinaryOperation add = (a, b) -> a + b;
-        App.calculate(12, 5, add);
+        var books = new ArrayList<>(
+                List.of(
 
-        BinaryOperation sub = (a, b) -> a - b;
-        App.calculate(7, 5, sub);
+                        new Book("Moby-Dick", "Herman Melville"),
+                        new Book("The Great Gatsby", "F. Scott Fitzgerald"),
+                        new Book("Assa", "Asimov Scot"),
+                        new Book("Dubliners", "James Joyce")
+                )
+        );
+        var sortedBooks = App.sortBooks(books);
+        System.out.println(sortedBooks);
 
+//        var sortedBooks2 = new ArrayList<>(books);
+////        Comparator<Book> comparator = Comparator.comparing(Book::getTitle);
+//
+////        sortedBooks2.sort(comparator);
+////        sortedBooks2.reversed();
+//
+////        System.out.println(sortedBooks2);
+//        System.out.println(books);
+//
+////        sortedBooks2.sort(Comparator.comparing(Book::getTitle,
+////                Comparator.reverseOrder()));
+//        System.out.println(sortedBooks2);
+
+
+
+
+
+
+//        var temp = new ArrayList<>(List.of(
+//                "Stem",
+//                "Welt",
+//                "Assa"
+//        ));
+//        Collections.sort(temp, Collections.reverseOrder());
+//        sortedBooks2.sort(Collections.reverseOrder());
+//        Collections.sort(sortedBooks2, Collections.reverseOrder());
+//        Comparator.reverseOrder();
+
+//
+//        System.out.println(temp);
+//        System.out.println(sortedBooks2);
+//        Runnable runnable = () -> System.out.println("Hello");
+//        runnable.run();
 
 
 
@@ -754,16 +801,21 @@ public class App {
 /**
  * №_21
  */
-//    @FunctionalInterface
-//    public interface BinaryOperation {
-//        int result(int a, int b);
-//
+//    public static int calculate(int a, int b, BinaryOperation fn) {
+//        int result = fn.binary(a, b);
+//        System.out.println(result);
+//        return result;
 //    }
+/**
+ * №_22
+ */
+    public static List<Book> sortBooks(List<Book> books) {
 
-    public static int calculate(int a, int b, BinaryOperation fn) {
-        int result = fn.binary(a, b);
-        System.out.println(result);
-        return result;
+        var sortBooks = new ArrayList<>(books);
+        sortBooks.sort(Comparator.comparing(Book::getTitle,
+                Comparator.reverseOrder()));
+
+        return sortBooks;
     }
 
 
