@@ -1323,6 +1323,107 @@ var booksCopy = new ArrayList<>(books);
     // END
 }
 ```
+###_____ Задание ____###\
+//№_23\
+Еще одна типичная операция при работе с коллекциями - это отображение. При отображении мы проходим по всей коллекции и меняем каждый ее элемент определенным образом. Результаты добавляются в новую коллекцию, которая возвращается после завершения обхода. Менять элементы мы можем разным способом, но как и в случае с фильтрацией, везде будет один и тот же обход коллекции. Отличаться будет только то, как мы меняем каждый элемент. Мы можем спрятать обход списка, а логику изменения элементов вынести в лямбда-функцию. В этом упражнении мы напишем такой метод
+
+src/main/java/io/hexlet/App.java\
+В классе App создайте публичный статический метод map(), который будет отображать список строк. Метод принимает два параметра:
+
+Список строк List<String>, исходная коллекция\
+Лямбда-функцию Function<String, String>.\
+Эта функция определяет, что 
+будет происходить с каждым элементом. Функция принимает строку и возвращает строку
+Метод должен вернуть новый список строк, в котором каждый элемент изменен в соответствии с правилом, определенным в лямбда-функции. Важно, что размер получившегося списка равен размеру исходного списка. Иными словами, нужно применить функцию к каждому элементу списка. Например, приведем все слова в списке к верхнему регистру:
+```
+var words = new ArrayList<String>();
+words.add("Java");
+words.add("Python");
+words.add("PHP");
+
+var result = App.map(words, word -> word.toUpperCase());
+
+// Или используя ссылку на метод
+// var result = App.map(words, String::toUpperCase);
+
+System.out.println(result); // ["JAVA", "PYTHON", "PHP"]
+```
+Подсказки
+Загляните в тесты. Посмотрите, как будет использоваться созданный вами метод
+В решении пригодиться метод apply()
+```
+package io.hexlet;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+import java.util.ArrayList;
+
+
+public class AppTest {
+
+    private static List<String> words;
+
+    @BeforeAll
+    public static void setUp() {
+        words = new ArrayList<>(
+            List.of("ApplE", "BananA", "LemoN", "PeaR")
+        );
+    }
+
+    @Test
+    public void testMapToLower() {
+        var expected = List.of("apple", "banana", "lemon", "pear");
+        var actual = App.map(words, String::toLowerCase);
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isNotSameAs(expected);
+    }
+
+    @Test
+    public void testMapToUpper() {
+        var expected = List.of("APPLE", "BANANA", "LEMON", "PEAR");
+        var actual = App.map(words, String::toUpperCase);
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isNotSameAs(expected);
+    }
+}
+```
+
+###_____ Решение ____###
+```
+public static List<String> map(List<String> str, Function<String, String> fn) {
+var result = new ArrayList<String>(str.size());
+
+        str.forEach(s -> result.add(fn.apply(s)));
+
+        return result;
+    }
+```    
+###_____ Решение Учителя ____###
+```
+import java.util.List;
+import java.util.ArrayList;
+
+import java.util.function.Function;
+
+class App {
+// BEGIN
+public static List<String> map(List<String> words, Function<String, String> fn) {
+
+        var mappedWords = new ArrayList<String>();
+
+        for (var word : words) {
+            var mappedWord = fn.apply(word);
+            mappedWords.add(mappedWord);
+        }
+
+        return mappedWords;
+    }
+    // END
+}
+```
 
 
 

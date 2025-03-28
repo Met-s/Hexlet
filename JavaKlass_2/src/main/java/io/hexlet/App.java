@@ -17,10 +17,8 @@ package io.hexlet;
 
 
 
-import io.hexlet.model.BinaryOperation;
-import io.hexlet.model.Book;
-
 import java.util.*;
+import java.util.function.Function;
 
 
 public class App {
@@ -517,51 +515,41 @@ public class App {
 /**
  * №_22
  */
-        var books = new ArrayList<>(
-                List.of(
-
-                        new Book("Moby-Dick", "Herman Melville"),
-                        new Book("The Great Gatsby", "F. Scott Fitzgerald"),
-                        new Book("Assa", "Asimov Scot"),
-                        new Book("Dubliners", "James Joyce")
-                )
-        );
-        var sortedBooks = App.sortBooks(books);
-        System.out.println(sortedBooks);
-
-//        var sortedBooks2 = new ArrayList<>(books);
-////        Comparator<Book> comparator = Comparator.comparing(Book::getTitle);
+//        var books = new ArrayList<>(
+//                List.of(
 //
-////        sortedBooks2.sort(comparator);
-////        sortedBooks2.reversed();
-//
-////        System.out.println(sortedBooks2);
-//        System.out.println(books);
-//
-////        sortedBooks2.sort(Comparator.comparing(Book::getTitle,
-////                Comparator.reverseOrder()));
-//        System.out.println(sortedBooks2);
+//                        new Book("Moby-Dick", "Herman Melville"),
+//                        new Book("The Great Gatsby", "F. Scott Fitzgerald"),
+//                        new Book("Assa", "Asimov Scot"),
+//                        new Book("Dubliners", "James Joyce")
+//                )
+//        );
+//        var sortedBooks = App.sortBooks(books);
+//        System.out.println(sortedBooks);
+/**
+ * №_23
+ */
+        var words = new ArrayList<String>();
+        words.add("Java");
+        words.add("Python");
+        words.add("PHP");
+
+        var result = App.map(words, String::toUpperCase);
+        var resultLover = App.map(words, String::toLowerCase);
+        System.out.println(result);
+        System.out.println(resultLover);
+//        result.forEach(System.out::println);
+//        resultLover.forEach(System.out::println);
+
+//        words.forEach(String::toUpperCase);
 
 
-
-
-
-
-//        var temp = new ArrayList<>(List.of(
-//                "Stem",
-//                "Welt",
-//                "Assa"
-//        ));
-//        Collections.sort(temp, Collections.reverseOrder());
-//        sortedBooks2.sort(Collections.reverseOrder());
-//        Collections.sort(sortedBooks2, Collections.reverseOrder());
-//        Comparator.reverseOrder();
-
-//
-//        System.out.println(temp);
-//        System.out.println(sortedBooks2);
-//        Runnable runnable = () -> System.out.println("Hello");
-//        runnable.run();
+//        List<String> wordsCopy = new ArrayList<>(words);
+//        Function <String, String> len = String::toUpperCase;
+//        Function <String, String> fen = String::toLowerCase;
+//        System.out.println(len.apply(String.valueOf(wordsCopy)));
+//        System.out.println(fen.apply(String.valueOf(wordsCopy)));
+//        System.out.println(words);
 
 
 
@@ -809,13 +797,24 @@ public class App {
 /**
  * №_22
  */
-    public static List<Book> sortBooks(List<Book> books) {
+//    public static List<Book> sortBooks(List<Book> books) {
+//
+//        var sortBooks = new ArrayList<>(books);
+//        sortBooks.sort(Comparator.comparing(Book::getTitle,
+//                Comparator.reverseOrder()));
+//
+//        return sortBooks;
+//    }
+/**
+ * №_23
+ */
+    public static List<String> map(List<String> str,
+                                        Function<String, String> fn) {
+        var result = new ArrayList<String>(str.size());
 
-        var sortBooks = new ArrayList<>(books);
-        sortBooks.sort(Comparator.comparing(Book::getTitle,
-                Comparator.reverseOrder()));
+        str.forEach(s -> result.add(fn.apply(s)));
 
-        return sortBooks;
+        return result;
     }
 
 
