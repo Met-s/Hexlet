@@ -19,6 +19,7 @@ package io.hexlet;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 
 public class App {
@@ -529,15 +530,16 @@ public class App {
 /**
  * №_23
  */
-        var words = new ArrayList<String>();
-        words.add("Java");
-        words.add("Python");
-        words.add("PHP");
-
-        var result = App.map(words, String::toUpperCase);
-        var resultLover = App.map(words, String::toLowerCase);
-        System.out.println(result);
-        System.out.println(resultLover);
+//        var words = new ArrayList<String>();
+//        words.add("Java");
+//        words.add("Python");
+//        words.add("PHP");
+//
+//        var result = App.map(words, String::toUpperCase);
+//        var resultLover = App.map(words, String::toLowerCase);
+//        System.out.println(result);
+//        System.out.println(resultLover);
+// ---------
 //        result.forEach(System.out::println);
 //        resultLover.forEach(System.out::println);
 
@@ -550,8 +552,16 @@ public class App {
 //        System.out.println(len.apply(String.valueOf(wordsCopy)));
 //        System.out.println(fen.apply(String.valueOf(wordsCopy)));
 //        System.out.println(words);
+/**
+ * ###_____ Испытания Функции ____###
+ * №_1
+ */
+        var words = List.of(
+                "java", "php", "ruby", "clojure",
+                "javascript", "lua");
 
-
+        var parts = App.partition(words, s -> s.startsWith("j"));
+        System.out.println(parts); // => [[clojure, javascript], [java, php, ruby, lua]]
 
     }
 
@@ -808,13 +818,35 @@ public class App {
 /**
  * №_23
  */
-    public static List<String> map(List<String> str,
-                                        Function<String, String> fn) {
-        var result = new ArrayList<String>(str.size());
+//    public static List<String> map(List<String> str,
+//                                        Function<String, String> fn) {
+//        var result = new ArrayList<String>(str.size());
+//
+//        str.forEach(s -> result.add(fn.apply(s)));
+//
+//        return result;
+//    }
+/**
+ * ###_____ Испытания Функции ____###
+ * №_1
+ */
+    public static List<List<String>> partition(List<String> words,
+                                         Predicate<String> condition) {
+        var wordList = new ArrayList<List<String>>();
+        var firstList = new ArrayList<String>();
+        var secondList = new ArrayList<String>();
+        for (String word : words) {
+           if (condition.test(word)) {
+               firstList.add(word);
+           } else {
+               secondList.add(word);
+           }
 
-        str.forEach(s -> result.add(fn.apply(s)));
+        }
+        wordList.add(firstList);
+        wordList.add(secondList);
 
-        return result;
+        return wordList;
     }
 
 

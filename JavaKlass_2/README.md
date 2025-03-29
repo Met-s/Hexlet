@@ -1424,6 +1424,123 @@ public static List<String> map(List<String> words, Function<String, String> fn) 
     // END
 }
 ```
+/=================================================================================
+
+###_____ Испытания Функции ____###\
+###_____ Задание ____###\
+//№_1\
+src/main/java/io/hexlet/App.java
+В классе App создайте публичный статический метод partition(), который делит список элементов на два списка. Первый содержит те элементы, для которых предикат вернул истину. Второй — те, для которых предикат вернул ложь. Метод принимает два параметра:
+
+Список слов List<String>, исходная коллекция
+Предикат Predicate<String>, который определяет, в какой список попадет элемент исходной коллекции
+Метод должен вернуть список списков List<List<String>>. Первый список содержит элементы, для которых предикат вернул true. Второй список содержит элементы, для которых предикат вернул false. Элементы в списках должны располагаться в порядке их появления в исходной коллекции
+```
+var words = List.of("java", "php", "ruby", "clojure", "javascript", "lua");
+
+var parts = App.partition(words, s -> s.length() > 4);
+System.out.println(parts); // => [[clojure, javascript], [java, php, ruby, lua]]
+```
+Подсказки
+Загляните в тесты, посмотрите другие варианты работы
+```
+package io.hexlet;
+
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+
+public class AppTest {
+
+    @Test
+    public void testPartition1() {
+        var words = List.of("java", "php", "ruby", "lua", "clojure", "javascript");
+
+        var actual = App.partition(words, s -> s.startsWith("j"));
+        var expected = List.of(
+                List.of("java", "javascript"),
+                List.of("php", "ruby", "lua", "clojure")
+        );
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void testPartition2() {
+        var words = List.of("java", "php", "ruby", "clojure", "javascript", "lua");
+
+        var actual = App.partition(words, s -> s.length() > 4);
+        var expected = List.of(
+                List.of("clojure", "javascript"),
+                List.of("java", "php", "ruby", "lua")
+        );
+
+        assertThat(actual).isEqualTo(expected);
+    }
+}
+```
+###_____ Решение ____###
+```
+import java.util.List;
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+class App {
+// BEGIN (write your solution here)
+public static List<List<String>> partition(List<String> words,
+Predicate<String> condition) {
+var wordList = new ArrayList<List<String>>();
+var firstList = new ArrayList<String>();
+var secondList = new ArrayList<String>();
+for (String word : words) {
+if (condition.test(word)) {
+firstList.add(word);
+} else {
+secondList.add(word);
+}
+
+        }
+        wordList.add(firstList);
+        wordList.add(secondList);
+
+        return wordList;
+    }
+    // END
+}
+```
+###_____ Решение Учителя ____###
+```
+package io.hexlet;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+class App {
+// BEGIN
+public static List<List<String>> partition(List<String> coll, Predicate<String> fn) {
+var truthy = new ArrayList<String>();
+var falsy = new ArrayList<String>();
+
+        coll.forEach(current -> {
+            if (fn.test(current)) {
+                truthy.add(current);
+            } else {
+                falsy.add(current);
+            }
+        });
+
+        return new ArrayList<>(List.of(
+                truthy,
+                falsy
+        ));
+    }
+    // END
+}
+```
+
+
 
 
 
