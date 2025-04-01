@@ -997,7 +997,8 @@ public static Map<Character, List<String>> buildIndex(String text) {
 №_18\
 В классе App реализуйте публичный статический метод printBalance(), который выведет на экран названия тех фруктов, которых осталось мало на складе. Метод принимает два параметра:
 
-Склад, Map<String, Integer>, которая содержит названия товаров и их количество на складе
+Склад, Map<String, Integer>, 
+которая содержит названия товаров и их количество на складе
 Минимальный остаток для количества товара, целое число
 Метод должен вывести на экран название тех товаров, которых на складе осталось меньше минимального остатка. Каждый товар с новой строки
 ```
@@ -1539,7 +1540,323 @@ var falsy = new ArrayList<String>();
     // END
 }
 ```
+###_____ Задание ____###\
+//№_2
 
+В классе App создайте публичный статический метод every(), который возвращает true, если каждый элемент списка удовлетворяет предикату и false в ином случае. Метод принимает два параметра:
+
+Список слов List<String>, проверяемая коллекция
+Предикат Predicate<String> 
+```
+var words = List.of("javascript", "java", "joker", "james");
+
+assertThat(App.every(words, s -> s.startsWith("j"))).isTrue();
+assertThat(App.every(words, s -> s.endsWith("a"))).isFalse();
+```
+###_____ Решение ____###
+```
+package io.hexlet;
+
+import java.util.List;
+import java.util.function.Predicate;
+
+class App {
+// BEGIN (write your solution here)
+public static boolean every(List<String> words,
+Predicate<String> condition) {
+int result = 0;
+for (String word : words) {
+if (condition.test(word)) {
+result += 1;
+}
+}
+if (words.size() == result) {
+return true;
+}
+
+        return false;
+    }
+    // END
+}
+```
+###_____ Решение Учителя ____###
+```
+package io.hexlet;
+
+import java.util.List;
+import java.util.function.Predicate;
+
+class App {
+// BEGIN
+public static boolean every(List<String> words, Predicate<String> fn) {
+
+        for (var word : words) {
+            if (!fn.test(word)) {
+                return false;
+            }
+        }
+
+        return  true;
+    }
+    // END
+}
+```
+###_____ Задание ____###\
+//№_3
+
+В классе App создайте публичный статический метод groupBy(), который группирует элементы списка в Map на основании ключа, полученного в результате вызова лямбда-функции. Метод принимает два параметра:
+
+Список слов List<String>, исходная коллекция
+Лямбда-функцию Function<String, String>. Эта функция определяет ключ, по которому будут группироваться слова из исходной коллекции
+Метод должен вернуть Map<String, List<String>>, в которой слова исходной коллекции сгруппированы по определенному ключу. Слова в списках должны быть в том же порядке, в котором они появляются в исходном списке
+```
+var words = List.of("java", "javascript", "php", "ruby", "lisp", "lua");
+
+// Группируем слова по их длине
+var result = App.groupBy(words, s -> Integer.toString(s.length()));
+System.out.println(result); // => {3=[php, lua], 4=[java, ruby, lisp], 10=[javascript]}
+```
+Подсказки\
+Загляните в тесты, посмотрите другие варианты работы\
+###_____ Решение ____###
+```
+public static Map<String, List<String>> groupBy(List<String> words,
+Function<String, String> func) {
+var result = new HashMap<String, List<String>>();
+for (String word : words) {
+String i = func.apply(word);
+var list = result.getOrDefault(i, new ArrayList<>());
+list.add(word);
+result.put(i, list);
+}
+
+        return result;
+    }
+```
+###_____ Решение Учителя ____###
+```
+class App {
+// BEGIN
+public static Map<String, List<String>> groupBy(List<String> coll, Function<String, String> fn) {
+var result = new HashMap<String, List<String>>();
+
+        coll.forEach((item) -> {
+            var key = fn.apply(item);
+
+            result.compute(key, (k, wordsGroup) -> {
+                wordsGroup = wordsGroup == null ? new ArrayList<>() : wordsGroup;
+                wordsGroup.add(item);
+                return wordsGroup;
+            });
+        });
+
+        return result;
+    }
+    // END
+}
+```
+###_____ Задание ____###\
+//№_4\
+В этом упражнении мы напишем один полезный метод для работы с книгами в нашем приложении
+
+src/main/java/io/hexlet/App.java
+В классе App создайте публичный статический метод getMinValueBy(), который возвращает минимальный элемент списка книг на основании результата переданной функции. Метод принимает два параметра:
+
+Список книг List<Book>, исходная коллекция книг
+Лямбда-функцию Function<Book, Integer>. Эта функция определяет параметр, по которому будет найден минимальный элемент книги
+Метод должен вернуть книгу из списка, которая является минимальной в соответствии с критерием, определенным в лямбда-функции
+```
+var books = List.of(
+new Book("Anna Karenina", "Leo Tolstoy", 1890, 543),
+new Book("Crime and Punishment", "Fyodor Dostoevsky", 1864, 231),
+new Book("The Lord of the Rings", "J. R. R. Tolkien", 1920, 1000),
+new Book("The Adventures of Huckleberry Finn", "Mark Twain", 1901, 120),
+new Book("Invisible Man", "Ralph Ellison", 1920, 1000),
+new Book("Frankenstein", "Mary Shelley", 1920, 245)
+);
+
+// Так можно получить книну, в которой меньше всего страниц
+var shortestBook = App.getMinValueBy(books, Book::getPagesCount)
+System.out.println(shortestBook);
+// => Book(title=The Adventures of Huckleberry Finn, author=Mark Twain, published=1901, pagesCount=120)
+
+// А так книгу, написанную раньше остальных
+var oldestBook = App.getMinValueBy(books, Book::getPublished);
+System.out.println(oldestBook);
+// => Book(title=Crime and Punishment, author=Fyodor Dostoevsky, published=1864, pagesCount=231)
+```
+Подсказки\
+Загляните в тесты. Посмотрите, как будет использоваться созданный вами метод
+
+Файл AppTest.java
+```
+import io.hexlet.model.Book;
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+
+public class AppTest {
+
+    @Test
+    public void testMinValue1() {
+        var books = List.of(
+                new Book("Anna Karenina", "Leo Tolstoy", 1890, 543),
+                new Book("Crime and Punishment", "Fyodor Dostoevsky", 1864, 231),
+                new Book("The Lord of the Rings", "J. R. R. Tolkien", 1920, 1000),
+                new Book("The Adventures of Huckleberry Finn", "Mark Twain", 1901, 120),
+                new Book("Invisible Man", "Ralph Ellison", 1920, 1000),
+                new Book("Frankenstein", "Mary Shelley", 1920, 245),
+                new Book("Test title-1", "Noname", 1950, 245)
+        );
+
+        var actual1 = App.getMinValueBy(books, Book::getPagesCount);
+        assertThat(actual1.getTitle()).isEqualTo("The Adventures of Huckleberry Finn");
+
+        var actual2 = App.getMinValueBy(books, Book::getPublished);
+        assertThat(actual2.getTitle()).isEqualTo("Crime and Punishment");
+
+        var actual3 = App.getMinValueBy(books, book -> book.getTitle().length());
+        assertThat(actual3.getTitle()).isEqualTo("Frankenstein");
+    }
+}
+```
+class Book
+```
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
+
+
+  @AllArgsConstructor
+  @Getter
+  @ToString
+  public class Book {
+  private String title;
+  private String author;
+  private int published;
+  private int pagesCount;
+  }
+  ```
+  ###_____ Решение ____###\
+```
+public static Book getMinValueBy(List<Book> books, Function<Book,
+Integer> fn) {
+
+        var booksCopy = new ArrayList<Book>(books);
+        booksCopy.sort(Comparator.comparing(fn));
+
+        return booksCopy.getFirst();
+    }
+```    
+###_____ Решение Учителя ____###
+```
+import io.hexlet.model.Book;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.ArrayList;
+
+import java.util.function.Function;
+
+class App {
+// BEGIN
+public static Book getMinValueBy(List<Book> books, Function<Book, Integer> fn) {
+var sortedBooks = new ArrayList<Book>(books);
+sortedBooks.sort(Comparator.comparingInt(fn::apply));
+return  sortedBooks.get(0);
+}
+// END
+}
+```
+###_____ Задание ____###\
+//№_5\
+Числа Фибоначчи — элементы числовой последовательности, в которой первые два числа равны 0 и 1, а каждое последующее число равно сумме двух предыдущих чисел. Вот несколько первых чисел этой последовательности:
+
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233
+Для определения чисел Фибоначчи часто используется рекурсивный алгоритм. Он выглядит так: Если n = 1, вернуть 0. Если n = 2, вернуть 1. В ином случае вызвать рекурсивно функцию с аргументами n — 1 и n — 2. Результат двух вызовов сложить и вернуть полученное значение.
+```
+public static long fib(long n) {
+if (n == 1) {
+return 0L;
+} else if (n == 2) {
+return 1L;
+}
+
+    return fib(n - 1) + fib(n - 2);
+}
+```
+Алгоритм довольно простой, но вычисление чисел Фибоначчи при помощи рекурсии может быть неэффективным из-за большого количества повторяющихся вычислений. При каждом вызове рекурсивной функции для вычисления числа Фибоначчи n, необходимо выполнять вычисления для чисел n-1 и n-2, что приводит к росту времени выполнения. Например, для вычисления пятого числа Фибоначчи нам нужно посчитать четвертое и третье числа. Для вычисления четвертого в свою очередь нужно повторно посчитать третье число.
+
+Этот процесс можно оптимизировать при помощи мемоизации. Мемоизация - это процесс сохранения результатов предыдущих вызовов функции и повторного использования их вместо повторного вычисления. В случае вычисления чисел Фибоначчи, мемоизация позволяет сохранять уже посчитанные значения и использовать их при последующих вызовах вместо того, чтобы считать заново.
+
+В этом упражнении вам предстоит оптимизировать процесс вычисления чисел Фибоначчи методом рекурсии, добавив использование мемоизации
+
+src/main/java/io/hexlet/App.java
+В файле создайте класс Fibonacci и реализуйте в нем публичный статический метод fib(), который принимает номер числа Фибоначчи в последовательности (long) и возвращает само это число. Для оптимизации метод должен использовать мемоизации
+```
+Fibonacci.fib(1); // 0
+Fibonacci.fib(2); // 1
+Fibonacci.fib(3); // 1
+Fibonacci.fib(7); // 8
+
+// При повторном вызове цепочки рекурсивных вызовов не происходит
+// Результат сразу берется из кеша
+Fibonacci.fib(7); // 8
+```
+Подсказки\
+Для хранения кеша вам возможно понадобится реализация ConcurrentHashMap\
+###_____ Решение ____###\
+// строка - 14281
+```
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.HashMap;
+
+// BEGIN (write your solution here)
+public class Fibonacci {
+private static HashMap<Long, Long> res = new HashMap<>();
+
+    public static long isFib(long n) {
+
+        if (n == 1) {
+            return 0L;
+        } else if (n == 2) {
+            return 1L;
+        }
+        return isFib(n - 1) + isFib(n - 2);
+    }
+
+    public static long fib(long key) {
+        return res.computeIfAbsent(key,Fibonacci::isFib);
+    }
+
+}
+```
+###_____ Решение Учителя ____###
+```
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+// BEGIN
+public class Fibonacci {
+
+    private static Map<Long, Long> cache = new ConcurrentHashMap<>();
+
+    public static long fib(long n) {
+        return cache.computeIfAbsent(n, num -> {
+            if (n == 1) {
+                return 0L;
+            } else if (n == 2) {
+                return 1L;
+            }
+
+            return fib(n - 1) + fib(n - 2);
+        });
+    }
+}
+// END
+```
 
 
 

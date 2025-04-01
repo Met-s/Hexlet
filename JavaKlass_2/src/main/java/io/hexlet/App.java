@@ -14,12 +14,13 @@ package io.hexlet;
 //import io.hexlet.util.Change;
 //import java.util.ArrayList;
 //import java.util.List;
-
-
+//import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.function.Predicate;
+
+import io.hexlet.model.Book;
+import io.hexlet.model.Fibonacci;
 
 
 public class App {
@@ -430,7 +431,6 @@ public class App {
 //                "Pear", 15
 //        );
 //        App.printBalance(products, 10);
-
 //###_____ Страница модуля ____###
 //        var langs = new ArrayList<>(List.of("ruby", "php", "python",
 //                "javascript"));
@@ -556,14 +556,74 @@ public class App {
  * ###_____ Испытания Функции ____###
  * №_1
  */
-        var words = List.of(
-                "java", "php", "ruby", "clojure",
-                "javascript", "lua");
+//        var words = List.of(
+//                "java", "php", "ruby", "clojure",
+//                "javascript", "lua");
+//
+//        var parts = App.partition(words, s -> s.startsWith("j"));
+//        System.out.println(parts); // => [[clojure, javascript], [java, php, ruby, lua]]
+/**
+ * №_2
+ */
+//        var words = List.of("javascript", "java", "joker", "james");
+//
+//        boolean result1 = (App.every(words, s -> s.startsWith("j")));
+//        boolean result2 = (App.every(words, s -> s.endsWith("a")));
+//        System.out.println(result1);
+//        System.out.println(result2);
+/**
+ * №_3
+ */
+//        var words = List.of("java", "javascript", "php",
+//                "ruby", "lisp", "lua");
+//
+//        var result = App.groupBy(words, s -> Integer.toString(s.length()));
+//        System.out.println(result);
+/**
+ * №_4
+ */
+//        var books = List.of(
+//          new Book("Anna Karenina", "Leo Tolstoy", 1890, 543),
+//          new Book("Crime and Punishment", "Fyodor Dostoevsky", 1864, 231),
+//          new Book("The Lord of the Rings", "J. R. R. Tolkien", 1920, 1000),
+//          new Book("The Adventures of Huckleberry Finn", "Nark Twain", 1901, 120),
+//          new Book("Invisible Man", "Ralph Ellison", 1920, 1000),
+//          new Book("Frankenstein", "Mary Shelley", 1920, 245)
+//        );
+//        // Так можно получить книгу, в которой меньше всего страниц
+//        var shortestBook = App.getMinValueBy(books, Book::getPagesCount);
+//        System.out.println(shortestBook); // => Book(title=The Adventures of Huckleberry Finn, author=Mark Twain, published=1901, pagesCount=120)
+//        // А так книгу, написанную раньше остальных
+//        var oldestBook = App.getMinValueBy(books, Book::getPublished);
+//        System.out.println(oldestBook); // => Book(title=Crime and Punishment, author=Fyodor Dostoevsky, published=1864, pagesCount=231)
+/**
+ * №_5
+ */
 
-        var parts = App.partition(words, s -> s.startsWith("j"));
-        System.out.println(parts); // => [[clojure, javascript], [java, php, ruby, lua]]
+        System.out.println(Fibonacci.fib(1));
+        System.out.println(Fibonacci.fib(2));
+        System.out.println(Fibonacci.fib(3));
+        System.out.println(Fibonacci.fib(7));
+
+        System.out.println();
+        System.out.println(Fibonacci.fib(7));
+        Fibonacci.fib(1); // 0
+        Fibonacci.fib(2); // 1
+        Fibonacci.fib(3); // 1
+        Fibonacci.fib(7); // 8
+
+// При повторном вызове цепочки рекурсивных вызовов не происходит
+// Результат сразу берется из кеша
+
+
+
+
+
 
     }
+
+
+
 
 /**
  * //=======================================================================
@@ -830,28 +890,88 @@ public class App {
  * ###_____ Испытания Функции ____###
  * №_1
  */
-    public static List<List<String>> partition(List<String> words,
-                                         Predicate<String> condition) {
-        var wordList = new ArrayList<List<String>>();
-        var firstList = new ArrayList<String>();
-        var secondList = new ArrayList<String>();
-        for (String word : words) {
-           if (condition.test(word)) {
-               firstList.add(word);
-           } else {
-               secondList.add(word);
-           }
-
-        }
-        wordList.add(firstList);
-        wordList.add(secondList);
-
-        return wordList;
-    }
-
+//    public static List<List<String>> partition(List<String> words,
+//                                         Predicate<String> condition) {
+//        var wordList = new ArrayList<List<String>>();
+//        var firstList = new ArrayList<String>();
+//        var secondList = new ArrayList<String>();
+//        for (String word : words) {
+//           if (condition.test(word)) {
+//               firstList.add(word);
+//           } else {
+//               secondList.add(word);
+//           }
+//
+//        }
+//        wordList.add(firstList);
+//        wordList.add(secondList);
+//
+//        return wordList;
+//    }
+/**
+ * №_2
+ */
+//    public static boolean every(List<String> words,
+//                                Predicate<String> condition) {
+//        int result = 0;
+//        for (String word : words) {
+//            if (condition.test(word)) {
+//                result += 1;
+//            }
+//        }
+//        if (words.size() == result) {
+//            return true;
+//        }
+//
+//        return false;
+//    }
+/**
+ * №_3
+ */
+//    public static Map<String, List<String>> groupBy(List<String> words,
+//                               Function<String, String> func) {
+//        var result = new HashMap<String, List<String>>();
+//        for (String word : words) {
+//            String i = func.apply(word);
+//            var list = result.getOrDefault(i, new ArrayList<>());
+//            list.add(word);
+//            result.put(i, list);
+//        }
+//        return result;
+//    }
+/**
+ * ###_____ Решение Учителя ____###
+  */
+//    public static Map<String, List<String>> groupBy(List<String> coll, Function<String, String> fn) {
+//        var result = new HashMap<String, List<String>>();
+//
+//        coll.forEach((item) -> {
+//            var key = fn.apply(item);
+//
+//            result.compute(key, (k, wordsGroup) -> {
+//                wordsGroup = wordsGroup == null ? new ArrayList<>() : wordsGroup;
+//                wordsGroup.add(item);
+//                return wordsGroup;
+//            });
+//        });
+//
+//        return result;
+//    }
+/**
+ * №_4
+ */
+//    public static Book getMinValueBy(List<Book> books, Function<Book,
+//            Integer> fn) {
+//
+//        var booksCopy = new ArrayList<Book>(books);
+//        booksCopy.sort(Comparator.comparing(fn));
+//
+//        return booksCopy.getFirst();
+//    }
 
 
 }
+
 
 /**
  * №_

@@ -1,7 +1,10 @@
 package io.hexlet.model;
 
 
-// №_2
+
+/**
+ *  №_2
+ */
 //public class Book {
 //    private String title;
 //    private String author;
@@ -21,28 +24,48 @@ package io.hexlet.model;
 //
 //}
 //=> Book "First Folio" written by William Shakespeare published in 1623
-// №_22
+/**
+ * №_22
+ */
+//public final class Book {
+//
+//    private String title;
+//    private String author;
+//
+//    public Book(String title, String author) {
+//        this.title = title;
+//        this.author = author;
+//    }
+//
+//    public String getTitle() {
+//        return title;
+//    }
+//
+//    public String getAuthor() {
+//        return author;
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return title + " - " + author;
+//    }
+//}
 
-public final class Book {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
 
+/**
+ * ###_____ Испытания Функции ____###
+ * ###_____ Задание ____###
+ * //№_4
+ */
+@AllArgsConstructor
+@Getter
+@ToString
+public class Book {
     private String title;
     private String author;
-
-    public Book(String title, String author) {
-        this.title = title;
-        this.author = author;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    @Override
-    public String toString() {
-        return title + " - " + author;
-    }
+    private int published;
+    private int pagesCount;
 }
