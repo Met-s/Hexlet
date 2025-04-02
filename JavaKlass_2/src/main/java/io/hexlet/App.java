@@ -21,7 +21,8 @@ import java.util.function.Function;
 
 import io.hexlet.model.Book;
 import io.hexlet.model.Fibonacci;
-
+import io.hexlet.moduls.ArrayListOfObjects;
+import io.hexlet.model.Box;
 
 public class App {
     public static void main(String[] args) {
@@ -366,7 +367,6 @@ public class App {
 //        Map<String, String> map2 = new HashMap<>(64);// 64 длина
 //        Map<String, String> map3 = new HashMap<>(32, 0.99f);
 //        Map<String, String> map4 = new HashMap<>(map3);
-
 //        Map<String,String> map = new HashMap<>();
 //        map.put("4510775676", "Linus Torvalds");
 //        map.put("4510775434", "Donald Knuth");
@@ -413,7 +413,6 @@ public class App {
 //        var text = "id ornare imperdiet sapien urna pretium ut volutpat sapies arcu sed augue aliquam vislo";
 //        var index = App.buildIndex(text);
 //        System.out.println(index);
-
 /**
 * ###_____ Java: Функции ____###
  *
@@ -599,32 +598,46 @@ public class App {
 /**
  * №_5
  */
-
-        System.out.println(Fibonacci.fib(1));
-        System.out.println(Fibonacci.fib(2));
-        System.out.println(Fibonacci.fib(3));
-        System.out.println(Fibonacci.fib(7));
-
-        System.out.println();
-        System.out.println(Fibonacci.fib(7));
-        Fibonacci.fib(1); // 0
-        Fibonacci.fib(2); // 1
-        Fibonacci.fib(3); // 1
-        Fibonacci.fib(7); // 8
+//        System.out.println(Fibonacci.fib(1));
+//        System.out.println(Fibonacci.fib(2));
+//        System.out.println(Fibonacci.fib(3));
+//        System.out.println(Fibonacci.fib(7));
+//
+//        System.out.println();
+//        System.out.println(Fibonacci.fib(7));
+//        Fibonacci.fib(1); // 0
+//        Fibonacci.fib(2); // 1
+//        Fibonacci.fib(3); // 1
+//        Fibonacci.fib(7); // 8
 
 // При повторном вызове цепочки рекурсивных вызовов не происходит
 // Результат сразу берется из кеша
+/**
+ * ###_____ Java: Дженерики ____###
+ */
+//        var items = new ArrayListOfObjects();
+//        items.add("Sun");
+//        var value = (String) items.get(0);
+/**
+ * №_24
+ */
 
+//        var box = new Box("word");
+//        var box = new Box(10);
+//        var value = box.getValue();
+//        System.out.println(box);
+        var box = new Box("not a number");
+        var value = (Integer) box.getValue();
+
+//
+//        var value = box.getValue();
+        System.out.println(value);
 
 
 
 
 
     }
-
-
-
-
 /**
  * //=======================================================================
  * №_8
@@ -854,8 +867,6 @@ public class App {
 //    public static String transform(Transformer fn, String param) {
 //        return fn.apply(param);
 //    }
-
-
 /**
  * №_21
  */
@@ -968,6 +979,13 @@ public class App {
 //
 //        return booksCopy.getFirst();
 //    }
+/**
+ * ###_____ Java: Дженерики ____###
+ * №_24
+ */
+
+
+
 
 
 }

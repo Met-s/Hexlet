@@ -1857,7 +1857,119 @@ public class Fibonacci {
 }
 // END
 ```
+==============================================================================\
+###_____ Java: Дженерики ____###\
+###_____ Задание ____###\
+//№_24\
+В этом упражнении мы перенесемся в далекие времена и представим, что в Java еще нет дженериков. Чтобы ощутить преимущества дженериков, попробуем сначала поработать без них. Вам предстоит реализовать класс Box, который представляет собой контейнер, задача которого - хранить одно единственное значение.
 
+src/main/java/io/hexlet/Box.java
+Реализуйте класс Box. Этот класс будет хранить одно значение. У класса должен быть конструктор, который на вход принимает начальное значение, а также у класса должен быть метод getValue(), который может вернуть установленное при создании значение. Единственная загвоздка - класс должен уметь хранить значение любого типа. Подумайте, как вы будете решать задачу на данном этапе.
+```
+var box = new Box("word");
+var value = (String) box.getValue(); // word
+
+
+var box = new Box(10);
+var value = (Integer) box.getValue(); // 10
+```
+Этот подход на первый взгляд кажется рабочим. Но порассуждайте, в чем его недостаток и как мы теряем типобезопасность в таком случае.
+
+Мы вынуждены вручную контролировать типы и легко можем ошибиться при этом. Представьте такой код:
+```
+// Ошиблись, хотели положить число, а положили строку
+var box = new Box("not a number");
+var value = (Integer) box.getValue(); // ClassCastException
+```
+Компилятор уже не сможет проверить, что мы кладем и извлекает значение правильного типа. На этапе компиляции мы не узнаем об этой ошибке. Код спокойно пройдет компиляцию, так как с точки зрения компилятора тут все в порядке. Но он упадет с ошибкой уже во время исполнения программы.
+
+Такая ситуация моделируется в тестах, загляните туда
+
+Уже в следующих уроках мы узнаем, как решается эта проблема при помощи дженериков
+
+Файл Test
+```
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
+public class AppTest {
+
+    @Test
+    public void testBoxWithString() {
+
+        var value = "hello";
+        var box = new Box(value);
+        var actual = box.getValue();
+
+        assertThat(actual).isEqualTo(value);
+    }
+
+    @Test
+    public void testBoxWithInteger() {
+
+        Integer value = 12;
+        var box = new Box(value);
+        var actual = box.getValue();
+
+        assertThat(actual).isEqualTo(value);
+    }
+
+    @Test
+    public void testBoxWithDouble() {
+
+        Double value = 10.0;
+        var box = new Box(value);
+        var actual = box.getValue();
+
+        assertThat(actual).isEqualTo(value);
+    }
+
+    @Test
+    public void classCastException() {
+
+        var value = "not a number";
+        var box = new Box(value);
+
+        // Симулируем ошибку при приведении типов
+        assertThatExceptionOfType(RuntimeException.class)
+            .isThrownBy(() -> {
+                var wrongValue = (Integer) box.getValue();
+            });
+    }
+}
+```
+###_____ Решение ____###
+```
+public class Box {
+private Object value;
+
+    public Box(Object word) {
+        this.value = word;
+    }
+
+    public Object getValue() {
+
+        return value;
+    }
+}
+```
+###_____ Решение Учителя ____###
+```
+class Box {
+// BEGIN
+private Object value;
+
+    Box(Object value) {
+        this.value = value;
+    }
+
+    public Object getValue() {
+        return value;
+    }
+    // END
+}
+```
 
 
 
@@ -1867,3 +1979,5 @@ public class Fibonacci {
 ###_____ Решение ____###\
 ###_____ Решение Учителя ____###\
 ###_____ Страница модуля ____###\
+==============================================================================\
+###_____ Java:  ____###\
