@@ -17,12 +17,8 @@ package io.hexlet;
 //import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.*;
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
-import io.hexlet.model.Book;
-import io.hexlet.model.Fibonacci;
-import io.hexlet.moduls.ArrayListOfObjects;
-import io.hexlet.model.Box;
 
 public class App {
     public static void main(String[] args) {
@@ -552,6 +548,30 @@ public class App {
 //        System.out.println(fen.apply(String.valueOf(wordsCopy)));
 //        System.out.println(words);
 /**
+ * ###_____ Страница модуля код из видеоролика ____###
+ * 3_Лямбда-выражения в Java
+ */
+//        DoubleNumber number = new DoubleNumber() {
+//            @Override
+//            public double getValue() {
+//                return 3.14;
+//            }
+//        };
+//--------
+//        DoubleNumber number = () -> 3.14;
+//--------
+//        System.out.println(number.getValue());
+        UnaryOperator<String> op = s -> s.toUpperCase();
+        System.out.println(op.apply("Hello"));
+        UnaryOperator<Integer> op2 = i -> i * 2;
+        System.out.println(op2.apply(5));
+
+
+
+
+
+
+/**
  * ###_____ Испытания Функции ____###
  * №_1
  */
@@ -621,17 +641,49 @@ public class App {
 /**
  * №_24
  */
-
 //        var box = new Box("word");
+//        var value = box.getValue();
+//        System.out.println(value);
+
 //        var box = new Box(10);
 //        var value = box.getValue();
-//        System.out.println(box);
-        var box = new Box("not a number");
-        var value = (Integer) box.getValue();
+//        System.out.println(value);
 
+//        var box = new Box("not a number");
+//        var value = (Integer) box.getValue();
+//        System.out.println(value);
+/**
+ * ###_____ Страница модуля ____###
+ */
+//        Predicate<Integer> isGreaterThanFive = number -> number > 5;
 //
-//        var value = box.getValue();
-        System.out.println(value);
+//        System.out.println(isGreaterThanFive.test(10));
+//        System.out.println(isGreaterThanFive.test(3));
+//
+//        var numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+//
+//        var filteredNumbers = numbers.stream()
+//                                .filter(isGreaterThanFive)
+//                                .toList();
+//
+//        System.out.println(filteredNumbers);
+/**
+ * №_25
+ */
+        var numbers = new ArrayList<>(List.of(2, 3, 5));
+        var result = App.duplicate(numbers);
+
+        System.out.println(result);
+
+        System.out.println(numbers == result);
+
+
+
+
+
+
+
+
 
 
 
@@ -981,9 +1033,16 @@ public class App {
 //    }
 /**
  * ###_____ Java: Дженерики ____###
- * №_24
+ * №_25
  */
+    public static List<Integer> duplicate(List<Integer> numbers) {
 
+        var result = new ArrayList<Integer>();
+        UnaryOperator<Integer> mult = n -> n * 2;
+        numbers.forEach(n -> result.add(mult.apply(n)));
+
+        return result;
+    }
 
 
 

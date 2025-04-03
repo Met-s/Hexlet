@@ -1970,6 +1970,59 @@ private Object value;
     // END
 }
 ```
+###_____ Задание ____###\
+//№_25\
+В этом упражнении мы поработаем со списками и функциональным интерфейсом, но посмотрим на них уже с другой стороны, как на дженерики
+
+src/main/java/io/hexlet/App.java
+В интерфейсе List есть метод replaceAll(), который принимает в качестве параметра лямбда-функцию, реализующую функциональный интерфейс UnaryOperator и заменяет каждый элемент этого списка результатом применения оператора к этому элементу. Изучите этот функциональный интерфейс в документации.
+
+В классе App определите публичный статический метод duplicate(), который принимает в качестве параметра список целых чисел и возвращает новый список, в котором каждое число умножено на 2
+```
+var numbers = new ArrayList<>(List.of(2, 3, 5));
+
+var result = App.duplicate(numbers);
+
+System.out.println(result); // => [4, 6, 10]
+
+// Вернулся новый список
+numbers == result; // false
+```
+###_____ Решение ____###
+```
+class App {
+// BEGIN (write your solution here)
+public static List<Integer> duplicate(List<Integer> numbers) {
+
+        var result = new ArrayList<Integer>();
+        UnaryOperator<Integer> mult = n -> n * 2;
+        numbers.forEach(n -> result.add(mult.apply(n)));
+        
+        return result;
+    }
+    // END
+}
+```
+###_____ Решение Учителя ____###
+```
+import java.util.List;
+import java.util.ArrayList;
+import java.util.function.UnaryOperator;
+
+class App {
+// BEGIN
+public static List<Integer> duplicate(List<Integer> numbers) {
+var copyOfNumbers = new ArrayList<>(numbers);
+UnaryOperator<Integer> fn = number -> number * 2;
+copyOfNumbers.replaceAll(fn);
+
+        return copyOfNumbers;
+    }
+    // END
+}
+```
+
+
 
 
 
