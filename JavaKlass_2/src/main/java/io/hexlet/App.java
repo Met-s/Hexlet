@@ -16,11 +16,29 @@ package io.hexlet;
 //import java.util.List;
 //import static org.assertj.core.api.Assertions.assertThat;
 
+import io.hexlet.moduls.Developer;
+import io.hexlet.moduls.Gamer;
+import org.checkerframework.checker.units.qual.C;
+
 import java.util.*;
-import java.util.function.UnaryOperator;
+import java.util.function.*;
 
 
 public class App {
+    /**
+     * ###_____ Страница модуля код из видеоролика ____###
+     * 3_Лямбда-выражения в Java
+     * ###_____ Примеры ____###
+     */
+    public static final List<Developer> developers = new ArrayList<>();
+    static {
+        developers.add(new Developer(1, "Sasha", 18, 45000));
+        developers.add(new Developer(2, "Misha", 27, 65000));
+        developers.add(new Developer(3, "Alex", 24, 95000));
+        developers.add(new Developer(4, "Evgeny", 30, 78000));
+    }
+
+
     public static void main(String[] args) {
 
 /**
@@ -561,13 +579,91 @@ public class App {
 //        DoubleNumber number = () -> 3.14;
 //--------
 //        System.out.println(number.getValue());
-        UnaryOperator<String> op = s -> s.toUpperCase();
-        System.out.println(op.apply("Hello"));
-        UnaryOperator<Integer> op2 = i -> i * 2;
-        System.out.println(op2.apply(5));
+//        UnaryOperator<String> op = s -> s.toUpperCase();
+//        System.out.println(op.apply("Hello"));
+//        UnaryOperator<Integer> op2 = i -> i * 2;
+//        System.out.println(op2.apply(5));
+//--------
+//        Predicate<Integer> inRange = n -> n > 0 && n < 100;
+//        System.out.println(inRange.test(4));
+//        System.out.println(inRange.test(400));
+//--------
+//        Consumer<String> printS = (s) -> System.out.println(s);
+//        printS.accept("Hello Hexlet!");
+//--------
+//        Function<String, Integer> len = (s) -> s.length();
+//        System.out.println(len.apply("Drink tea"));
+//--------
+//        Supplier<Gamer> createGam = () -> new Gamer(1L, "Nicita", "serOwin");
+//        System.out.println(createGam.get());
+//--------
+/**
+* ###_____ Объединение предикатов ____###
+*/
+//        Predicate<String> empty = s -> s.isEmpty();
+//        Predicate<String> nonEmpty = s -> empty.negate();
+//
+//        Predicate<String> containsA = s -> s.contains("a");
+//        Predicate<String> nonEmptyWithA = s -> nonEmpty.and(containsA);
+//
+//        Predicate<String> sLength8 = s -> s.length() == 8;
+//        Predicate<String> hasAOrL8 = containsA.or(sLength8);
+/**
+ * ###_____ Объединение функций ____###
+ */
+//        Function<Integer, Integer> add = i -> i + 1;
+//        Function<Integer, Integer> mult = i -> i * 2;
+//        Function<Integer, Integer> ops = add.andThen(mult);
+//        System.out.println(ops.apply(5));
+//        Function<Integer, Integer> opsCompose = add.compose(mult);
+//        System.out.println(opsCompose.apply(5));
+/**
+ * ###_____ Ссылки на методы ____###
+ */
+//        Predicate<String> empty = s -> s.isEmpty();
+//        Predicate<String> imptyMethodRef = String::isEmpty;
+//
+//        Function<String, Integer> parseFunc = Integer::parseInt;
+//        System.out.println(parseFunc.apply("123"));
+//
+//        Consumer<Integer> printNum = System.out::println;
+//        printNum.accept(Integer.valueOf(1));
+//
+//        Gamer dev = new Gamer(1L, "Nicita", "jfjls");
+//        Supplier<String> level = dev::getNickname;
+//        System.out.println(level.get());
+/**
+ * ###_____ Примеры ____###
+ */
+        Predicate<Integer> inRange = n -> n > 0 && n < 100;
+        Predicate<Integer> isPositive = (n) -> n > 0;
+        Predicate<Integer> isEvenNum = (n) -> n % 2 == 0;
+
+        List<Integer> nums = List.of(1, 3, 5, -5, 3,
+                18, 20, 4,  -4);
+
+        List<Integer> l1 = filterNums(nums, inRange); //1051- строка с filterNums()
+        List<Integer> l2 = filterNums(nums, isPositive.negate());
+        List<Integer> l3 = filterNums(nums, isPositive.and(isEvenNum));
+
+//        l3.forEach(System.out::println);
+
+        List<Developer> devs = new ArrayList<>(developers);
+//        devs.sort(new Comparator<Developer>() {
+//            @Override
+//            public int compare(Developer o1, Developer o2) {
+//                return o1.getAge().compareTo(o2.getAge());
+//            }
+//        });
+// Лямбда
+        devs.sort((o1, o2) -> o1.getAge().compareTo(o2.getAge()));
+
+        devs.sort(Comparator.comparingInt(Developer::getAge));
+
+        devs.sort(Comparator.comparing(d -> d.getAge()));
 
 
-
+        devs.forEach(System.out::println);
 
 
 
@@ -670,12 +766,10 @@ public class App {
 /**
  * №_25
  */
-        var numbers = new ArrayList<>(List.of(2, 3, 5));
-        var result = App.duplicate(numbers);
-
-        System.out.println(result);
-
-        System.out.println(numbers == result);
+//        var numbers = new ArrayList<>(List.of(2, 3, 5));
+//        var result = App.duplicate(numbers);
+//        System.out.println(result);
+//        System.out.println(numbers == result);
 
 
 
@@ -950,6 +1044,21 @@ public class App {
 //        return result;
 //    }
 /**
+* ###_____ Страница модуля код из видеоролика ____###
+* 3_Лямбда-выражения в Java
+* ###_____ Примеры ____###
+*/
+    public static List<Integer> filterNums(List<Integer> nums,
+                                           Predicate<Integer> pr) {
+        List<Integer> result = new ArrayList<>();
+        for (Integer n : nums) {
+            if (pr.test(n)) {
+                result.add(n);
+            }
+        }
+        return result;
+    }
+/**
  * ###_____ Испытания Функции ____###
  * №_1
  */
@@ -1031,6 +1140,7 @@ public class App {
 //
 //        return booksCopy.getFirst();
 //    }
+//-----------
 /**
  * ###_____ Java: Дженерики ____###
  * №_25
@@ -1043,6 +1153,7 @@ public class App {
 
         return result;
     }
+
 
 
 
