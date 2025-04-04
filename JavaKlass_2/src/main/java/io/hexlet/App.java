@@ -16,8 +16,10 @@ package io.hexlet;
 //import java.util.List;
 //import static org.assertj.core.api.Assertions.assertThat;
 
+import io.hexlet.model.SimpleTriple;
 import io.hexlet.moduls.Developer;
 import io.hexlet.moduls.Gamer;
+import io.hexlet.moduls.SimplePair;
 import org.checkerframework.checker.units.qual.C;
 
 import java.util.*;
@@ -635,20 +637,20 @@ public class App {
 /**
  * ###_____ Примеры ____###
  */
-        Predicate<Integer> inRange = n -> n > 0 && n < 100;
-        Predicate<Integer> isPositive = (n) -> n > 0;
-        Predicate<Integer> isEvenNum = (n) -> n % 2 == 0;
-
-        List<Integer> nums = List.of(1, 3, 5, -5, 3,
-                18, 20, 4,  -4);
-
-        List<Integer> l1 = filterNums(nums, inRange); //1051- строка с filterNums()
-        List<Integer> l2 = filterNums(nums, isPositive.negate());
-        List<Integer> l3 = filterNums(nums, isPositive.and(isEvenNum));
-
-//        l3.forEach(System.out::println);
-
-        List<Developer> devs = new ArrayList<>(developers);
+//        Predicate<Integer> inRange = n -> n > 0 && n < 100;
+//        Predicate<Integer> isPositive = (n) -> n > 0;
+//        Predicate<Integer> isEvenNum = (n) -> n % 2 == 0;
+//
+//        List<Integer> nums = List.of(1, 3, 5, -5, 3,
+//                18, 20, 4,  -4);
+//
+//        List<Integer> l1 = filterNums(nums, inRange); //1051- строка с filterNums()
+//        List<Integer> l2 = filterNums(nums, isPositive.negate());
+//        List<Integer> l3 = filterNums(nums, isPositive.and(isEvenNum));
+//
+////        l3.forEach(System.out::println);
+//
+//        List<Developer> devs = new ArrayList<>(developers);
 //        devs.sort(new Comparator<Developer>() {
 //            @Override
 //            public int compare(Developer o1, Developer o2) {
@@ -656,14 +658,14 @@ public class App {
 //            }
 //        });
 // Лямбда
-        devs.sort((o1, o2) -> o1.getAge().compareTo(o2.getAge()));
-
-        devs.sort(Comparator.comparingInt(Developer::getAge));
-
-        devs.sort(Comparator.comparing(d -> d.getAge()));
-
-
-        devs.forEach(System.out::println);
+//        devs.sort((o1, o2) -> o1.getAge().compareTo(o2.getAge()));
+//
+//        devs.sort(Comparator.comparingInt(Developer::getAge));
+//
+//        devs.sort(Comparator.comparing(d -> d.getAge()));
+//
+//
+//        devs.forEach(System.out::println);
 
 
 
@@ -770,7 +772,38 @@ public class App {
 //        var result = App.duplicate(numbers);
 //        System.out.println(result);
 //        System.out.println(numbers == result);
+//----------
+/**
+ * Один параметр типа
+ */
+//        var point =new SimplePair<Integer>();
+//        point.setLeft(10);
+//        point.setRight(20);
+//
+//        System.out.println(point.getLeft());
+//        System.out.println(point.getRight());
+/**
+ * Два параметра типа
+ */
+//        var pair = new SimplePair<String, Integer>();
+//        pair.setLeft("hexlet");
+//        pair.setRight(100);
+//
+//        System.out.println(pair.getLeft()); // hexlet
+//        System.out.println(pair.getRight()); // 100
+//        System.out.println();
+//
+//        var point = new SimplePair<>(10, 20);
+//        System.out.println(point.getLeft());
+//        System.out.println(point.getRight());
+/**
+ * №_26
+ */
+        var triple = new SimpleTriple("str", 1, true);
 
+        System.out.println(triple.getLeft());
+        System.out.println(triple.getRight());
+        System.out.println(triple.getMiddle());
 
 
 

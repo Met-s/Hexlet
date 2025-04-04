@@ -2021,7 +2021,67 @@ copyOfNumbers.replaceAll(fn);
     // END
 }
 ```
+###_____ Задание ____###\
+//№_26\
+Реализуйте класс SimpleTriple, который представляет собой тройку. Класс обобщен по трем типам: L, M, R. Класс имеет три поля: left с типом L, middle с типом M и right R. Класс должен реализовывать интерфейс Triple<L, M, R>. Все три свойства класса должны устанавливаться через конструктор
+```
+var triple = new SimpleTriple("str", 1, true);
 
+triple.getLeft(); // str
+triple.getRight(); // true
+triple.getMiddle(); // 1
+```
+###_____ Решение ____###
+```
+public class SimpleTriple<L, M, R> implements Triple<L, M, R> {
+private L left;
+private M middle;
+private R right;
+
+    public SimpleTriple(L left, M middle, R right) {
+        this.left = left;
+        this.middle = middle;
+        this.right = right;
+    }
+
+    public L getLeft() {
+        return left;
+    }
+
+    public M getMiddle() {
+        return middle;
+    }
+
+    public R getRight() {
+        return right;
+    }
+
+    public void setLeft(L left) {
+        this.left = left;
+    }
+
+    public void setMiddle(M middle) {
+        this.middle = middle;
+    }
+
+    public void setRight(R right) {
+        this.right = right;
+    }
+}
+```
+Файл Triple.java
+```
+public interface Triple<L, M, R> {
+
+    L getLeft();
+    M getMiddle();
+    R getRight();
+
+    void setLeft(L left);
+    void setMiddle(M middle);
+    void setRight(R right);
+}
+```
 
 
 
