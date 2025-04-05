@@ -16,6 +16,7 @@ package io.hexlet;
 //import java.util.List;
 //import static org.assertj.core.api.Assertions.assertThat;
 
+import io.hexlet.model.ListUtils;
 import io.hexlet.model.SimpleTriple;
 import io.hexlet.moduls.Developer;
 import io.hexlet.moduls.Gamer;
@@ -799,12 +800,27 @@ public class App {
 /**
  * №_26
  */
-        var triple = new SimpleTriple("str", 1, true);
+//        var triple = new SimpleTriple("str", 1, true);
+//
+//        System.out.println(triple.getLeft());
+//        System.out.println(triple.getRight());
+//        System.out.println(triple.getMiddle());
+/**
+ * №_27
+ */
+        var util = new ListUtils<Integer>();
 
-        System.out.println(triple.getLeft());
-        System.out.println(triple.getRight());
-        System.out.println(triple.getMiddle());
+        var coll1 = new ArrayList<>(List.of(1, 2, 3));
+        var coll2 = new ArrayList<>(List.of(3, 4, 5));
 
+        var result = util.merge(coll1, coll2);
+        System.out.println(result);
+
+        var util1 = new ArrayList<>(coll1);
+
+        util1.addAll(coll2);
+
+        System.out.println(util1);
 
 
 

@@ -2082,8 +2082,71 @@ public interface Triple<L, M, R> {
     void setRight(R right);
 }
 ```
+###_____ Вопрос-Ответ ____###\
+Как правильно создать обобщенный класс?
+```
+public class MyClass<T> {}
+```
+Как правильно создать экземпляр обобщенного класса? 
+```
+var instance = new MyClass<String>();
+MyClass<String> instance = new MyClass<>();
+```
+Допишите код метода в обобщенном классе, который возвращает значение value
+```
+public class SimplePair<T> {
 
+    private T value;
 
+    public T getValue() {
+        return value;
+    }
+}
+```
+Что такое параметрический полиморфизм?
+Возможность создания кода, работающего идентично с различными типами данных
+
+Как в Java реализуется параметрический полиморфизм?
+При помощи дженериков
+
+Что такое ad-hoc полиморфизм?
+Возможность изменения поведения методов в зависимости от типа данных аргументов
+
+Какой механизм используется в Java для реализации ad-hoc полиморфизма?
+Перегрузка методов
+
+###_____ Задание ____###\
+//№_27\
+В этом упражнении мы применим концепцию параметрического полиморфизма и создадим класс, логика работы которого будет независима от типа, для которого он выполняется. Он будет работать идентично для любого типа данных
+
+src/main/java/io/hexlet/ListUtils.java
+Создайте параметризованный класс ListUtils<T>. В классе создайте метод merge(), который принимает два параметризованных списка List и сливает их. Метод должен вернуть новый параметризованный список, который представляет собой слияние двух переданных списков.
+```
+var util = new ListUtils<Integer>();
+
+var coll1 = new ArrayList<>(List.of(1, 2, 3));
+var coll2 = new ArrayList<>(List.of(3, 4, 5));
+
+var result = util.merge(coll1, coll2);
+System.out.println(result); // [1, 2, 3, 3, 4, 5]
+```
+###_____ Решение ____###
+```
+import java.util.List;
+import java.util.ArrayList;
+
+// BEGIN (write your solution here)
+public class ListUtils<T> {
+
+    public List<T> merge(List<T> value, List<T> ar2) {
+        var result = new ArrayList<>(value);
+        result.addAll(ar2);
+
+        return result;
+    }
+}
+// END
+```
 
 
 
