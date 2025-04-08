@@ -20,6 +20,7 @@ import io.hexlet.model.ListUtils;
 import io.hexlet.model.SimpleTriple;
 import io.hexlet.moduls.Developer;
 import io.hexlet.moduls.Gamer;
+import io.hexlet.moduls.Pair;
 import io.hexlet.moduls.SimplePair;
 import org.checkerframework.checker.units.qual.C;
 
@@ -808,19 +809,48 @@ public class App {
 /**
  * №_27
  */
-        var util = new ListUtils<Integer>();
+//        var util = new ListUtils<Integer>();
+//
+//        var coll1 = new ArrayList<>(List.of(1, 2, 3));
+//        var coll2 = new ArrayList<>(List.of(3, 4, 5));
+//
+//        var result = util.merge(coll1, coll2);
+//        System.out.println(result);
+/**
+* ###_____ Страница модуля ____###
+*/
+//        var pair = new SimplePair<String, String>("hexlet", "google");
+//        var pair2 = pair.copy();
+//
+//        System.out.println(pair2.getLeft());
+//        System.out.println(pair2.getRight());
+//----------
+//        var pair = new SimplePair<String, String>("youtube", "chatgpt");
+//        var pair2 = new SimplePair<String, String>("hexlet", "google");
+//
+//        pair.replaceWith(pair2);
+//        System.out.println(pair.getLeft());
+//        System.out.println(pair.getRight());
+/**
+ * №_28
+ */
+        var triple = new SimpleTriple("str", 1, true);
+        var reversed = triple.reverse();
 
-        var coll1 = new ArrayList<>(List.of(1, 2, 3));
-        var coll2 = new ArrayList<>(List.of(3, 4, 5));
+        System.out.println(reversed.getLeft());
+        System.out.println(reversed.getMiddle());
+        System.out.println(reversed.getRight());
 
-        var result = util.merge(coll1, coll2);
-        System.out.println(result);
+        var triple1 = new SimpleTriple<>(1, "s", true);
+        var triple2 = new SimpleTriple<>(1, "s", true);
+        var triple3 = new SimpleTriple<>(1, "str", true);
 
-        var util1 = new ArrayList<>(coll1);
+        assertThat(triple1.isEqualTo(triple2)).isEqualTo(true);
+        assertThat(triple1.isEqualTo(triple3)).isEqulTo(false);
 
-        util1.addAll(coll2);
+        System.out.println((triple1.isEqualTo(triple2)));
 
-        System.out.println(util1);
+
 
 
 
@@ -833,6 +863,8 @@ public class App {
 
 
     }
+
+
 /**
  * //=======================================================================
  * №_8

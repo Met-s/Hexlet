@@ -35,5 +35,18 @@ public class SimpleTriple<L, M, R> implements Triple<L, M, R> {
         this.right = right;
     }
 
+    public SimpleTriple<R, M, L> reverse() {
+        var result = new SimpleTriple<>(getRight(), getMiddle(),
+                getLeft());
+
+        return result;
+    }
+
+    public boolean isEqualTo(SimpleTriple<Integer, String, Boolean> trip) {
+
+        return this.getLeft().equals(trip.getLeft()) && this.getMiddle()
+                .equals(trip.getMiddle()) && this.getRight().equals(trip.getRight());
+    }
+
 
 }

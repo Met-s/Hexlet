@@ -55,4 +55,13 @@ public class SimplePair<L, R> {
     public void setRight(R right) {
         this.right = right;
     }
+
+    public SimplePair<L, R> copy() {
+        return new SimplePair<L, R>(getLeft(), getRight());
+    }
+
+    public void replaceWith(SimplePair<L, R> pair) {
+        setLeft(pair.getLeft());
+        setRight(pair.getRight());
+    }
 }

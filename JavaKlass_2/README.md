@@ -2147,6 +2147,68 @@ public class ListUtils<T> {
 }
 // END
 ```
+###_____ Задание ____###\
+//№_28
+
+В файле уже реализован класс SimpleTriple, который представляет собой тройку. Класс обобщен по трем типам: L, M, R. Вам предстоит добавить в этот класс два метода
+
+src/main/java/io/hexlet/SimpleTriple.java
+В классе SimpleTriple создайте метод reverse(), который переворачивает тройку. Этот метод не принимает никаких параметров. Метод должен вернуть новую тройку, в который элементы нашей исходной тройки расположены в обратном порядке
+```
+var triple = new SimpleTriple("str", 1, true);
+
+var reversed = triple.reverse();
+
+reversed.getLeft(); // true
+reversed.getMiddle(); // 1
+reversed.getRight(); // str
+Создайте в классе метод isEqualTo(), который принимает в качестве параметра другую тройку и сравнивает их. Если они идентичны, метод должен вернуть true, в ином случае false
+
+var triple1 = new SimpleTriple<>(1, "s", true);
+var triple2 = new SimpleTriple<>(1, "s", true);
+var triple3 = new SimpleTriple<>(1, "str", true);
+
+assertThat(triple1.isEqualTo(triple2)).isEqualTo(true);
+assertThat(triple1.isEqualTo(triple3)).isEqualTo(false);
+```
+Подсказки
+При перевороте тройки меняются местами не только сами значения, но и параметры типа
+
+###_____ Решение ____###
+```
+public SimpleTriple<R, M, L> reverse() {
+var result = new SimpleTriple<>(getRight(), getMiddle(),
+getLeft());
+
+        return result;
+    }
+
+    public boolean isEqualTo(SimpleTriple<Integer, String, Boolean> trip) {
+
+        return this.getLeft().equals(trip.getLeft()) && this.getMiddle()
+                .equals(trip.getMiddle()) && this.getRight().equals(trip.getRight());
+    }
+```    
+###_____ Решение Учителя ____###
+```
+// BEGIN
+public Triple<R, M, L> reverse() {
+return new SimpleTriple(
+getRight(),
+getMiddle(),
+getLeft()
+);
+}
+
+    public boolean isEqualTo(Triple<L, M, R> otherTriple) {
+        return getLeft().equals(otherTriple.getLeft())
+            && getMiddle().equals(otherTriple.getMiddle())
+            && getRight().equals(otherTriple.getRight());
+    }
+    // END
+```
+
+
 
 
 

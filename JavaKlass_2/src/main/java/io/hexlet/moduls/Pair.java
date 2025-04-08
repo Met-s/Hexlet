@@ -18,9 +18,9 @@ package io.hexlet.moduls;
  */
 public interface Pair<L, R> {
 
-    public L getLeeft();
+    public L getLeft();
     public R getRight();
 
-    public void setLeeft(L leeft);
+    public void setLeft(L left);
     public void setRight(R right);
 }
