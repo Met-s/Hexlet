@@ -26,7 +26,9 @@ import org.checkerframework.checker.units.qual.C;
 
 import java.util.*;
 import java.util.function.*;
+import io.hexlet.moduls.PairUtils;
 
+import static org.apache.commons.lang3.StringUtils.startsWith;
 
 public class App {
     /**
@@ -834,24 +836,42 @@ public class App {
 /**
  * №_28
  */
-        var triple = new SimpleTriple("str", 1, true);
-        var reversed = triple.reverse();
+//        var triple = new SimpleTriple("str", 1, true);
+//        var reversed = triple.reverse();
+//
+//        System.out.println(reversed.getLeft());
+//        System.out.println(reversed.getMiddle());
+//        System.out.println(reversed.getRight());
+//
+//        var triple1 = new SimpleTriple<>(1, "s", true);
+//        var triple2 = new SimpleTriple<>(1, "s", true);
+//        var triple3 = new SimpleTriple<>(1, "str", true);
+//
+////        assertThat(triple1.isEqualTo(triple2)).isEqualTo(true);
+////        assertThat(triple1.isEqualTo(triple3)).isEqulTo(false);
+//
+//        System.out.println((triple1.isEqualTo(triple2)));
+/**
+ * ###_____ Страница модуля ____###
+ */
+//        var value = App.identity("hexlet");
+//        System.out.println(value);
+//
+//        var pair = PairUtils.getPair("hexlet", 100);
+//        System.out.println(pair.getLeft());
+//        System.out.println(pair.getRight());
+/**
+ * №_29
+ */
+        var languages   = new ArrayList<>(List.of("java",
+                "javascript", "php", "ruby"));
+        var result = ListUtils.filter(languages, l -> l.startsWith("j"));
+        System.out.println(result);
 
-        System.out.println(reversed.getLeft());
-        System.out.println(reversed.getMiddle());
-        System.out.println(reversed.getRight());
-
-        var triple1 = new SimpleTriple<>(1, "s", true);
-        var triple2 = new SimpleTriple<>(1, "s", true);
-        var triple3 = new SimpleTriple<>(1, "str", true);
-
-        assertThat(triple1.isEqualTo(triple2)).isEqualTo(true);
-        assertThat(triple1.isEqualTo(triple3)).isEqulTo(false);
-
-        System.out.println((triple1.isEqualTo(triple2)));
-
-
-
+        var numbers = new ArrayList<>(List.of(1, 2, 5,
+                0, 8, 3));
+        var result1 = ListUtils.filter(numbers, n -> n > 4);
+        System.out.println(result1);
 
 
 
@@ -1226,16 +1246,20 @@ public class App {
  * ###_____ Java: Дженерики ____###
  * №_25
  */
-    public static List<Integer> duplicate(List<Integer> numbers) {
-
-        var result = new ArrayList<Integer>();
-        UnaryOperator<Integer> mult = n -> n * 2;
-        numbers.forEach(n -> result.add(mult.apply(n)));
-
-        return result;
+//    public static List<Integer> duplicate(List<Integer> numbers) {
+//
+//        var result = new ArrayList<Integer>();
+//        UnaryOperator<Integer> mult = n -> n * 2;
+//        numbers.forEach(n -> result.add(mult.apply(n)));
+//
+//        return result;
+//    }
+/**
+ * ###_____ Страница модуля ____###
+ */
+    public static <T> T identity(T value) {
+        return value;
     }
-
-
 
 
 
@@ -1244,6 +1268,9 @@ public class App {
 
 /**
  * №_
+ */
+/**
+ * ###_____ Страница модуля ____###
  */
 //###_____ Страница модуля ____###
 // №_

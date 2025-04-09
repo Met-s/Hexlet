@@ -2207,8 +2207,71 @@ getLeft()
     }
     // END
 ```
+###_____ Задание ____###\
+//№_29\
+В этом упражнении мы создадим статический метод для фильтрации списков. Мы уже делали подобное. Но вы наверняка заметили, что сам процесс обхода коллекции и проверки элемента при помощи лямбда-функции никак не зависит от типа данных элементов в списке. Поэтому мы можем создать обобщенный метод, у которого параметр типа будет автоматически выводиться на основании того, какой тип мы передали при вызове
+
+src/main/java/io/hexlet/ListUtils.java
+В классе ListUtils создайте обобщенный статический метод filter, который фильтрует коллекцию. Метод принимает список элементов и лямбда-функцию Predicate, которая содержит логику проверки элемента. Метод должен вернуть новый список, в котором отсутствуют элементы, не удовлетворяющие условию
+```
+var languages = new ArrayList<>(List.of("java", "javascript", "php", "ruby"));
+var result = ListUtils.filter(languages, l -> l.startsWith("j"));
+System.out.println(result); // => ["java", "javascript"]
+
+var numbers = new ArrayList<>(List.of(1, 2, 5, 0, 8, 3));
+var result1 = ListUtils.filter(numbers, n -> n > 4);
+System.out.println(result1); // => [5, 8]
+```
+###_____ Решение ____###
+```
+import java.util.List;
+import java.util.ArrayList;
+import java.util.function.Predicate;
+import java.util.Collection;
 
 
+public class ListUtils {
+
+    // BEGIN (write your solution here)
+    public static <T> List<T> filter(Collection<T> coll,
+                                      Predicate<T> fn) {
+        var result = new ArrayList<T>();
+        coll.forEach(item -> {
+            if (fn.test(item)) {
+                result.add(item);
+            }
+        });    
+
+        return result;
+    }
+    // END
+}
+```
+###_____ Решение Учителя ____###
+```
+import java.util.List;
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+
+public class ListUtils {
+
+    // BEGIN
+    public static <T> List<T> filter(List<T> elements, Predicate<T> fn) {
+
+        var filtered = new ArrayList<T>();
+
+        for (T element : elements) {
+            if (fn.test(element)) {
+                filtered.add(element);
+            }
+        }
+
+        return filtered;
+    }
+    // END
+}
+```
 
 
 
