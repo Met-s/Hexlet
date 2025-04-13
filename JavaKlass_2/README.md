@@ -2272,7 +2272,121 @@ public class ListUtils {
     // END
 }
 ```
+###_____ Задание ____###. \
+//№_30\
+src/main/java/io/hexlet/ListUtils.java
+В классе ListUtils создайте обобщенный статический метод findFirstIndex(), который на вход принимает список List неизвестного типа. Единственное, что известно о типе в списке, это то, что он всегда будет унаследован от класса Human.
 
+Метод принимает на вход два параметра:
+
+humans - лист неизвестного типа
+namePrefix - префикс имени для поиска
+Метод ищет в списке первого человека, у которого имя начинается с заданного префикса и возвращает его индекс. В случае если ни одного такого человека нет, нужно вернуть значение -1
+```
+var people = new ArrayList<>(List.of(
+new Woman("Anna"),
+new Woman("Gina"),
+new Woman("Nina")
+));
+
+ListUtils.findFirstIndex(people, "G"); // 1
+ListUtils.findFirstIndex(people, "O"); // -1
+```
+###_____ Файлы ____###
+```
+package io.hexlet.model;
+
+public interface Human {
+String getSex();
+String getName();
+}
+```
+###_____
+```
+package io.hexlet.model;
+
+public final class Man implements Human {
+private final String name;
+
+    public Man(final String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getSex() {
+        return "male";
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+}
+```
+###_____
+```
+package io.hexlet.model;
+
+public final class Woman implements Human {
+
+    private final String name;
+
+    public Woman(final String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getSex() {
+        return "female";
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+}
+```
+###_____ Решение ____###
+```
+public static Integer findFirstIndex(List<? extends Human> humans,
+String namePrefix ) {
+
+    for (var human : humans) {
+
+        if (human.getName().startsWith(namePrefix)) {
+
+            return humans.indexOf(human);
+        }
+    }
+    return -1;
+}
+```
+###_____ Решение Учителя ____###
+```
+package io.hexlet;
+
+import java.util.List;
+import io.hexlet.model.Human;
+
+public class ListUtils {
+
+    // BEGIN
+    public static Integer findFirstIndex(List<? extends Human> people, String namePrefix) {
+
+        for (int i = 0; i < people.size(); i++) {
+
+            var human = people.get(i);
+
+            if (human.getName().startsWith(namePrefix)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+    // END
+}
+```
 
 
 №_\

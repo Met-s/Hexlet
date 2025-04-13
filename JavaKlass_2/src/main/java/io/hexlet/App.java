@@ -17,7 +17,9 @@ package io.hexlet;
 //import static org.assertj.core.api.Assertions.assertThat;
 
 import io.hexlet.model.ListUtils;
+import io.hexlet.model.Man;
 import io.hexlet.model.SimpleTriple;
+import io.hexlet.model.Woman;
 import io.hexlet.moduls.Developer;
 import io.hexlet.moduls.Gamer;
 import io.hexlet.moduls.Pair;
@@ -28,6 +30,7 @@ import java.util.*;
 import java.util.function.*;
 import io.hexlet.moduls.PairUtils;
 
+import static io.hexlet.moduls.Application.*;
 import static org.apache.commons.lang3.StringUtils.startsWith;
 
 public class App {
@@ -863,17 +866,45 @@ public class App {
 /**
  * №_29
  */
-        var languages   = new ArrayList<>(List.of("java",
-                "javascript", "php", "ruby"));
-        var result = ListUtils.filter(languages, l -> l.startsWith("j"));
-        System.out.println(result);
-
-        var numbers = new ArrayList<>(List.of(1, 2, 5,
-                0, 8, 3));
-        var result1 = ListUtils.filter(numbers, n -> n > 4);
-        System.out.println(result1);
-
-
+//        var languages   = new ArrayList<>(List.of("java",
+//                "javascript", "php", "ruby"));
+//        var result = ListUtils.filter(languages, l -> l.startsWith("j"));
+//        System.out.println(result);
+//
+//        var numbers = new ArrayList<>(List.of(1, 2, 5,
+//                0, 8, 3));
+//        var result1 = ListUtils.filter(numbers, n -> n > 4);
+//        System.out.println(result1);
+/**
+ * ###_____ Страница модуля ____### */
+//        var numbers = List.of(1, 2, 3, 4, 5);
+//        System.out.println(average(numbers));
+//        System.out.println(averageJ(numbers));
+//
+//        var numbersA = new ArrayList<Number>();
+//        addNumbers(numbersA);
+//        System.out.println(numbersA);
+/**
+ * №_30
+ * interface Human
+ * class Man
+ * class Woman
+ * class ListUtils
+ */
+        var people = new ArrayList<>(List.of(
+                new Man("John"),
+                new Man("Jack"),
+                new Man("Charlie"),
+                new Man("Chandler")
+        ));
+        var a = ListUtils.findFirstIndex(people, "J"); //).isEqualTo(0);
+        var b = ListUtils.findFirstIndex(people, "Ja"); //).isEqualTo(1);
+        var c = ListUtils.findFirstIndex(people, "Chan"); //).isEqualTo(3);
+        var d = ListUtils.findFirstIndex(people, "F"); //).isEqualTo(-1);
+        System.out.println(a);
+        System.out.println(b);
+        System.out.println(c);
+        System.out.println(d);
 
 
 
