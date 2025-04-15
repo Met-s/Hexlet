@@ -5,10 +5,21 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 public class ListUtilsT {
-    public static List<?> uniq(List<?> list) {
-        List<?> result =
-                new ArrayList<>(new LinkedHashSet<>(list));
+//    public static List<?> uniq(List<?> list) {
+//        List<?> result =
+//                new ArrayList<>(new LinkedHashSet<>(list));
+//
+//        return result;
+//    }
 
+    public static <T> List<T> uniq(List<T> elements) {
+        var result = new ArrayList<T>();
+
+        for (T element : elements) {
+            if (!result.contains(element)) {
+                result.add(element);
+            }
+        }
         return result;
     }
 }
