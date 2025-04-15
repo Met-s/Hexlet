@@ -2387,6 +2387,63 @@ public class ListUtils {
     // END
 }
 ```
+###_____ Испытания Java: Дженерики ____###
+
+###_____ Задание ____###\
+//№_1\
+В классе ListUtils создайте обобщенный статический метод uniq, который удаляет все дубликаты из списка. Метод принимает список элементов и возвращает новый список, в котором отсутствуют дубликаты. Элементы в итоговом списке должны идти в порядке их появления в исходном списке
+```
+var fruits = new ArrayList<>(List.of("mango", "apple", "lemon", "apple", "pear", "mango"));
+var result = ListUtils.uniq(fruits);
+System.out.println(result); // => [mango, apple, lemon, pear]
+```
+###_____ class Post
+```
+package io.hexlet.controlTask;
+
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+
+@AllArgsConstructor
+@EqualsAndHashCode
+public class Post {
+private String title;
+private String content;
+}
+```
+###_____ Решение ____###
+```
+public class ListUtils {
+
+    // BEGIN (write your solution here)
+    public static List<?> uniq(List<?> list) {
+        List<?> result =
+                new ArrayList<>(new LinkedHashSet<>(list));
+
+        return result;
+    }
+    // END
+}
+```
+###_____ Решение Учителя ____###
+```
+public static <T> List<T> uniq(List<T> elements) {
+
+        var result = new ArrayList<T>();
+
+        for (T element : elements) {
+            if (!result.contains(element)) {
+                result.add(element);
+            }
+        }
+
+        return result;
+    }
+```
+
+
+
+
 
 
 №_\

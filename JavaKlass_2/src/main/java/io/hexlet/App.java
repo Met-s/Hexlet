@@ -16,6 +16,7 @@ package io.hexlet;
 //import java.util.List;
 //import static org.assertj.core.api.Assertions.assertThat;
 
+import io.hexlet.controlTask.Post;
 import io.hexlet.model.ListUtils;
 import io.hexlet.model.Man;
 import io.hexlet.model.SimpleTriple;
@@ -29,9 +30,10 @@ import org.checkerframework.checker.units.qual.C;
 import java.util.*;
 import java.util.function.*;
 import io.hexlet.moduls.PairUtils;
-
 import static io.hexlet.moduls.Application.*;
 import static org.apache.commons.lang3.StringUtils.startsWith;
+import io.hexlet.controlTask.ListUtilsT;
+
 
 public class App {
     /**
@@ -891,20 +893,42 @@ public class App {
  * class Woman
  * class ListUtils
  */
-        var people = new ArrayList<>(List.of(
-                new Man("John"),
-                new Man("Jack"),
-                new Man("Charlie"),
-                new Man("Chandler")
-        ));
-        var a = ListUtils.findFirstIndex(people, "J"); //).isEqualTo(0);
-        var b = ListUtils.findFirstIndex(people, "Ja"); //).isEqualTo(1);
-        var c = ListUtils.findFirstIndex(people, "Chan"); //).isEqualTo(3);
-        var d = ListUtils.findFirstIndex(people, "F"); //).isEqualTo(-1);
-        System.out.println(a);
-        System.out.println(b);
-        System.out.println(c);
-        System.out.println(d);
+//        var people = new ArrayList<>(List.of(
+//                new Man("John"),
+//                new Man("Jack"),
+//                new Man("Charlie"),
+//                new Man("Chandler")
+//        ));
+//        var a = ListUtils.findFirstIndex(people, "J"); //).isEqualTo(0);
+//        var b = ListUtils.findFirstIndex(people, "Ja"); //).isEqualTo(1);
+//        var c = ListUtils.findFirstIndex(people, "Chan"); //).isEqualTo(3);
+//        var d = ListUtils.findFirstIndex(people, "F"); //).isEqualTo(-1);
+//        System.out.println(a);
+//        System.out.println(b);
+//        System.out.println(c);
+//        System.out.println(d);
+/**
+ * ###_____ Испытания: Java_Дженерики ____###
+ * №_1
+ */
+//        var fruits = new ArrayList<>(List.of("mango", "apple",
+//                "lemon", "apple", "pear", "mango"));
+////        "mango", "apple", "lemon", "pear"
+//        var result = ListUtilsT.uniq(fruits);
+//        System.out.println(result);
+//        var coll = new ArrayList<>(List.of(1, 3, 7, 5, 3, 7, 5, 8));
+////        1, 3, 7, 5, 8
+//        var posts = new ArrayList<Post>(List.of(
+//                new Post("super post", "content"),
+//                new Post("another post", "content"),
+//                new Post("super post", "content")
+//        ));
+//         new Post("super post", "content"),
+//            new Post("another post", "content")
+/**
+ * №_2
+ */
+
 
 
 
@@ -1180,16 +1204,16 @@ public class App {
 * 3_Лямбда-выражения в Java
 * ###_____ Примеры ____###
 */
-    public static List<Integer> filterNums(List<Integer> nums,
-                                           Predicate<Integer> pr) {
-        List<Integer> result = new ArrayList<>();
-        for (Integer n : nums) {
-            if (pr.test(n)) {
-                result.add(n);
-            }
-        }
-        return result;
-    }
+//    public static List<Integer> filterNums(List<Integer> nums,
+//                                           Predicate<Integer> pr) {
+//        List<Integer> result = new ArrayList<>();
+//        for (Integer n : nums) {
+//            if (pr.test(n)) {
+//                result.add(n);
+//            }
+//        }
+//        return result;
+//    }
 /**
  * ###_____ Испытания Функции ____###
  * №_1
@@ -1288,9 +1312,9 @@ public class App {
 /**
  * ###_____ Страница модуля ____###
  */
-    public static <T> T identity(T value) {
-        return value;
-    }
+//    public static <T> T identity(T value) {
+//        return value;
+//    }
 
 
 
