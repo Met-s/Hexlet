@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+/**
+ *###_____ Испытания Java: Дженерики ____###
+ * ###_____ Задание ____###
+ * //№_1
+ */
 public class ListUtilsT {
 //    public static List<?> uniq(List<?> list) {
 //        List<?> result =

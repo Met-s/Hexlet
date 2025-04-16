@@ -2443,6 +2443,124 @@ public static <T> List<T> uniq(List<T> elements) {
         return result;
     }
 ```
+###_____ Задание Java: Стек ____###\
+//№_2\
+Стек — абстрактный тип данных, представляющий собой упорядоченную коллекцию элементов, организованных по принципу LIFO (англ. last in — first out, «последним пришёл — первым вышел»). В стеке добавление и удаление элементов всегда происходит с вершины стека
+
+В стандартной библиотеке Java есть класс Stack, реализующий этот тип данных. Но данный класс считается устаревшим и в современной разработке не используется. Поэтому мы создадим собственную реализацию стека
+
+src/main/java/io/hexlet/Stack.java
+В файле создайте обобщенный класс Stack, который будет представлять собой стек. Для работы со стеком реализуйте следующие методы:
+
+push() — добавляет элемент в стек. Принимает в качестве параметра элемент и кладет его на вершину стека. Метод должен вернуть сам этот элемент
+pop() — забирает элемент из стека. Удаляет элемент с вершины стека и возвращает этот элемент. Если стек пуст, метод должен выбросить исключение java.util.EmptyStackException
+peek() — возвращает элемент с вершины стека без его удаления
+isEmpty() — Проверяет стек на пустоту. Возвращает true, если стек пуст и false в ином случае
+```
+var stack = new Stack<String>();
+
+stack.isEmpty(); // true
+
+stack.push("a"); // a
+stack.isEmpty(); // false
+
+stack.push("b"); // b
+stack.peek(); // b
+
+stack.pop(); // b
+stack.pop(); // a
+stack.isEmpty(); // true
+
+// Стек уже пуст
+stack.pop(); // Exception
+```
+Подсказки
+Как будет устроен стек внутри — выберите сами. Тестам не важно, как вы реализуете его. Они опираются только на описанный интерфейс и не проверяют внутреннюю реализацию
+
+###_____ Решение ____###
+```
+package io.hexlet.controlTask;
+
+
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.EmptyStackException;
+import java.util.List;
+
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+public class Stack<T> {
+private List<T> items = new ArrayList<>();
+
+    public T push(T value) {
+
+        this.items.add(value);
+        return value;
+    }
+
+    public T pop() {
+
+        T result ;
+        if (!this.items.isEmpty()) {
+            result = this.items.remove(this.items.size() - 1);
+        } else {
+            throw new EmptyStackException();
+        }
+        return result;
+    }
+
+    public T peek() {
+        return items.get(this.items.size() - 1);
+    }
+
+    public boolean isEmpty() {
+        return this.items.isEmpty();
+    }
+
+}
+```
+###_____ Решение Учителя ____###
+```
+package io.hexlet;
+
+// BEGIN
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.EmptyStackException;
+
+class Stack<T> {
+
+    private Deque<T> stack = new LinkedList<>();
+
+    public T push(T element) {
+        stack.addFirst(element);
+        return peek();
+    }
+
+    public T pop() {
+
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+
+        return stack.removeFirst();
+    }
+
+    public T peek() {
+        return stack.getFirst();
+    }
+
+    public boolean isEmpty() {
+        return stack.isEmpty();
+    }
+}
+// END
+```
 
 
 

@@ -17,6 +17,7 @@ package io.hexlet;
 //import static org.assertj.core.api.Assertions.assertThat;
 
 import io.hexlet.controlTask.Post;
+import io.hexlet.controlTask.Stack;
 import io.hexlet.model.ListUtils;
 import io.hexlet.model.Man;
 import io.hexlet.model.SimpleTriple;
@@ -27,7 +28,8 @@ import io.hexlet.moduls.Pair;
 import io.hexlet.moduls.SimplePair;
 import org.checkerframework.checker.units.qual.C;
 
-import java.util.*;
+//import java.util.*;
+import java.util.ArrayList;
 import java.util.function.*;
 import io.hexlet.moduls.PairUtils;
 import static io.hexlet.moduls.Application.*;
@@ -41,16 +43,16 @@ public class App {
      * 3_Лямбда-выражения в Java
      * ###_____ Примеры ____###
      */
-    public static final List<Developer> developers = new ArrayList<>();
-    static {
-        developers.add(new Developer(1, "Sasha", 18, 45000));
-        developers.add(new Developer(2, "Misha", 27, 65000));
-        developers.add(new Developer(3, "Alex", 24, 95000));
-        developers.add(new Developer(4, "Evgeny", 30, 78000));
-    }
+//    public static final List<Developer> developers = new ArrayList<>();
+//    static {
+//        developers.add(new Developer(1, "Sasha", 18, 45000));
+//        developers.add(new Developer(2, "Misha", 27, 65000));
+//        developers.add(new Developer(3, "Alex", 24, 95000));
+//        developers.add(new Developer(4, "Evgeny", 30, 78000));
+//    }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
 /**
  * №_1
@@ -928,6 +930,21 @@ public class App {
 /**
  * №_2
  */
+        var stack = new Stack<String>();
+
+        stack.push("a");
+        stack.push("b");
+
+        System.out.println(stack);
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+        System.out.println(stack);
+        stack.push("b");
+        System.out.println(stack.peek());
+        stack.pop();
+        System.out.println(stack.isEmpty());
+
+
 
 
 
