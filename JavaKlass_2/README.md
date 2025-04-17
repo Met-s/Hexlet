@@ -2562,6 +2562,196 @@ class Stack<T> {
 // END
 ```
 
+###_____ Задание ____###\
+//№_3\
+В этом курсе мы познакомились с параметризованным классом Pair<L, R>, который хранит пару элементов. В этом упражнении мы продолжим работать с этим классом и создадим пару полезных утилит для него
+
+src/main/java/io/hexlet/PairUtils.java
+В классе PairUtils создайте два метода для работы с парами:
+
+Обобщенный статический метод fromPairs(), который принимает список List пар Pair ключ-значение и возвращает составленный из этих пар Map
+```
+List<Pair<String, Integer>> coll = List.of(
+new SimplePair("a", 1),
+new SimplePair("b", 2)
+);
+
+var result = PairUtils.fromPairs(coll);
+System.out.println(result); // => {a=1, b=2}
+```
+Обобщенный статический метод toPairs(), который выполняет обратное действие. Принимает Map и возвращает список List пар Pair, составленных из пар ключ-значение мапы
+```
+Map<String, Integer> data = new LinkedHashMap();
+data.put("a", 1);
+data.put("b", 2);
+
+var result = PairUtils.toPairs(data);
+System.out.println(result); // => [SimplePair(left=a, right=1), SimplePair(left=b, right=2)]
+```
+###_____ Решение ____###
+```
+package io.hexlet.moduls;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+
+public class PairUtils {
+public static <L, R> SimplePair<L, R> getPair(L left, R right) {
+var pair = new SimplePair<>(left, right);
+
+        return pair;
+    }
+
+    public static <L, R> Map<Object, Object> fromPairs(List<Pair<L, R>> pairs) {
+
+        var result = new HashMap<>();
+
+        pairs.forEach(pair -> result.put(pair.getLeft(), pair.getRight()));
+
+        return result;
+    }
+
+    public static <L, R> List<Pair<L, R>> toPairs(Map<L, R> map) {
+        var result = new ArrayList<Pair<L, R>>();
+
+        map.forEach((key, value) -> result.add(getPair(key, value)));
+
+        return result;
+    }
+
+}
+```
+###_____ Pair.java
+```
+package io.hexlet.model;
+
+public interface Pair<L, R> {
+L getLeft();
+R getRight();
+}
+```
+###_____ SimplePair.java
+```
+package io.hexlet.model;
+import lombok.AllArgsConstructor;
+import lombok.ToString;
+
+
+@AllArgsConstructor
+@ToString
+public final class SimplePair<L, R> implements Pair<L, R> {
+
+    private L left;
+    private R right;
+
+    public L getLeft() {
+        return left;
+    }
+
+    public R getRight() {
+        return right;
+    }
+}
+```
+###_____ AppTest.java
+```
+package io.hexlet;
+
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+import java.util.Map;
+import java.util.LinkedHashMap;
+import io.hexlet.model.Pair;
+import io.hexlet.model.SimplePair;
+
+public class AppTest {
+
+    @Test
+    public void testFromPairs1() {
+
+        List<Pair<String, Integer>> coll = List.of(
+            new SimplePair("a", 1),
+            new SimplePair("b", 2)
+        );
+
+        var actual = PairUtils.fromPairs(coll);
+        var expected = Map.of("a", 1, "b", 2);
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void testFromPairs2() {
+
+        List<Pair<Double, Character>> coll = List.of(
+            new SimplePair(2.1, 'a'),
+            new SimplePair(5.8, 'c'),
+            new SimplePair(-13.1, 'h')
+
+        );
+
+        var actual = PairUtils.fromPairs(coll);
+        var expected = Map.of(2.1, 'a', 5.8, 'c', -13.1, 'h');
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void testToPairs() {
+
+        Map<String, Integer> data = new LinkedHashMap();
+        data.put("a", 1);
+        data.put("b", 2);
+        var actual = PairUtils.toPairs(data);
+
+        assertThat(actual.get(0).getLeft()).isEqualTo("a");
+        assertThat(actual.get(0).getRight()).isEqualTo(1);
+
+        assertThat(actual.get(1).getLeft()).isEqualTo("b");
+        assertThat(actual.get(1).getRight()).isEqualTo(2);
+    }
+}
+```
+###_____ Решение Учителя ____###
+```
+package io.hexlet;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+import io.hexlet.model.Pair;
+import io.hexlet.model.SimplePair;
+
+public class PairUtils {
+
+    // BEGIN
+    public static <L, R> Map<L, R> fromPairs(List<Pair<L, R>> pairs) {
+
+        var result = new HashMap<L, R>();
+
+        pairs.forEach(pair -> result.put(pair.getLeft(), pair.getRight()));
+
+        return result;
+    }
+
+    public static <L, R> List<Pair<L, R>> toPairs(Map<L, R> data) {
+
+        var result = new ArrayList<Pair<L, R>>();
+
+        data.forEach((k, v) -> result.add(new SimplePair(k, v)));
+
+        return result;
+    }
+    // END
+}
+```
 
 
 

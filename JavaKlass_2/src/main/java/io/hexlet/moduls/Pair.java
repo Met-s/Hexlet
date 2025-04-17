@@ -21,6 +21,6 @@ public interface Pair<L, R> {
     public L getLeft();
     public R getRight();
 
-    public void setLeft(L left);
-    public void setRight(R right);
+//    public void setLeft(L left);
+//    public void setRight(R right);
 }

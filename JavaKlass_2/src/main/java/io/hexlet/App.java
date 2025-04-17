@@ -30,6 +30,7 @@ import org.checkerframework.checker.units.qual.C;
 
 //import java.util.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.*;
 import io.hexlet.moduls.PairUtils;
 import static io.hexlet.moduls.Application.*;
@@ -947,8 +948,20 @@ public class App {
 /**
  * №_3
  */
+        List<Pair<String, Integer>> coll = List.of(
+                new SimplePair("a", 1),
+                new SimplePair("b", 2)
+        );
 
+        var result = PairUtils.fromPairs(coll);
+        System.out.println(result);
 
+//        Map<String, Integer> data = new LinkedHashMap();
+//        data.put("a", 1);
+//        data.put("b", 2);
+
+        var result1 = PairUtils.toPairs(result);
+        System.out.println(result1);
 
 
 
