@@ -930,21 +930,23 @@ public class App {
 /**
  * №_2
  */
-        var stack = new Stack<String>();
-
-        stack.push("a");
-        stack.push("b");
-
-        System.out.println(stack);
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
+//        var stack = new Stack<String>();
+//
+//        stack.push("a");
+//        stack.push("b");
+//
+//        System.out.println(stack);
 //        System.out.println(stack.pop());
-        System.out.println(stack);
-        stack.push("b");
-        System.out.println(stack.peek());
-        stack.pop();
-        System.out.println(stack.isEmpty());
-
+//        System.out.println(stack.pop());
+////        System.out.println(stack.pop());
+//        System.out.println(stack);
+//        stack.push("b");
+//        System.out.println(stack.peek());
+//        stack.pop();
+//        System.out.println(stack.isEmpty());
+/**
+ * №_3
+ */
 
 
 
