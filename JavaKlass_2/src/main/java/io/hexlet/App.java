@@ -16,6 +16,7 @@ package io.hexlet;
 //import java.util.List;
 //import static org.assertj.core.api.Assertions.assertThat;
 
+import io.hexlet.controlTask.AppFindMax;
 import io.hexlet.controlTask.Post;
 import io.hexlet.controlTask.Stack;
 import io.hexlet.model.ListUtils;
@@ -29,7 +30,9 @@ import io.hexlet.moduls.SimplePair;
 import org.checkerframework.checker.units.qual.C;
 
 //import java.util.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.*;
 import io.hexlet.moduls.PairUtils;
@@ -948,20 +951,37 @@ public class App {
 /**
  * №_3
  */
-        List<Pair<String, Integer>> coll = List.of(
-                new SimplePair("a", 1),
-                new SimplePair("b", 2)
+//        List<Pair<String, Integer>> coll = List.of(
+//                new SimplePair("a", 1),
+//                new SimplePair("b", 2)
+//        );
+//
+//        var result = PairUtils.fromPairs(coll);
+//        System.out.println(result);
+//
+////        Map<String, Integer> data = new LinkedHashMap();
+////        data.put("a", 1);
+////        data.put("b", 2);
+//
+//        var result1 = PairUtils.toPairs(result);
+//        System.out.println(result1);
+/**
+ * №_4
+ */
+        var coll1 = List.of("a", "b", "x", "h", "o");
+        System.out.println(AppFindMax.findMax(coll1));
+
+        var coll2 = List.of(1, 2, 3, 10, 4, 5, 6);
+        System.out.println(AppFindMax.findMax(coll2));
+
+        var coll = List.of(
+                LocalDate.of(2000, 1, 1),
+                LocalDate.of(2020, 2, 12),
+                LocalDate.of(2018, 5, 3)
         );
+        System.out.println(AppFindMax.findMax(coll));
 
-        var result = PairUtils.fromPairs(coll);
-        System.out.println(result);
 
-//        Map<String, Integer> data = new LinkedHashMap();
-//        data.put("a", 1);
-//        data.put("b", 2);
-
-        var result1 = PairUtils.toPairs(result);
-        System.out.println(result1);
 
 
 

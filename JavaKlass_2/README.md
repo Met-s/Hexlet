@@ -2752,7 +2752,48 @@ public class PairUtils {
     // END
 }
 ```
+###_____ Задание Java: Поиск максимального____###\
+//№_4\
+В классе App создайте обобщенный статический метод findMax(), который принимает список объектов, реализующих интерфейс Comparable и возвращает максимальное значение из списка.
+```
+var coll1 = List.of("a", "b", "x", "h", "o");
+App.findMax(coll1); // x
 
+var coll2 = List.of(1, 2, 3, 10, 4, 5, 6);
+App.findMax(coll2); // 10
+```
+Подсказки
+Загляните в тесты за другими вариантами работы метода
+
+###_____ Решение ____###
+```
+public class AppFindMax {
+
+    public static <T> T findMax(List<T> obj) {
+
+        List<T> copy = new ArrayList<>(obj);
+        copy.sort(Collections.reverseOrder());
+
+        return copy.get(0);
+    }
+```
+###_____ Решение Учителя ____###
+```
+    public static <T extends Comparable<? super T>> T findMax(List<T> list) {
+         if (list == null || list.isEmpty()) {
+             return null;
+         }
+
+         T max = list.get(0);
+         for (T item : list) {
+             if (item.compareTo(max) > 0) {
+                 max = item;
+             }
+         }
+         return max;
+    }
+}
+```
 
 
 
