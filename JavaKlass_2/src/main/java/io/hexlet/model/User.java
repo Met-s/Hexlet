@@ -74,5 +74,6 @@ import java.util.ArrayList;
 @ToString
 public final class User {
     private String name;
-    private LocalDate birthday;
+//    private LocalDate birthday;
+    private int age;
 }

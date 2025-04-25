@@ -16,13 +16,8 @@ package io.hexlet;
 //import java.util.List;
 //import static org.assertj.core.api.Assertions.assertThat;
 
-import io.hexlet.controlTask.AppFindMax;
-import io.hexlet.controlTask.Post;
-import io.hexlet.controlTask.Stack;
-import io.hexlet.model.ListUtils;
-import io.hexlet.model.Man;
-import io.hexlet.model.SimpleTriple;
-import io.hexlet.model.Woman;
+import io.hexlet.controlTask.*;
+import io.hexlet.model.*;
 import io.hexlet.moduls.Developer;
 import io.hexlet.moduls.Gamer;
 import io.hexlet.moduls.Pair;
@@ -31,15 +26,13 @@ import org.checkerframework.checker.units.qual.C;
 
 //import java.util.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.function.*;
+
 import io.hexlet.moduls.PairUtils;
 import static io.hexlet.moduls.Application.*;
 import static org.apache.commons.lang3.StringUtils.startsWith;
-import io.hexlet.controlTask.ListUtilsT;
-
+//import io.hexlet.controlTask.Converter.convert;
 
 public class App {
     /**
@@ -968,24 +961,70 @@ public class App {
 /**
  * №_4
  */
-        var coll1 = List.of("a", "b", "x", "h", "o");
-        System.out.println(AppFindMax.findMax(coll1));
+//        var coll1 = List.of("a", "b", "x", "h", "o");
+//        System.out.println(AppFindMax.findMax(coll1));
+//
+//        var coll2 = List.of(1, 2, 3, 10, 4, 5, 6);
+//        System.out.println(AppFindMax.findMax(coll2));
+//
+//        var coll = List.of(
+//                LocalDate.of(2000, 1, 1),
+//                LocalDate.of(2020, 2, 12),
+//                LocalDate.of(2018, 5, 3)
+//        );
+//        System.out.println(AppFindMax.findMax(coll));
+/**
+ * №_5      НЕ ЗАВЕРШЕНО
+ *
+ */
+//        var postData = Map.of(
+//                "name", "tesst post",
+//                "body", "test body"
+//        );
+//        Function<Map<String, String>, Post> func = data -> {
+//            return new Post(
+//                    data.get("name"),
+//                    data.get("body")
+//            );
+//        };
+//
+//        var converter =
+//                new FunctionConverter<Map<String, String>, Post>(func);
+//        var post = converter.convert(postData);
 
-        var coll2 = List.of(1, 2, 3, 10, 4, 5, 6);
-        System.out.println(AppFindMax.findMax(coll2));
+/**
+ * ###_____ Java: Стримы ____###
+ *
+ * Декларативное программирование
+ */
+//        var fruits = new ArrayList<>(List.of("Orange", "Apple",
+//                "Banana", "Grapes", "Cherry"));
+//
+//        fruits.sort((v1, v2) -> v1.compareTo(v2));
+//        System.out.println(fruits); // [Apple, Banana, Cherry, Grapes, Orange]
 
-        var coll = List.of(
-                LocalDate.of(2000, 1, 1),
-                LocalDate.of(2020, 2, 12),
-                LocalDate.of(2018, 5, 3)
-        );
-        System.out.println(AppFindMax.findMax(coll));
+//        var users = List.of(
+//                new User("Alice", 22),
+//                new User("Bob", 17),
+//                new User("Charlie", 24),
+//                new User("Diana", 16)
+//        );
+//
+//        var names = users.stream()
+//                .filter(user -> user.getAge() > 18)
+//                .map(User::getName)
+//                .sorted()
+//                .toList();
+//
+//        names.forEach(System.out::println);
+//
+//        String[] chars = {"h", "e", "x", "l", "e", "t"};
+//        var stream = Arrays.stream(chars);
 
-
-
-
-
-
+//№_31
+        var fruits = List.of("lemon", "apple", "banana");
+        var result = App.sortWords(fruits);
+        System.out.println(result);
 
 
 
@@ -1368,6 +1407,18 @@ public class App {
 //    public static <T> T identity(T value) {
 //        return value;
 //    }
+/**
+* ###_____ Java: Стримы ____###
+ *
+ * №_31
+*/
+    public static List<String> sortWords(List<String> list) {
+        var listSort = list.stream()
+                .sorted()
+                .toList();
+
+        return listSort;
+    }
 
 
 

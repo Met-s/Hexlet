@@ -1,6 +1,7 @@
 package io.hexlet.controlTask;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
@@ -10,6 +11,7 @@ import lombok.EqualsAndHashCode;
  */
 @AllArgsConstructor
 @EqualsAndHashCode
+@Data
 public class Post {
     private String title;
     private String content;
