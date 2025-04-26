@@ -2932,6 +2932,65 @@ public static List<String> getAdultUserNames(List<Person> users) {
 
     }
 ```
+###_____ Задание ____###\
+//№_34\
+В классе App реализуйте публичный статический метод getAverageAge(), который 
+принимает в качестве параметра группу людей — список List<Person>. 
+Метод должен вернуть средний возраст людей в нашей группе в виде числа типа 
+Double. Если передан пустой список, метод должен вернуть null
+```
+var people = new ArrayList(
+List.of(
+new Person("John", 17),
+new Person("Anna", 24),
+new Person("Alex", 57),
+new Person("Jun", 32)
+)
+);
+
+App.getAverageAge(people); // 32.5
+```
+###_____ Решение ____###
+```
+public static Double getAverageAge(List<Person> people) {
+
+        if (people.isEmpty()) {
+            return null;
+        }
+
+         var result = people.stream()
+                .reduce(0, (sum, person) -> {
+                     Integer age = person.getAge();
+                     sum += age;
+
+                     return sum;
+
+                },
+                  Integer::sum);
+
+        return result.doubleValue() / people.size();
+    }
+```
+###_____ Решение Учителя ____###
+```
+public static Double getAverageAge(List<Person> people) {
+
+        if (people.isEmpty()) {
+            return null;
+        }
+
+        var totalAge = people.stream()
+            .reduce(
+                0.0,
+                (sum, person) -> {
+                    var age = person.getAge();
+                    return sum + age;
+                },
+                Double::sum
+            );
+        return totalAge / people.size();
+    }
+```
 
 
 

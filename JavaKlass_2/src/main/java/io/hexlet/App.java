@@ -1075,20 +1075,79 @@ public class App {
 /**
  * №_33
  */
+//        var people = new ArrayList(
+//                List.of(
+//                        new Person("John", 17),
+//                        new Person("Anna", 24),
+//                        new Person("Alex", 35)
+//                )
+//        );
+//
+//        var names = App.getAdultUserNames(people);
+//        System.out.println(names);// => [Anna, Alex]
+/**
+ * ###_____ Страница модуля ____###
+ *      Свертка (reduce)
+ */
+//        var numbers = List.of(1, 2, 3, 4, 5);
+//
+////        var sum = numbers.stream()
+////                .reduce(0, (subtotal, element) -> subtotal + element);
+////                // или используя Integer.sum(subtotal, element)
+////                // .reduce(0, Integer::sum);
+////        System.out.println(sum); // => Вывод чисел: 15
+//
+//        var maxNumber = numbers.stream()
+//                .reduce(numbers.get(0), (a, b) -> a > b ? a : b);
+////                .reduce(Integer::max); // или так
+////                .max(Integer::compareTo).get(); // или так
+//
+//        System.out.println(maxNumber); // 5
+//        var letters = List.of("h", "e", "x", "l", "e", "t");
+//        var result = letters.stream()
+//                .reduce("", (result1, element) -> result1 + element);
+////                .reduce("", String::concat); // или так
+//        System.out.println(result);
+//        var products = List.of("Laptop: 800", "Headphones: 50",
+//                "Smartphone: 500", "Mouse: 20");
+//        var totalPrice = products.parallelStream()
+//                .reduce(0,
+//                        (sum, product) -> {
+//                    var parts = product.split(": ");
+//                    var price = Integer.parseInt(parts[1].trim());
+//                    return sum + price;
+//                        },
+//                        Integer::sum);
+//
+//        System.out.println(totalPrice);
+
+//        var words = List.of("java", "scala", "kotlin");
+//
+//        var totalLength = words.stream()
+//                .reduce(0L,
+//                        (sum, product) -> {
+//                            long length = product.length();
+//                            return sum + length;
+//                        },
+//                        Long::sum);
+/**
+ * №_34
+ */
         var people = new ArrayList(
                 List.of(
                         new Person("John", 17),
                         new Person("Anna", 24),
-                        new Person("Alex", 35)
+                        new Person("Alex", 57),
+                        new Person("Jun", 32)
                 )
         );
-
-        var names = App.getAdultUserNames(people);
-        System.out.println(names);// => [Anna, Alex]
-
-
-
-
+        var people1 = new ArrayList(
+                List.of()
+        );
+        var result1 = App.getAverageAge(people);
+        var result = App.getAverageAge(people1);
+        System.out.println(result);
+        System.out.println(result1);
 
 
 
@@ -1496,15 +1555,46 @@ public class App {
 /**
  * №_33
  */
-    public static List<String> getAdultUserNames(List<Person> people) {
+//    public static List<String> getAdultUserNames(List<Person> people) {
+//
+//        var result = people.stream()
+//                .filter(person -> person.getAge() >= 18)
+//                .map(Person::getName)
+//                .toList();
+//        return result;
+//    }
+/**
+ * №_34
+ */
+    public static Double getAverageAge(List<Person> people) {
 
-        var result = people.stream()
-                .filter(person -> person.getAge() >= 18)
-                .map(Person::getName)
-                .toList();
-        return result;
+        if (people.isEmpty()) {
+            return null;
+        }
+
+        var totalAge = people.stream()
+                .reduce(
+                        0.0,
+                        (sum, person) -> {
+                            var age = person.getAge();
+                            return sum + age;
+                        },
+                        Double::sum
+                );
+
+        return totalAge;
+
+//         var result = people.stream()
+//                .reduce(0, (sum, person) -> {
+//                     Integer age = person.getAge();
+//                     sum += age;
+//
+//                     return sum;
+//                },
+//                 Integer::sum);
+//
+//        return result.doubleValue() / people.size();
     }
-
 
 
 
