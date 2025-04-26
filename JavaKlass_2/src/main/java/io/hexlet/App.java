@@ -1058,10 +1058,39 @@ public class App {
 /**
  * №_32
  */
-        var emails = List.of("Mark@Gmail.com", " AnnA@mail.io ", "john" +
-                "@GMAIL.com");
-        var result = App.normalize(emails);
-        System.out.println(result);
+//        var emails = List.of("Mark@Gmail.com", " AnnA@mail.io ", "john" +
+//                "@GMAIL.com");
+//        var result = App.normalize(emails);
+//        System.out.println(result);
+/**
+ * ###_____ Страница модуля ____###
+ *      Фильтрация
+ */
+//        var numbers = List.of(1, 2, 3, 4, 5, 6);
+//
+//        var evenNumbers = numbers.stream()
+//                .filter(number -> number % 2 == 0)
+//                .toList();
+//        System.out.println(evenNumbers);// Вывод: [2, 4, 6]
+/**
+ * №_33
+ */
+        var people = new ArrayList(
+                List.of(
+                        new Person("John", 17),
+                        new Person("Anna", 24),
+                        new Person("Alex", 35)
+                )
+        );
+
+        var names = App.getAdultUserNames(people);
+        System.out.println(names);// => [Anna, Alex]
+
+
+
+
+
+
 
 
     }
@@ -1457,13 +1486,25 @@ public class App {
 /**
 * №_32
 */
-    public static List<String> normalize(List<String> emails) {
-        var result = emails.stream()
-                .map(String::trim)
-                .map(String::toLowerCase)
+//    public static List<String> normalize(List<String> emails) {
+//        var result = emails.stream()
+//                .map(String::trim)
+//                .map(String::toLowerCase)
+//                .toList();
+//        return result;
+//    }
+/**
+ * №_33
+ */
+    public static List<String> getAdultUserNames(List<Person> people) {
+
+        var result = people.stream()
+                .filter(person -> person.getAge() >= 18)
+                .map(Person::getName)
                 .toList();
         return result;
     }
+
 
 
 

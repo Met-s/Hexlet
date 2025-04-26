@@ -2892,7 +2892,46 @@ public static List<String> normalize(List<String> emails) {
             .toList();
     }
 ```
+###_____ Задание ____###\
+//№_33\
+В классе App реализуйте публичный статический метод getAdultUserNames(), который принимает в качестве параметра список персон List<Person>. Метод должен вернуть новый список с именами людей, которым уже исполнилось 18 лет
+```
+var people = new ArrayList(
+List.of(
+new Person("John", 17),
+new Person("Anna", 24),
+new Person("Alex", 35)
+)
+);
 
+var names = App.getAdultUserNames(people);
+System.out.println(names); // => [Anna, Alex]
+```
+###_____ Решение ____###
+```
+public static List<String> getAdultUserNames(List<Person> people) {
+
+        var result = people.stream()
+                .filter(person -> person.getAge() >= 18)
+                .map(Person::getName)
+                .toList();
+        return result;
+    }
+```
+###_____ Решение Учителя ____###
+```
+public static List<String> getAdultUserNames(List<Person> users) {
+
+        var adultUsers = users.stream()
+            .filter(p -> p.getAge() >= 18)
+            .toList();
+
+        return adultUsers.stream()
+            .map(Person::getName)
+            .toList();
+
+    }
+```
 
 
 
