@@ -2862,7 +2862,36 @@ public static List<String> sortWords(List<String> words) {
             .toList();
     }
 ```
+###_____ Задание ____###\
+//№_32\
+При регистрации на сайтах нам постоянно приходится вводить свой email в специальное поле. Стандартом является то, что email-адреса регистронезависимы. Однако пользователь может допустить ошибку, введя адрес с заглавной буквы или добавив пробелы в начале или в конце. В результате у него могут возникнуть проблемы с доступом к аккаунту из-за разницы в написании email. Именно поэтому перед сохранением email обычно проводят процедуру нормализации
 
+src/main/java/io/hexlet/App.java
+В классе App реализуйте публичный статический метод normalize(), который будет выполнять нормализацию. Метод принимает в качестве параметра список List email-адресов и возвращает новый список, в котором каждый email нормализован. Нормализация заключается в удалении концевых пробелов и приведении адреса к нижнему регистру
+```
+var emails = List.of("Mark@Gmail.com", "  AnnA@mail.io  ", "john@GMAIL.com");
+var result = App.normalize(emails);
+System.out.println(result); // => [mark@gmail.com, anna@mail.io, john@gmail.com]
+```
+###_____ Решение ____###
+```
+public static List<String> normalize(List<String> emails) {
+    var result = emails.stream()
+        .map(String::trim)
+        .map(String::toLowerCase)
+        .toList();
+    return result;
+}
+```
+###_____ Решение Учителя ____###
+```
+public static List<String> normalize(List<String> emails) {
+
+        return emails.stream()
+            .map(email -> email.strip().toLowerCase())
+            .toList();
+    }
+```
 
 
 

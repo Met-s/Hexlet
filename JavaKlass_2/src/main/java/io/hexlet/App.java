@@ -1020,13 +1020,48 @@ public class App {
 //
 //        String[] chars = {"h", "e", "x", "l", "e", "t"};
 //        var stream = Arrays.stream(chars);
+/**
+ * №_31
+ */
 
-//№_31
-        var fruits = List.of("lemon", "apple", "banana");
-        var result = App.sortWords(fruits);
+//        var fruits = List.of("lemon", "apple", "banana");
+//        var result = App.sortWords(fruits);
+//        System.out.println(result);
+/**
+ * ###_____ Страница модуля ____###
+ *  Отображение (map)
+ */
+//        var numbers = List.of(1.2, 2.5, 3.7, 4.4, 5.9);
+//        // Применение стрима для округления чисел и сбора их в новый список
+//        var roundedNumbers = numbers.stream()
+//                .map(number -> Math.round(number))
+//                // или проще через передачу ссылки
+//                // .map(Math::round)
+//                .toList();
+//        System.out.println(roundedNumbers);// Вывод: [1, 3, 4, 4, 6]
+
+//        var solutions = List.of("hexlet", "chatgpt", "google", "youtube");
+//
+//        var result1 = solutions.stream()
+//                .map(solution -> solution.toUpperCase())
+//                // или
+//                // .map(String::toUpperCase)
+//                .toList();
+//        System.out.println(result1); // [HEXLET, CHATGPT, GOOGLE, YOUTUBE]
+//
+//        var result2 = solutions.stream()
+//                .map(String::length)
+//                // тоже самое что и
+//                // .map(solution -> solution.length())
+//                .toList();
+//        System.out.println(result2);    // [6, 7, 6, 7]
+/**
+ * №_32
+ */
+        var emails = List.of("Mark@Gmail.com", " AnnA@mail.io ", "john" +
+                "@GMAIL.com");
+        var result = App.normalize(emails);
         System.out.println(result);
-
-
 
 
     }
@@ -1412,13 +1447,24 @@ public class App {
  *
  * №_31
 */
-    public static List<String> sortWords(List<String> list) {
-        var listSort = list.stream()
-                .sorted()
+//    public static List<String> sortWords(List<String> list) {
+//        var listSort = list.stream()
+//                .sorted()
+//                .toList();
+//
+//        return listSort;
+//    }
+/**
+* №_32
+*/
+    public static List<String> normalize(List<String> emails) {
+        var result = emails.stream()
+                .map(String::trim)
+                .map(String::toLowerCase)
                 .toList();
-
-        return listSort;
+        return result;
     }
+
 
 
 
