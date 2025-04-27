@@ -2991,7 +2991,55 @@ public static Double getAverageAge(List<Person> people) {
         return totalAge / people.size();
     }
 ```
+###_____ Задание ____###\
+//№_35\
 
+В классе App реализуйте публичный статический метод getTotalPrice(), который принимает в качестве параметра список товаров на складе List<Product>. Метод должен вернуть общую стоимость всех товаров из категории Электроника (electronics) на складе (число типа int)
+```
+var products = List.of(
+new Product("Smartphone", "electronics", 500),
+new Product("Laptop", "electronics", 1000),
+new Product("Headphones", "electronics", 100),
+new Product("Smart Watch", "electronics", 300),
+new Product("T-Shirt", "cloth", 20),
+new Product("Sneakers", "shoes", 100),
+new Product("Coffee Machine", "kitchen", 200),
+new Product("Sunglasses", "accessories", 50),
+new Product("Book", "books", 15),
+new Product("Gaming Console", "electronics", 400)
+);
+
+App.getTotalPrice(products); // 2300
+```
+###_____ Решение ____###
+```
+public static Integer getTotalPrice(List<Product> products) {
+
+//        var totalCost = products.stream()
+//                .filter(p -> "electronics".equals(p.getCategory()))
+//                .mapToInt(Product::getPrice).sum();
+// ИЛИ ТАК
+var totalCost = products.stream()
+.filter(p -> "electronics".equals(p.getCategory()))
+.map(Product::getPrice)
+.reduce(0, Integer::sum);
+return totalCost;
+}
+```
+###_____ Решение Учителя ____###
+```
+public static int getTotalPrice(List<Product> products) {
+
+        return products.stream()
+            .filter(product -> product.getCategory().equals("electronics"))
+            .map(Product::getPrice)
+            .reduce(
+                0,
+                (sum, price) -> sum + price,
+                Integer::sum
+            );
+    }
+```
 
 
 

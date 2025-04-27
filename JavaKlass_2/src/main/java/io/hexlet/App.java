@@ -18,10 +18,8 @@ package io.hexlet;
 
 import io.hexlet.controlTask.*;
 import io.hexlet.model.*;
-import io.hexlet.moduls.Developer;
-import io.hexlet.moduls.Gamer;
-import io.hexlet.moduls.Pair;
-import io.hexlet.moduls.SimplePair;
+import io.hexlet.moduls.*;
+import io.hexlet.moduls.Product;
 import org.checkerframework.checker.units.qual.C;
 
 //import java.util.*;
@@ -29,7 +27,6 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.function.*;
 
-import io.hexlet.moduls.PairUtils;
 import static io.hexlet.moduls.Application.*;
 import static org.apache.commons.lang3.StringUtils.startsWith;
 //import io.hexlet.controlTask.Converter.convert;
@@ -1133,28 +1130,82 @@ public class App {
 /**
  * №_34
  */
-        var people = new ArrayList(
-                List.of(
-                        new Person("John", 17),
-                        new Person("Anna", 24),
-                        new Person("Alex", 57),
-                        new Person("Jun", 32)
-                )
+//        var people = new ArrayList(
+//                List.of(
+//                        new Person("John", 17),
+//                        new Person("Anna", 24),
+//                        new Person("Alex", 57),
+//                        new Person("Jun", 32)
+//                )
+//        );
+//        var people1 = new ArrayList(
+//                List.of()
+//        );
+//        var result1 = App.getAverageAge(people);
+//        var result = App.getAverageAge(people1);
+//        System.out.println(result);
+//        System.out.println(result1);
+/**
+ * ###_____ Страница модуля ____###
+ *      Цепочка вызовов
+ */
+//        var products = List.of("Laptop: 800", "Headphones: 50",
+//                "Smartphone: 500", "Mouse: 20");
+//
+//        var totalPrice = products.stream()
+//                .map((product) -> {
+//                    var parts = product.split(": ");
+//                    var price = Integer.parseInt(parts[1].trim());
+//                    return price;
+//                })
+//                .reduce(0, Integer::sum);
+//
+//        System.out.println(totalPrice);
+//-----
+//        var numbers = List.of(1, 2, 3, 4, 5);
+//        var sum = numbers.stream()
+//                .filter((number) -> number < 5)
+//                .reduce(0, Integer::sum);
+//        System.out.println(sum);
+//-----
+        // Предположим, что у нас есть класс Employee
+        // Параметры конструктора: имя, департамент, зарплата
+//        var employees = List.of(
+//                new Employee("John", "IT", 70000),
+//                new Employee("Jane Smith", "IT", 75000),
+//                new Employee("Mike Wilson", "Marketing", 65000)
+//        );
+//
+//        var totalItSalary = employees
+//                .stream()
+//                .filter(e -> "IT".equals(e.getDepartment()))
+//                .map(Employee::getSalary)
+//                .reduce(0, Integer::sum);
+//        System.out.println(totalItSalary); // 145000
+/**
+ * №_35
+ */
+        var products = List.of(
+                new Product("Smartphone", "electronics", 500),
+                new Product("Laptop", "electronics", 1000),
+                new Product("Headphones", "electronics", 100),
+                new Product("Smart Watch", "electronics", 300),
+                new Product("T-Shirt", "cloth", 20),
+                new Product("Sneakers", "shoes", 100),
+                new Product("Coffee Machine", "kitchen", 200),
+                new Product("Sunglasses", "accessories", 50),
+                new Product("Book", "books", 15),
+                new Product("Gaming Console", "electronics", 400)
         );
-        var people1 = new ArrayList(
-                List.of()
-        );
-        var result1 = App.getAverageAge(people);
-        var result = App.getAverageAge(people1);
+        var result = App.getTotalPrice(products);
         System.out.println(result);
-        System.out.println(result1);
 
 
 
 
     }
 
-
+//-----
 /**
  * //=======================================================================
  * №_8
@@ -1566,23 +1617,23 @@ public class App {
 /**
  * №_34
  */
-    public static Double getAverageAge(List<Person> people) {
-
-        if (people.isEmpty()) {
-            return null;
-        }
-
-        var totalAge = people.stream()
-                .reduce(
-                        0.0,
-                        (sum, person) -> {
-                            var age = person.getAge();
-                            return sum + age;
-                        },
-                        Double::sum
-                );
-
-        return totalAge;
+//    public static Double getAverageAge(List<Person> people) {
+//
+//        if (people.isEmpty()) {
+//            return null;
+//        }
+//
+//        var totalAge = people.stream()
+//                .reduce(
+//                        0.0,
+//                        (sum, person) -> {
+//                            var age = person.getAge();
+//                            return sum + age;
+//                        },
+//                        Double::sum
+//                );
+//
+//        return totalAge;
 
 //         var result = people.stream()
 //                .reduce(0, (sum, person) -> {
@@ -1594,8 +1645,21 @@ public class App {
 //                 Integer::sum);
 //
 //        return result.doubleValue() / people.size();
-    }
+//    }
+/**
+ * №_35
+ */
+    public static Integer getTotalPrice(List<Product> products) {
+//        var totalCost = products.stream()
+//                .filter(p -> "electronics".equals(p.getCategory()))
+//                .mapToInt(Product::getPrice).sum();
 
+        var totalCost = products.stream()
+                .filter(p -> "electronics".equals(p.getCategory()))
+                .map(Product::getPrice)
+                .reduce(0, Integer::sum);
+        return totalCost;
+    }
 
 
 
@@ -1605,6 +1669,7 @@ public class App {
 /**
  * №_
  */
+
 /**
  * ###_____ Страница модуля ____###
  */
