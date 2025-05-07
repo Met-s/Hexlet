@@ -16,19 +16,12 @@ package io.hexlet;
 //import java.util.List;
 //import static org.assertj.core.api.Assertions.assertThat;
 
-import io.hexlet.controlTask.*;
-import io.hexlet.model.*;
-import io.hexlet.moduls.*;
-import io.hexlet.moduls.Product;
-import org.checkerframework.checker.units.qual.C;
-
 //import java.util.*;
-import java.time.LocalDate;
-import java.util.*;
-import java.util.function.*;
 
-import static io.hexlet.moduls.Application.*;
-import static org.apache.commons.lang3.StringUtils.startsWith;
+import org.checkerframework.checker.units.qual.A;
+
+import java.util.*;
+import java.util.stream.Collectors;
 //import io.hexlet.controlTask.Converter.convert;
 
 public class App {
@@ -1185,23 +1178,116 @@ public class App {
 /**
  * №_35
  */
-        var products = List.of(
-                new Product("Smartphone", "electronics", 500),
-                new Product("Laptop", "electronics", 1000),
-                new Product("Headphones", "electronics", 100),
-                new Product("Smart Watch", "electronics", 300),
-                new Product("T-Shirt", "cloth", 20),
-                new Product("Sneakers", "shoes", 100),
-                new Product("Coffee Machine", "kitchen", 200),
-                new Product("Sunglasses", "accessories", 50),
-                new Product("Book", "books", 15),
-                new Product("Gaming Console", "electronics", 400)
+//        var products = List.of(
+//                new Product("Smartphone", "electronics", 500),
+//                new Product("Laptop", "electronics", 1000),
+//                new Product("Headphones", "electronics", 100),
+//                new Product("Smart Watch", "electronics", 300),
+//                new Product("T-Shirt", "cloth", 20),
+//                new Product("Sneakers", "shoes", 100),
+//                new Product("Coffee Machine", "kitchen", 200),
+//                new Product("Sunglasses", "accessories", 50),
+//                new Product("Book", "books", 15),
+//                new Product("Gaming Console", "electronics", 400)
+//        );
+//        var result = App.getTotalPrice(products);
+//        System.out.println(result);
+/**
+ * ###_____ Страница модуля ____###
+ *      Стандартные методы свертки (Collectors)
+ */
+//        var numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+//        var count = numbers.stream().collect(Collectors.counting());
+//        System.out.println(count); // => 5
+//
+//        var sum = numbers.stream()
+//                .collect(Collectors.summingInt(Integer::intValue));
+//        System.out.println(sum); // => 15
+
+//        var employees = List.of(
+//                new Employee("John Doe", "IT", 70000),
+//                new Employee("Jane Smith", "IT", 75000),
+//                new Employee("Mary Johnson", "IT", 60000),
+//                new Employee("Mike Wilson", "Marketing", 65000)
+//        );
+//
+//        var total = employees.stream()
+//                .collect(Collectors.summingInt(Employee::getSalary));
+//        System.out.println(total);
+//
+//        var average = employees.stream()
+//                .collect(Collectors.averagingInt(Employee::getSalary));
+//        System.out.println(average);
+//
+//        var min = employees.stream()
+//                .collect(Collectors.minBy(Comparator.comparingInt(Employee::getSalary)));
+//
+//        var max = employees.stream()
+//                .collect(Collectors.maxBy(Comparator.comparingInt(Employee::getSalary)));
+
+//        var list = List.of("Apple", "Banana", "Cherry");
+//        var result = list.stream()
+//                .collect(Collectors.joining(": ", "[", "?"));
+//        System.out.println(result);
+
+//        List<Employee> employees = Arrays.asList(
+//                new Employee("John Doe", "IT", 70000),
+//                new Employee("Jane Smith", "IT", 75000),
+//                new Employee("Mary Johnson", "IT", 60000),
+//                new Employee("Mike Wilson", "Marketing", 65000)
+//        );
+
+//        var employeesByDepartment = employees.stream()
+//                .collect(Collectors.groupingBy(Employee::getDepartment));
+//        System.out.println(employeesByDepartment);
+//        employees.forEach(System.out::println);
+
+//        var words = Arrays.asList("apple", "banana", "apple", "orange",
+//                "banana", "apple");
+//        var wordCounts = words.stream()
+//                .collect(Collectors.groupingBy(word -> word,
+//                        Collectors.counting()));
+//        System.out.println(wordCounts); // => {orange=1, banana=2, apple=3}
+//
+//        var groups = numbers.stream()
+//                .collect(Collectors.partitioningBy(n -> n % 2 == 0));
+//        System.out.println(groups); // => {false=[1, 3, 5, 7, 9], true=[2, 4, 6, 8, 10]}
+/**
+ * №_36
+ */
+        var emails = List.of(
+                "info@yandex.ru",
+                "mk@host.com",
+                "support@hexlet.io",
+                "sergey@gmail.com",
+                "vovan@gmail.com",
+                "vovan@hotmail.com"
         );
-        var result = App.getTotalPrice(products);
+//        emails.forEach(System.out::println);
+//        System.out.println("-------");
+
+        var result = App.getFreeDomainsCount(emails);
         System.out.println(result);
+//        var email = new ArrayList<>();
+//        var setC = emails.forEach(s -> s.substring(s.lastIndexOf('@') + 1));
+
+//        String res = "info@yandex.ru";
+//        var seC = res.substring(res.lastIndexOf('@') + 1);
+//        System.out.println(seC);
+
+//        var st = "sergey@gmail.com";
+////        var cop = st.replace(, "d");
+//        System.out.println(st.endsWith("gmail.com"));
 
 
+//        System.out.println(st);
+//        System.out.println(cop);
 
+
+//         "gmail.com",
+//        "yandex.ru",
+//        "hotmail.com",
+//        "yahoo.com"
 
     }
 
@@ -1649,18 +1735,50 @@ public class App {
 /**
  * №_35
  */
-    public static Integer getTotalPrice(List<Product> products) {
+//    public static Integer getTotalPrice(List<Product> products) {
+////        var totalCost = products.stream()
+////                .filter(p -> "electronics".equals(p.getCategory()))
+////                .mapToInt(Product::getPrice).sum();
+//
 //        var totalCost = products.stream()
 //                .filter(p -> "electronics".equals(p.getCategory()))
-//                .mapToInt(Product::getPrice).sum();
+//                .map(Product::getPrice)
+//                .reduce(0, Integer::sum);
+//        return totalCost;
+//    }
+/**
+ * №_36
+ */
+    private static final List<String> FREE_DOMAINS = List.of(
+        "gmail.com",
+        "yandex.ru",
+        "hotmail.com",
+        "yahoo.com"
+    );
+    public static Map<String, Long> getFreeDomainsCount(List<String> emails) {
 
-        var totalCost = products.stream()
-                .filter(p -> "electronics".equals(p.getCategory()))
-                .map(Product::getPrice)
-                .reduce(0, Integer::sum);
-        return totalCost;
+//        var emailsCopy = new ArrayList<String>();
+//        emails.forEach(email -> emailsCopy.add(email.substring(email.lastIndexOf('@') + 1)));
+//
+//        var result = emailsCopy.stream()
+//                .filter(FREE_DOMAINS::contains)
+//                .collect(Collectors.groupingBy(email -> email, Collectors.counting()));
+
+//        var result = emails.stream()
+//                .map(email -> email.substring(email.lastIndexOf('@') + 1))
+//                .toList();
+//
+//         return result.stream()
+//                 .filter(FREE_DOMAINS::contains)
+//                 .collect(Collectors.groupingBy(email -> email,
+//                         Collectors.counting()));
+
+        return emails.stream()
+                .map(email -> email.split("@")[1])
+                .filter(domain -> FREE_DOMAINS.contains(domain))
+                .collect(Collectors.groupingBy(domain -> domain,
+                        Collectors.counting()));
     }
-
 
 
 }

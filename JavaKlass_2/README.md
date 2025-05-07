@@ -3040,6 +3040,62 @@ public static int getTotalPrice(List<Product> products) {
             );
     }
 ```
+###_____ Задание ____###\
+//№_36\
+В классе App реализуйте публичный статический метод getFreeDomainsCount(), 
+который принимает на вход список емейлов List<String>. 
+Метод должен вернуть Map<String, Long> — количество email, расположенных на 
+каждом бесплатном домене. Список бесплатных доменов хранится в константе 
+FREE_DOMAINS
+```
+var emails = List.of(
+"info@yandex.ru",
+"mk@host.com",
+"support@hexlet.io",
+"sergey@gmail.com",
+"vovan@gmail.com",
+"vovan@hotmail.com"
+);
+
+var result = App.getFreeDomainsCount(emails);
+System.out.println(result); // => {gmail.com=2, yandex.ru=1, hotmail.com=1}
+```
+###_____ Решение ____###
+```
+class App {
+private static final List<String> FREE_DOMAINS = List.of(
+"gmail.com",
+"yandex.ru",
+"hotmail.com",
+"yahoo.com"
+);
+
+    // BEGIN (write your solution here)
+     public static Map<String, Long> getFreeDomainsCount(List<String> emails) {
+
+        var result = emails.stream()
+                .map(email -> email.substring(email.lastIndexOf('@') + 1))
+                .toList();
+
+         return result.stream()
+                 .filter(FREE_DOMAINS::contains)
+                 .collect(Collectors.groupingBy(email -> email,
+                         Collectors.counting()));
+    }
+    // END
+}
+```
+###_____ Решение Учителя ____###
+```
+public static Map<String, Long> getFreeDomainsCount(List<String> emails) {
+
+        return emails.stream()
+            .map(email -> email.split("@")[1])
+            .filter(domain -> FREE_DOMAINS.contains(domain))
+            .collect(Collectors.groupingBy(domain -> domain, Collectors.counting()));
+    }
+```
+
 
 
 
