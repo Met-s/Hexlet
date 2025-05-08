@@ -3095,7 +3095,60 @@ public static Map<String, Long> getFreeDomainsCount(List<String> emails) {
             .collect(Collectors.groupingBy(domain -> domain, Collectors.counting()));
     }
 ```
+###_____ Задание ____###\
+//№_37\
+В этом упражнении мы будем работать со списком фильмов. Каждый фильм представлен объектом класса Film. Изучите этот класс, он расположен в файле src/main/java/io/hexlet/model/Film.java. У каждого фильма есть название и жанр. Так как фильм может быть снят в нескольких жанрах, это поле представлено списком. Вам предстоит посчитать, какое количество фильмов было снято в каждом из жанров
 
+В классе App реализуйте публичный статический метод getGenres(), который принимает в качестве параметра список фильмов List<Film>. Метод должен вернуть Map<String, Long>, в котором ключ — это название жанра, а значение — количество фильмов в этом жанре. Нормализуйте название жанра перед подсчетом
+```
+var films = List.of(
+new Film("Liquid Sky", List.of("thriller", "Action")),
+new Film("Superman", List.of("Action", "fantasy", "thriller")),
+new Film("Norwegian Ninja", List.of("THRILLER"))
+);
+
+var result = App.getGenres(films);
+System.out.println(result); // => {"action"=2,"thriller"=3,"fantasy"=1}
+```
+###_____ file Film.java
+```
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import java.util.List;
+
+@Getter
+@AllArgsConstructor
+public final class Film {
+
+    private String name;
+    private List<String> genres;
+}
+```
+###_____ Решение ____###
+```
+public static Map<String, Long> getGenres(List<Film> films) {
+
+        return films.stream()
+                .flatMap(genre -> genre.getGenres().stream())
+                .map(String::toLowerCase)
+                .collect(Collectors.groupingBy(genre -> genre,
+                        Collectors.counting()));
+    }
+```
+###_____ Решение Учителя ____###
+```
+class App {
+// BEGIN
+public static Map<String, Long> getGenres(List<Film> films) {
+
+        return films.stream()
+            .flatMap(film -> film.getGenres().stream())
+            .map(String::toLowerCase)
+            .collect(Collectors.groupingBy(genre -> genre, Collectors.counting()));
+    }
+    // END
+}
+```
 
 
 

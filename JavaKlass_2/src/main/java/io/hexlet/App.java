@@ -18,8 +18,11 @@ package io.hexlet;
 
 //import java.util.*;
 
+import io.hexlet.model.Film;
 import org.checkerframework.checker.units.qual.A;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
 //import io.hexlet.controlTask.Converter.convert;
@@ -1255,39 +1258,56 @@ public class App {
 /**
  * №_36
  */
-        var emails = List.of(
-                "info@yandex.ru",
-                "mk@host.com",
-                "support@hexlet.io",
-                "sergey@gmail.com",
-                "vovan@gmail.com",
-                "vovan@hotmail.com"
-        );
+//        var emails = List.of(
+//                "info@yandex.ru",
+//                "mk@host.com",
+//                "support@hexlet.io",
+//                "sergey@gmail.com",
+//                "vovan@gmail.com",
+//                "vovan@hotmail.com"
+//        );
 //        emails.forEach(System.out::println);
 //        System.out.println("-------");
 
-        var result = App.getFreeDomainsCount(emails);
+//        var result = App.getFreeDomainsCount(emails);
+//        System.out.println(result);
+/**
+ * ###_____ Страница модуля ____###
+ *      Выравнивание данных (Flat Map)
+ */
+//        var listOfLists = List.of(
+//                List.of(1, 2, 3),
+//                List.of(4, 5, 6),
+//                List.of(7, 8, 9)
+//        );
+//
+//        var flattenedList = listOfLists.stream()
+//                .flatMap(List::stream)
+//                .toList();
+//        System.out.println(flattenedList);
+//
+//
+//        try (var lines = Files.lines(Path.of("README.md"))) {
+//            var res =
+//                    lines.flatMap(line -> Arrays.stream(line.trim().split(
+//                            "\\s+")))
+//                            .map(String::toLowerCase)
+//                            .collect(Collectors.groupingBy(word -> word,
+//                                    Collectors.counting()));
+//            System.out.println(res);
+//        }
+/**
+ * №_37
+ */
+        var films = List.of(
+                new Film("Liquid Sky", List.of("thriller", "Action")),
+                new Film("Superman", List.of("Action", "fantasy", "thriller")),
+                new Film("Norwegian Ninja", List.of("THRILLER"))
+        );
+        var result = App.getGenres(films);
         System.out.println(result);
-//        var email = new ArrayList<>();
-//        var setC = emails.forEach(s -> s.substring(s.lastIndexOf('@') + 1));
-
-//        String res = "info@yandex.ru";
-//        var seC = res.substring(res.lastIndexOf('@') + 1);
-//        System.out.println(seC);
-
-//        var st = "sergey@gmail.com";
-////        var cop = st.replace(, "d");
-//        System.out.println(st.endsWith("gmail.com"));
 
 
-//        System.out.println(st);
-//        System.out.println(cop);
-
-
-//         "gmail.com",
-//        "yandex.ru",
-//        "hotmail.com",
-//        "yahoo.com"
 
     }
 
@@ -1749,36 +1769,48 @@ public class App {
 /**
  * №_36
  */
-    private static final List<String> FREE_DOMAINS = List.of(
-        "gmail.com",
-        "yandex.ru",
-        "hotmail.com",
-        "yahoo.com"
-    );
-    public static Map<String, Long> getFreeDomainsCount(List<String> emails) {
-
-//        var emailsCopy = new ArrayList<String>();
-//        emails.forEach(email -> emailsCopy.add(email.substring(email.lastIndexOf('@') + 1)));
+//    private static final List<String> FREE_DOMAINS = List.of(
+//        "gmail.com",
+//        "yandex.ru",
+//        "hotmail.com",
+//        "yahoo.com"
+//    );
+//    public static Map<String, Long> getFreeDomainsCount(List<String> emails) {
 //
-//        var result = emailsCopy.stream()
-//                .filter(FREE_DOMAINS::contains)
-//                .collect(Collectors.groupingBy(email -> email, Collectors.counting()));
-
-//        var result = emails.stream()
-//                .map(email -> email.substring(email.lastIndexOf('@') + 1))
-//                .toList();
+////        var emailsCopy = new ArrayList<String>();
+////        emails.forEach(email -> emailsCopy.add(email.substring(email.lastIndexOf('@') + 1)));
+////
+////        var result = emailsCopy.stream()
+////                .filter(FREE_DOMAINS::contains)
+////                .collect(Collectors.groupingBy(email -> email, Collectors.counting()));
 //
-//         return result.stream()
-//                 .filter(FREE_DOMAINS::contains)
-//                 .collect(Collectors.groupingBy(email -> email,
-//                         Collectors.counting()));
+////        var result = emails.stream()
+////                .map(email -> email.substring(email.lastIndexOf('@') + 1))
+////                .toList();
+////
+////         return result.stream()
+////                 .filter(FREE_DOMAINS::contains)
+////                 .collect(Collectors.groupingBy(email -> email,
+////                         Collectors.counting()));
+//
+//        return emails.stream()
+//                .map(email -> email.split("@")[1])
+//                .filter(domain -> FREE_DOMAINS.contains(domain))
+//                .collect(Collectors.groupingBy(domain -> domain,
+//                        Collectors.counting()));
+//    }
+/**
+ * №_37
+ */
+    public static Map<String, Long> getGenres(List<Film> films) {
 
-        return emails.stream()
-                .map(email -> email.split("@")[1])
-                .filter(domain -> FREE_DOMAINS.contains(domain))
-                .collect(Collectors.groupingBy(domain -> domain,
+        return films.stream()
+                .flatMap(genre -> genre.getGenres().stream())
+                .map(String::toLowerCase)
+                .collect(Collectors.groupingBy(genre -> genre,
                         Collectors.counting()));
     }
+
 
 
 }
