@@ -3188,6 +3188,54 @@ public static User findUserById(List<User> users, long id) {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 ```
+###_____ Задание ____###\
+//№_39\
+Вам наверняка часто попадались примеры, демонстрирующие работу стримов, где нужно найти максимальный или минимальный элемент в списке. В этом упражнении мы сделаем задачу чуть более интересной и найдем второй по величине элемент списка
+
+src/main/java/io/hexlet/App.java
+В классе App реализуйте публичный статический метод getSecondBiggest(), который принимает в качестве параметра список целых чисел List<Integer>. Метод должен вернуть второе по величине число из списка. Если найти такое число не представляется возможным (например, список пуст или в нем только один элемент), метод должен вернуть null
+```
+var numbers = List.of(3, -5, 6, 1, 0, -2, 10);
+
+App.getSecondBiggest(numbers); // 6
+```
+###_____ Решение ____###
+```
+import java.util.List;
+import java.util.*;
+
+class App {
+// BEGIN (write your solution here)
+public static Integer getSecondBiggest(List<Integer> numbers) {
+if (numbers.isEmpty() || numbers.size() < 2) {
+return null;
+}
+return numbers.stream()
+.sorted(Comparator.reverseOrder())
+.toList()
+.get(1);
+
+    }
+    // END
+}
+```
+###_____ Решение Учителя ____###
+```
+import java.util.List;
+
+class App {
+// BEGIN
+public static Integer getSecondBiggest(List<Integer> numbers) {
+return numbers.stream()
+.sorted((a, b) -> Integer.compare(b, a))
+.skip(1)
+.findFirst()
+.orElse(null);
+}
+// END
+}
+```
+
 
 
 №_\
