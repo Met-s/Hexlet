@@ -18,11 +18,8 @@ package io.hexlet;
 
 //import java.util.*;
 
-import io.hexlet.model.User;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 //import io.hexlet.controlTask.Converter.convert;
@@ -1332,18 +1329,24 @@ public class App {
 /**
  * №_38
  */
-        var users = new ArrayList(
-                List.of(
-                        new User(1, "John"),
-                        new User(2, "Anna"),
-                        new User(3, "Alex")
-                )
-        );
-        var user = App.findUserById(users, 1);
-        user.getName();
-
-        System.out.println(user.getName());
-
+//        var users = new ArrayList(
+//                List.of(
+//                        new User(1, "John"),
+//                        new User(2, "Anna"),
+//                        new User(3, "Alex")
+//                )
+//        );
+//        var user = App.findUserById(users, 1);
+//        user.getName();
+//
+//        System.out.println(user.getName());
+/**
+ * №_39
+ */
+        var numbers = List.of(3, -5, 6, 1, 0, -2, 10);
+        App.getSecondBiggest(numbers); // 6
+        var result = App.getSecondBiggest(numbers);
+        System.out.println(result);
 
 
 
@@ -1854,15 +1857,25 @@ public class App {
 /**
  * №_38
  */
-    public static User findUserById(List<User> users, long id) {
-
-        return users.stream()
-                .filter(u -> u.getId() == id)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("User not found"));
+//    public static User findUserById(List<User> users, long id) {
+//
+//        return users.stream()
+//                .filter(u -> u.getId() == id)
+//                .findFirst()
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//    }
+/**
+ * №_39
+ */
+    public static Integer getSecondBiggest(List<Integer> numbers) {
+        if (numbers.isEmpty() || numbers.size() < 2) {
+            return null;
+        }
+        return numbers.stream()
+                .sorted(Comparator.reverseOrder())
+                .toList()
+                .get(1);
     }
-
-
 
 
 
