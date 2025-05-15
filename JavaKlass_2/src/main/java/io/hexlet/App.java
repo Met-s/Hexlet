@@ -18,13 +18,13 @@ package io.hexlet;
 
 //import java.util.*;
 
-import io.hexlet.model.Film;
-import org.checkerframework.checker.units.qual.A;
+import io.hexlet.model.User;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+
 //import io.hexlet.controlTask.Converter.convert;
 
 public class App {
@@ -1299,13 +1299,54 @@ public class App {
 /**
  * №_37
  */
-        var films = List.of(
-                new Film("Liquid Sky", List.of("thriller", "Action")),
-                new Film("Superman", List.of("Action", "fantasy", "thriller")),
-                new Film("Norwegian Ninja", List.of("THRILLER"))
+//        var films = List.of(
+//                new Film("Liquid Sky", List.of("thriller", "Action")),
+//                new Film("Superman", List.of("Action", "fantasy", "thriller")),
+//                new Film("Norwegian Ninja", List.of("THRILLER"))
+//        );
+//        var result = App.getGenres(films);
+//        System.out.println(result);
+/**
+ * ###_____ Страница модуля ____###
+ *      Поиск элементов (find)
+ */
+//        var fruits = List.of("Apple", "Banana", "Apricot",
+//                "Orange", "Avocado");
+//        var maybeFruit = fruits.stream()
+//                .filter(s -> s.startsWith("C"))
+//                .findFirst();
+//                if (maybeFruit.isPresent()) {
+//                    System.out.println(maybeFruit.get());
+//                } else {
+//                    System.out.println("Ничего не нашли");
+//                }
+//        System.out.println(maybeFruit);
+
+//        var optional = Optional.of("Hello");
+//        System.out.println(optional.isPresent());
+//
+//        var fruit1 = maybeFruit.orElse("Strawberry");
+//        System.out.println(fruit1);
+//        var friot2 = maybeFruit.orElseThrow(() -> new RuntimeException("Fruit not found"));
+//        System.out.println(friot2);
+/**
+ * №_38
+ */
+        var users = new ArrayList(
+                List.of(
+                        new User(1, "John"),
+                        new User(2, "Anna"),
+                        new User(3, "Alex")
+                )
         );
-        var result = App.getGenres(films);
-        System.out.println(result);
+        var user = App.findUserById(users, 1);
+        user.getName();
+
+        System.out.println(user.getName());
+
+
+
+
 
 
 
@@ -1802,14 +1843,26 @@ public class App {
 /**
  * №_37
  */
-    public static Map<String, Long> getGenres(List<Film> films) {
+//    public static Map<String, Long> getGenres(List<Film> films) {
+//
+//        return films.stream()
+//                .flatMap(genre -> genre.getGenres().stream())
+//                .map(String::toLowerCase)
+//                .collect(Collectors.groupingBy(genre -> genre,
+//                        Collectors.counting()));
+//    }
+/**
+ * №_38
+ */
+    public static User findUserById(List<User> users, long id) {
 
-        return films.stream()
-                .flatMap(genre -> genre.getGenres().stream())
-                .map(String::toLowerCase)
-                .collect(Collectors.groupingBy(genre -> genre,
-                        Collectors.counting()));
+        return users.stream()
+                .filter(u -> u.getId() == id)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
+
+
 
 
 

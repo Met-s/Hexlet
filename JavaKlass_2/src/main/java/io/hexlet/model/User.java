@@ -1,13 +1,7 @@
 package io.hexlet.model;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-
-import java.time.LocalDate;
-import java.time.temporal.Temporal;
-import java.util.List;
-import java.util.ArrayList;
 
 /**
  *№_12
@@ -68,12 +62,31 @@ import java.util.ArrayList;
 /**
  *№_19
  */
+//@AllArgsConstructor
+//@Getter
+//@EqualsAndHashCode
+//@ToString
+//public final class User {
+//    private String name;
+////    private LocalDate birthday;
+//    private int age;
+//}
+/**
+ *№_38
+ */
 @AllArgsConstructor
 @Getter
-@EqualsAndHashCode
-@ToString
 public final class User {
+    private long id;
     private String name;
-//    private LocalDate birthday;
-    private int age;
+
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public long getId() {
+//        return id;
+//    }
+
+
 }

@@ -3149,7 +3149,45 @@ public static Map<String, Long> getGenres(List<Film> films) {
     // END
 }
 ```
+###_____ Задание ____###\
+//№_38\
+В классе App реализуйте публичный статический метод findUserById(), который ищет пользователя в списке по идентификатору. Метод принимает в качестве параметра список пользователей List<User> и идентификатор пользователя, число типа long. Он должен вернуть пользователя с таким идентификатором, если он есть в списке. А если такого пользователя нет, выбросить исключение RuntimeException с сообщением User not found
+```
+var users = new ArrayList(
+List.of(
+new User(1, "John"),
+new User(2, "Anna"),
+new User(3, "Alex")
+)
+);
 
+var user = App.findUserById(users, 1);
+user.getName(); // John
+
+// Пользователя с таким id нет
+App.findUserById(users, 10); // Error
+```
+###_____ file User
+```
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
+public final class User {
+private long id;
+private String name;
+```
+###_____ Решение ____###
+```
+public static User findUserById(List<User> users, long id) {
+
+        return users.stream()
+                .filter(u -> u.getId() == id)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+```
 
 
 №_\
