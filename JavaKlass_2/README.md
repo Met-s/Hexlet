@@ -3235,6 +3235,87 @@ return numbers.stream()
 // END
 }
 ```
+//=================================================================================\
+###_____ Java: Автоматическое тестирование ____###\
+//=================================================================================\
+###_____ Задание ____###\
+//№_40\
+Напишите тесты для метода get(strings, index, defaultValue), который получает элемент массива по индексу, при условии, что он существует. В ином случае возвращается defaultValue.
+
+массив строк String[] strings\
+число int index\
+строка String defaultValue\
+Идея метода взята из библиотеки org.apache.commons.lang3 — ArrayUtils.get()
+```
+String[] strings = {"hello", "world"};
+get(strings, 1, "value"); // "world"
+get(strings, 5, "value"); // "value"
+```
+Тесты должны быть построены по такому же принципу, как это описывалось в теории урока: проверка через if и выброс исключения AssertionError в случае провала теста.
+
+Для хорошего тестирования этого метода, понадобится как минимум три проверки:
+
+Проверка, что метод возвращает нужное значение по существующему индексу (прямой тест на работоспособность)
+Проверки на то, что возвращается значение по умолчанию если индекс выходит за 
+границы массива. Индекс может быть как меньше минимального значения, так и 
+больше длины массива\
+###_____ Решение ____###
+```
+public void testGet() {
+//BEGIN (write your solution here)
+
+        String[] strings = new String[]{"hello", "world"};
+
+        if (!"hello".equals(Methods.get(strings, 0, "value"))) {
+            throw new AssertionError("Метод работает неверно!");
+        }
+        if (!"value".equals(Methods.get(strings, 3, "value"))) {
+            throw new AssertionError("Метод работает неверно!");
+        }
+
+        if (!"value".equals(Methods.get(strings, -1, "value"))) {
+            throw new AssertionError("Метод работает неверно!");
+        }
+
+        //END
+    }
+```    
+###_____ Решение Учителя ____###
+```
+import org.junit.jupiter.api.Test;
+import static io.hexlet.Methods.get;
+
+public class MethodsTest {
+
+    @Test
+    public void testGet() {
+        //BEGIN
+        String[] strings = {"zero", "one", "two", "three"};
+        var defaultValue = "value";
+
+        var actual1 = get(strings, 0, defaultValue);
+        if (!actual1.equals(strings[0])) {
+            throw new AssertionError();
+        }
+
+        var actual2 = get(strings, 2, defaultValue);
+        if (!actual2.equals(strings[2])) {
+            throw new AssertionError();
+        }
+
+        var actual3 = get(strings, 8, defaultValue);
+        if (!defaultValue.equals(actual3)) {
+            throw new AssertionError();
+        }
+
+        var actual4 = get(strings, -2, defaultValue);
+        if (!defaultValue.equals(actual4)) {
+            throw new AssertionError();
+        }
+        //END
+    }
+}
+```
 
 
 

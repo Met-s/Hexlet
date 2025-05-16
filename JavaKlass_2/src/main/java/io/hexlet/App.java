@@ -18,6 +18,13 @@ package io.hexlet;
 
 //import java.util.*;
 
+import io.hexlet.model.Methods;
+import io.hexlet.testModel.MethodsTest;
+import io.hexlet.testUtils.StringUtils;
+import io.hexlet.testUtils.StringUtilsTest;
+import org.apache.commons.lang3.ArrayUtils;
+
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -1343,17 +1350,45 @@ public class App {
 /**
  * №_39
  */
-        var numbers = List.of(3, -5, 6, 1, 0, -2, 10);
-        App.getSecondBiggest(numbers); // 6
-        var result = App.getSecondBiggest(numbers);
+//        var numbers = List.of(3, -5, 6, 1, 0, -2, 10);
+//        App.getSecondBiggest(numbers); // 6
+//        var result = App.getSecondBiggest(numbers);
+//        System.out.println(result);
+/**
+ * //=======================================================================
+ * ###_____ Java: Автоматическое тестирование ____###
+ * Причины тестирования
+ */
+//        var result = StringUtils.capitalize("hello"); // "Hello"
+//        System.out.println(result);
+//
+//        System.out.println(StringUtils.capitalizeNew("hello"));
+//        System.out.println(StringUtils.capitalize("how are you"));
+//        System.out.println(StringUtils.capitalizeNew(""));
+
+//        StringUtilsTest.testCapitalize();
+//        StringUtilsTest.testCapitalizeZero();
+//        System.out.println(StringUtils.len("hexlet"));
+//        System.out.println(StringUtils.len(null));
+
+//        if (7 != App.sum(3, 4)) {
+//            throw new AssertionError("Not Summary!");
+//        }
+/**
+ * №_40
+ */
+        String[] strings = {"hello", "world"};
+        String result = Methods.get(strings, 0, "value");   // "world"
+        String result1 = Methods.get(strings, 5, "value");   // "value"
+        String result2 = Methods.get(strings, -2, "value");
         System.out.println(result);
-
-
-
-
+        System.out.println(result1);
+        System.out.println(result2);
+        MethodsTest.testGet();
 
 
     }
+
 
 //-----
 /**
@@ -1867,16 +1902,26 @@ public class App {
 /**
  * №_39
  */
-    public static Integer getSecondBiggest(List<Integer> numbers) {
-        if (numbers.isEmpty() || numbers.size() < 2) {
-            return null;
-        }
-        return numbers.stream()
-                .sorted(Comparator.reverseOrder())
-                .toList()
-                .get(1);
-    }
-
+//    public static Integer getSecondBiggest(List<Integer> numbers) {
+//        if (numbers.isEmpty() || numbers.size() < 2) {
+//            return null;
+//        }
+//        return numbers.stream()
+//                .sorted(Comparator.reverseOrder())
+//                .toList()
+//                .get(1);
+//    }
+/**
+ * //=======================================================================
+ * ###_____ Java: Автоматическое тестирование ____###
+ * Причины тестирования
+ */
+//    public static int sum(int a, int b) {
+//        return a + b;
+//    }
+/**
+ * №_40
+ */
 
 
 }
