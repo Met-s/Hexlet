@@ -3316,8 +3316,94 @@ public class MethodsTest {
     }
 }
 ```
+//=================================================================================
+
+###_____ Диограмма_diagram_схема ____###
+
+//=================================================================================\
+Рисуем схемы в ID припомощи кода mermaid diagram\
+создаём файл в коневой папке каталога рядом с README.md
+
+Рисуем диаграммы Mermaid.js в README-файлах [GitHub / Хабр](https://habr.com/ru/articles/652867/)
+
+file diagram.mmd
+```
+flowchart   RL; LR;TB;TD; BT;
+classDef class1 fill:#3f3,stroke:#333,stroke-width:4px
+classDef class2 fill:#ff2400,stroke:#333,stroke-width:4px,color:#fff,stroke-dasharray: 12 5
+
+    subgraph one
+        node1[Form 1]
+        node2(Form 2)
+        node3([Форма 3])
+        node4[[Форма 4]]
+        node5[(Форма 5)]
+        node6((Форма 6))
+        node7>Форма 7]
+    end
+
+    subgraph two
+        node8{Форма 8}
+        node9{{Форма 9}}
+        node10[/Форма 10/]
+        node11[\Форма 11\]
+        node12[/Форма 12\]
+        node13[\Форма 13/]
+    end
+
+    subgraph three
+        А --> B
+        C --- D
+        E -.-> F
+        G ==> H
+        I --o J
+        K --x L
+        TR
+
+        id1["Это текст (а вот это могло сломать рендеринг), но у нас есть экранирование"]
+    end
+    subgraph four
+        A-- Text ---B
+        C---|Text|D
+        E-->|text|F
+        G-- text -->H
+        I-. text .-> J
+        K == text ==> L
+        CS --> TR
+    end
+
+    subgraph five
+        Mermaid_Хабр --> CB
+        click Mermaid_Хабр "https://habr.com/ru/articles/652867/"
+    end
+
+    subgraph six
+        AA:::class1 --> BB:::class2
+    end
+
+    subgraph seven
+
+    end
 
 
+
+%%flowchart TD
+
+
+
+    Start --> Up
+    Start --> Stop
+    Up --> End
+    Stop --> End
+
+
+
+%%  TB — «top to bottom», сверху вниз;
+%%  TD — «top-down/ same as top to bottom», сверху вниз;
+%%  BT — «bottom to top», снизу вверх;
+%%  RL — «right to left», справа налево;
+%%  LR — «left to right», слева направо.
+```
 
 №_\
 ###_____ Задание ____###\
