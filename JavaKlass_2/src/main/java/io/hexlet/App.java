@@ -22,11 +22,14 @@ import io.hexlet.model.Methods;
 import io.hexlet.testModel.MethodsTest;
 import io.hexlet.testUtils.StringUtils;
 import io.hexlet.testUtils.StringUtilsTest;
-import org.apache.commons.lang3.ArrayUtils;
+
+
 
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static io.hexlet.model.Methods.take;
 
 
 //import io.hexlet.controlTask.Converter.convert;
@@ -1377,14 +1380,44 @@ public class App {
 /**
  * №_40
  */
-        String[] strings = {"hello", "world"};
-        String result = Methods.get(strings, 0, "value");   // "world"
-        String result1 = Methods.get(strings, 5, "value");   // "value"
-        String result2 = Methods.get(strings, -2, "value");
-        System.out.println(result);
-        System.out.println(result1);
-        System.out.println(result2);
-        MethodsTest.testGet();
+//        String[] strings = {"hello", "world"};
+//        String result = Methods.get(strings, 0, "value");   // "world"
+//        String result1 = Methods.get(strings, 5, "value");   // "value"
+//        String result2 = Methods.get(strings, -2, "value");
+//        System.out.println(result);
+//        System.out.println(result1);
+//        System.out.println(result2);
+//        MethodsTest.testGet();
+/**
+ * ###_____ Страница модуля ____###
+ * ###_____ Утверждения ____###
+ */
+//        assert 1 == 2 : "Ваш метод не работает!";
+//        System.out.println("Hello World");
+/**
+ * №_41
+ */
+        int[] numbers = {1, 2, 3};
+        int[] numbers2 = {1, 2, 3};
+        var result = take(numbers, 1); // [1]
+        var result1 = take(numbers, 2); // [1, 2]
+        var result2 = take(numbers, 9); // [1, 2, 3]
+
+        int[] emptyNumbers = {};
+        var result3 = take(emptyNumbers, 2); // []
+
+        System.out.println(Arrays.toString(result));
+        System.out.println(Arrays.toString(result1));
+        System.out.println(Arrays.toString(result2));
+        System.out.println(Arrays.toString(result3));
+
+        MethodsTest.testTake();
+
+
+//        System.out.println(Arrays.equals(numbers, numbers2));
+
+
+
 
 
     }
