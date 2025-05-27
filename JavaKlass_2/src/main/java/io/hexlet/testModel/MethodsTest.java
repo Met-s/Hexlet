@@ -55,7 +55,7 @@ public class MethodsTest {
  * №_41
  */
     public static void testTake() {
-        int[] numbers = {1, 2, 3, 4};
+        int[] numbers = {1, 22, 3, 4};
 
         var actual1 = take(numbers, 2);
         int[] n = {1, 2};
