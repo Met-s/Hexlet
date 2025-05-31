@@ -1,12 +1,10 @@
 package io.hexlet;
 
 import io.hexlet.TestMethod.MethodsTest;
-import org.apache.commons.lang3.ArrayUtils;
-
 import java.util.Arrays;
-
 import static io.hexlet.model.Methods.take;
-//import static src.test.java.io.hexlet.MethodsTestTest.testTakeTest;
+import static io.hexlet.model.Methods_42.indexOf;
+
 
 public class App {
     public static void main(String[] args) {
@@ -44,30 +42,53 @@ public class App {
 
 /**
  * ###_____ Страница модуля ____###
- * ###_____ Утверждения ____###
+ * ###_____ Утверждения Assert ____###
  */
 //        assert 1 == 2 : "Ваш метод не работает!";
-        System.out.println("Hello world!");
+//        System.out.println("Hello world!");
+///**
+// * №_41
+// */
+//        int[] numbers = {1, 2, 3};
+//
+//        var result = take(numbers, 1); // [1]
+//        var result1 = take(numbers, 2); // [1, 2]
+//        var result2 = take(numbers, 9); // [1, 2, 3]
+//        var result4 = take(numbers, -2); // []
+
+//        int[] emptyNumbers = {};
+//        var result3 = take(emptyNumbers, 2); // []
+//
+//        System.out.println(Arrays.toString(result));
+//        System.out.println(Arrays.toString(result1));
+//        System.out.println(Arrays.toString(result2));
+//        System.out.println(Arrays.toString(result3));
+//        System.out.println(Arrays.toString(result4));
+//
+//        MethodsTest.testTake();
 /**
- * №_41
+ * ###_____ Страница модуля ____###
+ * ###_____ Библиотека AssertJ ____###
  */
-        int[] numbers = {1, 2, 3};
+//        SomeClassTest.estMethod();
+        int[] numbers = {1, 2, 1, 2};
+        int[] numbersZero = {};
+        int[] numbersOne = {0};
+        int result1 = indexOf(numbers, 2, 0); // 1
+        int result2 = indexOf(numbers, 2, 2); // 3
+        int result3 = indexOf(numbers, 8, 0); // -1
+        int result4 = indexOf(numbersZero, 2, 0);
+        int result5 = indexOf(numbersOne, 2, 2);
+        int result6 = indexOf(numbers, 1, 0); // 0
 
-        var result = take(numbers, 1); // [1]
-        var result1 = take(numbers, 2); // [1, 2]
-        var result2 = take(numbers, 9); // [1, 2, 3]
-        var result4 = take(numbers, -2); // []
+        System.out.println(result1);
+        System.out.println(result2);
+        System.out.println(result3); // -1
+        System.out.println(result4); // -1
+        System.out.println(result5); // -1
+        System.out.println(result6); // 0
 
-        int[] emptyNumbers = {};
-        var result3 = take(emptyNumbers, 2); // []
 
-        System.out.println(Arrays.toString(result));
-        System.out.println(Arrays.toString(result1));
-        System.out.println(Arrays.toString(result2));
-        System.out.println(Arrays.toString(result3));
-        System.out.println(Arrays.toString(result4));
-
-        MethodsTest.testTake();
 
     }
 }

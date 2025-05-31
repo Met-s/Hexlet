@@ -304,6 +304,121 @@ public class MethodsTest {
     }
 }
 ```
+###_____ Библиотека AssertJ ____###\
+[Документация AssertJ](https://assertj.github.io/doc/)
+
+###_____ Задание ____###\
+//№_42\
+src/test/java/io/hexlet/MethodsTest.java
+Напишите тесты для метода indexOf(numbers, value, fromIndex), возвращает индекс первого вхождения переданного элемента в массив, начиная поиск с индекса fromIndex. Метод уже импортирован в файл с тестами.
+
+Метод indexOf() принимает на вход:
+
+массив чисел int[] numbers
+значение искомого элемента int value
+индекс с которого будет произведён поиск int fromIndex
+Если искомый элемент не найден в массиве, то метод возвращает -1.
+```
+int[] numbers = {1, 2, 1, 2};
+indexOf(numbers, 2, 0); // 1
+indexOf(numbers, 2, 2); // 3
+indexOf(numbers, 8, 0); // -1
+```
+Подсказки
+Тестирование необходимо провести с использованием библиотеки AssertJ. Метод assertThat() уже импортирован в файле MethodsTest.java.
+[ArrayUtils.indexOf()](https://commons.apache.org/proper/commons-lang/javadocs/api-release/org/apache/commons/lang3/ArrayUtils.html#indexOf-int:A-int-int-)
+
+###_____ Methods_42 ____###
+```
+package io.hexlet.model;
+
+import org.apache.commons.lang3.ArrayUtils;
+
+
+public class Methods_42 {
+private static String implementation = "right";
+
+    private static int right(int[] numbers, int value, int fromIndex) {
+        return ArrayUtils.indexOf(numbers, value, fromIndex);
+    }
+
+    private static int wrong1(int[] numbers, int value, int fromIndex) {
+        var index = ArrayUtils.indexOf(numbers, value, fromIndex);
+        return index == -1 ? 0 : index;
+    }
+
+    private static int wrong2(int[] numbers, int value, int fromIndex) {
+        return ArrayUtils.indexOf(numbers, value, 0);
+    }
+
+    private static int wrong3(int[] numbers, int value, int fromIndex) {
+        return ArrayUtils.isEmpty(numbers)
+                ? 0
+                : ArrayUtils.indexOf(numbers, value, fromIndex);
+    }
+
+    public static void setImplementation(String implementationName) {
+        implementation = implementationName;
+    }
+
+    public static int indexOf(int[] numbers, int value, int fromIndex) {
+        return switch (implementation) {
+            case "wrong1" -> wrong1(numbers, value, fromIndex);
+            case "wrong2" -> wrong2(numbers, value, fromIndex);
+            case "wrong3" -> wrong3(numbers, value, fromIndex);
+            default -> right(numbers, value, fromIndex);
+        };
+    }
+}
+```
+###_____ Решение ____###
+```
+package io.hexlet;
+
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static io.hexlet.model.Methods_42.indexOf;
+
+public class MethodsTest_42 {
+
+    @Test
+    public void testIndexOf() {
+        int[] numbers = {1, 2, 1, 2};
+        assertThat(1).isEqualTo(indexOf(numbers, 2, 0));
+        assertThat(-1).isEqualTo(indexOf(numbers, 8, 0));
+        assertThat(-1).isEqualTo(indexOf(new int[] {}, -1, 0));
+        assertThat(-1).isEqualTo(indexOf(numbers, 1, 5));
+        assertThat(indexOf(numbers, 1, 0)).isEqualTo(0); //0
+    }
+}
+```
+###_____ Решение Учителя ____###
+```
+package io.hexlet;
+
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static io.hexlet.Methods.indexOf;
+
+public class MethodsTest {
+
+    @Test
+    public void testIndexOf() {
+        //BEGIN
+        int[] numbers = {1, 2, 3, 1, 5};
+
+        assertThat(indexOf(numbers, 1, 0)).isEqualTo(0);
+        assertThat(indexOf(numbers, 8, 0)).isEqualTo(-1);
+        assertThat(indexOf(numbers, 1, 2)).isEqualTo(3);
+        assertThat(indexOf(new int[] {}, 2, 0)).isEqualTo(-1);
+        //END
+    }
+}
+```
+
+
+
+
 
 
 №_\
