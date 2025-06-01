@@ -330,7 +330,7 @@ indexOf(numbers, 8, 0); // -1
 
 ###_____ Methods_42 ____###
 ```
-package io.hexlet.model;
+package io.hexlet.modul;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -377,7 +377,7 @@ package io.hexlet;
 
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.hexlet.model.Methods_42.indexOf;
+import static io.hexlet.modul.Methods_42.indexOf;
 
 public class MethodsTest_42 {
 
@@ -415,7 +415,81 @@ public class MethodsTest {
     }
 }
 ```
+###_____ Задание ____###\
+//№_43\
+src/test/java/io/hexlet/MethodsTest.java
+Напишите тесты для метода gt(value, other), который возвращает true в том случае, если value > other, и false в иных случаях.
 
+Метод gt() принимает на вход:
+```
+число int value
+число int other
+gt(3, 1); // true
+
+gt(3, 3); // false
+
+gt(1, 3); // false
+```
+###_____ Дополнительные материалы ____###
+
+1. [Документация AssertJ](https://assertj.github.io/doc/)
+2. Весь перечень подобных матчеров и примеров их использования можно найти в официальной документации [AbstractObjectAssert](https://joel-costigliola.github.io/assertj/core-8/api/org/assertj/core/api/AbstractObjectAssert.html)
+
+###_____ class Methods ____###
+```
+public class Methods {
+private static String implementation = "right";
+
+    private static boolean right(int value, int other) {
+        return value > other;
+    }
+
+    private static boolean wrong1(int value, int other) {
+        return value >= other;
+    }
+
+    private static boolean wrong2(int value, int other) {
+        return value != other;
+    }
+
+    private static boolean wrong3(int value, int other) {
+        return true;
+    }
+
+    public static void setImplementation(String implementationName) {
+        implementation = implementationName;
+    }
+
+    public static boolean gt(int value, int other) {
+        return switch (implementation) {
+            case "wrong1" -> wrong1(value, other);
+            case "wrong2" -> wrong2(value, other);
+            case "wrong3" -> wrong3(value, other);
+            default -> right(value, other);
+        };
+    }
+}
+```
+###_____ Решение ____###
+```
+package io.hexlet.modul;
+
+import org.junit.jupiter.api.Test;
+
+import static io.hexlet.modul.Methods_43.gt;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+public class MethodsTest_43 {
+
+    @Test
+    public void testGt() {
+        assertThat(gt(3, 1)).isTrue();
+        assertThat(gt(3, 3)).isFalse();
+        assertThat(gt(3, 4)).isFalse();
+    }
+}
+```
+###_____ Решение Учителя ____###
 
 
 

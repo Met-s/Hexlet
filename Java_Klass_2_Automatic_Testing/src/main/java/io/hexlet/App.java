@@ -1,10 +1,7 @@
 package io.hexlet;
 
-import io.hexlet.TestMethod.MethodsTest;
-import java.util.Arrays;
-import static io.hexlet.model.Methods.take;
-import static io.hexlet.model.Methods_42.indexOf;
 
+import static io.hexlet.modul.Methods_43.gt;
 
 public class App {
     public static void main(String[] args) {
@@ -71,25 +68,41 @@ public class App {
  * ###_____ Библиотека AssertJ ____###
  */
 //        SomeClassTest.estMethod();
-        int[] numbers = {1, 2, 1, 2};
-        int[] numbersZero = {};
-        int[] numbersOne = {0};
-        int result1 = indexOf(numbers, 2, 0); // 1
-        int result2 = indexOf(numbers, 2, 2); // 3
-        int result3 = indexOf(numbers, 8, 0); // -1
-        int result4 = indexOf(numbersZero, 2, 0);
-        int result5 = indexOf(numbersOne, 2, 2);
-        int result6 = indexOf(numbers, 1, 0); // 0
+///**
+// * №_42
+// */
+//        int[] numbers = {1, 2, 1, 2};
+//        int[] numbersZero = {};
+//        int[] numbersOne = {0};
+//        int result1 = indexOf(numbers, 2, 0); // 1
+//        int result2 = indexOf(numbers, 2, 2); // 3
+//        int result3 = indexOf(numbers, 8, 0); // -1
+//        int result4 = indexOf(numbersZero, 2, 0);
+//        int result5 = indexOf(numbersOne, 2, 2);
+//        int result6 = indexOf(numbers, 1, 0); // 0
+//
+//        System.out.println(result1);
+//        System.out.println(result2);
+//        System.out.println(result3); // -1
+//        System.out.println(result4); // -1
+//        System.out.println(result5); // -1
+//        System.out.println(result6); // 0
+/**
+ * ###_____ Страница модуля ____###
+ * ###_____ Матчеры ____###
+ */
 
-        System.out.println(result1);
-        System.out.println(result2);
-        System.out.println(result3); // -1
-        System.out.println(result4); // -1
-        System.out.println(result5); // -1
-        System.out.println(result6); // 0
+        int[] a = {1, 2, 3};
+        int[] b = {1, 2, 3};
 
+//        System.out.println(a.SameAs(b));
 
-
+/**
+ * №_43
+ */
+        System.out.println(gt(3, 1)); // true
+        System.out.println(gt(3, 3)); // false
+        System.out.println(gt(1, 3)); // false
     }
 }
 /**

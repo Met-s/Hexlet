@@ -1,4 +1,4 @@
-package io.hexlet.model;
+package io.hexlet.modul;
 
 import org.apache.commons.lang3.ArrayUtils;
 

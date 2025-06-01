@@ -2,7 +2,7 @@ package io.hexlet.TestMethod;
 
 //import io.hexlet.model.Methods;
 import java.util.Arrays;
-import static io.hexlet.model.Methods.take;
+import static io.hexlet.modul.Methods.take;
 
 public class MethodsTest {
 

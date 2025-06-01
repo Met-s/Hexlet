@@ -1,8 +1,8 @@
-package io.hexlet;
+package io.hexlet.modul;
 
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.hexlet.model.Methods_42.indexOf;
+import static io.hexlet.modul.Methods_42.indexOf;
 
 public class MethodsTest_42 {
 
