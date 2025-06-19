@@ -1,6 +1,10 @@
 package io.hexlet;
 
 
+
+import java.util.Stack;
+
+import static io.hexlet.Methods.makeValidator;
 import static io.hexlet.modul.Methods_43.gt;
 
 public class App {
@@ -91,18 +95,75 @@ public class App {
  * ###_____ Страница модуля ____###
  * ###_____ Матчеры ____###
  */
-
-        int[] a = {1, 2, 3};
-        int[] b = {1, 2, 3};
+//        int[] a = {1, 2, 3};
+//        int[] b = {1, 2, 3};
 
 //        System.out.println(a.SameAs(b));
-
 /**
  * №_43
  */
-        System.out.println(gt(3, 1)); // true
-        System.out.println(gt(3, 3)); // false
-        System.out.println(gt(1, 3)); // false
+//        System.out.println(gt(3, 1)); // true
+//        System.out.println(gt(3, 3)); // false
+//        System.out.println(gt(1, 3)); // false
+/**
+ * ###_____ Страница модуля ____###
+ * ###_____ Модульные тесты ____###
+ */
+        // Если вы не знакомы с дженериками, то не переживайте
+        // Такой способ создания не влияет на использование
+        // Он лишь нужен для указания типа данных, которые могут храниться в стеке
+//        Stack<Integer> stack = new Stack<>();
+//        // Проверка на пустоту
+//        System.out.println(stack.isEmpty());            // true;
+//        // Добавление в стек
+//        System.out.println(stack.push(1)); // (1)
+//        System.out.println(stack.push(2)); // (2, 1)
+//
+//        System.out.println(stack.push(3)); // (3, 2, 1)
+//        System.out.println(stack);
+//        System.out.println(stack.isEmpty()); // false
+//        // Извлечение из стека
+//        var value = stack.pop();    // 3. В стеке (2, 1)
+//        System.out.println(value);
+//        System.out.println(stack);
+//        System.out.println(stack.pop()); // 2. В стеке (1)
+//        System.out.println(stack.pop()); // 1. В стеке пусто
+//        System.out.println(stack.isEmpty()); // true
+/**
+ * №_44
+ */
+        // Создаем объект валидатора
+        var validator = makeValidator();
+        // Так как не было добавлено ни одной проверки,
+        // корректными данными будут считаться числа и значение null
+        var result = validator.isValid(null); // true
+        System.out.println(result);
+        var result1 = validator.isValid("some string"); // false
+        System.out.println(result1);
+
+        // добавляем проверку, что переданное значение должно быть числом
+        validator.required();
+        var result2 = validator.isValid(null); //false
+        System.out.println(result2);
+
+        // добавляем проверку, что переданное число больше нуля
+        validator.positive();
+        var result3 = validator.isValid(5); // true
+        System.out.println(result3);
+        var result4 = validator.isValid(0); // false
+        System.out.println(result4);
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
 /**

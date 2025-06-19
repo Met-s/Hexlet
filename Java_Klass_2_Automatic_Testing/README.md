@@ -489,7 +489,95 @@ public class MethodsTest_43 {
     }
 }
 ```
+###_____ Задание ____###\
+//№_44\
+Напишите тесты для объекта Validator. Это валидатор чисел, который проверяет корректность данных с помощью метода isValid(). Необходимые проверки добавляются вызовами методов на объекте (см. пример).
+```
+// Создаем объект валидатора
+var validator = makeValidator();
+// Так как не было добавлено ни одной проверки,
+// корректными данными будут считаться числа и значение null
+validator.isValid(null); // true
+validator.isValid("some string"); // false
+// добавляем проверку, что переданное значение должно быть числом
+validator.required();
+validator.isValid(null); // false
+// добавляем проверку, что переданное число больше нуля
+validator.positive();
+validator.isValid(5); // true
+validator.isValid(0); // false
+```
+###_____ Решение ____###
+```
+package io.hexlet.modul;
+
+import org.junit.jupiter.api.Test;
+
+import static io.hexlet.Methods.makeValidator;
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class MethodsTest_44 {
+
+    @Test
+    public void testValidator() {
+
+        var validator = makeValidator();
+        assertThat(validator.isValid(null)).isTrue();
+        assertThat(validator.isValid("some")).isFalse();
+
+        validator.required();
+        assertThat(validator.isValid(null)).isFalse();
+        validator.positive();
+        assertThat(validator.isValid(5)).isTrue();
+        assertThat(validator.isValid(0)).isFalse();
+    }
+}
+
+/**
+* Сопуствующие файлы:
+* implementations/
+*                  Right
+*                  Validator
+*                  Wrong1
+*                  Wrong2
+*                  Wrong3
+*                  Wrong4
+* main.java.io.hexlet/
+*            Methods
+* test.jama.io.hexlet/
+*            TestsTest
+*/
+```
 ###_____ Решение Учителя ____###
+```
+package io.hexlet;
+
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static io.hexlet.Methods.makeValidator;
+
+public class MethodsTest {
+
+    @Test
+    public void testValidator() {
+        //BEGIN
+        var validator = makeValidator();
+        assertThat(validator.isValid(5)).isTrue();
+        assertThat(validator.isValid(null)).isTrue();
+        assertThat(validator.isValid("string")).isFalse();
+
+        validator.required();
+        assertThat(validator.isValid(null)).isFalse();
+
+        validator.positive();
+        assertThat(validator.isValid(0)).isFalse();
+        assertThat(validator.isValid(-5)).isFalse();
+        assertThat(validator.isValid(100)).isTrue();
+        //END
+    }
+}
+```
+
 
 
 
