@@ -6,4 +6,5 @@ public class App {
 
         System.out.printf("Hello and welcome!");
     }
+
 }
