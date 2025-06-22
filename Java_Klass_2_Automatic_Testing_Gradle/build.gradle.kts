@@ -21,12 +21,12 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("org.junit.platform:junit-platform-console:1.13.1")
-
+    implementation("org.apache.commons:commons-lang3:3.17.0")
 }
 
 tasks.test {
     useJUnitPlatform()
-//    testLogging {
-//        events ("passed", "skipped", "failed")
-//    }
+    testLogging {
+        events ("passed", "skipped", "failed")
+    }
 }
