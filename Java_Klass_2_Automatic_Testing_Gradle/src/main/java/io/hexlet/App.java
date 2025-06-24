@@ -7,7 +7,12 @@ import static io.hexlet.modul.Methods_45.without;
 
 public class App {
     public static void main(String[] args) {
-//        System.out.printf("Hello and welcome to App.java!");
+        /**
+         * АвтоТесты: JUnit
+         * ###_____ Задание ____###
+         * //№_45
+         */
+
         int[] numbers = {1, 2, 3, 4, 5};
         // исключаем из исходного массива числа 2 и 3
         var result = without(numbers, 2, 3);
