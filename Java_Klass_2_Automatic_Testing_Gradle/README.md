@@ -30,7 +30,7 @@ Windows PowerShell
 .\gradlew
 ```
 ###_____ Задание ____###\
-//№_45\
+№_45\
 src/test/java/io/hexlet/MethodsTest.java\
 Напишите тесты для метода without(), который принимает в качестве первого аргумента массив чисел и возвращает его копию, из которой исключены значения, переданные вторым и последующими аргументами. Если массив содержит повторяющиеся элементы с искомым значением, они все исключаются из массива (изучите примеры). Метод without() уже импортирован в файл с тестами.
 
@@ -129,6 +129,144 @@ assertArrayEquals(expected1, actual1);
         assertArrayEquals(expected4, actual4);
     }
 ```
+==============================================================================\
+###_____ Подготовка данных ____###
+
+###_____ Дополнительные материалы ____###
+1. Аннотации [Junit](https://junit.org/junit5/docs/current/user-guide/#writing-tests-annotations)
+
+###_____ Задание ____###\
+№_46\
+Напишите тесты для метода add(). Метод добавляет в список, переданный первым аргументом, элемент по указанному индексу. Если в списке уже есть элемент по такому индексу, то он и все следующие элементы сдвигаются вправо. Если индекс не передан, элемент добавляется в конец списка. В случае успешного изменения коллекции метод возвращает true. Метод меняет переданный список
+
+Метод принимает три параметра:
+
+Первый – список List, в который нужно добавить элемент
+Второй – добавляемый элемент
+Третий (необязательный) - индекс, по которому будет вставлен элемент. Если индекс не передан, элемент будет добавлен в конец списка.
+В случае, если индекс элемента выходит за пределы длины массива
+```
+(index < 0 || index > size())
+```
+, метод выбрасывает исключение IndexOutOfBoundsException
+```
+List<Integer> coll = Arrays.asList(1, 2, 3, 4);
+
+// Все вызовы нужно рассматривать, как независимые
+add(coll, 5); // true
+System.out.println(coll); // => [1, 2 ,3, 4, 5]
+
+add(coll, 5, 1); // true
+System.out.println(coll); // => [1, 5, 2 ,3, 4]
+
+add(coll, 5, 4); // true
+System.out.println(coll); // => [1, 2 ,3, 4, 5]
+```
+###_____ Подсказки ____###\
+В этом упражнении нужно будет проверить не только возвращаемое значение, но и то, что метод нужным образом меняет исходный список
+Информация по исключению дается для более полного понимания работы метода, проверять это поведение в упражнении не нужно.
+
+###_____ Решение ____###
+```
+package io.hexlet.modul;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+
+import static io.hexlet.modul.Methods_46.add;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Methods_46Test {
+List<Integer> coll = new ArrayList<>();
+
+    @BeforeEach
+    public void beforeEach() {
+        coll.addAll(Arrays.asList(1, 2, 3, 4));
+    }
+
+    @Test
+    public void test1() {
+        assertTrue(add(coll, 5));
+    }
+
+    @Test
+    public void test2() {
+        assertTrue(add(coll, 5, 2));
+    }
+
+    @Test
+    public void test3() {
+        add(coll, 5);
+        assertEquals(5, coll.getLast());
+    }
+
+    @Test
+    public void test4() {
+        add(coll, 5, 2);
+        assertEquals(5, coll.get(2));
+    }
+
+    @Test
+    public void test5() {
+        add(coll, 5, 4);
+        assertEquals(5, coll.getLast());
+    }
+}
+```
+###_____ Решение Учителя ____###
+```
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static io.hexlet.Methods.add;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+class MethodsTest {
+
+    // BEGIN
+    private List<Integer> coll = new ArrayList<>();
+
+    @BeforeEach
+    public void beforeEach() {
+        coll.addAll(Arrays.asList(1, 2, 3, 4));
+    }
+
+    @Test
+    public void testWithoutIndex() {
+        var actual = add(coll, 10);
+        var expected = List.of(1, 2, 3, 4, 10);
+        assertTrue(actual);
+        assertEquals(expected, coll);
+    }
+
+    @Test
+    public void testIndexNotExists() {
+        var actual = add(coll, 10, 4);
+        var expected = List.of(1, 2, 3, 4, 10);
+        assertTrue(actual);
+        assertEquals(expected, coll);
+    }
+
+    @Test
+    public void testIndexExists() {
+        var actual = add(coll, 10, 0);
+        var expected = List.of(10, 1, 2, 3, 4);
+        assertTrue(actual);
+        assertEquals(expected, coll);
+    }
+    // END
+}
+```
 
 
 
@@ -138,11 +276,15 @@ assertArrayEquals(expected1, actual1);
 
 
 
-//=================================================================================
+//============================================================================
+
 ###_____ Java:  ____###
-//=================================================================================
+
+//============================================================================
+
 ###_____ Задание ____###
-//№_
+
+№_
 
 ###_____ Решение ____###
 
