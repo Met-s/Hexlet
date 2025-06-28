@@ -267,9 +267,106 @@ class MethodsTest {
     // END
 }
 ```
+//============================================================================
+
+###_____ Плохие и хорошие практики тестирования ____###
+
+###_____ Задание ____###\
+№_47\
+Напишите тесты для корзины интернет-магазина. Работать с корзиной мы можем при помощи следующих методов:
+
+1. Статический метод makeCart() – создаёт новую пустую корзину (объект)
+2. Метод addItem(good, count) – добавляет в корзину товары и их количество. Товар – это объект класса Good с двумя свойствами: name (имя) и price (стоимость). Количество — целое положительное число
+3. Метод getItems() – возвращает список List<Map> товаров в формате [{good=товар, count=количество}, {good=товар, count=количество}, ...]. Каждый элемент списка – это словарь Map, содержащий товар и его количество {good, count}
+4. Метод getCost() – возвращает стоимость корзины. Стоимость корзины высчитывается как сумма стоимости всех добавленных товаров с учётом их количества.
+5. Метод getCount() – возвращает общее количество товаров в корзине.
+```
+// Создаём новый объект корзины
+var cart = makeCart();
+
+// Создаём новые товары
+var car = new Good("car", 3);
+var house = new Good("house", 10);
+
+// Добавляем их в корзину
+cart.addItem(car, 5);
+cart.addItem(house, 2);
+
+cart.getItems().size(); // 2
+cart.getCost(); // 35
+cart.getCount(); // 7
+```
+###_____ Файл ____###
+```
+public final class Good {
+private String name;
+private int price;
+
+    Good(String name, int price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+}
+```
+###_____ Решение ____###
+```
+import org.junit.jupiter.api.Test;
+
+import static io.hexlet.modul.Carts.makeCart;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
+public class CartTest_47 {
 
+    @Test
+    public void addItemCartTest() {
+        var cart = makeCart();
+
+        var car = new Good_47("car", 3);
+        var car2 = new Good_47("car2", 10);
+        cart.addItem(car, 2);
+        cart.addItem(car2, 1);
+
+        assertEquals(2, cart.getItems().size());
+        assertEquals(3, cart.getCount());
+        assertEquals(16, cart.getCost());
+    }
+}
+```
+###_____ Решение Учителя ____###
+```
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static io.hexlet.Carts.makeCart;
+
+class CartTest {
+
+    // BEGIN
+    @Test
+    public void testCart() {
+
+        var cart = makeCart();
+
+        assertEquals(0, cart.getItems().size());
+
+        var car = new Good("car", 3);
+        cart.addItem(car, 5);
+
+        assertEquals(15, cart.getCost());
+        assertEquals(5, cart.getCount());
+
+        var house = new Good("house", 10);
+        cart.addItem(house, 2);
+        assertEquals(35, cart.getCost());
+        assertEquals(7, cart.getCount());
+    }
+    // END
+}
+```
 
 
 

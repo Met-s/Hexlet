@@ -22,6 +22,9 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("org.junit.platform:junit-platform-console:1.13.1")
     implementation("org.apache.commons:commons-lang3:3.17.0")
+
+    compileOnly ("org.projectlombok:lombok:1.18.36")
+    annotationProcessor ("org.projectlombok:lombok:1.18.36")
 }
 
 tasks.test {

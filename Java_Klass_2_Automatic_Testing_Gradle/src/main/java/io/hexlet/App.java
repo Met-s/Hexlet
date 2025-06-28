@@ -1,5 +1,6 @@
 package io.hexlet;
 
+import io.hexlet.modul.Good_47;
 import io.hexlet.modul.Methods_46;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static io.hexlet.modul.Carts.makeCart;
 import static io.hexlet.modul.Methods_45.without;
 import static io.hexlet.modul.Methods_46.add;
 
@@ -71,11 +73,32 @@ public class App {
 //        Arrays.copyOf(resul);
 //
 //        System.out.println(add(result, 5));
-        List<Integer> coll1 = new ArrayList<> (coll);
-        add(coll1, 5, 2);
+//        List<Integer> coll1 = new ArrayList<> (coll);
+//        add(coll1, 5, 2);
+//
+//        System.out.println(coll1);
+//        System.out.println(add(coll1, 5));
+/**
+ *  ###_____ Задание ____###
+ *      №_47
+ */
+        // Создаём новый объект корзины
+        var cart = makeCart();
 
-        System.out.println(coll1);
-        System.out.println(add(coll1, 5));
+//        var car = new Good_47("car", 3);
+//        var house = new Good_47("house", 10);
+//
+//        cart.addItem(car, 5);
+//        cart.addItem(house, 2);
+//
+//        cart.getItems().size();
+//        cart.getCost();
+//        cart.getCount();
+        System.out.println("Cart: " + cart);
+
+
+
+
     }
 
 }
