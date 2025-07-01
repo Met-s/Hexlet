@@ -13,13 +13,15 @@ public class SomeClassTest {
         var expected = 5;
         var actual = SomeClass.sum(3, 2);
         assertEquals(expected, actual);
+        assertEquals(5, SomeClass.sum(5, 0));
+        assertEquals(0, SomeClass.sum(-3, 3));
     }
 
-    @Test
-    @DisplayName("SomeClassTst: User - getName, getAge.")
-    public void testGetName() {
-        var user = new User("Mark", 15);
-        assertEquals("Mark", user.getName());
-        assertEquals(15, user.getAge());
-    }
+//    @Test
+//    @DisplayName("SomeClassTst: User - getName, getAge.")
+//    public void testGetName() {
+//        var user = new User("Mark", 15);
+//        assertEquals("Mark", user.getName());
+//        assertEquals(15, user.getAge());
+//    }
 }

@@ -11,6 +11,9 @@ import java.util.List;
 import static io.hexlet.modul.Carts.makeCart;
 import static io.hexlet.modul.Methods_45.without;
 import static io.hexlet.modul.Methods_46.add;
+import static io.hexlet.modul.Methods_48.indexOf;
+
+
 
 
 public class App {
@@ -52,7 +55,7 @@ public class App {
 //        add(coll, 5, 4);
 //        System.out.println(coll);
 
-        List<Integer> coll = Arrays.asList(1, 2, 3, 4, 5, 6);
+//        List<Integer> coll = Arrays.asList(1, 2, 3, 4, 5, 6);
 
 //        var result = coll.add(5);
 //        System.out.println(result);
@@ -68,7 +71,7 @@ public class App {
 //
 //        add(coll, 5, 4); // true
 //        System.out.println(coll); // => [1, 2 ,3, 4, 5]
-        List<Integer> result = Arrays.asList(1, 2, 3, 4);
+//        List<Integer> result = Arrays.asList(1, 2, 3, 4);
 
 //        Arrays.copyOf(resul);
 //
@@ -83,7 +86,7 @@ public class App {
  *      №_47
  */
         // Создаём новый объект корзины
-        var cart = makeCart();
+//        var cart = makeCart();
 
 //        var car = new Good_47("car", 3);
 //        var house = new Good_47("house", 10);
@@ -94,7 +97,59 @@ public class App {
 //        cart.getItems().size();
 //        cart.getCost();
 //        cart.getCount();
-        System.out.println("Cart: " + cart);
+/**
+ *  ###_____ Задание ____###
+ *      №_48
+ */
+        var coll = List.of(1, 2, 3, 2, 5);
+
+//        var result = indexOf(coll, 2, 2); // 3
+//        var result1 = indexOf(coll, 0,-3); // -1
+//        var result2 = indexOf(coll, 2, -2); // 3
+//        var result3 = indexOf(coll, 5); // 4
+//        var result4 = indexOf(coll, 7); // -1
+
+        var collLength = coll.size();
+        var normalisedIndex = -9;
+        int value = 2;
+//        assertEquals(-1, indexOf(List.of(), 2, -1));
+
+//
+//        var result5 = indexOf(coll, value, normalisedIndex);
+
+        if (normalisedIndex < 0) {
+            if (-normalisedIndex > collLength) {
+                System.out.println("normalisedIndex" + normalisedIndex);
+                normalisedIndex = 0;
+                System.out.println("normalisedIndex: " + normalisedIndex);
+            } else {
+                normalisedIndex += collLength;
+                System.out.println("normalisedIndex += collLength : " + normalisedIndex);
+            }
+        }
+
+//        var index = -1;
+//
+//        for (int i = normalisedIndex; i < collLength; i++) {
+//            var current = coll.get(i);
+//            if (current.equals(value)) {
+////                return i;
+//                System.out.println(i);
+//            }
+//        }
+//        System.out.println(result5);
+
+
+
+//        System.out.println(result);
+//        System.out.println(result1);
+//        System.out.println(result2);
+//        System.out.println(result3);
+//        System.out.println(result4);
+
+
+
+
 
 
 

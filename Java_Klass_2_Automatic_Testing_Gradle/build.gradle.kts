@@ -1,8 +1,10 @@
 plugins {
     application
+    jacoco
     id("java")
     id("eclipse")
     id("idea")
+
 }
 
 group = "io.hexlet"
@@ -14,6 +16,11 @@ repositories {
 
 application {
     mainClass.set("io.hexlet.App")
+}
+
+jacoco {
+    toolVersion = "0.8.13"
+    reportsDirectory = layout.buildDirectory.dir("customJacocoReportDir")
 }
 
 dependencies {
@@ -31,5 +38,15 @@ tasks.test {
     useJUnitPlatform()
     testLogging {
         events ("passed", "skipped", "failed")
+    }
+    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests ru
+}
+
+tasks.jacocoTestReport { reports { xml.required.set(true) } }
+tasks.jacocoTestReport {
+    reports {
+        xml.required = true
+        csv.required = true
+        html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
     }
 }

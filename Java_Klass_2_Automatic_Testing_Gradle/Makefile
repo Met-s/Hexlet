@@ -16,3 +16,16 @@ bud:
 
 build:
 	./gradlew clean build
+
+#console:
+#	@java-console
+
+#test:
+#	@mvn test -q -o
+#
+#test-coverage:
+#	@mvn clean test -q -o -Dexec.args="-c io.hexlet.module.Methods_48Test"
+#    @mvn jacoco:report
+
+#\\wsl$\Ubuntu\home\admint\Hexlet\Java_Klass_2_Automatic_Testing_Gradle\build\jacocoHtml\index.html
+#\\wsl$\Ubuntu\home\admint\Hexlet\Java_Klass_2_Automatic_Testing_Gradle\build\jacocoHtml\index.html

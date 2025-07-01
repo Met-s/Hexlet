@@ -367,8 +367,106 @@ class CartTest {
     // END
 }
 ```
+//===========================================================================
 
+###_____ Покрытие кода тестами ____###
 
+###_____ Дополнительные материалы ____###
+
+1. Тестирование Java-кода с [JUnit](https://ru.hexlet.io/blog/posts/testirovanie-java-koda-s-junit-osnovnye-vozmozhnosti-i-primery)
+
+###_____ Задание ____###\
+//№_48\
+В нашем проекте имеется метод indexOf() для работы со списками. Программист, работавший на этом проекте до вас, недостаточно ответственно отнесся к написанию тестов. Вам нужно исправить этот недочет и дописать недостающие тесты.
+
+Чтобы понять, каких тестов не хватает, сгенерируйте отчёт по покрытию кода тестами. Для этого выполните в терминале команду make test-coverage. Чтобы увидеть подробный отчёт, нажмите кнопку "Web-доступ" в упражнении. Изучите статистику, посмотрите, какие строки кода в методе indexOf() не покрыты тестами и допишите тесты на эти случаи.
+
+src/test/java/io/hexlet/MethodsTest.java
+Допишите необходимые тесты для метода indexOf(), ориентируясь на отчёт о покрытии тестами. Метод возвращает первый индекс, по которому переданное значение может быть найдено в списке, или -1, если такого значения нет.
+
+Метод принимает три аргумента:
+
+Список List, в котором ведется поиск
+Значение, поиск которого ведется в списке
+Индекс, с которого начинается поиск элемента. Если значение отрицательное, то оно используется, как смещение с конца списка. Это не обязательный аргумент, если он не передан при вызове, поиск начинается с начала списка.
+```
+var coll = List.of(1, 2, 3, 2, 5);
+
+indexOf(coll, 2, 2); // 3
+indexOf(coll, 2); // 1
+indexOf(coll, 2, -3); // 3
+indexOf(coll, 7); // -1
+```
+###_____ Решение ____###
+```
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static io.hexlet.Methods.indexOf;
+import java.util.List;
+
+class MethodsTest {
+
+    @Test
+    public void testIndexOf() {
+        var coll = List.of(1, 2, 3, 2, 4);
+        var actual = indexOf(coll, 2, 2);
+        assertEquals(3, actual);
+
+        // BEGIN (write your solution here)
+        assertEquals(-1, indexOf(List.of(), 2));
+        assertEquals(-1, indexOf(List.of(), 2, 2));
+        assertEquals(-1, indexOf(List.of(), 2, -1));
+
+        assertEquals(1, indexOf(coll, 2));
+        assertEquals(1, indexOf(coll,2, -9));
+        assertEquals(3, indexOf(coll, 2, -2));
+        
+        assertEquals(-1, indexOf(coll, 2, -1));
+        assertEquals(-1, indexOf(coll, 2, 5));
+        assertEquals(-1, indexOf(coll, 5, 2));
+        // END
+    }
+}
+```
+###_____ Решение Учителя ____###
+```
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static io.hexlet.Methods.indexOf;
+import java.util.List;
+
+class MethodsTest {
+
+    @Test
+    public void testIndexOf() {
+        var coll = List.of(1, 2, 3, 2, 4);
+        var actual = indexOf(coll, 2, 2);
+        assertEquals(3, actual);
+
+        // BEGIN
+        var coll1 = List.of();
+        var actual1 = indexOf(coll1, 0, 1);
+        assertEquals(-1, actual1);
+
+        var coll2 = List.of(1, 2, 3, 2, 4);
+        var actual2 = indexOf(coll2, 2, -3);
+        assertEquals(3, actual2);
+
+        var coll3 = List.of(1, 2, 2);
+        var actual3 = indexOf(coll3, 2, -10);
+        assertEquals(1, actual3);
+
+        var coll4 = List.of(1, 2, 3, 2, 4);
+        var actual4 = indexOf(coll4, 2);
+        assertEquals(1, actual4);
+
+        var coll5 = List.of(5, 1, 2, 3);
+        var actual5 = indexOf(coll5, 5, 2);
+        assertEquals(-1, actual5);
+        // END
+    }
+}
+```
 
 
 
