@@ -1,4 +1,4 @@
-package io.hexlet.modul;
+package io.hexlet.module;
 
 public final class Good_47 {
     private String name;

@@ -1,11 +1,11 @@
-package io.hexlet.modul;
+package io.hexlet.module;
 
 import java.util.List;
-import io.hexlet.modul.implementations.AddRight;
-import io.hexlet.modul.implementations.AddWrong1;
-import io.hexlet.modul.implementations.AddWrong2;
-import io.hexlet.modul.implementations.AddWrong3;
-import io.hexlet.modul.implementations.AddWrong4;
+import io.hexlet.module.implementations.AddRight;
+import io.hexlet.module.implementations.AddWrong1;
+import io.hexlet.module.implementations.AddWrong2;
+import io.hexlet.module.implementations.AddWrong3;
+import io.hexlet.module.implementations.AddWrong4;
 
 
 public class Methods_46 {

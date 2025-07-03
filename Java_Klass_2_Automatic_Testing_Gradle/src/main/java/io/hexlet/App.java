@@ -1,19 +1,12 @@
 package io.hexlet;
 
-import io.hexlet.modul.Good_47;
-import io.hexlet.modul.Methods_46;
-import org.apache.commons.lang3.ArrayUtils;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import static io.hexlet.modul.Carts.makeCart;
-import static io.hexlet.modul.Methods_45.without;
-import static io.hexlet.modul.Methods_46.add;
-import static io.hexlet.modul.Methods_48.indexOf;
+import java.util.Arrays;
 
 
+import static io.hexlet.module.Methods_46.add;
+import static io.hexlet.module.Methods_48.indexOf;
+import static io.hexlet.module.Methods_49.fill;
 
 
 public class App {
@@ -101,56 +94,29 @@ public class App {
  *  ###_____ Задание ____###
  *      №_48
  */
-        var coll = List.of(1, 2, 3, 2, 5);
+//        var coll = List.of(1, 2, 3, 2, 5);
 
 //        var result = indexOf(coll, 2, 2); // 3
-//        var result1 = indexOf(coll, 0,-3); // -1
+//        var result1 = indexOf(coll, 0,-3); // -1]]
 //        var result2 = indexOf(coll, 2, -2); // 3
 //        var result3 = indexOf(coll, 5); // 4
 //        var result4 = indexOf(coll, 7); // -1
-
-        var collLength = coll.size();
-        var normalisedIndex = -9;
-        int value = 2;
-//        assertEquals(-1, indexOf(List.of(), 2, -1));
-
-//
-//        var result5 = indexOf(coll, value, normalisedIndex);
-
-        if (normalisedIndex < 0) {
-            if (-normalisedIndex > collLength) {
-                System.out.println("normalisedIndex" + normalisedIndex);
-                normalisedIndex = 0;
-                System.out.println("normalisedIndex: " + normalisedIndex);
-            } else {
-                normalisedIndex += collLength;
-                System.out.println("normalisedIndex += collLength : " + normalisedIndex);
-            }
-        }
-
-//        var index = -1;
-//
-//        for (int i = normalisedIndex; i < collLength; i++) {
-//            var current = coll.get(i);
-//            if (current.equals(value)) {
-////                return i;
-//                System.out.println(i);
-//            }
-//        }
-//        System.out.println(result5);
-
-
 
 //        System.out.println(result);
 //        System.out.println(result1);
 //        System.out.println(result2);
 //        System.out.println(result3);
 //        System.out.println(result4);
+/**
+ *  ###_____ Задание ____###
+ *      №_49
+ */
+        var coll = Arrays.asList("a", "b", "c", "d");
+
+        fill(coll, "*", 1, 3);
 
 
-
-
-
+        System.out.println(coll);
 
 
 

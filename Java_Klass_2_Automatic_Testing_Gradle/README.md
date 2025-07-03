@@ -467,8 +467,279 @@ class MethodsTest {
     }
 }
 ```
+//===========================================================================
+
+###_____ Разработка через тестирование ____###
+
+###_____ Задание ____###\
+//№_49\
+В этом упражнении вам предстоит попрактиковаться в подходе "Разработка через тестирование". Вам нужно будет написать и тесты и реализацию функции. Сначала напишите тесты и запуcтите тестирование. Тесты должны упасть. Затем напишите решение, которое будет проходить тесты.
+
+src/test/java/io/hexlet/MethodsTest.java
+Напишите тесты, проверяющие работу статического метода fill(List coll, E element, int begin, int end). Метод заполняет элементы списка переданным значением, начиная со старта и заканчивая (но не включая) конечной позицией. Метод меняет исходный список!
+
+Метод принимает следующие параметры:
+
+coll – список List, элементы которого будут заполнены element – значение, которым будут заполнены элементы списка begin – стартовая позиция. Не обязательный параметр. Если стартовая позиция не передана, заполнение будет происходить с начала списка. end– конечная позиция. Не обязательный параметр. Если конечная позиция не передана, заполнение будет происходить до конца списка.
+
+Метод работает только с неотрицательными индексами
+```
+var coll = Arrays.asList("a", "b", "c", "d");
+
+// Все вызовы нужно рассматривать, как независимые
+fill(coll, "*", 1, 3);
+System.out.println(coll); // => ["a", "*", "*", "d"]
+
+fill(coll, "*");
+System.out.println(coll); // => ["*", "*", "*", "*"]
+
+fill(coll, "*", 4, 6);
+System.out.println(coll); // => ["a", "b", "c", "d"]
+
+fill(coll, "*", 0, 10);
+System.out.println(coll); // => ["*", "*", "*", "*"]
+```
+src/main/java/io/hexlet/Fill.java\
+Реализуйте публичный статический метод fill(List coll, E element, int begin, int end), опираясь на описание и пример его работы
+
+Подсказки\
+Чтобы реализовать значения параметров по умолчанию, используйте перегрузку методов
+
+###_____ Решение ____###
+```
+package io.hexlet.module;
+
+import java.util.List;
 
 
+public class Methods_49 {
+public static <T> void fill(List<T> coll, T element, int begin, int end) {
+
+        int collSize = coll.size();
+
+
+        if ((begin > collSize) || (begin < 0)) {
+            begin = collSize;
+        }
+
+        if (end > collSize) {
+            end = collSize;
+        }
+
+        for (int i = begin; i < end; i++) {
+            coll.set(i, element);
+        }
+    }
+
+    public static <T> void fill(List<T> coll, T element, int begin) {
+
+        int end = coll.size();
+        if ((begin < 0) || (begin > end)) {
+            begin = end;
+        }
+        fill(coll, element, begin, end);
+    }
+
+    public static <T> void fill(List<T> coll, T element) {
+
+        int begin = 0;
+        int end = coll.size();
+        fill(coll, element, begin, end);
+    }
+```    
+Method_49Test
+```
+package io.hexlet.modul;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static io.hexlet.module.Methods_49.fill;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+
+public class Method_49Test {
+
+    List<String> coll = new ArrayList<>();
+
+    @BeforeEach
+    public void bforeEach() {
+        coll.addAll(Arrays.asList("a", "b", "c", "d"));
+    }
+
+
+    @Test
+    public void test() {
+
+        fill(coll, "*", 1, 3);
+        var expected = Arrays.asList("a", "*", "*", "d");
+        assertEquals(expected, coll);
+    }
+
+    @Test
+    public void test2() {
+
+        fill(coll, "*", 2);
+        var expected = Arrays.asList("a", "b", "*", "*");
+        assertEquals(expected, coll);
+    }
+
+    @Test
+    public void test3() {
+
+        fill(coll, "*");
+        var expected = Arrays.asList("*", "*", "*", "*");
+        assertEquals(expected, coll);
+    }
+    //    =================================================
+
+    @Test
+    public void test4() {
+
+        var expected = Arrays.asList("*", "*", "*", "*");
+        fill(coll, "*", 0, 10);
+        assertEquals(expected, coll);
+    }
+
+    @Test
+    public void test9() {
+        var expected = Arrays.asList("a", "b", "c", "d");
+        fill(coll, "*", 10, 2);
+        assertEquals(expected, coll);
+    }
+
+//    ====================================
+
+    @Test
+    public void test5() {
+
+        fill(coll, "*", 4, 6);
+        var expected = Arrays.asList("a", "b", "c", "d");
+        assertEquals(expected, coll);
+    }
+
+    @Test
+    public void test7() {
+        fill(coll, "*", -1, 6);
+        var expected = Arrays.asList("a", "b", "c", "d");
+        assertEquals(expected, coll);
+    }
+
+    @Test
+    public void test10() {
+        fill(coll, "*", 1, -1);
+        var expected = Arrays.asList("a", "b", "c", "d");
+        assertEquals(expected, coll);
+    }
+
+
+    @Test
+    public void test6() {
+        fill(coll, "*", -5);
+        var expected = Arrays.asList("a", "b", "c", "d");
+        assertEquals(expected, coll);
+    }
+
+    @Test
+    public void test8() {
+        fill(coll, "*", 6);
+        var expected = Arrays.asList("a", "b", "c", "d");
+        assertEquals(expected, coll);
+    }
+
+    @Test
+    public void test11() {
+
+        coll = Arrays.asList();
+        fill(coll, "*");
+        var expected = Arrays.asList();
+        assertEquals(expected, coll);
+    }
+
+
+
+}
+```
+###_____ Решение Учителя ____###
+```
+public static <T> void fill(List<T> coll, T element, int begin, int end) {
+// BEGIN
+var collLength = coll.size();
+var normalizedBegin = begin > collLength ? end : begin;
+var normalizedEnd = end > collLength ? collLength : end;
+
+        for (var i = normalizedBegin; i < normalizedEnd; i++) {
+            coll.set(i, element);
+        }
+        // END
+    }
+
+    public static <T> void fill(List<T> coll, T element, int begin) {
+
+        // BEGIN
+        fill(coll, element, begin, coll.size());
+        // END
+    }
+
+    public static <T> void fill(List<T> coll, T element) {
+
+        // BEGIN
+        fill(coll, element, 0, coll.size());
+        // END
+    }
+```
+MethodsTest
+```
+class MethodsTest {
+
+    // BEGIN
+    private List<String> coll = new ArrayList<>();;
+
+    @BeforeEach
+    public void beforeEach() {
+        coll.addAll(Arrays.asList("a", "b", "c", "d"));
+    }
+
+    @Test
+    public void testCommonCase() {
+        fill(coll, "*", 1, 3);
+        var expected = List.of("a", "*", "*", "d");
+        assertEquals(expected, coll);
+    }
+
+    @Test
+    public void testDefaultStartAndEnd() {
+        fill(coll, "*");
+        var expected = List.of("*", "*", "*", "*");
+        assertEquals(expected, coll);
+    }
+
+    @Test
+    public void testStartMoreLength() {
+        fill(coll, "*", 10, 12);
+        var expected = List.of("a", "b", "c", "d");
+        assertEquals(expected, coll);
+    }
+
+    @Test
+    public void testStartMoreOrEqualEnd() {
+        fill(coll, "*", 2, 2);
+        var expected = List.of("a", "b", "c", "d");
+        assertEquals(expected, coll);
+    }
+
+    @Test
+    public void testEndMoreLength() {
+        fill(coll, "*", 0, 10);
+        var expected = List.of("*", "*", "*", "*");
+        assertEquals(expected, coll);
+    }
+    // END
+}
+```
 
 
 //============================================================================

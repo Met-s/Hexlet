@@ -1,4 +1,4 @@
-package io.hexlet.modul.implementations;
+package io.hexlet.module.implementations;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package io.hexlet.modul;
+package io.hexlet.module;
 
 import org.apache.commons.lang3.ArrayUtils;
 import java.util.Arrays;

@@ -1,13 +1,14 @@
-package io.hexlet.modul.implementations_48;
+package io.hexlet.module.implementations_48;
 
 import java.util.List;
 
-public class Wrong4 {
+public class Wrong1 {
+
     public static <T> int indexOf(List<T> coll, T value, int fromIndex) {
         var collLength = coll.size();
 
         if (collLength == 0) {
-            return -1;
+            return 0;
         }
 
         var normalisedIndex = fromIndex;
@@ -33,6 +34,11 @@ public class Wrong4 {
     }
 
     public static <T> int indexOf(List<T> coll, T value) {
-        return -1;
+
+        if (coll.size() == 0) {
+            return 0;
+        }
+
+        return coll.indexOf(value);
     }
 }

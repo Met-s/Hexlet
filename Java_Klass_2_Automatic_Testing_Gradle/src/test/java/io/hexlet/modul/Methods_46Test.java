@@ -3,7 +3,7 @@ package io.hexlet.modul;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
-import static io.hexlet.modul.Methods_46.add;
+import static io.hexlet.module.Methods_46.add;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

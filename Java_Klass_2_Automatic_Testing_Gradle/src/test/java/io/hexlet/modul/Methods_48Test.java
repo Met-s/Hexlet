@@ -1,9 +1,8 @@
 package io.hexlet.modul;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static io.hexlet.modul.Methods_48.indexOf;
+import static io.hexlet.module.Methods_48.indexOf;
 import java.util.List;
 
 public class Methods_48Test {

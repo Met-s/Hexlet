@@ -1,9 +1,8 @@
-package io.hexlet.modul.implementations_48;
+package io.hexlet.module.implementations_48;
 
 import java.util.List;
 
-public class Right {
-
+public class Wrong2 {
     public static <T> int indexOf(List<T> coll, T value, int fromIndex) {
         var collLength = coll.size();
 
@@ -15,7 +14,7 @@ public class Right {
 
         if (normalisedIndex < 0) {
             if (-normalisedIndex > collLength) {
-                normalisedIndex = 0;
+                return -1;
             } else {
                 normalisedIndex += collLength;
             }

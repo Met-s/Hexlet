@@ -1,10 +1,12 @@
-package io.hexlet.modul.implementations;
+package io.hexlet.module.implementations;
 
 import java.util.List;
 
-public class AddRight {
+
+public class AddWrong1 {
     public static <T> boolean add(List<T> coll, T element) {
-        return coll.add(element);
+        coll.add(0, element);
+        return true;
     }
 
     public static <T> boolean add(List<T> coll, T element, int index) {

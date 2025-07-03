@@ -1,17 +1,17 @@
-package io.hexlet.modul.implemeentations_47;
+package io.hexlet.module.implemeentations_47;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 
-import io.hexlet.modul.Good_47;
+import io.hexlet.module.Good_47;
 
 
-public final class CartWrong2 implements Cart {
+public final class CartWrong3 implements Cart {
     private List<Map> items = new ArrayList<>();
 
     public void addItem(Good_47 item, int count) {
-        items = List.of(Map.of(
+        items.add(Map.of(
                 "good", item,
                 "count", count
         ));
@@ -32,10 +32,7 @@ public final class CartWrong2 implements Cart {
     }
 
     public int getCount() {
-        return items
-                .stream()
-                .mapToInt(item -> (int) item.get("count"))
-                .sum();
+        return items.size();
     }
 }
 

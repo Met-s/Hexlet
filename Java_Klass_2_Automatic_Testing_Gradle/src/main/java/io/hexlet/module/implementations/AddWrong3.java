@@ -1,15 +1,14 @@
-package io.hexlet.modul.implementations;
+package io.hexlet.module.implementations;
 
 import java.util.List;
 
-public class AddWrong4 {
+public class AddWrong3 {
     public static <T> boolean add(List<T> coll, T element) {
-        coll.add(element);
-        return false;
+        return coll.add(element);
     }
 
     public static <T> boolean add(List<T> coll, T element, int index) {
-        coll.add(index, element);
-        return false;
+        return coll.add(element);
     }
 }
+

@@ -1,10 +1,10 @@
-package io.hexlet.modul;
+package io.hexlet.module;
 
-import io.hexlet.modul.implemeentations_47.Cart;
-import io.hexlet.modul.implemeentations_47.CartRight;
-import io.hexlet.modul.implemeentations_47.CartWrong1;
-import io.hexlet.modul.implemeentations_47.CartWrong2;
-import io.hexlet.modul.implemeentations_47.CartWrong3;
+import io.hexlet.module.implemeentations_47.Cart;
+import io.hexlet.module.implemeentations_47.CartRight;
+import io.hexlet.module.implemeentations_47.CartWrong1;
+import io.hexlet.module.implemeentations_47.CartWrong2;
+import io.hexlet.module.implemeentations_47.CartWrong3;
 
 
 public class Carts {

@@ -1,6 +1,7 @@
-package io.hexlet.modul.implemeentations_47;
+package io.hexlet.module.implemeentations_47;
 
-import io.hexlet.modul.Good_47;
+import io.hexlet.module.Good_47;
+
 import java.util.List;
 import java.util.Map;
 

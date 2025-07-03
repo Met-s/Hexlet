@@ -2,7 +2,7 @@ package io.hexlet.modul;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static io.hexlet.modul.Methods_45.without;
+import static io.hexlet.module.Methods_45.without;
 
 
 public class Methods_45Test {

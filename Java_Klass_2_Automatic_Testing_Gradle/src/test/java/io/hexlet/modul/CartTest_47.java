@@ -1,8 +1,9 @@
 package io.hexlet.modul;
 
+import io.hexlet.module.Good_47;
 import org.junit.jupiter.api.Test;
 
-import static io.hexlet.modul.Carts.makeCart;
+import static io.hexlet.module.Carts.makeCart;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
