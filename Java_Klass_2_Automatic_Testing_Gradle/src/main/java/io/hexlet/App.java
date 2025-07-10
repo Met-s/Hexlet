@@ -111,13 +111,16 @@ public class App {
  *  ###_____ Задание ____###
  *      №_49
  */
-        var coll = Arrays.asList("a", "b", "c", "d");
+//        var coll = Arrays.asList("a", "b", "c", "d");
+//        fill(coll, "*", 1, 3);
+//
+//        System.out.println(coll);
 
-        fill(coll, "*", 1, 3);
 
-
-        System.out.println(coll);
-
+        String example = "<a href=\"/users/6\">Улугбек Туйчиев</a></div></div></div></div></div>";
+        String result = example.substring(example.lastIndexOf("href=") + 5,
+                example.lastIndexOf("\">"));
+        System.out.println(result);
 
 
     }
