@@ -22,10 +22,9 @@ public class AppTest {
         return Files.readString(path).trim();
     }
 
-    private static String writeFixture(String fileName, String text) throws Exception {
+    private static void writeFixture(String fileName, String text) throws Exception {
         var path = getFixturePath(fileName);
         Files.writeString(path, text);
-        return text;
 
     }
     String text;
