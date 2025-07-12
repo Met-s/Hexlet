@@ -740,7 +740,148 @@ class MethodsTest {
     // END
 }
 ```
+###_____ Задание ____###\
+№_50\
+Протестируйте метод toHtmlList(), который преобразует различные входные форматы в выходной HTML. Поддерживаются форматы JSON, YAML
+```
+var html1 = toHtmlList("/path/to/yaml/file");
+var html2 = toHtmlList("/path/to/json/file");
+```
+Каждый из входных файлов для этого метода содержит список элементов, из которых формируется маркированный список <ul>. Входные данные и выходной HTML можно подсмотреть в фикстурах.
 
+Ваша задача — пропустить через этот метод каждый входной файл (list.json, list.yaml, list.yml) и сравнить результат работы с ожидаемым значением, находящимся в файле src/test/resources/fixtures/result.html. Метод принимает на вход путь к файлу.
+```
+var html = toHtmlList("src/test/resources/fixtures/list.json");
+System.out.println(html);
+
+// <ul>
+// <li>one</li>
+// <li>two</li>
+// <li>three</li>
+// </ul>
+```
+Подсказки
+В этом упражнении можно использовать параметризованные тесты. А можно не использовать и написать несколько отдельных тестов для различных форматов
+Файлы с данными в формате YAML могут иметь разрешение .yaml или .yml
+Построение пути до фикстур и чтение файла удобно вынести в отдельные методы
+
+###_____ Решение ____###
+```
+import org.junit.jupiter.params.ParameterizedTest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+
+import static io.hexlet.Methods.toHtmlList;
+
+class MethodsTest {
+
+    // BEGIN (write your solution here)
+    private static Path getFixturePath(String fileName) {
+        return Paths.get("src", "test", "resources", "fixtures",
+                fileName).toAbsolutePath().normalize();
+    }
+
+    private static String readFixture(String fileName) throws Exception {
+        var path = getFixturePath(fileName);
+        return Files.readString(path).trim();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"list.json", "list.yaml", "list.yml"})
+    void listHtml(String fileName) throws Exception {
+        var path = getFixturePath(fileName);
+        var expected = readFixture("result.html");
+        var actual = toHtmlList(String.valueOf(path));
+        assertEquals(expected, actual);
+    }
+    // END
+}
+```
+###_____ Решение Учителя ____###
+```
+import org.junit.jupiter.api.Test;
+// import org.junit.jupiter.params.ParameterizedTest;
+// import org.junit.jupiter.api.BeforeAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+// import org.junit.jupiter.params.provider.ValueSource;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+
+import static io.hexlet.Methods.toHtmlList;
+
+class MethodsTest {
+
+    // BEGIN
+    private static Path getFixturePath(String fileName) {
+        return Paths.get("src", "test", "resources", "fixtures", fileName)
+            .toAbsolutePath().normalize();
+    }
+
+    private static String readFixture(String fileName) throws Exception {
+        Path filePath = getFixturePath(fileName);
+        return Files.readString(filePath).trim();
+    }
+
+    @Test
+    public void testJsonToHtml() throws Exception {
+        var path = getFixturePath("list.json");
+        var expected = readFixture("result.html");
+        var actual = toHtmlList(path.toString());
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testYamlToHtml() throws Exception {
+        var path = getFixturePath("list.yaml");
+        var expected = readFixture("result.html");
+        var actual = toHtmlList(path.toString());
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testYmlToHtml() throws Exception {
+        var path = getFixturePath("list.yml");
+        var expected = readFixture("result.html");
+        var actual = toHtmlList(path.toString());
+
+        assertEquals(expected, actual);
+    }
+
+
+    // Альтернативное решение
+
+
+    // private static String expected;
+
+    // // Ожидаемый результат везде один и тот же, достаточно прочитать один раз перед всеми тестами
+    // @BeforeAll
+    // public static void beforeAll() throws Exception {
+    //     expected = readFixture("result.html");
+    // }
+
+    // // Так как тесты отличаются только форматом входных данных
+    // // мы можем использовать параметризованные тесты
+    // // Форматы, которые мы перечислили в аннотации ValueSource, передаются в тестовые метод в качестве аргумента
+    // @ParameterizedTest
+    // @ValueSource(strings = {"json", "yaml", "yml"})
+    // public void testToHtml(String type) throws Exception {
+    //     var filePath = getFixturePath("list." + type);
+    //     var actual = toHtmlList(filePath.toString());
+    //     assertEquals(expected, actual);
+    // }
+
+    // END
+}
+```
 
 //============================================================================
 
@@ -757,4 +898,5 @@ class MethodsTest {
 ###_____ Решение Учителя ____###
 
 ###_____ Страница модуля ____###
+
 ==============================================================================

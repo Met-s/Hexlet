@@ -7,10 +7,11 @@ import java.util.Arrays;
 import static io.hexlet.module.Methods_46.add;
 import static io.hexlet.module.Methods_48.indexOf;
 import static io.hexlet.module.Methods_49.fill;
+import static io.hexlet.module.Methods_50.toHtmlList;
 
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         /**
          * АвтоТесты: JUnit
          * ###_____ Задание ____###
@@ -115,14 +116,34 @@ public class App {
 //        fill(coll, "*", 1, 3);
 //
 //        System.out.println(coll);
+/**
+ *  ###_____ Страница модуля ____###
+ *  Фикстуры
+ *  Fixture
+ */
+//        String example = "<a href=\"/users/6\">Улугбек Туйчиев</a></div></div></div></div></div>";
+//        String result = example.substring(example.lastIndexOf("href=") + 5,
+//                example.lastIndexOf("\">"));
+//        System.out.println(result);
+/**
+ *  ###_____ Задание ____###
+ *      №_50
+ */
+//        var html1 = toHtmlList("/path/to/yaml/file");
+//        var html2 = toHtmlList("path/to/json/file"); // работает этот путь
+
+        var html = toHtmlList("src/test/resources/fixtures/list.yaml");
+        System.out.println(html);
 
 
-        String example = "<a href=\"/users/6\">Улугбек Туйчиев</a></div></div></div></div></div>";
-        String result = example.substring(example.lastIndexOf("href=") + 5,
-                example.lastIndexOf("\">"));
-        System.out.println(result);
+
 
 
     }
 
 }
+
+/**
+ *  ###_____ Задание ____###
+ *      №_49
+ */

@@ -29,9 +29,20 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("org.junit.platform:junit-platform-console:1.13.1")
     implementation("org.apache.commons:commons-lang3:3.17.0")
+    implementation("org.apache.commons:commons-lang3:3.0")
 
     compileOnly ("org.projectlombok:lombok:1.18.36")
     annotationProcessor ("org.projectlombok:lombok:1.18.36")
+
+    implementation ("commons-io:commons-io:2.6")
+
+    implementation ("com.fasterxml.jackson.core:jackson-databind:2.12.4")
+    implementation ("com.fasterxml.jackson.core:jackson-annotations:2.12.4")
+    implementation ("com.fasterxml.jackson.core:jackson-core:2.12.4")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.19.1")
+    testImplementation("org.assertj:assertj-core:4.0.0-M1")
+    testImplementation ("org.junit.jupiter:junit-jupiter-params:5.10.0")
+
 }
 
 tasks.test {

@@ -34,7 +34,6 @@ public class AppTest {
     public void readeText() throws Exception {
         text = readFixture("textString.txt");
     }
-
     @Test
     public void appReverseTest() throws Exception {
 
