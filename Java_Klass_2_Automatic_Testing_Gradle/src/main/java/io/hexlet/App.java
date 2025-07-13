@@ -9,6 +9,7 @@ import static io.hexlet.module.Methods_46.add;
 import static io.hexlet.module.Methods_48.indexOf;
 import static io.hexlet.module.Methods_49.fill;
 import static io.hexlet.module.Methods_50.toHtmlList;
+import static io.hexlet.testsAutomaticTesting.Methods_2.slice;
 
 import io.hexlet.testsAutomaticTesting.User;
 import net.datafaker.Faker;
@@ -140,23 +141,44 @@ public class App {
 //        System.out.println(html);
 /**
  *  ###_____ испытания Автоматическое Тестирование ____###
- *
+ *   ###_____ Задание ____###
+ *   №_1
  */
-        Faker faker = new Faker();
-//        String name = faker.name().fullName();
-        String firstName = faker.name().firstName();
-        String lastName = faker.name().lastName();
-        String email = faker.internet().emailAddress();
+//        Faker faker = new Faker();
+////        String name = faker.name().fullName();
+//        String firstName = faker.name().firstName();
+//        String lastName = faker.name().lastName();
+//        String email = faker.internet().emailAddress();
+//
+//        List<User> users = new ArrayList<>();
+//
+//        int i = 0;
+//        while (i < 15) {
+//            users.add(new User(firstName, lastName, email));
+//            i++;
+//        }
+//
+//        System.out.println(users);
+/**
+ * ###_____ Задание ____###
+ * №_2
+  */
+        var number = List.of(1, 2, 3, 4, 5);
+        var numZero = List.of();
 
-        List<User> users = new ArrayList<>();
+        var slice1 = slice(number, 1, 4);
+        System.out.println(slice1);//=> [2, 3, 4]
 
-        int i = 0;
-        while (i < 15) {
-            users.add(new User(firstName, lastName, email));
-            i++;
-        }
+        var slice2 = slice(number, -4, -2);
+        System.out.println(slice2);//=> [2, 3]
 
-        System.out.println(users);
+        var slice3 = slice(number, -8, 8);
+        System.out.println(slice3); //=> [1, 2, 3, 4, 5]
+
+        var slice4 = slice(numZero, 8, 8);
+        System.out.println(slice4);
+
+
 
 
 

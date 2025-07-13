@@ -1026,6 +1026,115 @@ class MethodsTest {
 }
 ```
 
+###_____ Задание ____###
+№_2
+
+src/test/java/io/hexlet/MethodsTest.java
+Допишите тесты для метода slice(), ориентируясь на описание, примеры работы и на отчёт о покрытии тестами. Метод возвращает новый список - копию части исходного списка. Метод принимает три параметра:
+
+coll - исходный список List
+begin - индекс, по которому начинается извлечение. Если индекс отрицательный, begin указывает смещение от конца списка
+end - индекс, по которому заканчивается извлечение (не включая элемент с индексом end). Если индекс отрицательный, end указывает смещение от конца списка
+```
+var numbers = List.of(1, 2, 3, 4, 5);
+
+var slice1 = slice(numbers, 1, 4);
+System.out.println(slice1); //=> [2, 3, 4]
+
+var slice2 = slice(numbers, -4, -2);
+System.out.println(slice2); //=> [2, 3]
+
+var slice3 = slice(numbers, -8, 8);
+System.out.println(slice3); //=> [1, 2, 3, 4, 5]
+```
+Чтобы понять, каких тестов не хватает, сгенерируйте отчёт по покрытию кода тестами. Для этого выполните в терминале команду make test-coverage. Чтобы увидеть подробный отчёт, нажмите кнопку "Web-доступ" в упражнении. Изучите статистику, посмотрите, какие строки кода в методе slice() не покрыты тестами и допишите тесты на эти случаи.
+
+###_____ Решение ____###
+```
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static io.hexlet.Methods.slice;
+import java.util.List;
+import java.util.ArrayList;
+
+class MethodsTest {
+
+    // BEGIN (write your solution here)
+    @Test
+    public void sliceTest() {
+        var numbers = List.of(1, 2, 3, 4, 5);
+        var actual = slice(numbers, 1, 4);
+        assertEquals(List.of(2, 3, 4), actual);
+
+        assertNotSame(numbers, actual);
+
+        var numbers1 = List.of();
+        var actual1 = slice(numbers1, 1, 4);
+        assertEquals(List.of(), actual1);
+
+        var actual2 = slice(numbers, -4, -2);
+        assertEquals(List.of(2, 3), actual2);
+
+        var actual3 = slice(numbers, -8, 8);
+        assertEquals(numbers, actual3);
+
+        var actual4 = slice(numbers, 1, -8);
+        assertEquals(List.of(2, 3, 4), actual4);
+    }
+    // END
+}
+```
+###_____ Решение Учителя ____###
+```
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static io.hexlet.Methods.slice;
+import java.util.List;
+import java.util.ArrayList;
+
+class MethodsTest {
+
+    // BEGIN
+    @Test
+    public void testCommonCase() {
+        var coll = List.of(1, 2, 3, 4, 5, 6);
+        var actual = slice(coll, 1, 4);
+        var expected = List.of(2, 3, 4);
+        assertEquals(expected, actual);
+        assertNotSame(coll, actual);
+    }
+
+    @Test
+    public void testEmptyCollection() {
+        var coll = new ArrayList<Integer>();
+        var actual = slice(coll, 1, 4);
+        var expected = new ArrayList<Integer>();
+        assertEquals(expected, actual);
+        assertNotSame(coll, actual);
+    }
+
+    @Test
+    public void testNegativeLimits() {
+        var coll = List.of(1, 2, 3, 4, 5, 6);
+        var actual = slice(coll, -4, -2);
+        var expected = List.of(3, 4);
+        assertEquals(expected, actual);
+        assertNotSame(coll, actual);
+    }
+
+    @Test
+    public void testMixedLimits() {
+        var coll = List.of(1, 2, 3, 4);
+        var actual = slice(coll, -10, 10);
+        var expected = List.of(1, 2, 3, 4);
+        assertEquals(expected, actual);
+        assertNotSame(coll, actual);
+    }
+    // END
+}
+```
 //============================================================================
 
 ###_____ Java:  ____###
