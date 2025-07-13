@@ -42,6 +42,7 @@ dependencies {
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.19.1")
     testImplementation("org.assertj:assertj-core:4.0.0-M1")
     testImplementation ("org.junit.jupiter:junit-jupiter-params:5.10.0")
+    implementation("net.datafaker:datafaker:2.4.2")
 
 }
 

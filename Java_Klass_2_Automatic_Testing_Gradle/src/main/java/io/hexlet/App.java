@@ -1,5 +1,6 @@
 package io.hexlet;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 
@@ -8,6 +9,9 @@ import static io.hexlet.module.Methods_46.add;
 import static io.hexlet.module.Methods_48.indexOf;
 import static io.hexlet.module.Methods_49.fill;
 import static io.hexlet.module.Methods_50.toHtmlList;
+
+import io.hexlet.testsAutomaticTesting.User;
+import net.datafaker.Faker;
 
 
 public class App {
@@ -132,8 +136,33 @@ public class App {
 //        var html1 = toHtmlList("/path/to/yaml/file");
 //        var html2 = toHtmlList("path/to/json/file"); // работает этот путь
 
-        var html = toHtmlList("src/test/resources/fixtures/list.yaml");
-        System.out.println(html);
+//        var html = toHtmlList("src/test/resources/fixtures/list.yaml");
+//        System.out.println(html);
+/**
+ *  ###_____ испытания Автоматическое Тестирование ____###
+ *
+ */
+        Faker faker = new Faker();
+//        String name = faker.name().fullName();
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String email = faker.internet().emailAddress();
+
+        List<User> users = new ArrayList<>();
+
+        int i = 0;
+        while (i < 15) {
+            users.add(new User(firstName, lastName, email));
+            i++;
+        }
+
+        System.out.println(users);
+
+
+
+
+
+
 
 
 

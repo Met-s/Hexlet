@@ -882,6 +882,149 @@ class MethodsTest {
     // END
 }
 ```
+//============================================================================
+
+###_____ Испытания Автоматизированное Тестирование ____###
+
+//============================================================================
+###_____ Задание ____###
+№_1
+
+В тестировании часто возникает необходимость работать с большими объемами повторяющихся данных. Создавать правдоподобных данные вручную очень утомительно, это не только занимает много времени, но и увеличивает риск ошибок. Чтобы упростить задачу, существуют специальные библиотеки, которые позволяют генерировать данные автоматически. Одной из таких библиотек является Datafaker. Она предоставляет множество функций для генерации разнообразных и правдоподобных данных, таких как имена, адреса, номера телефонов, электронные почты и многое другое.
+
+В этом задании мы будем проверять работу метода findByName(), который принимает список пользователей и имя. Метод возвращает список всех пользователей, чье имя соответствует переданному.
+
+Сами тесты уже написаны, но чтобы качественно проверить работу метода, нам нужно передать ему список пользователей. Составлением этого списка вам и нужно будет заняться
+
+src/main/java/io/hexlet/model/User.java
+В файле представлен класс User, который представляет пользователя в нашем приложении. Изучите, какие поля есть у класса
+
+src/test/java/io/hexlet/MethodsTest.java
+Добавьте в тесты генерацию данных пользователей. Заполните список в переменной users пользователями. Каждый пользователь — это объект класса User. Список должен содержать не менее 10 пользователей. Чтобы не делать это вручную, используйте возможности библиотеки Datafaker
+
+Подсказки
+Метод findByName() никак не меняет исходные данные, а возвращает новый список
+
+###_____ Решение ____###
+```
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.List;
+import java.util.ArrayList;
+
+import static io.hexlet.Methods.findByName;
+import io.hexlet.model.User;
+
+// BEGIN (write your solution here)
+import net.datafaker.Faker;
+import org.junit.jupiter.api.BeforeAll;
+// END
+
+class MethodsTest {
+
+    private static List<User> users = new ArrayList<>();
+
+    // BEGIN (write your solution here)
+    @BeforeAll
+    public static void beforeAll() throws Exception {
+        Faker faker = new Faker();
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String email = faker.internet().emailAddress();
+
+        int i = 0;
+        while (i < 15) {
+            users.add(new User(firstName, lastName, email));
+            i++;
+        }
+    }
+    // END
+
+    @Test
+    public void testCommonCase1() {
+        var name = users.getFirst().getFirstName();
+        var expected = users.stream().filter(u -> u.getFirstName().equals(name)).toList();
+        var actual = findByName(users, name);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testCommonCase2() {
+        var name = users.getLast().getFirstName();
+        var expected = users.stream().filter(u -> u.getFirstName().equals(name)).toList();
+        var actual = findByName(users, name);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEmptyList() {
+        var expected = List.<User>of();
+        var actual = findByName(List.<User>of(), "John");
+        assertEquals(expected, actual);
+    }
+}
+```
+###_____ Решение Учителя ____###
+```
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.List;
+import java.util.ArrayList;
+
+import static io.hexlet.Methods.findByName;
+import io.hexlet.model.User;
+
+// BEGIN
+import org.junit.jupiter.api.BeforeAll;
+import net.datafaker.Faker;
+// END
+
+class MethodsTest {
+
+    private static List<User> users = new ArrayList<>();
+
+    // BEGIN
+    private static Faker faker = new Faker();
+
+    @BeforeAll
+    public static void prepareUsers() {
+        for (var i = 0; i < 10; i++) {
+            var user = new User(
+                faker.name().fullName(),
+                faker.name().lastName(),
+                faker.internet().emailAddress()
+            );
+            users.add(user);
+        }
+    }
+    // END
+
+    @Test
+    public void testCommonCase1() {
+        var name = users.getFirst().getFirstName();
+        var expected = users.stream().filter(u -> u.getFirstName().equals(name)).toList();
+        var actual = findByName(users, name);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testCommonCase2() {
+        var name = users.getLast().getFirstName();
+        var expected = users.stream().filter(u -> u.getFirstName().equals(name)).toList();
+        var actual = findByName(users, name);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testEmptyList() {
+        var expected = List.<User>of();
+        var actual = findByName(List.<User>of(), "John");
+        assertEquals(expected, actual);
+    }
+}
+```
 
 //============================================================================
 

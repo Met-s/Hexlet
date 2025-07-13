@@ -90,6 +90,7 @@ public class Methods_50Test {
      public void testToHtml(String type) throws Exception {
          var filePath = getFixturePath("list." + type);
          var actual = toHtmlList(filePath.toString());
+
          assertEquals(expected, actual);
      }
 
