@@ -1135,6 +1135,100 @@ class MethodsTest {
     // END
 }
 ```
+###_____ Задание ____###
+
+№_3
+
+В современном цифровом мире безопасность данных становится одной из главных задач. Предположим, что в нашем приложении есть метод генерации паролей generatePassword(), который позволяет создавать пароли разного уровня сложности в зависимости от заданных параметров. Метод предоставляет возможность пользователю настраивать длину пароля, а также включать заглавные буквы, цифры и специальные символы. В этом упражнении вам предстоит проверить этот метод на корректность его работы
+
+src/test/java/io/hexlet/MethodsTest.java
+Допишите необходимые тесты для метода generatePassword(), который генерирует случайный пароль. Ориентируйтесь на описание и примеры работы метода.
+
+Метод принимает четыре параметра:
+
+Длина пароля, целое число
+Параметр, указывающий, включать ли в пароль заглавные буквы. Булево значение
+Параметр, указывающий, включать ли в пароль цифры. Булево значение
+Параметр, указывающий, включать ли в пароль спецсимволы. Булево значение
+Метод возвращает строку — сгенерированный пароль
+```
+generatePassword(5, true, true, true); // aD$1s
+generatePassword(6, true, false, false); // cFkODn
+```
+Если параметр включен, то метод гарантировано включит в пароль хотя бы один символ указанного типа
+
+Существует еще перегруженная версия метода generatePassword(), который не принимает параметров. Метод генерирует пароль длиной 5 символов, который содержит только латинские буквы в нижнем регистре
+```
+generatePassword(); // hobsl
+```
+Подсказки
+В упражнении есть класс TestUtils с различными методами для проверки строк. Изучите эти методы, возможно они вам пригодятся
+
+###_____ Решение ____###
+```
+@Test
+public void generatePasswordTrueTest() {
+var actual = generatePassword(8, true, true, true);
+
+        assertTrue(actual.length() == 8);
+        assertTrue(containsUpperCase(actual));
+        assertTrue(containsDigits(actual));
+        assertTrue(containsSpecialChars(actual));
+    }
+
+    @Test
+    public void generatePasswordFalseTest1() {
+        var actual = generatePassword(6, false, false, false);
+
+        assertEquals(false, containsUpperCase(actual));
+        assertEquals(false, containsDigits(actual));
+        assertEquals(false, containsSpecialChars(actual));
+
+    }
+
+    @Test
+    public void generatePasswordDefaultTest() {
+        var actual = generatePassword();
+
+        System.out.println(actual);
+        assertTrue(actual.length() == 5);
+        assertTrue(isLowerCaseAlphabetic(actual));
+    }
+```
+###_____ Решение Учителя ____###
+```
+@Test
+public void testDefaultCase() {
+var actual = generatePassword();
+assertEquals(5, actual.length());
+assertTrue(TestUtils_3.isLowerCaseAlphabetic(actual), "default pass" +
+" should only include lowercase letters");
+}
+
+    @Test
+    public void testUpcaseRule() {
+        var actual = generatePassword(10, true, false, false);
+        assertEquals(10, actual.length());
+        assertTrue(TestUtils_3.containsUpperCase(actual), "the password " +
+                "must contain at least one capital letter");
+    }
+
+    @Test
+    public void testDigitsRule() {
+        var actual = generatePassword(10, false, true, false);
+        assertEquals(10, actual.length());
+        assertTrue(TestUtils_3.containsDigits(actual), "the password must " +
+                "contain at least one digit");
+    }
+
+    @Test
+    public void testSpecialCharRule() {
+        var actual = generatePassword(10, false, false, true);
+        assertEquals(10, actual.length());
+        assertTrue(TestUtils_3.containsSpecialChars(actual), "the password " +
+                "must contain at least one special char");
+    }
+```
 //============================================================================
 
 ###_____ Java:  ____###

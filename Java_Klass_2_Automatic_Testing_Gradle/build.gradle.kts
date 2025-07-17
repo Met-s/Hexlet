@@ -43,6 +43,7 @@ dependencies {
     testImplementation("org.assertj:assertj-core:4.0.0-M1")
     testImplementation ("org.junit.jupiter:junit-jupiter-params:5.10.0")
     implementation("net.datafaker:datafaker:2.4.2")
+    implementation("org.passay:passay:1.6.6")
 
 }
 

@@ -13,6 +13,9 @@ import static io.hexlet.testsAutomaticTesting.Methods_2.slice;
 
 import io.hexlet.testsAutomaticTesting.User;
 import net.datafaker.Faker;
+import static io.hexlet.testsAutomaticTesting.Methods_3.generatePassword;
+import static io.hexlet.testsAutomaticTesting.TestUtils_3.containsUpperCase;
+
 
 
 public class App {
@@ -163,20 +166,32 @@ public class App {
  * ###_____ Задание ____###
  * №_2
   */
-        var number = List.of(1, 2, 3, 4, 5);
-        var numZero = List.of();
+//        var number = List.of(1, 2, 3, 4, 5);
+//        var numZero = List.of();
+//
+//        var slice1 = slice(number, 1, 4);
+//        System.out.println(slice1);//=> [2, 3, 4]
+//
+//        var slice2 = slice(number, -4, -2);
+//        System.out.println(slice2);//=> [2, 3]
+//
+//        var slice3 = slice(number, -8, 8);
+//        System.out.println(slice3); //=> [1, 2, 3, 4, 5]
+//
+//        var slice4 = slice(numZero, 8, 8);
+//        System.out.println(slice4);
+/**
+ * ###_____ Задание ____###
+ * №_3
+ */
+        var password = generatePassword(5, true, true, true);
+        var password2 = generatePassword(6, true, false, false);
+        var password3 = generatePassword();
+        System.out.println(password);//=> V0#j~
+        System.out.println(password2);//=> VjwWHw
+        System.out.println(password3);//=> gajkz
 
-        var slice1 = slice(number, 1, 4);
-        System.out.println(slice1);//=> [2, 3, 4]
-
-        var slice2 = slice(number, -4, -2);
-        System.out.println(slice2);//=> [2, 3]
-
-        var slice3 = slice(number, -8, 8);
-        System.out.println(slice3); //=> [1, 2, 3, 4, 5]
-
-        var slice4 = slice(numZero, 8, 8);
-        System.out.println(slice4);
+        System.out.println(containsUpperCase(password));
 
 
 
@@ -191,6 +206,8 @@ public class App {
 
 
     }
+
+
 
 }
 
