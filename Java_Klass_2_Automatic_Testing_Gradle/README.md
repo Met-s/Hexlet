@@ -887,7 +887,9 @@ class MethodsTest {
 ###_____ Испытания Автоматизированное Тестирование ____###
 
 //============================================================================
+
 ###_____ Задание ____###
+
 №_1
 
 В тестировании часто возникает необходимость работать с большими объемами повторяющихся данных. Создавать правдоподобных данные вручную очень утомительно, это не только занимает много времени, но и увеличивает риск ошибок. Чтобы упростить задачу, существуют специальные библиотеки, которые позволяют генерировать данные автоматически. Одной из таких библиотек является Datafaker. Она предоставляет множество функций для генерации разнообразных и правдоподобных данных, таких как имена, адреса, номера телефонов, электронные почты и многое другое.
@@ -1027,6 +1029,7 @@ class MethodsTest {
 ```
 
 ###_____ Задание ____###
+
 №_2
 
 src/test/java/io/hexlet/MethodsTest.java
@@ -1229,6 +1232,169 @@ assertTrue(TestUtils_3.isLowerCaseAlphabetic(actual), "default pass" +
                 "must contain at least one special char");
     }
 ```
+###_____ Задание ____###
+
+№_4
+
+Работа с данными в различных форматах является неотъемлемой частью разработки. Форматы, такие как YAML и JSON, широко используются для хранения и передачи структурированных данных. Важно, чтобы данные были правильно отформатированы для удобства чтения и обработки.
+
+В этом упражнении мы сосредоточимся на тестировании форматера, который преобразовывает список в указанный формат — YAML или JSON
+
+Форматер принимает два параметра:
+
+Список строк List<String>, это исходные данные
+Формат данных, в который будет преобразован исходный список. Формат данных - строка. Форматер поддерживает два формата - json и yml
+Форматер возвращает строку - отформатированный в указанный формат список. Если передан неподдерживаемый формат, метод выбрасывает исключение IllegalArgumentException
+```
+var coll = List.of("apple", "lemon", "pear");
+
+format(coll, "json"); // => ["apple","lemon","pear"]
+
+format(coll, "yml"); // =>
+// ---
+// - "apple"
+// - "lemon"
+// - "pear"
+```
+src/test/java/io/hexlet/FormatterTest.java
+Напишите тесты, проверяющие работу форматтера
+
+Подсказки
+Порассуждайте, где лучше хранить данные для тестов
+Выброс исключения форматером в этом упражнении проверять не нужно. Но если очень хочется, то можно
+
+###_____ Решение ____###
+```
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
+import static io.hexlet.Formatters.format;
+
+class FormatterTest {
+
+    // BEGIN (write your solution here)
+    private static Path getFixturePath(String fileName) {
+        return Paths.get("src", "test", "resources",
+                "fixtures", fileName).toAbsolutePath().normalize();
+    }
+
+    private static String readFixture(String fileName) throws Exception {
+        Path filePath = getFixturePath(fileName);
+        return Files.readString(filePath).trim();
+    }
+
+    static ArrayList<String> coll = new ArrayList<>();
+
+    @BeforeAll
+    public static void beforeAll() {
+        coll.addAll(List.of("apple", "lemon", "pear"));
+    }
+
+    @Test
+    public void testStringToJson() throws Exception {
+
+        var expected = readFixture("list.json");
+        var actual = format(coll, "json");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testStringToYaml() throws Exception {
+
+        var expected = readFixture("list.yaml");
+        var actual = format(coll, "yaml");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testStringToYml() throws Exception {
+
+        var expected = readFixture("list.yml");
+        var actual = format(coll, "yml");
+        assertEquals(expected, actual);
+    }
+    // END
+}
+```
+###_____ Решение Учителя ____###
+```
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
+import static io.hexlet.Formatters.format;
+
+class FormatterTest {
+
+    // BEGIN
+    private static List<String> coll;
+
+    @BeforeAll
+    public static void prepare() {
+        coll = List.of("apple", "lemon", "pear");
+    }
+
+    @Test
+    public void testYamlFormat() throws Exception {
+        var expected = readFixture("result.yml");
+        var actual = format(coll, "yaml");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testJsonFormat() throws Exception {
+        var expected = readFixture("result.json");
+        var actual = format(coll, "json");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testYamlFormatWithEmptyColl() throws Exception {
+        var expected = readFixture("empty.yml");
+        var actual = format(new ArrayList<String>(), "yaml");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testJsonFormatWithEmptyColl() throws Exception {
+        var expected = readFixture("empty.json");
+        var actual = format(new ArrayList<String>(), "json");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testWrongFormat() throws Exception {
+        assertThrows(IllegalArgumentException.class, () -> format(coll, "html"));
+    }
+
+    private static Path getFixturePath(String fileName) {
+        return Paths.get("src", "test", "resources", "fixtures", fileName)
+                .toAbsolutePath().normalize();
+    }
+
+    private static String readFixture(String fileName) throws Exception {
+        Path filePath = getFixturePath(fileName);
+        return Files.readString(filePath).trim();
+    }
+    // END
+}
+```
+
 //============================================================================
 
 ###_____ Java:  ____###

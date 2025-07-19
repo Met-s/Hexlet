@@ -11,6 +11,7 @@ import static io.hexlet.module.Methods_49.fill;
 import static io.hexlet.module.Methods_50.toHtmlList;
 import static io.hexlet.testsAutomaticTesting.Methods_2.slice;
 
+import io.hexlet.testsAutomaticTesting.Formatters_4;
 import io.hexlet.testsAutomaticTesting.User;
 import net.datafaker.Faker;
 import static io.hexlet.testsAutomaticTesting.Methods_3.generatePassword;
@@ -184,16 +185,25 @@ public class App {
  * ###_____ Задание ____###
  * №_3
  */
-        var password = generatePassword(5, true, true, true);
-        var password2 = generatePassword(6, true, false, false);
-        var password3 = generatePassword();
-        System.out.println(password);//=> V0#j~
-        System.out.println(password2);//=> VjwWHw
-        System.out.println(password3);//=> gajkz
+//        var password = generatePassword(5, true, true, true);
+//        var password2 = generatePassword(6, true, false, false);
+//        var password3 = generatePassword();
+//        System.out.println(password);//=> V0#j~
+//        System.out.println(password2);//=> VjwWHw
+//        System.out.println(password3);//=> gajkz
+//
+//        System.out.println(containsUpperCase(password));
+/**
+ * ###_____ Задание ____###
+ * №_4
+ */
+        var coll = List.of("apple", "lemon", "pear");
 
-        System.out.println(containsUpperCase(password));
+        var json = Formatters_4.format(coll, "json");
+        var yml = Formatters_4.format(coll, "yml");
 
-
+        System.out.println(json);
+        System.out.println(yml);
 
 
 
