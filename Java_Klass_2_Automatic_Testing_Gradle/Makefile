@@ -2,8 +2,10 @@ CC = java
 PUT = src/main/java/io/hexlet
 PUT_TEST = src/test/java/io/hexlet
 
+
 run:
-	@$(CC) $(PUT)/App.java
+	./gradlew run --quiet
+#	@$(CC) $(PUT)/App.java
 
 test:
 	./gradlew test
@@ -16,6 +18,13 @@ bud:
 
 build:
 	./gradlew clean build
+
+test-5T:
+	./gradlew $(PUT_TEST)/testsAutomaticTesting/Library_5Test
+
+
+
+
 
 #console:
 #	@java-console

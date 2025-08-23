@@ -11,11 +11,15 @@ import static io.hexlet.module.Methods_49.fill;
 import static io.hexlet.module.Methods_50.toHtmlList;
 import static io.hexlet.testsAutomaticTesting.Methods_2.slice;
 
+import io.hexlet.testsAutomaticTesting.Book_5;
 import io.hexlet.testsAutomaticTesting.Formatters_4;
 import io.hexlet.testsAutomaticTesting.User;
 import net.datafaker.Faker;
 import static io.hexlet.testsAutomaticTesting.Methods_3.generatePassword;
 import static io.hexlet.testsAutomaticTesting.TestUtils_3.containsUpperCase;
+
+import static io.hexlet.testsAutomaticTesting.Libraries_5.makeLibrary;
+
 
 
 
@@ -197,16 +201,35 @@ public class App {
  * ###_____ Задание ____###
  * №_4
  */
-        var coll = List.of("apple", "lemon", "pear");
+//        var coll = List.of("apple", "lemon", "pear");
+//
+//        var json = Formatters_4.format(coll, "json");
+//        var yml = Formatters_4.format(coll, "yml");
+//
+//        System.out.println(json);
+//        System.out.println(yml);
+/**
+ * ###_____ Задание ____###
+ * №_5
+ */
+//        var library = makeLibrary();
+//        library.addBook(new Book_5("Law Abiding Citizen",
+//                "Lawton MacParlan"));
+//        library.addBook(new Book_5("Aliens", "Tye Brighouse"));
+//
+//        var result = library.findBook("Aliens"); //=> Book_5(title=Aliens, author=Tye Brighouse)
+//        System.out.println(result);
+//
+//        // Книга с таким названием существует
+////        library.addBook(new Book_5("Aliens", "Tye Brighouse")); //=> UnsupportedOperationException
+//
+//        library.removeBook("Aliens"); //=> true
+//        var result1 = library.findBook("Aliens"); //=> null
+//        System.out.println(result1);
 
-        var json = Formatters_4.format(coll, "json");
-        var yml = Formatters_4.format(coll, "yml");
-
-        System.out.println(json);
-        System.out.println(yml);
-
-
-
+        // Такой книги нет
+//        library.removeBook("Not existed"); //=> NoSuchElementException
+//        Exception in thread "main" java.util.NoSuchElementException
 
 
 

@@ -271,13 +271,15 @@ class MethodsTest {
 
 ###_____ Плохие и хорошие практики тестирования ____###
 
-###_____ Задание ____###\
-№_47\
+###_____ Задание ____###
+
+№_47
+
 Напишите тесты для корзины интернет-магазина. Работать с корзиной мы можем при помощи следующих методов:
 
 1. Статический метод makeCart() – создаёт новую пустую корзину (объект)
 2. Метод addItem(good, count) – добавляет в корзину товары и их количество. Товар – это объект класса Good с двумя свойствами: name (имя) и price (стоимость). Количество — целое положительное число
-3. Метод getItems() – возвращает список List<Map> товаров в формате [{good=товар, count=количество}, {good=товар, count=количество}, ...]. Каждый элемент списка – это словарь Map, содержащий товар и его количество {good, count}
+3. Метод getItems() – возвращает список List<Map> товаров в формате[{good=товар, count=количество}, {good=товар, count=количество}, ...]. Каждый элемент списка – это словарь Map, содержащий товар и его количество {good, count}
 4. Метод getCost() – возвращает стоимость корзины. Стоимость корзины высчитывается как сумма стоимости всех добавленных товаров с учётом их количества.
 5. Метод getCount() – возвращает общее количество товаров в корзине.
 ```
@@ -1394,21 +1396,189 @@ class FormatterTest {
     // END
 }
 ```
-
-//============================================================================
-
-###_____ Java:  ____###
-
-//============================================================================
-
 ###_____ Задание ____###
 
-№_
+№_5
+
+В этом упражнении вам предстоит проверить работу книжного сервиса. Интерфейс сервиса следующий:
+
+Статический метод makeLibrary() – создаёт новую библиотеку, объект (пока пустую, без книг)
+
+Метод addBook() принимает в качестве параметра книгу и добавляет ее в библиотеку. Если операция прошла успешно, метод возвращает true
+
+Каждая книга — это объект класса Book. Конструктор книги принимает два параметра в виде строк: название книги и имя автора.
+
+Если книга с таким названием уже существует в библиотеке, метод выбрасывает исключение UnsupportedOperationException и добавление книги не происходит
+
+Метод findBook() принимает в качестве параметра название книги и ищет в библиотеке книгу с таким названием. Считаем, что название книги в библиотеке уникально. Если книга найдена, возвращает ее. Если книги нет, возвращает null. Метод ищет книги по точному совпадению названия
+
+Метод removeBook() принимает в качестве параметра название книги и удаляет из библиотеки книгу с таким названием. Метод возвращает true как сигнал успешности выполнения. Если книги с таким названием в библиотеке нет, метод выбрасывает исключение NoSuchElementException
+```
+library = makeLibrary();
+
+library.addBook(new Book("Law Abiding Citizen", "Lawton MacParlan")); // true
+library.addBook(new Book("Aliens", "Tye Brighouse")); // true
+
+library.findBook("Aliens"); // Book(title=Aliens, author=Tye Brighouse)
+
+// Книга с таким названием существует
+library.addBook(new Book("Aliens", "Tye Brighouse")); // UnsupportedOperationException
+
+library.removeBook("Aliens"); // true
+library.findBook("Aliens"); // null
+
+// Такой книги нет
+library.removeBook("Not existed"); // NoSuchElementException
+```
+src/test/java/io/hexlet/LibraryTest.java
+
+Напишите тесты, проверяющие работу сервиса
+
+Подсказки\
+Для проверки, что метод выбрасывает исключение, используйте assertThrows()
+```
+// Первый параметр - класс исключения, которое мы ожижаем получить
+// Второй параметр - лямбда, внутри которой вызов кода, выбрасывающего исключение
+
+assertThrows(NumberFormatException.class, () -> Integer.parseInt("1a"));
+```
+
+Статья про проверку [исключений](https://www.baeldung.com/junit-assert-exception)
 
 ###_____ Решение ____###
+```
+package io.hexlet.testsAutomaticTesting;
 
+import io.hexlet.testsAutomaticTesting.implementations_5.Library;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.NoSuchElementException;
+
+import static io.hexlet.testsAutomaticTesting.Libraries_5.makeLibrary;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+
+public class Library_5Test {
+
+    private Library library = makeLibrary();
+
+    @Test
+    public void makeLibraryTest() {
+        assertNotNull(library);
+    }
+
+    @BeforeEach
+    public void beforeEach() {
+        library.addBook(new Book_5("Aliens",
+                "Tye Brighouse"));
+    }
+
+    @Test
+    public void addBookTest() {
+        assertTrue(library.addBook(new Book_5(
+                "Law Abiding Citizen","Lawton MacParlan")));
+    }
+
+    @Test
+    public void findBookTest() {
+        var actual = library.findBook("Aliens");
+        Book_5 expected = new Book_5("Aliens", "Tye Brighouse");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void bookExceptionTest() {
+        assertThrows(NoSuchElementException.class,
+                () -> library.removeBook("No existed"));
+    }
+
+    @Test
+    public void addBookExceptionTest() {
+        assertThrows(UnsupportedOperationException.class,
+                () -> library.addBook(
+                        new Book_5("Aliens",
+                                "Tye Brighouse")));
+    }
+
+    @Test
+    public void removeBookTest() {
+        library.removeBook("Aliens");
+        var actual = library.findBook("Aliens");
+        assertNull(actual);
+    }
+}
+```
 ###_____ Решение Учителя ____###
+```
+package io.hexlet;
 
-###_____ Страница модуля ____###
+import io.hexlet.implementations.Library;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-==============================================================================
+import java.util.NoSuchElementException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static io.hexlet.Libraries.makeLibrary;
+
+class LibraryTest {
+
+    // BEGIN
+    private Library library;
+
+    @BeforeEach
+    public void setupLibrary() {
+        library = makeLibrary();
+        library.addBook(new Book("Law Abiding Citizen", "Lawton MacParlan"));
+        library.addBook(new Book("Aliens", "Tye Brighouse"));
+        library.addBook(new Book("Seduced and Abandoned", "Mercy Blackborough"));
+        library.addBook(new Book("Law and Order", "Mano Kinloch"));
+    }
+
+
+    @Test
+    public void testAddBook() {
+        var addedBook = new Book("Gold", "Mano Kinloch");
+        assertTrue(library.addBook(addedBook));
+
+        var actualBook = library.findBook(addedBook.getTitle());
+        assertNotNull(actualBook);
+        assertEquals(actualBook, addedBook);
+
+        var existingBook = new Book("Law and Order", "Mano Kinloch");
+        assertThrows(UnsupportedOperationException.class, () -> library.addBook(existingBook));
+    }
+
+    @Test
+    public void testRemoveBook() {
+        var bookTitleToRemove = "Aliens";
+        assertTrue(library.removeBook(bookTitleToRemove));
+        assertNull(library.findBook(bookTitleToRemove));
+
+        assertThrows(NoSuchElementException.class, () -> library.removeBook("Not existing"));
+    }
+
+    @Test
+    public void testFindBook() {
+        var existingBook = new Book("Aliens", "Tye Brighouse");
+        var actualBook = library.findBook(existingBook.getTitle());
+        assertEquals(existingBook, actualBook);
+
+        var notExistingTitle = "Law";
+        assertNull(library.findBook(notExistingTitle));
+    }
+    // END
+}
+```
+###_____ Страница с решениями ____###\
+[Библиотечный менеджер](https://ru.hexlet.io/code_reviews/1873939)
