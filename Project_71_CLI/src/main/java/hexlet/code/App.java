@@ -47,7 +47,7 @@ public class App implements Callable<String> {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
 
-//        System.out.println("Hello World!");
+        System.out.println("Hello World!");
 //        logger.info("Hello World!");
     }
 }

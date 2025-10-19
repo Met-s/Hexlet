@@ -1,7 +1,8 @@
 plugins {
     id("java")
     id("idea")
-    id ("com.github.ben-manes.versions") version "0.52.0"
+    id("com.github.ben-manes.versions") version "0.52.0"
+    id("org.sonarqube") version "7.0.0.6105"
     application
     checkstyle
 }
@@ -19,6 +20,13 @@ application {
 
 checkstyle {
     toolVersion = "10.12.4"
+}
+
+sonar {
+    properties {
+        property ("sonar.projectKey", "Met-s_Hexlet")
+        property ("sonar.organization", "met-s-1")
+    }
 }
 
 dependencies {
