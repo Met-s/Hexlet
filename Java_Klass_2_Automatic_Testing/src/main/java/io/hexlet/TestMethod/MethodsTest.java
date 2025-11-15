@@ -1,15 +1,11 @@
-package io.hexlet.testModel;
+package io.hexlet.TestMethod;
 
 //import io.hexlet.model.Methods;
-
 import java.util.Arrays;
-
-import static io.hexlet.model.Methods.take;
+import static io.hexlet.modul.Methods.take;
 
 public class MethodsTest {
-/**
- * №_40
- */
+
 //    public static void testGet() {
 //
 //        String[] strings = new String[]{"hello", "world"};
@@ -27,6 +23,9 @@ public class MethodsTest {
 //        }
 //        System.out.println("Все тесты пройдены!");
 //    }
+/**
+ * ###_____ Решение Учителя ____###
+ */
 //    public static void testGet() {
 //        String[] strings = {"zero", "one", "two", "three"};
 //        var defaultValue = "value";
@@ -51,18 +50,24 @@ public class MethodsTest {
 //            throw new AssertionError("actual4");
 //        }
 //        }
+
+
 /**
- * №_41
- */
+* №_41
+*/
     public static void testTake() {
-        int[] numbers = {1, 22, 3, 4};
 
-        var actual1 = take(numbers, 2);
-        int[] n = {1, 2};
-        assert Arrays.equals(n, actual1) : "AssertionError: actual1";
+        assert Arrays.equals(take(new int[] {1, 2, 3}, 5), new int[] {1, 2, 3}) : "AssertionError: actual1";
 
+        assert Arrays.equals(take(new int[] {}, 2), new int[] {}) : "AssertionError: actualNul2";
 
+        assert Arrays.equals(take(new int[] {1, 2, 3}, 0), new int[] {}) : "AssertionError: actual3";
 
+        assert Arrays.equals(take(new int[] {1, 2, 3}, 1), new int[] {1}) : "AssertionError: actual4";
+
+        assert Arrays.equals(take(new int[] {1, 2, 3}, -2), new int[] {}) : "AssertionError: actual5";
+
+        assert Arrays.equals(take(null, 3), null);
 
     }
 }

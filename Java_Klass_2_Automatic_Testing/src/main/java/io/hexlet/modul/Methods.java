@@ -1,21 +1,20 @@
-package io.hexlet.model;
+package io.hexlet.modul;
 
-import org.apache.commons.lang3.*;
-
+import org.apache.commons.lang3.ArrayUtils;
 
 public class Methods {
-/**
- * №_40
- */
+    /**
+     * №_40
+     */
 //    public static String get(String[] strings, int index, String value) {
 //        if (index >= strings.length || index < 0) {
 //            return value;
 //        }
 //        return strings[index];
 //    }
-/**
-* №_41
-*/
+    /**
+     * №_41
+     */
     private static String implementation = "right";
 
     private static int[] right(int[] numbers, int n) {
@@ -59,5 +58,4 @@ public class Methods {
             default -> right(numbers, n);
         };
     }
-
 }
