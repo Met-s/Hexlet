@@ -34,6 +34,5 @@ public class TestAssetDemo {
         System.out.println(absolutePath);
 
         assertEquals(expected, actual);
-
     }
 }
