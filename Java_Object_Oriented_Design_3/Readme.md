@@ -286,8 +286,321 @@ private Department department;
 }
 // END
 ````
+//=================================================================================
+
+###_____ Связь многие ко многим ____###
 
 
+###_____ Дополнительные материалы ____###
+
+1. [Виды связи мужду классами](https://ru.wikipediaorg/wiki/Информационное_моделирование_предметных_областей#Типы_взаимосвязей_между_объектами)	
+
+###_____ Задание ____###\
+№_3
+
+Представьте, что мы разрабатываем приложение по прокату автомобилей. В нашем приложении есть автомобили и пользователи. Автомобили связаны с пользователем связью многие-ко-многим. Пользователь может совершить поездку на множестве автомобилей. С другой стороны один автомобиль берут в прокат разные пользователи. Связь между сущностями реализована через третью сущность — поездку. Поездка содержит дополнительные данные — дату ее начала и завершения
+
+Структура классов в нашем приложении отображена на диаграмме:
+````
++-------------------+
+|     Customer      |
++-------------------+
+| - name: String    |
+| - rides: List     |
++-------------------+
+| + addRide()       |
+| + getName()       |
+| + setName()       |
+| + getRides()      |
++-------------------+
+^ 1
+|
+| *
++-------------------------+
+|      CarRide            |
++-------------------------+
+| - customer: Customer    |
+| - car: Car              |
+| - startedAt: LocalDate  |
+| - finishedAt: LocalDate |
++-------------------------+
+| + getCustomer()         |
+| + setCustomer  ()       |
+| + getCar()              |
+| + setCar()              |
+| + getStartedAt()        |
+| + setStartedAt()        |
+| + getFinishedAt()       |
+| + setFinishedAt()       |
++-------------------------+
+| *
+|
+v 1
++-------------------+
+|       Car         |
++-------------------+
+| - model: String   |
+| - vin: String     |
+| - rides: List     |
++-------------------+
+| + addRide()       |
+| + getModel()      |
+| + getVin()        |
+| + getRides()      |
++-------------------+
+````
+src/main/java/io/hexlet/model/Car.java\
+В классе Car допишите необходимый метод, который будет добавлять поездку в сущность автомобиля, ориентируясь на диаграмму классов
+
+src/main/java/io/hexlet/model/Customer.java\
+В классе Customer допишите необходимый метод, который будет добавлять поездку в сущность пользователя, ориентируясь на диаграмму классов
+
+src/main/java/io/hexlet/model/CarRide.java\
+В файле создайте класс CarRide, который будет представлять собой поездку на автомобиле. Этот класс будет связывать сущности пользователя и автомобиля. Добавьте в класс все необходимые свойства и методы, ориентируясь на диаграмму классов
+
+src/main/java/io/hexlet/App.java\
+В классе App реализуйте публичный статический метод getRide(), который будет создавать новую поездку. Метод принимает два параметра:
+
+Пользователь, который совершает поездку, объект класса Customer
+Автомобиль, на котором совершается поездка, объект класса Car
+Метод должен вернуть созданную поездку CarRide. В качестве даты начала поездки установите текущую дату
+````
+var car = new Car("audi a4", "1FTEX1E81AF746863");
+var customer = new Customer("Ann");
+
+var ride = App.getRide(customer, car);
+````
+Подсказки
+Перед началом работы загляните в тесты
+
+###_____ Решение ____###
+````
+package io.hexlet;
+
+import io.hexlet.model.Car;
+import io.hexlet.model.CarRide;
+import io.hexlet.model.Customer;
+
+import java.time.LocalDate;
+
+class App {
+// BEGIN (write your solution here)
+public static CarRide getRide(Customer customer, Car car) {
+var carRide = new CarRide();
+carRide.setCustomer(customer);
+carRide.setCar(car);
+carRide.setStartedAt(LocalDate.now());
+
+        return carRide;
+    }
+    // END
+}
+````
+
+````
+package io.hexlet.model;
+
+import lombok.Setter;
+import lombok.Getter;
+
+import java.util.List;
+import java.util.ArrayList;
+
+@Setter
+@Getter
+public final class Car {
+private final String model;
+private final String vin;
+
+    private List<CarRide> rides;
+
+    public Car(String model, String vin) {
+        this.model = model;
+        this.vin = vin;
+        rides = new ArrayList<>();
+    }
+
+    // BEGIN (write your solution here)
+        public void addCarRide(CarRide ride) {
+        rides.add(ride);
+    }
+
+    public void removeCarRide(CarRide ride) {
+        rides.remove(ride);
+    }
+    // END
+}
+````
+
+````
+package io.hexlet.model;
+
+// BEGIN (write your solution here)
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDate;
+
+@Getter
+public class CarRide {
+private Car car;
+private Customer customer;
+@Setter
+private LocalDate startedAt;
+@Setter
+private LocalDate finishedAt;
+
+    public void setCar(Car car) {
+        this.car = car;
+        car.addCarRide(this);
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+        customer.addCarRide(this);
+    }
+}
+// END
+````
+
+````
+package io.hexlet.model;
+
+
+
+import java.util.List;
+import java.util.ArrayList;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public final class Customer {
+
+    private String name;
+    private List<CarRide> rides;
+
+    public Customer(String name) {
+        this.name = name;
+        rides = new ArrayList<>();
+    }
+
+    // BEGIN (write your solution here)
+        public void addCarRide(CarRide ride) {
+        rides.add(ride);
+    }
+
+    public void removeCarRide(CarRide ride) {
+        rides.remove(ride);
+    }
+    // END
+}
+````
+###_____ Решение Учителя ____###
+````
+package io.hexlet;
+
+import io.hexlet.model.Car;
+import io.hexlet.model.CarRide;
+import io.hexlet.model.Customer;
+
+import java.time.LocalDate;
+
+class App {
+// BEGIN
+public static CarRide getRide(Customer customer, Car car) {
+
+        var ride = new CarRide();
+        ride.setCustomer(customer);
+        ride.setCar(car);
+        ride.setStartedAt(LocalDate.now());
+
+        customer.addRide(ride);
+        car.addRide(ride);
+
+        return ride;
+    }
+    // END
+}
+````
+
+````
+package io.hexlet.model;
+
+
+import lombok.Getter;
+
+import java.util.List;
+import java.util.ArrayList;
+
+@Getter
+public final class Car {
+private final String model;
+private final String vin;
+
+    private List<CarRide> rides;
+
+    public Car(String model, String vin) {
+        this.model = model;
+        this.vin = vin;
+        rides = new ArrayList<>();
+    }
+
+    // BEGIN
+    public void addRide(CarRide ride) {
+        rides.add(ride);
+    }
+    // END
+}
+````
+
+````
+package io.hexlet.model;
+
+// BEGIN
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDate;
+
+@Getter
+@Setter
+public final class CarRide {
+private Customer customer;
+private Car car;
+private LocalDate startedAt;
+private LocalDate finishedAt;
+}
+// END
+````
+
+````
+package io.hexlet.model;
+
+import java.util.List;
+import java.util.ArrayList;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public final class Customer {
+
+    private String name;
+    private List<CarRide> rides;
+
+    public Customer(String name) {
+        this.name = name;
+        rides = new ArrayList<>();
+    }
+
+    // BEGIN
+    public void addRide(CarRide ride) {
+        rides.add(ride);
+    }
+    // END
+}
+````
 
 
 

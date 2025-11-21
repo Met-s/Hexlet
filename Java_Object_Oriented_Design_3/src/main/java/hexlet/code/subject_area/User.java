@@ -1,33 +1,27 @@
 package hexlet.code.subject_area;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
+/**
+ Java: Объектно-ориентированный дизайн
+ ###_____ Связь многие ко многим ____###
+ //№_4
+ */
 @Setter
-public class Course {
+@Getter
+public class User {
     private String name;
-//    private List<Lesson> lessons;
     private List<CourseMember> courseMembers;
 
-    public Course(String name) {
+    public User(String name) {
         this.name = name;
-//        lessons = new ArrayList<>();
         courseMembers = new ArrayList<>();
     }
-
-//    public void addLesson(Lesson lesson) {
-//        lesson.setCourse(this);
-//        lessons.add(lesson);
-//    }
-//
-//    public void removeLesson(Lesson lesson) {
-//        lesson.setCourse(null);
-//        lessons.remove(lesson);
-//    }
 
     public void addCourseMember(CourseMember courseMember) {
         courseMembers.add(courseMember);
