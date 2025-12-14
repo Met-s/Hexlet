@@ -188,9 +188,359 @@ public class AppTest {
     }
 }
 ````
+###_____ Интерфейсы ____###
+
+###_____ Дополнительные материалы ____###
+
+1. [Создание интерфейсов](https://docs.oracle.com/javase/tutorial/java/IandI/createinterface.html)	
+2. [Метод isEmpty() интерфейса List](https://docs.oracle.com/en/java/javase/20/docs/api/java.base/java/util/List.html#isEmpty())	
+3. [Методы по умолчанию](https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html)	
+
+###_____ Задание ____###
+
+№_2
+
+src/main/java/io/hexlet/Home.java
+
+Реализуйте интерфейс Home для работы с недвижимостью. Этот интерфейс содержит два метода:
+````
+getArea() — предназначен для получения общей площади объекта недвижимости.
+compareTo() — Служит для сравнения двух объектов недвижимости по их площади.
+````
+src/main/java/io/hexlet/Flat.java
+
+Реализуйте класс Flat(), который представляет объект недвижимости — квартиру. Класс должен реализовывать интерфейс Home. Конструктор класса принимает на вход три параметра:
+````
+area — жилая площадь квартиры, число типа double
+balconyArea — площадь балкона, число типа double
+floor — этаж, на котором расположена квартира
+````
+Общая площадь квартиры складывается из жилой площади и площади балкона.
+
+Метод toString() должен возвращать представление квартиры в виде строки формата "Квартира площадью 56 метров на 5 этаже".
+
+Метод compareTo(Home another) в качестве аргумента принимает другой объект недвижимости и сравнивает их по площади. Метод должен вернуть 1, если площадь текущего объекта больше площади переданного; -1, если площадь текущего объекта меньше площади переданного и 0, если площади равны.
+````
+Home flat = new Flat(54.5, 4, 3);
+double area = flat.getArea(); // 58.5
+flat.toString(); // "Квартира площадью 58.5 метров на 3 этаже"
+src/main/java/io/hexlet/Cottage.java
+````
+Реализуйте класс Cottage(), который представляет еще один объект недвижимости — коттедж. Класс должен реализовывать интерфейс Home. Конструктор класса принимает на вход два параметра:
+````
+area — Общая площадь коттеджа, число типа double
+floorCount — количество этажей
+
+Метод toString() должен возвращать представление коттеджа в виде строки формата "2 этажный коттедж площадью 120.5 метров".
+````
+Метод compareTo(Home another) работает аналогично методу в классе Flat
+````
+Home cottage = new Cottage(135, 2);
+double area = cottage.getArea(); // 135
+cottage.toString(); // "2 этажный коттедж площадью 135 метров"
+````
+src/main/java/io/hexlet/App.java
+
+Создайте класс App с публичным статическим методом buildApartmentsList(). Метод принимает в качестве первого аргумента список List объектов недвижимости, реализующих интерфейс Home. Метод сортирует объекты по площади по возрастанию, берет первые n элементов и возвращает строковые представления этих объектов в виде списка List. Количество n элементов передаётся в метод buildApartmentsList() вторым параметром.
+````
+List<Home> apartments = new ArrayList<>(List.of(
+new Flat(41, 3, 10),
+new Cottage(125.5, 2),
+new Flat(80, 10, 2),
+new Cottage(150, 3)
+));
+
+List<String> result = App.buildApartmentsList(apartments, 3);
+System.out.println(result); // =>
+// [
+//     Квартира площадью 44.0 метров на 10 этаже,
+//     Квартира площадью 90.0 метров на 2 этаже,
+//     2 этажный коттедж площадью 125.5 метров
+// ]
+````
+###_____ Решение ____###
+
+__interface Home
+````
+package io.hexlet.model;
+
+// BEGIN (write your solution here)
+public interface Home {
+double getArea();
+int compareTo(Home another);
+}
+// END
+````
+____class Flat
+````
+package io.hexlet.model;
+
+// BEGIN (write your solution here)
+public class Flat implements Home {
+
+    private double area;
+    private double balconyArea;
+    private int floor;
+
+    public Flat(double area, double balconyArea, int floor) {
+        this.area = area;
+        this.balconyArea = balconyArea;
+        this.floor = floor;
+
+    }
+
+    @Override
+    public double getArea() {
+
+        return area + balconyArea;
+    }
+
+    @Override
+    public int compareTo(Home another) {
+
+        return Double.compare(getArea(), another.getArea());
+    }
+
+    public String toString() {
+
+        return "Квартира площадью " + getArea() + " метров на " + floor + " этаже";
+    }
+
+}
+// END
+````
+___class Cottage
+````
+// BEGIN (write your solution here)
+public class Cottage implements Home {
+
+    private double area;
+    private int floorCount;
+
+    public Cottage(double area, int floorCount) {
+        this.area = area;
+        this.floorCount = floorCount;
+    }
 
 
+    @Override
+    public double getArea() {
 
+        return area;
+    }
+
+    @Override
+    public int compareTo(Home home) {
+
+        return Double.compare(getArea(), home.getArea());
+    }
+
+    public String toString() {
+        return floorCount + " этажный коттедж площадью " + getArea() + " метров";
+    }
+}
+// END
+````
+___class App
+````
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import io.hexlet.model.Home;
+
+// BEGIN (write your solution here)
+public class App {
+public static List<String>  buildApartmentsList(List<Home> listHouses, int quantetyHouses) {
+
+        List<String> apartmentsList = new ArrayList<>();
+
+        listHouses.stream()
+                .sorted(Comparator.comparing(Home::getArea))
+                .forEach(house -> {
+                    apartmentsList.add(house.toString());
+                });
+
+        return apartmentsList.stream().limit(quantetyHouses).toList();
+    }
+}
+// END
+````
+___class AppTest
+````
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import java.util.ArrayList;
+import java.util.List;
+
+import io.hexlet.model.Home;
+import io.hexlet.model.Flat;
+import io.hexlet.model.Cottage;
+
+class AppTest {
+
+    @Test
+    void testBuildApartmentsList1() {
+        List<Home> apartments = new ArrayList<>(List.of(
+            new Flat(41, 3, 10),
+            new Cottage(125.5, 2),
+            new Flat(80, 10, 2),
+            new Cottage(150, 3)
+        ));
+
+        List<String> expected = new ArrayList<>(List.of(
+            "Квартира площадью 44.0 метров на 10 этаже",
+            "Квартира площадью 90.0 метров на 2 этаже",
+            "2 этажный коттедж площадью 125.5 метров"
+        ));
+
+        List<String> result = App.buildApartmentsList(apartments, 3);
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    void testBuildApartmentsList2() {
+        List<Home> apartments = new ArrayList<>(List.of(
+            new Cottage(100, 1),
+            new Flat(190, 10, 2),
+            new Flat(180, 30, 5),
+            new Cottage(250, 3)
+        ));
+
+        List<String> expected = new ArrayList<>(List.of(
+            "1 этажный коттедж площадью 100.0 метров",
+            "Квартира площадью 200.0 метров на 2 этаже",
+            "Квартира площадью 210.0 метров на 5 этаже",
+            "3 этажный коттедж площадью 250.0 метров"
+        ));
+
+        List<String> result = App.buildApartmentsList(apartments, 4);
+        assertThat(result).isEqualTo(expected);
+
+    }
+
+    @Test
+    void testBuildApartmentsList3() {
+        List<Home> apartments = new ArrayList<>();
+        List<String> expected = new ArrayList<>();
+        List<String> result = App.buildApartmentsList(apartments, 10);
+        assertThat(result).isEqualTo(expected);
+    }
+}
+````
+###_____ Решение Учителя ____###
+````
+// BEGIN
+public interface Home {
+int compareTo(Home home);
+
+    double getArea();
+}
+// END
+````
+
+````
+// BEGIN
+public class Flat implements Home {
+private double area;
+private int floor;
+private double balconyArea;
+
+    public Flat(double area, double balconyArea, int floor) {
+        this.area = area;
+        this.balconyArea = balconyArea;
+        this.floor = floor;
+    }
+
+    public double getArea() {
+        return this.area + balconyArea;
+    }
+
+    public String toString() {
+        return String.format("Квартира площадью %s метров на %d этаже", getArea(), floor);
+    }
+
+    public int compareTo(Home another) {
+        if (this.getArea() == another.getArea()) {
+            return 0;
+        }
+
+        if (this.getArea() > another.getArea()) {
+            return 1;
+        }
+
+        return -1;
+    }
+}
+// END
+````
+````
+// BEGIN
+public class Cottage implements Home {
+private double area;
+private int floorCount;
+
+    public Cottage(double area, int floorCount) {
+        this.area = area;
+        this.floorCount = floorCount;
+    }
+
+    public double getArea() {
+        return this.area;
+    }
+
+    public String toString() {
+        return String.format("%d этажный коттедж площадью %s метров", floorCount, getArea());
+    }
+
+    public int compareTo(Home another) {
+        if (area == another.getArea()) {
+            return 0;
+        }
+
+        if (area > another.getArea()) {
+            return 1;
+        }
+
+        return -1;
+    }
+}
+// END
+````
+````
+import java.util.List;
+import java.util.stream.Collectors;
+
+import io.hexlet.model.Home;
+
+// BEGIN
+class App {
+
+    // new
+    public static List<String> buildApartmentsList(List<Home> apartments, int count) {
+        return apartments.stream()
+            .sorted(Home::compareTo)
+            .limit(count)
+            .map(Home::toString)
+            .toList();
+    }
+    // old
+    public static List<String> buildApartmentsList2(List<Home> apartments, int count) {
+        int normalizedCount = Math.min(count, apartments.size());
+        apartments.sort(Home::compareTo);
+        List<Home> sublist = apartments.subList(0, normalizedCount);
+        return sublist.stream()
+            .map(appartment -> appartment.toString())
+            .collect(Collectors.toList());
+    }
+}
+// END
+````
+
+###_____ Полиморфизм ____###
 
 
 
