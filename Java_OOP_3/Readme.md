@@ -539,8 +539,237 @@ class App {
 }
 // END
 ````
-
 ###_____ Полиморфизм ____###
+
+###_____ Дополнительные материалы ____###
+
+1. [Полиморфизм подтипов](https://ru.wikipedia.org/wiki/Полиморфизм_(информатика)#Полиморфизм_подтипов)
+
+###_____ Задание ____###
+
+№_3
+
+В программировании, для некоторых задач распространены key-value базы данных. Внешне они работают по принципу словарей, но живут как отдельные программы и умеют делать много полезного: например, сохранять данные на диск, переносить данные между машинами в сети и тому подобное.
+
+В целях тестирования бывает полезно иметь реализацию такой базы данных с таким же интерфейсом, но которая хранит данные в памяти, а не во внешнем хранилище. Это позволяет легко сбрасывать состояние между тестами и не замедлять их. В этом упражнении вам предстоит реализовать такую базу данных.
+
+src/main/java/io/hexlet/InMemoryKV.java
+Задачи
+Реализуйте класс InMemoryKV, который представляет собой in-memory key-value хранилище. Данные внутри него хранятся в обычном словаре Map. Класс должен реализовывать интерфейс KeyValueStorage. Конструктор класса принимает на вход словарь Map, который становится начальным значением базы данных. Ключи и значения в словаре представлены строками. Интерфейс этого класса вы можете посмотреть в файле
+
+main/java/exercise/KeyValueStorage.java.
+Реализуйте в классе следующие интерфейсные методы:
+
+• set() — добавляет в словарь новое значение по указанному ключу (или меняет значение, если ключ уже существует).
+
+• unset() — удаляет из словаря значение по переданному ключу
+
+• get() — возвращает значение по указанному ключу. Если такого ключа в словаре нет, возвращает значение по умолчанию.
+
+• toMap() — возвращает базу данных в виде словаря Map.
+````
+KeyValueStorage storage = new InMemoryKV(Map.of("key", "10"));
+// Получение значения по ключу
+storage.get("key", "default"); // "10"
+storage.get("unknown", "default"); // "default"
+// Установка нового значения
+storage.set("key2", "value2");
+storage.get("key2", "default"); // "value2"
+// Удаление ключа
+storage.unset("key2");
+storage.get("key2", "default"); // "default"
+// Получение всех данных из базы
+Map<String, String> data = storage.toMap();
+System.out.println(data); // => {key=10};
+````
+src/main/java/io/hexlet/App.java
+
+Создайте класс App с публичным статическим методом swapKeyValue(). Метод принимает на вход объект базы данных и меняет в нём ключи и значения местами. swapKeyValue() — полиморфный метод, он может работать с любой реализацией базы данных, реализующей интерфейс KeyValueStorage.
+````
+KeyValueStorage storage = new InMemoryKV(Map.of("key", "value", "key2", "value2"));
+App.swapKeyValue(storage);
+storage.get("key", "default"); // "default"
+storage.get("value", "default"); // "key"
+
+System.out.println(storage.toMap()); // => {value=key, value2=key2}
+````
+Подсказка
+
+Изучите тесты
+
+###_____ Решение ____###
+
+class InMemoryKV
+````
+class InMemoryKV implements KeyValueStorage {
+
+    private Map<String, String> data = new HashMap<>();
+
+    InMemoryKV(Map<String, String> initial) {
+        data.putAll(initial);
+    }
+
+    public void set(String key, String value) {
+        data.put(key, value);
+    }
+
+    public void unset(String key) {
+        data.remove(key);
+    }
+
+    public String get(String key, String defaultValue) {
+        return data.getOrDefault(key, defaultValue);
+    }
+
+    public Map<String, String> toMap() {
+        return new HashMap<>(data);
+    }
+}
+// END
+````
+class App
+````
+public static void swapKeyValue (KeyValueStorage date) {
+Map<String, String> map = date.toMap();
+
+        Set<Entry<String, String>> set = map.entrySet();
+
+        for (Entry<String, String> entry : set) {
+            date.unset(entry.getKey());
+            date.set(entry.getValue(), entry.getKey());
+        }
+    }
+    
+````
+interface KeyValueStorage
+````
+import java.util.Map;
+
+interface KeyValueStorage {
+void set(String key, String value);
+void unset(String key);
+String get(String key, String defaultValue);
+Map<String, String> toMap();
+}
+````
+class AppTest
+````
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import java.util.Map;
+
+class AppTest {
+@Test
+void testSwapKV() {
+KeyValueStorage storage = new InMemoryKV(Map.of("key", "value"));
+storage.set("key2", "value2");
+App.swapKeyValue(storage);
+
+        assertThat(storage.get("key3", "default")).isEqualTo("default");
+        assertThat(storage.get("value", "")).isEqualTo("key");
+        assertThat(storage.get("value2", "")).isEqualTo("key2");
+    }
+
+    @Test
+    void testSwapKV2() {
+        KeyValueStorage storage = new InMemoryKV(Map.of("foo", "bar", "bar", "zoo"));
+        App.swapKeyValue(storage);
+        Map<String, String> expected = Map.of("bar", "foo", "zoo", "bar");
+        assertThat(storage.toMap()).isEqualTo(expected);
+    }
+}
+````
+class InMemoryKVTest
+````
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import java.util.Map;
+import java.util.HashMap;
+
+
+class InMemoryKVTest {
+
+    @Test
+    void inMemoryKVTest() {
+        KeyValueStorage storage = new InMemoryKV(Map.of("key", "10"));
+        assertThat(storage.get("key2", "default")).isEqualTo("default");
+        assertThat(storage.get("key", "default")).isEqualTo("10");
+
+        storage.set("key2", "value2");
+        storage.set("key", "value");
+
+        assertThat(storage.get("key2", "default")).isEqualTo("value2");
+        assertThat(storage.get("key", "default")).isEqualTo("value");
+
+        storage.unset("key");
+        assertThat(storage.get("key", "def")).isEqualTo("def");
+        assertThat(storage.toMap()).isEqualTo(Map.of("key2", "value2"));
+
+    }
+
+    @Test
+    void mustBeImmutableTest() {
+        Map<String, String> initial = new HashMap<>();
+        initial.put("key", "10");
+
+        Map<String, String> clonedInitial = new HashMap<>();
+        clonedInitial.putAll(initial);
+
+        KeyValueStorage storage = new InMemoryKV(initial);
+
+        initial.put("key2", "value2");
+        assertThat(storage.toMap()).isEqualTo(clonedInitial);
+
+        Map<String, String> map = storage.toMap();
+        map.put("key2", "value2");
+        assertThat(storage.toMap()).isEqualTo(clonedInitial);
+    }
+}
+````
+###_____ Решение Учителя ____###
+
+class App
+````
+// BEGIN
+class App {
+public static void swapKeyValue(KeyValueStorage storage) {
+Map<String, String> data = storage.toMap();
+Set<Entry<String, String>> entries = data.entrySet();
+entries.forEach(entry -> storage.unset(entry.getKey()));
+entries.forEach(entry -> storage.set(entry.getValue(), entry.getKey()));
+}
+}
+// END
+````
+class InMemoryKV
+````
+// BEGIN
+class InMemoryKV implements KeyValueStorage {
+
+    private Map<String, String> data = new HashMap<>();
+
+    InMemoryKV(Map<String, String> initial) {
+        data.putAll(initial);
+    }
+
+    public void set(String key, String value) {
+        data.put(key, value);
+    }
+
+    public void unset(String key) {
+        data.remove(key);
+    }
+
+    public String get(String key, String defaultValue) {
+        return data.getOrDefault(key, defaultValue);
+    }
+
+    public Map<String, String> toMap() {
+        return new HashMap<>(data);
+    }
+}
+// END
+````
 
 
 

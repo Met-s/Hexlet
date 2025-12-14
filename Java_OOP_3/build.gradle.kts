@@ -24,6 +24,7 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:3.18.0")
     compileOnly ("org.projectlombok:lombok:1.18.36")
     annotationProcessor ("org.projectlombok:lombok:1.18.36")
+    implementation("tools.jackson.core:jackson-databind:3.0.2")
 }
 
 tasks.test {

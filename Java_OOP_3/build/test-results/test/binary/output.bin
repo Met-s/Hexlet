@@ -1,0 +1,8 @@
+initial{key=10}
+clonedInitial{key=10}
+storage1{key=10}
+storage1.toMap(): {key=10}
+clonedInitial: {key=10}
+'map.toString(): {key2=value2, key=10}
+storage1.toMap(): {key=10}
+clonedInitial: {key=10}

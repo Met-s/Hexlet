@@ -5,14 +5,22 @@ import hexlet.code.exercise1.Segment;
 import hexlet.code.exercise2.Cottage;
 import hexlet.code.exercise2.Flat;
 import hexlet.code.exercise2.Home;
+//import hexlet.code.exercise3.InMemoryKV;
+import hexlet.code.exercise3.InMemoryKV;
+import hexlet.code.exercise3.KeyValueStorage;
 import hexlet.code.interfas.Device;
 import hexlet.code.interfas.Laptop;
 import hexlet.code.interfas.PC;
 import hexlet.code.interfas.Screen;
+import hexlet.code.polymorphism.Circle;
+import hexlet.code.polymorphism.Rectangle;
+import hexlet.code.polymorphism.Shape;
+import hexlet.code.polymorphism.Square;
+import java.util.Map.Entry;
+import java.util.Map;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 //import java.util.*;
 
@@ -104,19 +112,63 @@ public class App {
 //        System.out.println("AreaCottage is " + areaCottage);
 //        System.out.println("cottage.toString()" + cottage.toString());
 
-        List<Home> apartments = new ArrayList<>(List.of(
-                new Flat(41, 3, 10),
-                new Cottage(125.5, 2),
-                new Flat(80, 10, 2),
-                new Cottage(150, 3)
-        ));
+//        List<Home> apartments = new ArrayList<>(List.of(
+//                new Flat(41, 3, 10),
+//                new Cottage(125.5, 2),
+//                new Flat(80, 10, 2),
+//                new Cottage(150, 3)
+//        ));
+//
+//        List<String> resultSort = App.buildApartmentsList(apartments, 3);
+//        System.out.println(resultSort);
+/**
+ * ###_____ Страница модуля ____###
+ * Пщлиморфизм
+ * №_3
+ */
+//        List<Shape> shapes = List.of(
+//                new Square(2),
+//                new Square(3),
+//                new Rectangle(1, 2),
+//                new Rectangle(1, 3),
+//                new Circle(1)
+//        );
+//
+//        System.out.println(getTotalArea(shapes));
+/**
+ *  ###_____ Задание ____###
+ *  Пщлиморфизм
+ * №_3
+ */
+//        KeyValueStorage storage = new InMemoryKV(Map.of("key", "10"));
 
-        List<String> resultSort = App.buildApartmentsList(apartments, 3);
-        System.out.println(resultSort);
+//        storage.get("key", "default");
+//
+//        Map<String, String> storageMap = new java.util.HashMap<>(Map.of("key", "value"));
+//        storageMap.put("key1", "value1");
+////        System.out.println(storage.toMap());
+//        System.out.println(storageMap);
+//
+//        storage.set("key2", "value2");
+////        System.out.println(storage);
+////        storage.set()
+//
+//        App.swapKeyValue(storage);
+//        System.out.println(storage.toMap());
+//
+//
+////        KeyValueStorage storage = new InMemoryKV(Map.of("key", "value", "key2", "value2"));
+////        App.swapKeyValue(storage);
+//         // "default"
+//         // "key"
+//
+//        System.out.println(storage.get("key", "default"));
+//        System.out.println(storage.get("value", "default"));
+//        System.out.println(storage.toMap()); // => {value=key, value2=key2}
 
 
     }
-
+// --------
 //    public static int getAvgRam(List <Device> devices) {
 //        int result = 0;
 //
@@ -125,19 +177,51 @@ public class App {
 //        }
 //        return result / devices.size();
 //    }
+// --------
+/**
+ * ###_____ Интерфейсы ____###
+ * №_2 к заданию
+ */
 
-    public static List<String> buildApartmentsList(List<Home> listHouses, int quantetyHouses) {
+//    public static List<String> buildApartmentsList(List<Home> listHouses, int quantetyHouses) {
+//
+//        List<String> apartmentsList = new ArrayList<>();
+//
+//        listHouses.stream()
+//                .sorted(Comparator.comparing(Home::getArea))
+//                .forEach(house -> {
+//                    apartmentsList.add(house.toString());
+//                });
+//
+//
+//
+//        return apartmentsList.stream().limit(quantetyHouses).toList();
+//    }
+/**
+ * ###_____ Полиморфизм ____###
+ * метод для подсчета площади
+ */
+//    public static double getTotalArea(List<Shape> shapes) {
+//        double result = 0;
+//
+//        for (Shape shape : shapes) {
+//            result += shape.getArea();
+//        }
+//        return result;
+//    }
+/**
+ *  ###_____ Задание ____###
+ *  Пщлиморфизм
+ * №_3 к заданию
+ */
+    public static void swapKeyValue (KeyValueStorage date) {
+        Map<String, String> map = date.toMap();
 
-        List<String> apartmentsList = new ArrayList<>();
+        Set<Entry<String, String>> set = map.entrySet();
 
-        listHouses.stream()
-                .sorted(Comparator.comparing(Home::getArea))
-                .forEach(house -> {
-                    apartmentsList.add(house.toString());
-                });
-
-
-
-        return apartmentsList.stream().limit(quantetyHouses).toList();
+        for (Entry<String, String> entry : set) {
+            date.unset(entry.getKey());
+            date.set(entry.getValue(), entry.getKey());
+        }
     }
 }
