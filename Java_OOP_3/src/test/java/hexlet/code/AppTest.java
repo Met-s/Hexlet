@@ -26,14 +26,14 @@ public class AppTest {
         now = LocalDate.now();
     }
 
-    @Disabled
-    @Test
-    @DisplayName("Test App.main Hello World!")
-    public void testMain() {
-        App.main(null);
-        assertEquals("Hello World!",
-                output.toString(StandardCharsets.UTF_8).trim());
-    }
+//    @Disabled
+//    @Test
+//    @DisplayName("Test App.main Hello World!")
+//    public void testMain() {
+//        App.main(null);
+//        assertEquals("Hello World!",
+//                output.toString(StandardCharsets.UTF_8).trim());
+//    }
 
     @Disabled
     @Test

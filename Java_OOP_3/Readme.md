@@ -771,6 +771,213 @@ class InMemoryKV implements KeyValueStorage {
 // END
 ````
 
+###_____ Паттерны ____###
+
+###_____ Дополнительные материалы ____###
+
+1. [Рефакторинг.Гуру](https://refactoring.guru/ru)
+
+###_____ Задание ____###
+
+№_4
+
+В этом задании мы будем работать с HTML-тегами. Каждый класс, реализующий интерфейс TagInterface, представляет собой тег HTML. Единственный метод render() этого интерфейса позволяет получить текстовое представление тега:
+````
+TagInterface tag = new InputTag("submit", "Save");
+tag.render(); // <input type="submit" value="Save">
+````
+Предположим, что эта система нужна для генерации разных кусков верстки, которая может быть очень разнообразной. Попробуйте ответить на вопрос, сколько понадобится классов для представления всех возможных комбинаций тегов?
+
+Если создавать по классу на каждый возможный вариант верстки, то классов будет бесконечно много и смысла в такой реализации очень мало. Но вместо этого лучше использовать композицию. Создать класс для каждого индивидуального тега (в html5 их около 100 штук), а затем путем комбинирования получить все возможные варианты верстки.
+
+src/main/java/io/hexlet/TagInterface.java
+
+Реализуйте интерфейс TagInterface. В интерфейсе есть один метод render(), который возвращает строковое представление тега
+
+src/main/java/io/hexlet/InputTag.java
+
+Реализуйте класс InputTag, который реализует интерфейс TagInterface. Класс представляет собой HTML-тег
+`<input>`. 
+Этот тег определяет поле ввода, в которое пользователь может вводить данные. Конструктор класса принимает два строковых параметра: значения атрибутов type и value
+````
+TagInterface tag = new InputTag("submit", "Save");
+tag.render(); // <input type="submit" value="Save">
+````
+src/main/java/io/hexlet/LabelTag.java
+
+Реализуйте класс LabelTag, который реализует интерфейс TagInterface и умеет оборачивать другие теги. Конструктор класса принимает два параметра: текстовое значение тега в виде строки и дочерний тег - любой объект, реализующий TagInterface
+````
+TagInterface inputTag = new InputTag("submit", "Save");
+TagInterface labelTag = new LabelTag("Press Submit", inputTag);
+labelTag.render();
+// <label>Press Submit<input type="submit" value="Save"></label>
+````
+Подсказки
+
+• [Паттерн Декоратор](https://ru.wikipedia.org/wiki/Декоратор_(шаблон_проектирования))\
+• [Тег `<label>`](https://developer.mozilla.org/ru/docs/Web/HTML/Element/label)\
+• [Тег `<input>`](https://developer.mozilla.org/ru/docs/Web/HTML/Element/input)
+
+###_____ Решение ____###
+
+class InputTag
+````
+// BEGIN (write your solution here)
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+public class InputTag implements TagInterface {
+
+    private String type;
+    private String value;
+
+    @Override
+    public String render() {
+        return "<input type=\"" + type + "\" value=\"" + value + "\">";
+    }
+}
+// END
+````
+class LabelTag
+````
+// BEGIN (write your solution here)
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+public class LabelTag implements TagInterface {
+
+    private String teg;
+    private TagInterface childTag;
+
+    @Override
+    public String render() {
+
+        return "<label>" + teg + childTag.render() + "</label>";
+    }
+}
+// END
+````
+interface TagInterface
+````
+// BEGIN (write your solution here)
+public interface TagInterface {
+String render();
+}
+// END
+````
+AppTest
+````
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeAll;
+
+
+class AppTest {
+
+    private static String expectedInput;
+    private static String expectedLabel;
+
+    @BeforeAll
+    public static void beforeAll() throws Exception {
+        expectedInput = readFixture("input.html");
+        expectedLabel = readFixture("label.html");
+    }
+
+    @Test
+    void testInput()  {
+        TagInterface inputTag = new InputTag("submit", "Save");
+        var actual = inputTag.render();
+
+        assertThat(actual).isEqualTo(expectedInput);
+    }
+
+    @Test
+    void testLabel()  {
+        TagInterface inputTag = new InputTag("submit", "Save");
+        TagInterface labelTag = new LabelTag("Press Submit", inputTag);
+        var actual = labelTag.render();
+
+        assertThat(actual).isEqualTo(expectedLabel);
+    }
+
+    private static Path getFixturePath(String fileName) {
+        return Paths.get("src", "test", "resources", "fixtures", fileName)
+            .toAbsolutePath().normalize();
+    }
+
+    private static String readFixture(String fileName) throws Exception {
+        Path filePath = getFixturePath(fileName);
+        return Files.readString(filePath).trim();
+    }
+}
+````
+input.html
+````
+<input type="submit" value="Save">
+````
+label.html
+````
+<label>Press Submit<input type="submit" value="Save"></label>
+````
+###_____ Решение Учителя ____###
+
+class InputTag
+````
+// BEGIN
+class InputTag implements TagInterface {
+
+    private String type;
+    private String value;
+
+    InputTag(String type, String value) {
+        this.type = type;
+        this.value = value;
+    }
+
+    public String render() {
+        return "<input type=\"" + this.type + "\" value=\"" + this.value + "\">";
+    }
+
+    @Override
+    public String toString() {
+        return render();
+    }
+}
+// END
+````
+class LabelTag
+````
+// BEGIN
+class LabelTag implements TagInterface {
+
+    private String text;
+    private TagInterface child;
+
+    LabelTag(String text, TagInterface child) {
+        this.text = text;
+        this.child = child;
+    }
+
+    public String render() {
+        return "<label>" + text + child.render() + "</label>";
+    }
+}
+// END
+````
+interface TagInterface
+````
+// BEGIN
+interface TagInterface {
+String render();
+}
+````
+
+
+
+
 
 
 

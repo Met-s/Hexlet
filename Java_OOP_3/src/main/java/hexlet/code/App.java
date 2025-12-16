@@ -8,14 +8,21 @@ import hexlet.code.exercise2.Home;
 //import hexlet.code.exercise3.InMemoryKV;
 import hexlet.code.exercise3.InMemoryKV;
 import hexlet.code.exercise3.KeyValueStorage;
+import hexlet.code.exercise4.LabelTag;
+import hexlet.code.exercise4.TagInterface;
 import hexlet.code.interfas.Device;
 import hexlet.code.interfas.Laptop;
 import hexlet.code.interfas.PC;
 import hexlet.code.interfas.Screen;
-import hexlet.code.polymorphism.Circle;
+import hexlet.code.pattern.*;
+
+//import hexlet.code.polymorphism.Circle;
 import hexlet.code.polymorphism.Rectangle;
-import hexlet.code.polymorphism.Shape;
-import hexlet.code.polymorphism.Square;
+//import hexlet.code.polymorphism.Shape;
+//import hexlet.code.polymorphism.Square;
+
+
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Map;
 
@@ -24,8 +31,14 @@ import java.util.stream.Collectors;
 
 //import java.util.*;
 
+/*
+паттерны
+ */
+import hexlet.code.exercise4.InputTag;
+
+
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 //        System.out.println("Hello World!");
 /**
  * ###_____ Страница модуля ____###
@@ -165,9 +178,134 @@ public class App {
 //        System.out.println(storage.get("key", "default"));
 //        System.out.println(storage.get("value", "default"));
 //        System.out.println(storage.toMap()); // => {value=key, value2=key2}
+/**
+ * ###_____ Страница модуля ____###
+ * Паттерны
+ * №_4
+ */
+
+/*
+###_____ Порождающие паттерны ____###
+
+    Singleton (Одиночка)
+    SimpleSingleton
+    LazySingleton
+ */
+      //  new SimpleSingleton();// Ошибка. Конструктор SimpleSingleton() приватный
+
+//        var singleton1 = SimpleSingleton.getInstance();
+//        var singleton2 = SimpleSingleton.getInstance();
+//
+//        System.out.println(singleton1 == singleton2);   // true
+//
+//        var lazySingleton1 = LazySingleton.getInstance();
+//        var lazySingleton2 = LazySingleton.getInstance();
+//        // Это один и тот же объект
+//        System.out.println(lazySingleton1 == lazySingleton2);   // true
+/*
+    Builder (Строитель)
+    class Computer
+    class ComputerBuilder
+    class Computer
+ */
+        // Создание при помощи конструктора
+//        var computer1 = new Computer(10, 1.3, 100, 0,
+//                1000, false, "");
+//
+//        // Создание при помощи собственного билдера
+//        var computer2 = new ComputerBuilder()
+//                .withRam(10)
+//                .withPower(1000)
+//                .withCpu(1.3)
+//                .withSsd(100)
+//                .build();
+//
+//        // Создание при помощи билдера, сгенерированного библиотекой Lombok
+//        var computer3 = Computer.builder()
+//                .withRam(10)
+//                .withPower(1000)
+//                .withCpu(1.3)
+//                .withSsd(100)
+//                .build();
+//
+//        System.out.println(computer2 == computer3);
+/*
+    Prototype (Прототип)
+    interface Cloneable
+    interface Shape
+    class Circle
+    class Square
+ */
+//        List<Shape> shapes = List.of(
+//                new Square(10), new Circle(10)
+//        );
+//
+//        List<Shape> newShapes = shapes.stream()
+//                .map(Shape::clone)
+//                .collect(Collectors.toList());
+//
+//        System.out.println(newShapes.toString());
+/**
+ * Структурные паттерны
+ * Composite (Компоновщик)
+ * interface Component
+ * class Window
+ * class Block
+ * class Button
+ * class TextInput
+ */
+//        var window = new Window(
+//                List.of(
+//                        new Button(),
+//                        new Button(),
+//                        new TextInput(),
+//                        new Block(
+//                                List.of(
+//                                        new Button()
+//                                )
+//                        )
+//                )
+//        );
+//        window.draw();
+/**
+ * Структурные паттерны
+ * Decorator (Декоратор)
+ * interface Order
+ * class BaseOrder
+ * class DeliveryOrder
+ * class InsOrder
+ */
+//        Order order = new BaseOrder(List.of(100, 500, 100)); // 700
+//        order = new DeliveryOrder(order); // 1700
+//        order = new InsOrder(order); // 1900
+//
+//        System.out.println(order.getTotalPrice()); // 1900
+/**
+ * Структурные паттерны
+ * Facade (Фасад)
+ * interface HostingImageLoader
+ * class HostingImageLoaderImpl
+ * class Client
+ */
+
+/**
+ *  ###_____ Задание ____###
+ *  Паттерны
+ * №_4
+ */
+        TagInterface tag = new InputTag("submit", "Save");
+        tag.render();
+        System.out.println(tag.render());
+
+        TagInterface inputTag = new InputTag("submit", "Save");
+        TagInterface labelTag = new LabelTag("Press Submit", inputTag);
+        labelTag.render();
+        System.out.println(labelTag.render());
+
 
 
     }
+//================================================================
 // --------
 //    public static int getAvgRam(List <Device> devices) {
 //        int result = 0;
@@ -214,14 +352,14 @@ public class App {
  *  Пщлиморфизм
  * №_3 к заданию
  */
-    public static void swapKeyValue (KeyValueStorage date) {
-        Map<String, String> map = date.toMap();
-
-        Set<Entry<String, String>> set = map.entrySet();
-
-        for (Entry<String, String> entry : set) {
-            date.unset(entry.getKey());
-            date.set(entry.getValue(), entry.getKey());
-        }
-    }
+//    public static void swapKeyValue (KeyValueStorage date) {
+//        Map<String, String> map = date.toMap();
+//
+//        Set<Entry<String, String>> set = map.entrySet();
+//
+//        for (Entry<String, String> entry : set) {
+//            date.unset(entry.getKey());
+//            date.set(entry.getValue(), entry.getKey());
+//        }
+//    }
 }
