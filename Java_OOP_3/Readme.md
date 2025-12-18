@@ -974,10 +974,350 @@ interface TagInterface {
 String render();
 }
 ````
+Java: ООП\
+###_____ Наследование ____###
+
+###_____ Дополнительные материалы ____###
+
+1. Наследование - документация [Oracle](https://docs.oracle.com/javase/tutorial/java/IandI/subclasses.html)
+
+###_____ Задание ____###\
+№_5
+
+Чтобы браузер при отображении документа понимал, что имеет дело с элементом форматирования, применяются теги. Общий вид тегов следующий:
+````
+<тег атрибут1="значение1" атрибут2="значение2">
+<тег атрибут1="значение1" атрибут2="значение2">...</тег>
+````
+Теги бывают двух видов — одиночные и парные. Одиночный тег используется самостоятельно, а парный может включать внутри себя другие теги (детей) или текст (тело тега). У тегов могут быть различные атрибуты, которые разделяются между собой пробелом. Значение атрибута заключено в кавычки.
+
+В этом задании вам предстоит реализовать упрощенную версию html тегов.
+
+src/main/java/io/hexlet/Tag.java\
+Создайте класс Tag, который описывает html тег. Реализуйте базовый класс так, чтобы он содержал в себе общую логику классов-наследников.
+
+src/main/java/io/hexlet/SingleTag.java\
+Создайте класс SingleTag, который наследуется от класса Tag и описывает одиночный html тег. Конструктор класса принимает два аргумента:
+
+Имя тега в виде строки
+Атрибуты тега, которые представлены словарём Map со строковыми ключами и значениями.
+В классе реализуйте публичный метод toString(), который возвращает текстовое представление тега в виде строки.
+````
+Tag img = new SingleTag("img", Map.of("class", "v-10", "id", "wop"));
+img.toString(); // <img class="v-10" id="wop">
+````
+src/main/java/io/hexlet/PairedTag.java\
+Создайте класс PairedTag, который наследуется от класса Tag и описывает парный html тег. Конструктор класса принимает четыре аргумента:
+
+Имя тега в виде строки
+Атрибуты тега, которые представлены словарём Map со строковыми ключами и значениями.
+Тело тега, строка
+Список List детей. В этом задании детьми могут быть только одиночные теги.
+В классе реализуйте публичный метод toString(), который возвращает текстовое представление тега в виде строки.
+````
+Tag p = new PairedTag(
+"p",
+Map.of("id", "abc"),
+"Text paragraph",
+new ArrayList<Tag>()
+);
+
+p.toString(); // <p id="abc">Text paragraph</p>
+
+Tag div = new PairedTag(
+"div",
+Map.of("class", "y-5"),
+"",
+List.of(
+new SingleTag("br", Map.of("id", "s")),
+new SingleTag("hr", Map.of("class", "a-5"))
+)
+)
+
+div.toString(); // <div class="y-5"><br id="s"><hr class="a-5"></div>
+````
+Подсказки
+Сформировать итоговую строку из разных частей можно разными способами. Выбирайте тот, который вам более удобен. Возможно, для этого вам пригодится метод [String.format().](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#format-java.lang.String-java.lang.Object...-)
+Вот [пример](https://www.baeldung.com/string/format#example) его использования	
+
+###_____ Решение ____###
+
+class PairedTag
+````
+import java.util.Map;
+import java.util.List;
+// import java.util.stream.Collectors;
+
+// BEGIN (write your solution here)
+public class PairedTag extends Tag{
+
+    private String bodyTag;
+    private List<Tag> singleTags;
+
+    public PairedTag(String nameTag,
+                     Map<String, String> attributesTag,
+                     String bodyTag,
+                     List<Tag> singleTags) {
+        super(nameTag, attributesTag);
+        this.bodyTag = bodyTag;
+        this.singleTags = singleTags;
+    }
+
+    public String toString(){
+
+        if (super.getAttributesTag().isEmpty() && bodyTag.isEmpty() && singleTags.isEmpty()){
+            return String.format("<%s></%s>", super.getNameTag(), super.getNameTag());
+        }
+        if (singleTags.isEmpty()){
+
+            return String.format("<%s %s>%s</%s>",
+                    super.getNameTag(),
+                    valueTeg(super.getAttributesTag()),
+                    bodyTag,
+                    super.getNameTag());
+        }
+
+        return String.format("<%s %s>%s%s</%s>",
+                super.getNameTag(),
+                valueTeg(super.getAttributesTag()),
+                singleTags.get(0),
+                singleTags.get(1),
+                super.getNameTag());
+    }
+
+}
+// END
+````
+class SingleTag
+````
+import java.util.Map;
+
+// BEGIN (write your solution here)
+public class SingleTag extends Tag {
+
+    public SingleTag(String nameTag, Map<String, String> attributesTag) {
+        super(nameTag, attributesTag);
+    }
+
+    public String toString() {
+        if (super.getAttributesTag().isEmpty()) {
+            return String.format("<%s>", super.getNameTag());
+        }
+        return String.format("<%s %s>",
+                super.getNameTag(),
+                valueTeg(super.getAttributesTag()));
+    }
+}
+// END
+````
+class Tag
+````
+// import java.util.stream.Collectors;
+import java.util.Map;
+
+// BEGIN (write your solution here)
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Iterator;
 
 
+@Getter
+@Setter
+public class Tag {
+
+    private String nameTag;
+    private Map<String, String> attributesTag;
+
+    public Tag(String nameTag, Map<String, String> attributesTag) {
+        this.nameTag = nameTag;
+        this.attributesTag = attributesTag;
+    }
+
+    public String valueTeg(Map<String, String> attributes) {
+
+        String result = "";
+
+        Iterator<Map.Entry<String, String>> iterator = attributes.entrySet().iterator();
+
+        while (iterator.hasNext()) {
+            Map.Entry<String, String> entry = iterator.next();
+            result += entry.getKey() + "=\"" + entry.getValue() + "\"";
+            if (iterator.hasNext()) {
+                result += " ";
+            }
+        }
+        return result;
+    }
+}
+// END
+````
+###_____ Решение Учителя ____###
+
+class PairedTag
+````
+import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
+
+// BEGIN
+class PairedTag extends Tag {
+
+    private String body;
+    private List<Tag> children;
+
+    PairedTag(String name, Map<String, String> attributes, String body, List<Tag> children) {
+        super(name, attributes);
+        this.body = body;
+        this.children = children;
+    }
+
+    public String toString() {
+        String attributes = stringifyAttributes();
+        String name = getName();
+        String value = children.stream()
+            .map(Object::toString)
+            .collect(Collectors.joining(""));
+
+        return String.format("<%s%s>%s%s</%s>", name, attributes, body, value, name);
+    }
+}
+// END
+````
+class SingleTag
+````
+import java.util.Map;
+
+// BEGIN
+class SingleTag extends Tag {
+
+    SingleTag(String name, Map<String, String> attributes) {
+        super(name, attributes);
+    }
+
+    public String toString() {
+        return String.format("<%s%s>", getName(), stringifyAttributes());
+    }
+}
+
+// END
+````
+class Tag
+````
+import java.util.stream.Collectors;
+import java.util.Map;
+
+// BEGIN
+class Tag {
+
+    private String name;
+    private Map<String, String> attributes;
+
+    Tag(String name, Map<String, String> attributes) {
+        this.name = name;
+        this.attributes = attributes;
+    }
+
+    public String stringifyAttributes() {
+        return attributes.keySet().stream()
+            .map(key -> {
+                String value = attributes.get(key);
+                return String.format(" %s=\"%s\"", key, value);
+            })
+            .collect(Collectors.joining(""));
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+// END
+````
+class TestExercise5
+````
+package hexlet.code;
+
+import hexlet.code.exercise5.PairedTag;
+import hexlet.code.exercise5.SingleTag;
+import hexlet.code.exercise5.Tag;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
+public class TestExercise5 {
+
+    @Test
+    void testSengleTag() {
+        Map<String, String> attributes1 = new LinkedHashMap<>();
+        attributes1.put("class", "w-75");
+        attributes1.put("id", "wop");
+        Tag img = new SingleTag("img", attributes1);
+        String actual1 = img.toString();
+        String expected1 = "<img class=\"w-75\" id=\"wop\">";
+
+        assertEquals(expected1, actual1);
+    }
+
+    @Test
+    void testSengleTag2() {
+        Map<String, String> attributes2 = new LinkedHashMap<>();
+        Tag hr = new SingleTag("hr", attributes2);
+        String actual2 = hr.toString();
+        String expected2 = "<hr>";
+        assertEquals(expected2, actual2);
+    }
+
+    @Test
+    void testPairedTag() {
+        Map<String, String> attributes1 = new LinkedHashMap<>();
+        attributes1.put("class", "m-10");
+        attributes1.put("id", "10");
+        attributes1.put("lang", "en");
+
+        // List<Tag> children = new ArrayList<>();
+
+        Tag p = new PairedTag("p", attributes1, "Text paragraph", new ArrayList<Tag>());
+        String actual1 = p.toString();
+        String expected1 = "<p class=\"m-10\" id=\"10\" lang=\"en\">Text paragraph</p>";
+
+        assertEquals(expected1, actual1);
+    }
+
+    @Test
+    void testPairedTag2() {
+        Map<String, String> attributes2 = new LinkedHashMap<>();
+        Tag span = new PairedTag("span", attributes2, "", new ArrayList<Tag>());
+        String actual2 = span.toString();
+        String expected2 = "<span></span>";
+
+        assertEquals(expected2, actual2);
+    }
+
+    @Test
+    void testPairedTagWithChildren() {
+        Map<String, String> attributes = new LinkedHashMap<>();
+        attributes.put("lang", "ru");
+        attributes.put("id", "abc");
+
+        List<Tag> children = List.of(
+                new SingleTag("br", Map.of("id", "s")),
+                new SingleTag("hr", Map.of("class", "a-5"))
+        );
+
+        Tag div = new PairedTag("div", attributes, "", children);
+        String actual = div.toString();
+        String expected = "<div lang=\"ru\" id=\"abc\"><br id=\"s\"><hr class=\"a-5\"></div>";
+
+        assertEquals(expected, actual);
+    }
+}
+````
 
 
 

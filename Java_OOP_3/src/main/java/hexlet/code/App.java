@@ -10,6 +10,12 @@ import hexlet.code.exercise3.InMemoryKV;
 import hexlet.code.exercise3.KeyValueStorage;
 import hexlet.code.exercise4.LabelTag;
 import hexlet.code.exercise4.TagInterface;
+import hexlet.code.exercise5.SingleTag;
+import hexlet.code.exercise5.Tag;
+import hexlet.code.inheritance.EmployeeAbstract;
+import hexlet.code.inheritance.PersonAbstract;
+import hexlet.code.inheritance.Student;
+import hexlet.code.inheritance.StudentAbstract;
 import hexlet.code.interfas.Device;
 import hexlet.code.interfas.Laptop;
 import hexlet.code.interfas.PC;
@@ -293,14 +299,55 @@ public class App {
  *  Паттерны
  * №_4
  */
-        TagInterface tag = new InputTag("submit", "Save");
-        tag.render();
-        System.out.println(tag.render());
+//        TagInterface tag = new InputTag("submit", "Save");
+//        tag.render();
+//        System.out.println(tag.render());
+//
+//        TagInterface inputTag = new InputTag("submit", "Save");
+//        TagInterface labelTag = new LabelTag("Press Submit", inputTag);
+//        labelTag.render();
+//        System.out.println(labelTag.render());
+/**
+ * Java: ООП
+ * ###_____ Наследование ____###
+ * inheritance
+ * ###_____ Синтаксис ____###
+ */
+//        var student = new Student("Nicita", "Smit", 22, 5);
+//        System.out.println(student.getName());
+/*
+###_____ Абстрактные классы ____###
+ */
+//        var listF = List.of(
+//                new StudentAbstract("Nicita", "Smit", 22, 5),
+//                new StudentAbstract("Nicia", "Smit", 22, 5),
+//                new StudentAbstract("Nicia", "Smit", 22, 5),
+//                new EmployeeAbstract("Nicita", "Smit", 22, "set")
+//        );
+//
+//        var people = getTotalSalary(listF);
+//        System.out.println("Total salary: " + people);
+/**
+ *  ###_____ Задание ____###
+ *  Наследование
+ * №_5
+ */
+        Tag img = new SingleTag("img", Map.of("class", "v-10", "id", "wop"));
+        img.toString(); // <img class="v-10" id="wop">
 
-        TagInterface inputTag = new InputTag("submit", "Save");
-        TagInterface labelTag = new LabelTag("Press Submit", inputTag);
-        labelTag.render();
-        System.out.println(labelTag.render());
+        System.out.println(img.toString());
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -362,4 +409,16 @@ public class App {
 //            date.set(entry.getValue(), entry.getKey());
 //        }
 //    }
+/*
+###_____ Абстрактные классы ____###
+ */
+    public static int getTotalSalary(List<PersonAbstract> people) {
+        int result = 0;
+
+        for (PersonAbstract person : people) {
+            result += person.getSalary();
+        }
+        return result;
+    }
+
 }
