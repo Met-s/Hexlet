@@ -1319,8 +1319,235 @@ public class TestExercise5 {
 }
 ````
 
+Java: ООП\
+###_____ Ошибки ____###
+Exception
+###_____ Дополнительные материалы ____###
 
+1. [Коды возврата и исключения](https://habr.com/ru/articles/131212/)
 
+###_____ Задание ____###
+№_6
+
+src/main/java/io/hexlet/Circle.java
+Круг — графический примитив на плоскости. Чтобы определить круг, достаточно задать точку — центр круга и его радиус.
+
+Создайте класс Circle, описывающий круг. Конструктор класса принимает в качестве аргумента точку Point и радиус в виде целого числа. В классе определите публичные методы:
+
+getRadius() — возвращает радиус круга.
+getSquare() — возвращает площадь круга. Если радиус круга меньше нуля, метод должен выбросить исключение NegativeRadiusException.
+````
+Point point = new Point(3, 4);
+Circle circle = new Circle(point, 1);
+circle.getRadius(); // 1
+circle.getSquare(); // 3.1415...
+````
+src/main/java/io/hexlet/NegativeRadiusException.java
+
+Реализуйте класс исключения NegativeRadiusException, который наследуется от Exception, базового класса исключений.
+
+src/main/java/io/hexlet/App.java
+
+Реализуйте класс App и публичный статический метод printSquare(), который принимает в качестве аргумента круг Circle и печатает на экран его площадь, округленную до целого числа. Если в процессе вычисления площади возникло исключение, метод должен вывести на экран фразу "Не удалось посчитать площадь". В конце на экран должна выводиться фраза "Вычисление окончено".
+````
+Point point = new Point(5, 7);
+Circle circle = new Circle(point, 4);
+App.printSquare(circle);
+// => "50"
+// => "Вычисление окончено"
+
+Circle circle1 = new Circle(point, -2);
+App.printSquare(circle1);
+// => "Не удалось посчитать площадь"
+// => "Вычисление окончено"
+````
+###_____ Решение ____###
+
+class Circle
+````
+// BEGIN (write your solution here)
+import static java.lang.Math.PI;
+
+public class Circle {
+private int radius;
+Point center;
+
+    public Circle(Point center, int radius) {
+        this.center = center;
+        this.radius = radius;
+    }
+
+    public int getRadius() throws NegativeRadiusException {
+
+        if (radius < 0) {
+            throw new NegativeRadiusException("");
+        }
+        return radius;
+    }
+
+    public double getSquare() throws NegativeRadiusException {
+
+        return PI * getRadius() * getRadius();
+    }
+}
+// END
+````
+class App
+````
+// BEGIN (write your solution here)
+public class App {
+    public static void printSquare(Circle circle) {
+        try {
+            if (circle.getRadius() < 0) {
+                throw new NegativeRadiusException("");
+            }
+            int areaCircle = (int) Math.round(circle.getSquare());
+            System.out.println(areaCircle);
+        }  catch (Exception e) {
+            System.out.println("Не удалось посчитать площадь");
+        } finally {
+            System.out.println("Вычисление окончено");
+        }
+    }
+}
+// END
+````
+class NegativeRadiusException
+````
+// BEGIN (write your solution here)
+public class NegativeRadiusException extends Exception {
+String message;
+
+    public NegativeRadiusException(String message) {
+        super(message);
+        this.message = message;
+    }
+}
+// END
+````
+###_____ Решение Учителя ____###
+
+class Circle
+````
+// BEGIN
+class Circle {
+
+    private Point cirlleCenter;
+    private int circleRadius;
+
+    Circle(Point center, int radius) {
+        this.cirlleCenter = center;
+        this.circleRadius = radius;
+    }
+
+    public int getRadius() {
+        return this.circleRadius;
+    }
+
+    public double getSquare() throws NegativeRadiusException {
+        if (this.getRadius() < 0) {
+            throw new NegativeRadiusException("Radius can not be negative");
+        }
+
+        return Math.PI * Math.pow(circleRadius, 2);
+    }
+}
+// END
+````
+class App
+````
+// BEGIN
+class App {
+    public static void printSquare(Circle circle) {
+        try {
+            double square = circle.getSquare();
+            System.out.println(Math.round(square));
+        } catch (NegativeRadiusException e) {
+            System.out.println("Не удалось посчитать площадь");
+        } finally {
+            System.out.println("Вычисление окончено");
+        }
+    }
+}
+// END
+````
+class NegativeRadiusException
+````
+// BEGIN
+class NegativeRadiusException extends Exception {
+    NegativeRadiusException(String msg) {
+        super(msg);
+    }
+}
+// END
+````
+class AppTest
+````
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static com.github.stefanbirkner.systemlambda.SystemLambda.tapSystemOut;
+
+class AppTest {
+@Test
+    void testPrintSquare() throws Exception {
+        Circle circle = new Circle(new Point(2, 3), 5);
+        String result = tapSystemOut(() -> {
+            App.printSquare(circle);
+        });
+        assertThat(result.trim()).isEqualTo("79\nВычисление окончено");
+
+        Circle circle1 = new Circle(new Point(2, 3), -5);
+        String result1 = tapSystemOut(() -> {
+            App.printSquare(circle1);
+        });
+        assertThat(result1.trim()).isEqualTo("Не удалось посчитать площадь\nВычисление окончено");
+    }
+}
+````
+class CircleTest
+````
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.within;
+
+class CircleTest {
+    @Test
+    void testException() {
+        Circle circle = new Circle(new Point(1, 2), -2);
+        assertThatThrownBy(() -> {
+            circle.getSquare();
+        }).isInstanceOf(NegativeRadiusException.class);
+    }
+
+    @Test
+    void testCircle() throws NegativeRadiusException {
+        Circle circle = new Circle(new Point(1, 2), 10);
+        int radius = circle.getRadius();
+        assertThat(radius).isEqualTo(10);
+
+        double square = circle.getSquare();
+        assertThat(square).isCloseTo(314.159, within(0.01));
+
+        Circle circle1 = new Circle(new Point(1, 2), 0);
+        double square1 = circle1.getSquare();
+        assertThat(square1).isEqualTo(0);
+    }
+}
+````
+ErrorTest
+````
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+
+class ErrorTest {
+    @Test
+    void negativeRadiusException() {
+        var error = new NegativeRadiusException("");
+        assertThat(error).isInstanceOf(Exception.class);
+    }
+}
+````
 
 
 ###_____ Модуль ____###

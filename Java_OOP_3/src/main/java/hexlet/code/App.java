@@ -1,39 +1,44 @@
 package hexlet.code;
 
-import hexlet.code.exercise1.Point;
-import hexlet.code.exercise1.Segment;
-import hexlet.code.exercise2.Cottage;
-import hexlet.code.exercise2.Flat;
-import hexlet.code.exercise2.Home;
+//import hexlet.code.exercise1.Point;
+//import hexlet.code.exercise1.Segment;
+//import hexlet.code.exercise2.Cottage;
+//import hexlet.code.exercise2.Flat;
+//import hexlet.code.exercise2.Home;
+////import hexlet.code.exercise3.InMemoryKV;
 //import hexlet.code.exercise3.InMemoryKV;
-import hexlet.code.exercise3.InMemoryKV;
-import hexlet.code.exercise3.KeyValueStorage;
-import hexlet.code.exercise4.LabelTag;
-import hexlet.code.exercise4.TagInterface;
-import hexlet.code.exercise5.SingleTag;
-import hexlet.code.exercise5.Tag;
-import hexlet.code.inheritance.EmployeeAbstract;
-import hexlet.code.inheritance.PersonAbstract;
-import hexlet.code.inheritance.Student;
-import hexlet.code.inheritance.StudentAbstract;
-import hexlet.code.interfas.Device;
-import hexlet.code.interfas.Laptop;
-import hexlet.code.interfas.PC;
-import hexlet.code.interfas.Screen;
-import hexlet.code.pattern.*;
+//import hexlet.code.exercise3.KeyValueStorage;
+//import hexlet.code.exercise4.LabelTag;
+//import hexlet.code.exercise4.TagInterface;
+//import hexlet.code.exercise5.SingleTag;
+//import hexlet.code.exercise5.Tag;
+//import hexlet.code.exercise6.NegativeRadiusException;
+//import hexlet.code.inheritance.EmployeeAbstract;
+//import hexlet.code.inheritance.PersonAbstract;
+//import hexlet.code.inheritance.Student;
+//import hexlet.code.inheritance.StudentAbstract;
+//import hexlet.code.interfas.Device;
+//import hexlet.code.interfas.Laptop;
+//import hexlet.code.interfas.PC;
+//import hexlet.code.interfas.Screen;
+//import hexlet.code.pattern.*;
 
 //import hexlet.code.polymorphism.Circle;
-import hexlet.code.polymorphism.Rectangle;
+//import hexlet.code.polymorphism.Rectangle;
 //import hexlet.code.polymorphism.Shape;
 //import hexlet.code.polymorphism.Square;
 
 
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Map;
+//import java.util.List;
+//import java.util.Map.Entry;
+//import java.util.Map;
 
-import java.util.Set;
-import java.util.stream.Collectors;
+//import java.util.Set;
+//import java.util.stream.Collectors;
+
+import hexlet.code.exercise6.Circle;
+import hexlet.code.exercise6.NegativeRadiusException;
+import hexlet.code.exercise6.Point;
 
 //import java.util.*;
 
@@ -42,9 +47,11 @@ import java.util.stream.Collectors;
  */
 import hexlet.code.exercise4.InputTag;
 
+import static java.lang.Math.round;
+
 
 public class App {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, NegativeRadiusException {
 //        System.out.println("Hello World!");
 /**
  * ###_____ Страница модуля ____###
@@ -332,12 +339,32 @@ public class App {
  *  Наследование
  * №_5
  */
-        Tag img = new SingleTag("img", Map.of("class", "v-10", "id", "wop"));
-        img.toString(); // <img class="v-10" id="wop">
+//        Tag img = new SingleTag("img", Map.of("class", "v-10", "id", "wop"));
+//        img.toString(); // <img class="v-10" id="wop">
+//
+//        System.out.println(img.toString());
+/**
+ * Java: ООП
+ * ###_____ Ошибки ____###
+ */
 
-        System.out.println(img.toString());
+/**
+ *  ###_____ Задание ____###
+ *  Ошибки (Exception)
+ * №_6
+ */
+//        Point point1 = new Point(3, 4);
+//        Circle circle = new Circle(point1, 1);
+//        System.out.println(circle.getRadius());
+//        System.out.println(circle.getSquare());
 
 
+        Point point = new Point(5, 7);
+//        Circle circle = new Circle(point, 4);
+//        App.printSquare(circle);
+
+        Circle circle1 = new Circle(point, -2);
+        App.printSquare(circle1);
 
 
 
@@ -412,13 +439,31 @@ public class App {
 /*
 ###_____ Абстрактные классы ____###
  */
-    public static int getTotalSalary(List<PersonAbstract> people) {
-        int result = 0;
-
-        for (PersonAbstract person : people) {
-            result += person.getSalary();
+//    public static int getTotalSalary(List<PersonAbstract> people) {
+//        int result = 0;
+//
+//        for (PersonAbstract person : people) {
+//            result += person.getSalary();
+//        }
+//        return result;
+//    }
+/**
+ *  ###_____ Задание ____###
+ *  Ошибки (Exception)
+ * №_6
+ */
+    public static void printSquare(Circle circle) {
+        try {
+            if (circle.getRadius() < 0) {
+                throw new NegativeRadiusException("");
+            }
+            int areaCircle = (int) Math.round(circle.getSquare());
+            System.out.println(areaCircle);
+        }  catch (Exception e) {
+            System.out.println("Не удалось посчитать площадь");
+        } finally {
+            System.out.println("Вычисление okoncheno окончено");
         }
-        return result;
     }
 
 }

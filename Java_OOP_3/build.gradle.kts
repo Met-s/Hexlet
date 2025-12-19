@@ -25,6 +25,7 @@ dependencies {
     compileOnly ("org.projectlombok:lombok:1.18.36")
     annotationProcessor ("org.projectlombok:lombok:1.18.36")
     implementation("tools.jackson.core:jackson-databind:3.0.2")
+    testImplementation("org.assertj:assertj-core:3.27.6")
 }
 
 tasks.test {
