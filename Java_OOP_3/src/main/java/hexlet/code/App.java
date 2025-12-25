@@ -36,9 +36,9 @@ package hexlet.code;
 //import java.util.Set;
 //import java.util.stream.Collectors;
 
-import hexlet.code.exercise6.Circle;
-import hexlet.code.exercise6.NegativeRadiusException;
-import hexlet.code.exercise6.Point;
+//import hexlet.code.exercise6.Circle;
+//import hexlet.code.exercise6.NegativeRadiusException;
+//import hexlet.code.exercise6.Point;
 
 //import java.util.*;
 
@@ -47,11 +47,23 @@ import hexlet.code.exercise6.Point;
  */
 import hexlet.code.exercise4.InputTag;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
+
+import hexlet.code.exercise7.Address;
+import hexlet.code.exercise7.Validator;
+import hexlet.code.reflection.Commands;
+import hexlet.code.reflection.Test;
+
 import static java.lang.Math.round;
 
 
 public class App {
-    public static void main(String[] args) throws InterruptedException, NegativeRadiusException {
+    public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
 //        System.out.println("Hello World!");
 /**
  * ###_____ Страница модуля ____###
@@ -359,14 +371,42 @@ public class App {
 //        System.out.println(circle.getSquare());
 
 
-        Point point = new Point(5, 7);
+//        Point point = new Point(5, 7);
 //        Circle circle = new Circle(point, 4);
 //        App.printSquare(circle);
 
-        Circle circle1 = new Circle(point, -2);
-        App.printSquare(circle1);
+//        Circle circle1 = new Circle(point, -2);
+//        App.printSquare(circle1);
+/**
+ * Java: ООП
+ * ###_____ Рефлексия ____###
+ * Reflection
+ * class Test
+ */
+//        Test test = new Test();
+//        getClassInfo(test);
 
+//        System.out.println(test);
+//        setPrivateValue(test, "value", "new value");
+//        System.out.println(test);
+//        callPrivateMethod(test, "setValue", "new value");
+//        System.out.println(test);
 
+//        var test2 = createTestObjectWithValue("test value");
+//        System.out.println(test2);
+
+//        var commands = new Commands();
+//        commands.printHelp();
+/**
+ * Java: ООП
+ * ###_____ Рефлексия ____###
+ * Reflection
+ * Задание
+ * №_7
+ */
+        Address address = new Address(null, "London", "1-st street", "7", "2");
+        List<String> notValidFields = Validator.validate(address);
+        System.out.println(notValidFields);
 
 
 
@@ -452,17 +492,67 @@ public class App {
  *  Ошибки (Exception)
  * №_6
  */
-    public static void printSquare(Circle circle) {
+//    public static void printSquare(Circle circle) {
+//        try {
+//            if (circle.getRadius() < 0) {
+//                throw new NegativeRadiusException("");
+//            }
+//            int areaCircle = (int) Math.round(circle.getSquare());
+//            System.out.println(areaCircle);
+//        }  catch (Exception e) {
+//            System.out.println("Не удалось посчитать площадь");
+//        } finally {
+//            System.out.println("Вычисление okoncheno окончено");
+//        }
+//    }
+/**
+ * Java: ООП
+ * ###_____ Рефлексия ____###
+ * Reflection
+ * class Test
+ */
+    public static void getClassInfo(Object obj) {
+        Class<?> aClass = obj.getClass();
+        Method[] methods = aClass.getDeclaredMethods();
+        Field[] fields = aClass.getFields();
+        Field[] declaredFields = aClass.getDeclaredFields();
+        Constructor<?>[] constructors = aClass.getConstructors();
+
+        System.out.println(aClass);
+        System.out.println(Arrays.toString(methods));
+        System.out.println(Arrays.toString(fields));
+        System.out.println(Arrays.toString(declaredFields));
+        System.out.println(Arrays.toString(constructors));
+    }
+
+    public static void setPrivateValue(Object obj, String fieldName, String newValue) {
+        Class<?> aClass = obj.getClass();
         try {
-            if (circle.getRadius() < 0) {
-                throw new NegativeRadiusException("");
-            }
-            int areaCircle = (int) Math.round(circle.getSquare());
-            System.out.println(areaCircle);
-        }  catch (Exception e) {
-            System.out.println("Не удалось посчитать площадь");
-        } finally {
-            System.out.println("Вычисление okoncheno окончено");
+            Field field = aClass.getDeclaredField(fieldName);
+            field.setAccessible(true);
+            field.set(obj, newValue);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Test createTestObjectWithValue(String value){
+        try {
+            var constructor = Test.class.getDeclaredConstructor(String.class);
+            constructor.setAccessible(true);
+            return constructor.newInstance(value);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static void callPrivateMethod(Object obj, String methodName, String parameter) {
+        Class<?> aClass = obj.getClass();
+        try {
+            Method method = aClass.getDeclaredMethod(methodName, String.class);
+            method.setAccessible(true);
+            method.invoke(obj, parameter);
+        } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            e.printStackTrace();
         }
     }
 

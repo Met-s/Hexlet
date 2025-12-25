@@ -1548,6 +1548,203 @@ class ErrorTest {
     }
 }
 ````
+Java: ООП\
+###_____ Рефлексия ____###\
+#Рефлексия #reflection\
+###_____ Дополнительные материалы ____###
+
+1. [Reflection API](https://docs.oracle.com/javase/tutorial/reflect/)
+
+###_____ Задание ____###\
+№_7
+
+Аннотации представляют собой метки в коде, включаемые в текст программы, и используются для хранения метаданных программного кода, необходимых на разных этапах жизненного цикла программы. Информация, хранимая в аннотациях, может использоваться соответствующими обработчиками для создания необходимых вспомогательных файлов или для маркировки классов, полей и т.д.
+
+В этом задании вам предстоит поработать с аннотациями для описания полей класса. В упражнении в файле NotNull.java уже создана аннотация @NotNull. Эта аннотация предупреждает о том, что поле, которое ею помечено, не должно принимать значение null. Откройте этот файл и посмотрите, как создается новая аннотация.
+
+src/main/java/io/hexlet/Address.java
+
+В файле уже создан класс Address, описывающий адрес пользователя.
+
+Расставьте аннотации для полей класса в соответствии со следующими правилами:
+
+Поля класса country, city, street, houseNumber не могут иметь значение null.
+
+Поле flatNumber может принимать значение null, так как не у каждого адреса может быть номера квартиры.
+
+src/main/java/io/hexlet/Validator.java
+
+Просто разместить эту аннотацию в коде недостаточно. Сама по себе она не будет проверять, что значение поля равно null. Для этого нужен валидатор.
+
+Создайте класс Validator и публичный статический метод validate(). Метод принимает на вход экземпляр класса и проверяет, что свойства, помеченные в классе аннотацией @NotNull, не имеют значение null. Метод должен вернуть список List с названием полей, которые не прошли валидацию (т.е. помечены аннотацией @NotNull, но при этом имеют значение null). Обратите внимание, что свойства в объекте приватные и для обращения к ним нет селекторов, поэтому вам нужно будет воспользоваться рефлексией.
+````
+Address address = new Address(null, "London", "1-st street", "7", "2");
+List<String> notValidFields = Validator.validate(address);
+System.out.println(notValidFields); // => [country]
+
+Address address2 = new Address("England", null, null, "7", "2");
+List<String> notValidFields2 = Validator.validate(address2);
+System.out.println(notValidFields2); // => [city, street]
+````
+###_____ Решение ____###\
+class Address
+````
+class Address {
+// BEGIN (write your solution here)
+@NotNull
+// END
+private String country;
+
+    // BEGIN (write your solution here)
+    @NotNull
+    // END
+    private String city;
+
+    // BEGIN (write your solution here)
+    @NotNull
+    // END
+    private String street;
+
+    // BEGIN (write your solution here)
+    @NotNull
+    // END
+    private String houseNumber;
+
+    private String flatNumber;
+
+    Address(String country, String city, String street, String houseNumber, String flatNumber) {
+        this.country = country;
+        this.city = city;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.flatNumber = flatNumber;
+    }
+}
+````
+class Validator
+````
+// BEGIN (write your solution here)
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Validator {
+
+    public static List<String> validate(Address address) {
+        List<String> result = new ArrayList<>();
+        Class<?> aClass = address.getClass();
+
+        Field[] fields = aClass.getDeclaredFields();
+
+        try {
+            for (Field field : fields) {
+
+                var fieldName = field.getName();
+                field.setAccessible(true);
+                var fieldValue = field.get(address);
+                if (field.isAnnotationPresent(NotNull.class) && fieldValue == null) {
+                    result.add(fieldName);
+                }
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+}
+// END
+````
+###_____ Решение Учителя ____###\
+class Address
+````
+class Address {
+// BEGIN (write your solution here)
+@NotNull
+// END
+private String country;
+
+    // BEGIN (write your solution here)
+    @NotNull
+    // END
+    private String city;
+
+    // BEGIN (write your solution here)
+    @NotNull
+    // END
+    private String street;
+
+    // BEGIN (write your solution here)
+    @NotNull
+    // END
+    private String houseNumber;
+
+    private String flatNumber;
+
+    Address(String country, String city, String street, String houseNumber, String flatNumber) {
+        this.country = country;
+        this.city = city;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.flatNumber = flatNumber;
+    }
+}
+````
+class Validator
+````
+// BEGIN
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.stream.Collectors;
+
+class Validator {
+public static List<String> validate(Object instance) {
+List<Field> fields = List.of(instance.getClass().getDeclaredFields());
+return fields.stream()
+.filter(field -> field.isAnnotationPresent(NotNull.class))
+.filter(field -> {
+Object value;
+try {
+field.setAccessible(true);
+value = field.get(instance);
+} catch (Exception e) {
+throw new RuntimeException(e);
+}
+return value == null;
+})
+.map(Field::getName)
+.collect(Collectors.toList());
+}
+}
+// END
+````
+class ValidationTest
+````
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import java.util.List;
+
+
+class ValidationTest {
+
+    @Test
+    void testValidate() {
+        Address address1 = new Address("Russia", "Ufa", "Lenina", "54", null);
+        List<String> result1 = Validator.validate(address1);
+        List<String> expected1 = List.of();
+        assertThat(result1).isEqualTo(expected1);
+
+        Address address2 = new Address(null, "London", "1-st street", "5", "1");
+        List<String> result2 = Validator.validate(address2);
+        List<String> expected2 = List.of("country");
+        assertThat(result2).isEqualTo(expected2);
+
+        Address address3 = new Address("USA", null, null, null, "1");
+        List<String> result3 = Validator.validate(address3);
+        List<String> expected3 = List.of("city", "street", "houseNumber");
+        assertThat(result3).isEqualTo(expected3);
+    }
+}
+````
 
 
 ###_____ Модуль ____###
